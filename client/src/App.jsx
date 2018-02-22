@@ -9,7 +9,7 @@ export default class App extends Component {
 		return (
       <div>
         <Navbar />
-        This is from App.jsx!!!!!!!!
+        This is from App.jsx!!
 			</div>
 		);
   }
