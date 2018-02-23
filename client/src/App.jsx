@@ -5,15 +5,15 @@ import Footer from './components/Footer.jsx';
 
 export default class App extends Component {
   state = {}
-	
+
   render() {
-		return (
+    return (
       <div>
         <Navbar />
         This is from App.jsx!!!!!!!!
         <Footer />
-			</div>
-		);
+      </div>
+    );
   }
 }
 

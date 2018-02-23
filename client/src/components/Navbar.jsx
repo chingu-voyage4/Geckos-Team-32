@@ -6,7 +6,6 @@ export default class Navbar extends Component {
   render() {
 		return (
 			<div>
-
 				<nav className="navBar">
           <nav className="wrapper">
             <div className="logo"><a href=".home">5Gecho</a></div>
@@ -23,7 +22,6 @@ export default class Navbar extends Component {
             </ul>
           </nav>
         </nav>
-        
 			</div>
 		);
   }
