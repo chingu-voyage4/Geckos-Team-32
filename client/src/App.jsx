@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Navbar from './components/Navbar.jsx';
+import Footer from './components/Footer.jsx';
 
 export default class App extends Component {
   state = {}
@@ -9,7 +10,8 @@ export default class App extends Component {
 		return (
       <div>
         <Navbar />
-        This is from App.jsx!!
+        This is from App.jsx!!!!!!!!
+        <Footer />
 			</div>
 		);
   }
