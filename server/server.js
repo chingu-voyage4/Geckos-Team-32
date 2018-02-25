@@ -16,7 +16,6 @@ app.use(bodyParser.urlencoded({extended: true})); // returns middleware that onl
 app.use(bodyParser.json()); // looks for JSON data
 app.use(cors());
 
-// mongoose.connect('mongodb://gecko:gecko@ds147668.mlab.com:47668/geckosapp');
 const options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } },
   replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } } };
 
