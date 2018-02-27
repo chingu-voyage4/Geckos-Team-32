@@ -12,3 +12,10 @@ html, body {
 body {
   font-family: sans-serif;
 }
+
+.button {
+  border-radius: 3px;
+  padding: 1em;
+  outline: none;
+  cursor: pointer;
+}
