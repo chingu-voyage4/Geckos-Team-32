@@ -1,0 +1,88 @@
+.post-landing-page {
+  width: 100%;
+  min-height: calc(100vh - 100px);
+  padding: 2em;
+  margin-left: 20vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-family: 'ubuntu', sans-serif;
+}
+.post-landing-searchbar-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+  height: 150px;
+}
+.post-landing-searchbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 40px;
+}
+.post-landing-page .fa-search {
+  position: absolute;
+  left: 7px;
+  font-size: 20px;
+}
+.post-landing-search {
+  width: 100%;
+  height: 100%;
+  font-size: 26px;
+  text-indent: 36px;
+  outline: none;
+}
+.post-landing-video-pull {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 90%;
+  margin-top: 3%;
+}
+.individual-video-space {
+  width: 30%;
+}
+.post-search-video {
+  height: 200px;
+  width: 300px;
+}
+.video-description {
+  height: 60px;
+  overflow: hidden;
+}
+
+@media screen and (min-width: 950px) and (max-width: 1360px) {
+  .individual-video-space {
+    width: 45%;
+  }
+  .post-landing-searchbar-wrapper {
+  width: 75%;
+  }
+}
+
+@media screen and (max-width: 949px) {
+  .individual-video-space {
+    width: 80%;
+  }
+  .post-landing-searchbar-wrapper {
+  width: 75%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .post-landing-page {
+    margin-left: 0;
+  }
+  .post-landing-searchbar-wrapper {
+  width: 100%;
+  }
+}
+@media screen and (max-width: 481px) {
+  .post-search-video {
+  height: 150px;
+  width: 200px;
+  }
+}
