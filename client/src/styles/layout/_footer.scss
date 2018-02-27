@@ -10,9 +10,9 @@
 // #1CA7CE
 
 footer {
-  display: flex;
+  display: none;
   justify-content: space-evenly;
-  background-color: #EE4548;
+  background-color: $accent-red;
   align-items: center;
   color: #fff;
   padding: 30px 0;
@@ -123,6 +123,10 @@ span#circle4:hover svg{
 		text-align: center;
 		min-width: 320px;
 	}
+}
+
+@media (max-width: 768px) {
+  footer { display: flex; }
 }
 
 @media (max-width: 375px) {

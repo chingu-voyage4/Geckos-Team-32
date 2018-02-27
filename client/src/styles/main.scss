@@ -1,4 +1,9 @@
 @import './setup/variables';
 @import './setup/base';
-@import './components/navbar';
-@import './components/footer';
+
+@import './layout/navbar';
+@import './layout/footer';
+@import './layout/dashboard';
+@import './pages/mainpage';
+
+@import './pages/landing/landing';
