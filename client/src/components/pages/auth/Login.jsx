@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Login = () => (
-  <div className="login-wrapper">
+  <div className="page-wrapper login-wrapper">
     <h1>Welcome back!</h1>
     <form className="login-form">
       <input className="login-form__input" type="text" name="username" placeholder="username"/>
