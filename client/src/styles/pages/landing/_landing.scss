@@ -13,16 +13,26 @@
 }
 .searchbar-wrapper {
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: center;
   width: 50%;
-  height: 60%;
+  height: 40%;
 }
 .landing-searchbar {
   height: 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 .landing-search {
   width: 100%;
   height: 100%;
   font-size: 26px;
+  text-indent: 36px;
+}
+.landing-page .fa-search {
+  position: absolute;
+  left: 7px;
+  font-size: 20px;
 }
