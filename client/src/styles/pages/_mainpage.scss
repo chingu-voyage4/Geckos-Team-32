@@ -2,3 +2,27 @@
   display: flex;
   padding-top: 100px;
 }
+
+.not-found {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+  width: 100%;
+
+  span {
+    color: $accent-red;
+  }
+
+  a {
+    text-decoration: none;
+    color: $off-black;
+
+    &:hover {
+      text-decoration: underline;
+      color: $accent-red;
+    }
+  }  
+
+}

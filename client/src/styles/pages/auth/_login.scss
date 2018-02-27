@@ -1,0 +1,28 @@
+.login-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  padding: 2em;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.login-form__input {
+  padding: 1em;
+  margin: 1em;
+  outline: none;
+}
+
+@media (max-width: 768px) {
+  .login-wrapper {
+    min-height: calc(100vh - 100px);
+  }
+}

@@ -8,7 +8,7 @@ export default class Footer extends Component {
 			<div>
         <footer>
           <div className="two">
-            Images courtesy of <a href="#">Youtube API</a>
+            Images courtesy of <a href="https://developers.google.com/youtube/">Youtube API</a>
           </div>
           <div className="icons one">
             <a href="#">
@@ -37,7 +37,7 @@ export default class Footer extends Component {
           </a>
           </div>
           <div className="three">
-            Copyright <span className="span">&copy;</span> <a href="#">gecko-team-32</a>
+            Copyright <span className="span">&copy;</span> <a href="https://github.com/chingu-voyage4/Geckos-Team-32">gecko-team-32</a>
           </div>
         </footer>
 			</div>
