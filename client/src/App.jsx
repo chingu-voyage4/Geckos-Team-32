@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Routes from './components/routes/Routes.jsx';
+import Routes from './routes/Routes.jsx';
 
 export default class App extends Component {
   state = {}
