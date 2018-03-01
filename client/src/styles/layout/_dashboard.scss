@@ -8,7 +8,7 @@
   padding: 1em;
   font-family: 'Ubuntu', sans-serif;
   min-height: calc(100vh - 100px);
-
+  position: fixed;
   h2 {
     font-size: 1.2em;
   }
@@ -51,7 +51,7 @@
   }
 }
 
-.dashboard-link {
+.dashboard__link {
   color: $accent-red;
   text-decoration: none;
 

@@ -4,6 +4,7 @@
   min-width: 100%;
   background-color: white;
   justify-content: space-between;
+  z-index: 3;
 }
 
 .nav-wrapper {
@@ -96,51 +97,51 @@
   display: none;
 }
 
-// @media (max-width: 1024px) {
-//   #menu-toggle:checked ~ ul {
-//     opacity: 1;
-//     min-height: 100vh;
-//     visibility: visible;
-//   }
+@media (max-width: 768px) {
+  #menu-toggle:checked ~ ul {
+    opacity: 1;
+    min-height: 100vh;
+    visibility: visible;
+  }
 
-//   #menu-toggle:checked ~ a.btn {
-//     display:none
-//   }
+  #menu-toggle:checked ~ a.btn {
+    display:none
+  }
 
-//   .dropdown-toggle {
-//     background: linear-gradient(to bottom, #a9a9a9 0%, #a9a9a9 20%, transparent 20%, transparent 40%, #a9a9a9 40%, #a9a9a9 60%, transparent 60%, transparent 80%, #a9a9a9 80%, #a9a9a9 100%);
-//     cursor: pointer;
-//     display: flex;
-//     float: right;
-//     height: 35px;
-//     align-self: center;
-//     min-width: 35px;
-//   }
+  .dropdown-toggle {
+    background: linear-gradient(to bottom, #a9a9a9 0%, #a9a9a9 20%, transparent 20%, transparent 40%, #a9a9a9 40%, #a9a9a9 60%, transparent 60%, transparent 80%, #a9a9a9 80%, #a9a9a9 100%);
+    cursor: pointer;
+    display: flex;
+    float: right;
+    height: 35px;
+    align-self: center;
+    min-width: 35px;
+  }
 
-//   .nav-list {
-//     background-color: white;
-//     display: block;
-//     height: 0;
-//     list-style-type: none;
-//     opacity: 0;
-//     text-align: center;
-//     transition: all 1s ease;
-//     width: 100%;
-//     visibility: hidden;
+  .nav-list {
+    background-color: white;
+    display: block;
+    height: 0;
+    list-style-type: none;
+    opacity: 0;
+    text-align: center;
+    transition: all 1s ease;
+    width: 100%;
+    visibility: hidden;
 
-//     li {
-//       border-bottom: 2px solid #53354A;
-//       // color: #53354A;
-//       display: block;
-//       font-size: 1.5em;
-//       padding: 2em 0;
-//     }
+    li {
+      border-bottom: 2px solid #53354A;
+      // color: #53354A;
+      display: block;
+      font-size: 1.5em;
+      padding: 2em 0;
+    }
 
-//     a {
-//       color: $off-black;
-//     }
-//   }
-// }
+    a {
+      color: $off-black;
+    }
+  }
+}
 
 @media screen and (max-width:425px) {
   .nav-wrapper {
