@@ -8,7 +8,7 @@ import VideoList from '../../shared/Video_list.jsx';
 import VideoDetail from '../../shared/Video_detail.jsx';
 // import API_KEY from '../../helpers/api.jsx';
 
-const API_KEY = "AIzaSyCqCZFFCtUYNsXmm-ew0nFZcArMP1ygpCI";
+const API_KEY = "API_KEY_HERE";
 
 export default class Landing extends Component {
   constructor(props) {
@@ -44,7 +44,7 @@ export default class Landing extends Component {
 					<h2>Get Started with your favorite song/artist!</h2>
 					<form className="landing-searchbar">
             <span className="landing-search-icon"><i className="fas fa-search"></i></span>
-            <SearchBar onSearchTermChange={videoSearch} />
+            <SearchBar onSearchTermChange={term => this.videoSearch(term)} />
             <VideoDetail video={this.state.selectedVideo} />
             <VideoList
               onVideoSelect={selectedVideo => this.setState({selectedVideo}) }
