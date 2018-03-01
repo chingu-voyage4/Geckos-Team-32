@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Signup = () => (
-  <div className="signup-wrapper">
+  <div className="page-wrapper signup-wrapper">
     <h1>Explore the music you love.</h1>
     <h2>Visualize the experience now!</h2>
     <form className="signup-form">
