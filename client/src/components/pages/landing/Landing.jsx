@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom';
@@ -31,6 +32,8 @@ export default class Landing extends Component {
   }
 
   render() {
+    const videoSearch = _.debounce((term) => {this.videoSearch(term) }, 300);
+
 		return (
 			<div className="page-wrapper">
 				<div className="landing-page-title">
@@ -40,8 +43,8 @@ export default class Landing extends Component {
 				<div className="searchbar-wrapper">
 					<h2>Get Started with your favorite song/artist!</h2>
 					<form className="landing-searchbar">
-						<span className="landing-search-icon"><i className="fas fa-search"></i></span>
-            <SearchBar onSearchTermChange={term => this.videoSearch(term)} />
+            <span className="landing-search-icon"><i className="fas fa-search"></i></span>
+            <SearchBar onSearchTermChange={videoSearch} />
             <VideoDetail video={this.state.selectedVideo} />
             <VideoList
               onVideoSelect={selectedVideo => this.setState({selectedVideo}) }
