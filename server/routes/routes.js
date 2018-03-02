@@ -28,7 +28,7 @@ router.route('/update')
 .post((req, res) => {
   const doc = {
     username: req.body.username,
-    passeword: req.body.password,
+    password: req.body.password,
   };
   console.log(doc);
   user.update({_id: req.body._id}, doc, (err, result) => {
