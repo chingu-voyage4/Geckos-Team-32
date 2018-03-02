@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Routes from './routes/Routes.jsx';
+import AppRoutes from './routing/AppRoutes.jsx';
 
 export default class App extends Component {
   state = {}
@@ -8,7 +8,7 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <Routes />
+        <AppRoutes />
       </div>
     );
   }

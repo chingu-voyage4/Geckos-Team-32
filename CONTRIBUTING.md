@@ -9,10 +9,11 @@ For any specific questions or suggestions, feel free to create a new issue with 
 3. In the command line terminal, navigate to the root directory of your local clone.
 4. Run `npm install` to install all the development dependencies of this project.
 5. Run `npm run build` to bundle the code.
-6. Run `npm run dev` to begin developing.
+6. Run `npm run dev` to begin developing with local webpack server.
 7. Open browser and enter `http://localhost:8080` as the URL.
 8. When you are finished with all the changes, save your work, and run `npm run build` re-bundle all changes for production, and `npm start` to see production-ready app at `http://localhost:8000`.
-9. Commit and push all files to your forked repositroy.
+9. If you want to test development with a local mongoDB server, in a separate terminal run `mongod` before running `npm start`.
+10. Commit and push all files to your forked repositroy.
 
 
 ## Making a Pull Request

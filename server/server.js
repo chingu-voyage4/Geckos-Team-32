@@ -1,17 +1,37 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+require('dotenv').config();
+const router = require('./routes/routes')
 const path = require('path');
 const cors = require('cors');
-const router = express.Router();
+const mongoose = require('mongoose');
 
 const app = express();
-const PORT = 8000 || process.env.PORT;
+const PORT = process.env.PORT || 8000;
 
+// app.set('view engine', 'ejs');
+// app.set('views', path.join(__dirname, '../client/public));
+app.use(express.static(path.join(__dirname, '../client/public'))); // joins current path with client path
 app.use(bodyParser.urlencoded({extended: true})); // returns middleware that only parses urlencoded bodies; extended allows for the qs library
 app.use(bodyParser.json()); // looks for JSON data
 app.use(cors());
-app.use('/api', router);
-app.use(express.static(path.join(__dirname, '../client/public'))); // joins current path with client path
+
+const options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } },
+  replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } } };
+
+// Locally use mongoDB or use mLab setup from geckos-32
+const url = process.env.MONGODB_URI || "mongodb://localhost:27017/geckos32"
+
+mongoose.connect(url, options);
+const conn = mongoose.connection;
+
+conn.on('error', console.error.bind(console, 'connection error:'));
+
+// conn.once('open', function() {
+//   // Wait for the database connection to establish, then start the app.
+// });
+
+app.use('/', router);
 
 app.get('/', (req, res) => {
   res.render('index');
@@ -19,8 +39,8 @@ app.get('/', (req, res) => {
 
 // start app on specified port
 app.listen(PORT, (err) => {
-  if (err) { 
-    console.log('There was an error connecting to the server', err); 
+  if (err) {
+    console.log('There was an error connecting to the server', err);
   }
   else { 
     console.log('You have connected to the server on PORT: ', PORT); 
