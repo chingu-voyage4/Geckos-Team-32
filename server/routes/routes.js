@@ -3,20 +3,24 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const User = require('../models/user');
 
-router.get('/', (req, res) => {
-  res.render('index')
-});
 
-router.route('/insert')
+// router.get('/', (req, res) => {
+//   res.render('index')
+// });
+
+router.route('/signup')
 .post((req,res) => {
+  console.log('this is params: ', req.params);
   let user = new User();
   user.username = req.body.username;
   user.password = req.body.password;
-  user.save((err) => {
+  user.save((err, user) => {
     if (err) {
+      console.log('There was an error: ', err);
       res.send(err);
-      res.send('User successfully added!');
     }
+    console.log('Successfully created new user: ', user);
+    res.send('User successfully added!');
   });
 })
 

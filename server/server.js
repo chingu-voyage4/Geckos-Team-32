@@ -9,8 +9,6 @@ const mongoose = require('mongoose');
 const app = express();
 const PORT = process.env.PORT || 8000;
 
-// app.set('view engine', 'ejs');
-// app.set('views', path.join(__dirname, '../client/public));
 app.use(express.static(path.join(__dirname, '../client/public'))); // joins current path with client path
 app.use(bodyParser.urlencoded({extended: true})); // returns middleware that only parses urlencoded bodies; extended allows for the qs library
 app.use(bodyParser.json()); // looks for JSON data
@@ -20,7 +18,8 @@ const options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS
   replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } } };
 
 // Locally use mongoDB or use mLab setup from geckos-32
-const url = process.env.MONGODB_URI || "mongodb://localhost:27017/geckos32"
+// const url = process.env.MONGODB_URI || "mongodb://localhost:27017/geckos32"
+const url = "mongodb://localhost:27017/geckos32"
 
 mongoose.connect(url, options);
 const conn = mongoose.connection;
@@ -33,8 +32,9 @@ conn.on('error', console.error.bind(console, 'connection error:'));
 
 app.use('/', router);
 
-app.get('/', (req, res) => {
-  res.render('index');
+// handle all routes on index.html
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/public/index.html'))
 });
 
 // start app on specified port
