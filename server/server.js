@@ -30,7 +30,7 @@ conn.on('error', console.error.bind(console, 'connection error:'));
 //   // Wait for the database connection to establish, then start the app.
 // });
 
-app.use('/', router);
+app.use('/routes', router);
 
 // handle all routes on index.html
 app.get('*', (req, res) => {

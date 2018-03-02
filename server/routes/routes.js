@@ -3,11 +3,7 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const User = require('../models/user');
 
-
-// router.get('/', (req, res) => {
-//   res.render('index')
-// });
-
+// POST route to create a new user
 router.route('/signup')
 .post((req,res) => {
   console.log('this is params: ', req.params);
@@ -20,9 +16,23 @@ router.route('/signup')
       res.send(err);
     }
     console.log('Successfully created new user: ', user);
-    res.send('User successfully added!');
+    res.redirect('/');
   });
-})
+});
+
+// POST route to login user
+router.route('/login')
+.post((req, res) => {
+  User.findOne({username: req.body.username}, (err, foundUser) => {
+    if (err) {
+      console.log('There was an error finding the user: ', err);
+      res.send(err);
+    } else {
+      console.log('Successfully found user! ', foundUser);
+      res.redirect('/');
+    }
+  });
+});
 
 router.route('/update')
 .post((req, res) => {
