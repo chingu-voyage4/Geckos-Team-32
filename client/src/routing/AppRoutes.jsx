@@ -47,6 +47,7 @@ class AppRoutes extends React.Component {
                 path="/postlanding" 
                 component={() => (<PostLanding
                   stateData={this.state}
+                  handleSearchInput={this.handleSearchInput}
                 />)} 
               />
               <Route path="/signup" component={Signup} />
