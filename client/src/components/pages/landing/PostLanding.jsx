@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 
 export default class PostLandingPage extends Component {
   render() {
+    // console.log('from postlanding: ', this.props.stateData.videos);
+    
     return (
       <div className="page-wrapper">
         
@@ -15,44 +17,15 @@ export default class PostLandingPage extends Component {
         </div>
 
         <div className="post-landing-video-pull">
-          
-          <div className="individual-video-space">
-            <img className="post-search-video" src="https://images.unsplash.com/photo-1506367289495-02a78c329501?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=b32100a8e6e1ebe0df8f0f9ddb50a94e&auto=format&fit=crop&w=1955&q=80" />
-            <h3>Video Title</h3>
-            <p className="video-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque ante eros, eu gravida leo viverra quis.</p>
-          </div>
-
-          <div className="individual-video-space">
-            <img className="post-search-video" src="https://images.unsplash.com/photo-1506367289495-02a78c329501?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=b32100a8e6e1ebe0df8f0f9ddb50a94e&auto=format&fit=crop&w=1955&q=80" />
-            <h3>Video Title</h3>
-            <p className="video-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque ante eros, eu gravida leo viverra quis.</p>
-          </div>
-
-          <div className="individual-video-space">
-            <img className="post-search-video" src="https://images.unsplash.com/photo-1506367289495-02a78c329501?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=b32100a8e6e1ebe0df8f0f9ddb50a94e&auto=format&fit=crop&w=1955&q=80" />
-            <h3>Video Title</h3>
-            <p className="video-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque ante eros, eu gravida leo viverra quis.</p>
-          </div>
-
-          <div className="individual-video-space">
-            <img className="post-search-video" src="https://images.unsplash.com/photo-1506367289495-02a78c329501?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=b32100a8e6e1ebe0df8f0f9ddb50a94e&auto=format&fit=crop&w=1955&q=80" />
-            <h3>Video Title</h3>
-            <p className="video-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque ante eros, eu gravida leo viverra quis.</p>
-          </div>
-
-          <div className="individual-video-space">
-            <img className="post-search-video" src="https://images.unsplash.com/photo-1506367289495-02a78c329501?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=b32100a8e6e1ebe0df8f0f9ddb50a94e&auto=format&fit=crop&w=1955&q=80" />
-            <h3>Video Title</h3>
-            <p className="video-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque ante eros, eu gravida leo viverra quis.</p>
-          </div>
-
-          <div className="individual-video-space">
-            <img className="post-search-video" src="https://images.unsplash.com/photo-1506367289495-02a78c329501?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=b32100a8e6e1ebe0df8f0f9ddb50a94e&auto=format&fit=crop&w=1955&q=80" />
-            <h3>Video Title</h3>
-            <p className="video-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque ante eros, eu gravida leo viverra quis.</p>
-          </div>
-
+          {this.props.stateData.videos.map((video, index) => (
+            <div key={index} className="individual-video-space">
+              <img className="post-search-video" src={video.snippet.thumbnails.high.url}/>
+              <h3>{video.snippet.title}</h3>
+              <p>{video.snippet.description}</p>
+            </div>
+          ))}
         </div>
+
       </div>
     );
   }

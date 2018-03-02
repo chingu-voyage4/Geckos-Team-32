@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import YTSearch from 'youtube-api-search';
+
 import Navbar from '../components/shared/Navbar.jsx';
 import Footer from '../components/shared/Footer.jsx';
 import Dashboard from '../components/shared/Dashboard.jsx';
@@ -9,18 +11,21 @@ import Signup from '../components/pages/auth/Signup.jsx';
 import Login from '../components/pages/auth/Login.jsx';
 import NotFound from './NotFound.jsx';
 
-class Routes extends React.Component {
+class AppRoutes extends React.Component {
 	state = {
-    search: ''
+    search: '',
+    videos: [],
   }
   
-  handleSearchInput = (search) => {
-    console.log('from handleSearchInput: ', search);
-    this.setState(() => ({ search: search }));
-  }
+  handleSearchInput = (term) => {
+    const API_KEY = '';
 
-  componentDidUpdate() {
-    console.log('updated!!', this.state);
+    YTSearch({key: API_KEY, term: term}, (videos) => {
+      this.setState({
+        search: term,
+        videos: videos,
+      });
+    });
   }
 
   render() {
@@ -41,7 +46,7 @@ class Routes extends React.Component {
               <Route 
                 path="/postlanding" 
                 component={() => (<PostLanding
-                  search={this.state.search}
+                  stateData={this.state}
                 />)} 
               />
               <Route path="/signup" component={Signup} />
@@ -56,4 +61,4 @@ class Routes extends React.Component {
   }
 }
 
-export default Routes;
+export default AppRoutes;

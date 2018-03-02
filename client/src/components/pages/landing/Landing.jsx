@@ -1,39 +1,15 @@
-import _ from 'lodash';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom';
-import YTSearch from 'youtube-api-search';
-import SearchBar from '../../shared/Search_bar.jsx';
-import VideoList from '../../shared/Video_list.jsx';
-import VideoDetail from '../../shared/Video_detail.jsx';
-// import API_KEY from '../../helpers/api.jsx';
-
-const API_KEY = "API_KEY_HERE";
 
 export default class Landing extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      videos: [],
-      selectedVideo: null
-    };
-
-    this.videoSearch('surfboards');
-  }
-
-  videoSearch(term) {
-    YTSearch({key: API_KEY, term: term}, (videos) => {
-      this.setState({
-        videos: videos,
-        selectedVideo: videos[0]
-      });
-    });
-  }
+	handleSearchInput(e) {
+		e.preventDefault();
+		const search = e.target.elements.search.value;
+		this.props.handleSearchInput(search);
+	}
 
   render() {
-    const videoSearch = _.debounce((term) => {this.videoSearch(term) }, 300);
-
 		return (
 			<div className="page-wrapper">
 				<div className="landing-page-title">
@@ -42,13 +18,9 @@ export default class Landing extends Component {
 				</div>
 				<div className="searchbar-wrapper">
 					<h2>Get Started with your favorite song/artist!</h2>
-					<form className="landing-searchbar">
-            <span className="landing-search-icon"><i className="fas fa-search"></i></span>
-            <SearchBar onSearchTermChange={term => this.videoSearch(term)} />
-            <VideoDetail video={this.state.selectedVideo} />
-            <VideoList
-              onVideoSelect={selectedVideo => this.setState({selectedVideo}) }
-              videos={this.state.videos}  />
+					<form className="landing-searchbar" onSubmit={this.handleSearchInput.bind(this)}>
+						<span className="landing-search-icon"><i className="fas fa-search"></i></span>
+						<input className="landing-search" name="search"/>
 					</form>
 				</div>
 			</div>
