@@ -20,6 +20,8 @@ router.route('/signup')
   });
 });
 
+
+
 // POST route to login user
 router.route('/login')
 .post((req, res) => {

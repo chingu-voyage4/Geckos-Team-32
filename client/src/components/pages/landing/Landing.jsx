@@ -10,6 +10,12 @@ import { Link } from 'react-router-dom';
 const API_KEY = "";
 
 export default class Landing extends Component {
+	handleSearchInput(e) {
+		e.preventDefault();
+		const search = e.target.elements.search.value;
+		this.props.handleSearchInput(search);
+	}
+
   render() {
 		return (
 			<div className="page-wrapper">
@@ -19,9 +25,9 @@ export default class Landing extends Component {
 				</div>
 				<div className="searchbar-wrapper">
 					<h2>Get Started with your favorite song/artist!</h2>
-					<form className="landing-searchbar">
+					<form className="landing-searchbar" onSubmit={this.handleSearchInput.bind(this)}>
 						<span className="landing-search-icon"><i className="fas fa-search"></i></span>
-						<input className="landing-search" />
+						<input className="landing-search" name="search"/>
 					</form>
 				</div>
 			</div>
