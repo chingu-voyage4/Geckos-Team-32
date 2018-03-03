@@ -1,10 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 require('dotenv').config();
-const router = require('./routes/routes')
 const path = require('path');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+
+// Require routes & models
+const router = require('./routes/routes')
+const User = require('../models/user');
 
 const app = express();
 const PORT = process.env.PORT || 8000;
