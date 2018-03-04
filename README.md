@@ -28,14 +28,16 @@ See link below for instructions on how to get your development environment setup
 ## Requirements
 * [Node](https://nodejs.org/en/)
 * [NPM](https://www.npmjs.com/)
+* [MongoDB](https://www.mongodb.com/)
 
 
 ## Installation
 1. Clone or download this repo
 2. Navigate to the root directory in your terminal
 3. Run `npm install` to install all the dependencies
-4. Run `npm start` to see live app
-5. To make changes of your own, see [contributing](https://github.com/chingu-voyage4/Geckos-Team-32/blob/master/CONTRIBUTING.md) instructions
+4. Run `npm run build` to bundle the code
+5. Run `npm start` to see live app
+6. To make changes of your own, see [contributing](https://github.com/chingu-voyage4/Geckos-Team-32/blob/master/CONTRIBUTING.md) instructions  
 
 
 ## Build Tools
