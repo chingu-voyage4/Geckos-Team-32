@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
-export default class Landing extends Component {
+class Landing extends Component {
 	handleSearchInput(e) {
 		e.preventDefault();
 		const search = e.target.elements.search.value;
 		this.props.handleSearchInput(search);
+		this.props.history.push('/PostLanding');
 	}
 
   render() {
@@ -27,3 +28,5 @@ export default class Landing extends Component {
 		);
   }
 }
+
+export default withRouter(Landing);

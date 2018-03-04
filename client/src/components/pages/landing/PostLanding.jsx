@@ -9,7 +9,7 @@ export default class PostLandingPage extends Component {
   }
   
   render() {
-    // console.log('from postlanding: ', this.props.stateData.videos);
+    console.log('from postlanding: ', this.props.stateData);
     
     return (
       <div className="page-wrapper">
@@ -17,7 +17,7 @@ export default class PostLandingPage extends Component {
         <div className="post-landing-searchbar-wrapper">
           <form className="landing-searchbar" onSubmit={this.handleSearchInput.bind(this)}>
             <span className="landing-search-icon"><i className="fas fa-search"></i></span>
-            <input className="landing-search" name="search"/>
+            <input className="landing-search" name="search" defaultValue={this.props.stateData.search}/>
           </form>
           <h2>Choose a video to begin!</h2>
         </div>
