@@ -28,6 +28,12 @@
 .landing-search-icon {
   font-size: 1.5em;
   padding-left: .5em;
+  border: none;
+  background: transparent;
+
+  &:hover {
+    color: $accent-red;
+  }
 }
 
 @media screen and (min-width: 950px) and (max-width: 1360px) {
