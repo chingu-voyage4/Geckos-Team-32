@@ -23,7 +23,7 @@ class AppRoutes extends React.Component {
 
     axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&key=${API_KEY}&q=${term}&maxResults=9&topicId=/m/04rlf`)
       .then((results) => {
-        console.log('this is the data: ', results.data.items);
+        // console.log('this is the data: ', results.data.items);
         this.setState({
           search: term,
           videos: results.data.items,
