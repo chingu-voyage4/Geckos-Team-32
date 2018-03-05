@@ -12,7 +12,7 @@ class Profile extends React.Component {
 				this.props.history.push('/');
 			})
 			.catch((err) => {
-				console.log('There was an arror: ', err);
+				console.log('There was an error: ', err);
 			});
 	}
   
