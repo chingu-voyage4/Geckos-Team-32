@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import axios from 'axios';
 
 import Navbar from '../components/shared/Navbar.jsx';
 import Footer from '../components/shared/Footer.jsx';
@@ -10,6 +11,7 @@ import Signup from '../components/pages/auth/Signup.jsx';
 import Login from '../components/pages/auth/Login.jsx';
 import Profile from '../components/pages/auth/Profile.jsx';
 import NotFound from './NotFound.jsx';
+
 
 class AppRoutes extends React.Component {
 	state = {
@@ -33,12 +35,17 @@ class AppRoutes extends React.Component {
   handleSearchInput = (term) => {
     const API_KEY = '';
 
-    YTSearch({key: API_KEY, term: term}, (videos) => {
-      this.setState({
-        search: term,
-        videos: videos,
+    axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&key=${API_KEY}&q=${term}&maxResults=9&topicId=/m/04rlf`)
+      .then((results) => {
+        // console.log('this is the data: ', results.data.items);
+        this.setState({
+          search: term,
+          videos: results.data.items,
+        });
+      })
+      .catch(err => {
+        console.log(err);
       });
-    });
   }
 
   render() {
