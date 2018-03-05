@@ -16,7 +16,9 @@ class Profile extends React.Component {
     let id = this.props.userId.match.params.id;
 		axios.get(`/routes/user/${id}`)
 			.then((results) => {
-				this.setState({ userInfo: results.data.users });
+				// this.setState({ userInfo: results.data.users, foundUser: true });
+				console.log(results.data.users);
+				this.props.handleUpdateUser(results.data.users)
 			})
 			.catch((err) => {
 				console.log('There was an arror: ', err);

@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import YTSearch from 'youtube-api-search';
 
 import Navbar from '../components/shared/Navbar.jsx';
 import Footer from '../components/shared/Footer.jsx';
@@ -14,8 +13,21 @@ import NotFound from './NotFound.jsx';
 
 class AppRoutes extends React.Component {
 	state = {
+    user: {
+      loggedIn: false,
+      creds: {}
+    },
     search: '',
     videos: [],
+  }
+
+  handleUpdateUser = (user) => {
+    this.setState({
+      user: {
+        loggedIn: true,
+        creds: user
+      }
+    });
   }
   
   handleSearchInput = (term) => {
@@ -35,7 +47,9 @@ class AppRoutes extends React.Component {
         <div>
           <Navbar />
           <div className="main-page">
-            <Dashboard />
+            <Dashboard 
+              user={this.state.user}
+            />
             <Switch>
               <Route 
                 exact path="/" 
@@ -48,6 +62,7 @@ class AppRoutes extends React.Component {
                 path="/users/:id"
                 render={(props) => (<Profile
                   userId={props}
+                  handleUpdateUser={this.handleUpdateUser}
                 />)}
               />
               <Route 
