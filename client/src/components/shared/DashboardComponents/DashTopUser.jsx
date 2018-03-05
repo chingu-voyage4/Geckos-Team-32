@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom';
 
 export default class DashTop extends Component {
   render() {
-    console.log('from dashtopuser: ', this.props);
     return (
       <div className="dashboard-top dashboard-user">
         <img src="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/profile-icon.png"/>
