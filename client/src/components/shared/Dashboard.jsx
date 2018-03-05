@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 
 // Will include conditional rendering to show appropriate content if user if logged in/out
-export default class Navbar extends Component {
-	
+export default class Dashboard extends Component {
+
   render() {
+		console.log('dashboard reached');
 		return (
 			<div className="dashboard">
 				<div className="dashboard-top">

@@ -9,6 +9,7 @@ import Landing from '../components/pages/landing/Landing.jsx';
 import PostLanding from '../components/pages/landing/PostLanding.jsx'
 import Signup from '../components/pages/auth/Signup.jsx';
 import Login from '../components/pages/auth/Login.jsx';
+import Profile from '../components/pages/auth/Profile.jsx';
 import NotFound from './NotFound.jsx';
 
 class AppRoutes extends React.Component {
@@ -42,6 +43,12 @@ class AppRoutes extends React.Component {
                   search={this.state.search}
                   handleSearchInput={this.handleSearchInput}
                 />)} 
+              />
+              <Route
+                path="/users/:id"
+                render={(props) => (<Profile
+                  userId={props}
+                />)}
               />
               <Route 
                 path="/postlanding" 
