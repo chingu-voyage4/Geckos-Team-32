@@ -10,7 +10,7 @@ export default class DashTop extends Component {
         <ul>
           <li><a className="dashboard__link" href="#">Playlists</a></li>
           <li><a className="dashboard__link" href="#">Liked Videos</a></li>
-          <li className="dashboard-share">Share 
+          <li className="dashboard-share">Share: 
             <a href="#"><i className="fab fa-facebook-f"></i></a>
             <a href="#"><i className="fab fa-twitter"></i></a>
             <a href="#"><i className="fab fa-pinterest"></i></a>

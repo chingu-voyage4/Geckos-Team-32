@@ -15,7 +15,7 @@ router.post('/signup', (req, res) => {
     }
     passport.authenticate('local')(req, res, () => {
       console.log('new user created: ', newUser);
-      res.redirect('/');
+      res.redirect('/users/' + newUser._id);
     });
   });
 });

@@ -31,6 +31,16 @@ class AppRoutes extends React.Component {
       }
     });
   }
+
+  handleLogoutUser = () => {
+    console.log('user logging out');
+    this.setState({
+      user: {
+        loggedIn: false,
+        creds: {}
+      }
+    });
+  }
   
   handleSearchInput = (term) => {
     const API_KEY = 'AIzaSyCqCZFFCtUYNsXmm-ew0nFZcArMP1ygpCI';
@@ -52,11 +62,12 @@ class AppRoutes extends React.Component {
     return (
       <BrowserRouter>
         <div>
-          <Navbar />
-          <div className="main-page">
-            <Dashboard 
-              user={this.state.user}
+          <Navbar 
+            user={this.state.user} 
+            handleLogoutUser={this.handleLogoutUser}
             />
+          <div className="main-page">
+            <Dashboard user={this.state.user} />
             <Switch>
               <Route 
                 exact path="/" 
