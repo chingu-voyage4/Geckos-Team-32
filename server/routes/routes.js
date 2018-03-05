@@ -29,21 +29,12 @@ router.post('/login', passport.authenticate('local', {
   res.redirect('/users/' + req.user._id);
 });
 
-// GET route to get login information
-// router.get('/user', (req, res) => {
-//   User.find({}, (err, foundUsers) => {
-//     if (err) {
-//       console.log('There was a problem: ', err);
-//     } else {
-//       res.send({ users: foundUsers });
-//     }
-//   });
-// });
-
+// GET route to obtain user login information
 router.get('/user/:id', (req, res) => {
   User.findById(req.params.id).exec((err, foundUser) => {
     if (err || !foundUser) {
       console.log('There was a problem: ', err);
+      res.redirect('/');
     } else {
       res.send({ users: foundUser });
     }
