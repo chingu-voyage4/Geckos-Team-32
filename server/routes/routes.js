@@ -36,6 +36,9 @@ router.get('/logout', (req, res) => {
   res.redirect('/');
 });
 
+router.get('/PostLanding', (req,res) => {
+  res.redirect('/');
+}); 
 
 // router.route('/update')
 // .post((req, res) => {
