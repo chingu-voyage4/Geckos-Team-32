@@ -36,7 +36,7 @@ class AppRoutes extends React.Component {
 	state = {
     user: dummyData,
     search: '',
-    videos: [],
+   videos: [],
   }
 
   handleUpdateUser = (user) => {
