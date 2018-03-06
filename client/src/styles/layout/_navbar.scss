@@ -2,8 +2,8 @@
   display: flex;
   position: fixed;
   min-width: 100%;
+  height: 100px;
   background-color: white;
-  justify-content: space-between;
   z-index: 3;
 }
 
@@ -11,30 +11,32 @@
   display: flex;
   align-items: center;
   align-content: center;
-  // justify-content: space-around;
   margin: 0 auto;
-  padding: 0 10%;
-  // background-color: white;
-  max-width: 1440px;
+  padding: 0 5%;
+  width: 80vw;
   height: 100px;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .logo {
-  padding: 0;
-  margin: 0;
-  // width: 50%
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 20vw;
 }
 .logo a {
-  color: $off-black;
+  // color: $off-black;
   text-decoration: none;
-  opacity: .9;
+  // opacity: .9;
   font-family: 'Ubuntu', sans-serif;
   font-size: 40px;
   font-weight: 725;
-  letter-spacing:2px;
+  letter-spacing: 2px;
   justify-self: flex-start;
   // margin: auto 0;
+}
+.logo img {
+  height: 100%;
 }
 
 .toggle {
@@ -46,24 +48,24 @@
   display: flex;
   list-style-type: none;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin: 0;
   padding: 0 auto;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 24px;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 22px;
   font-weight: 500;
+  height: 100%;
+  width: 50%;
   
   li {
     display: flex;
-    justify-items: center;
     min-width: 90px;
-    width:20%;
+    width: 20%;
   }
   
   a {
     display: flex;
     white-space: nowrap;
-    margin: 10px;
     min-width: 100%;;
     color: $off-black;
     text-decoration: none;
@@ -80,9 +82,27 @@
   width: 110px;
 }
 
-.nav-list a:not(.logo):hover {
+.nav-wrapper a:not(.logo):hover {
   opacity: .8;
   color: #E6484B;
+}
+.login-list {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 40%;
+  height: 100%;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+  list-style-type: none;
+}
+.login-list a {
+  padding: 1em;
+  text-decoration: none;
+  color: $off-black;
+  transition: all .5s ease;
+  white-space: nowrap;
 }
 
 #menu-toggle {
@@ -96,26 +116,56 @@
 .dropdown-toggle {
   display: none;
 }
-
-@media (max-width: 768px) {
-  #menu-toggle:checked ~ ul {
-    opacity: 1;
-    min-height: 100vh;
-    visibility: visible;
+@media screen and (max-width: 949px) {
+  .logo {
+    width: 200px;
   }
-
-  #menu-toggle:checked ~ a.btn {
-    display:none
+}
+@media screen and (max-width: 768px) {
+  .navBar {
+    justify-content: space-between;
   }
-
+  .logo {
+    width: 200px;
+  }
+  .logo img {
+    width: 100%;
+    height: 100%;
+  }
+  .nav-wrapper {
+    display: none;
+  }
+  .login-list {
+    width: 50%;
+  }
+  .nav-wrapper {
+    justify-content: flex-end;
+  }
+  .hamburger {
+    display: flex;
+    padding: 0 5% 0 0;
+    justify-content: flex-end;
+    width: 25%;
+    height: 100px;
+  }
   .dropdown-toggle {
     background: linear-gradient(to bottom, #a9a9a9 0%, #a9a9a9 20%, transparent 20%, transparent 40%, #a9a9a9 40%, #a9a9a9 60%, transparent 60%, transparent 80%, #a9a9a9 80%, #a9a9a9 100%);
     cursor: pointer;
     display: flex;
-    float: right;
     height: 35px;
     align-self: center;
     min-width: 35px;
+  }
+}
+@media (max-width: 768px) {
+  #menu-toggle:checked ~ ul {
+  opacity: 1;
+  min-height: 100vh;
+  visibility: visible;
+  }
+
+  #menu-toggle:checked ~ a.btn {
+    display:none
   }
 
   .nav-list {
@@ -144,9 +194,9 @@
 }
 
 @media screen and (max-width:425px) {
-  .nav-wrapper {
-    justify-content: center;
-  }
+  //.nav-wrapper {
+  //  justify-content: center;
+  //}
   // .logo a {
   //   justify-self: flex-end;
   // }

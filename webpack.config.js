@@ -11,7 +11,10 @@ module.exports = {
   ],
   output: { //create output path
     filename: 'js/bundle.js',
-    path: PUBLIC_DIR
+    path: PUBLIC_DIR,
+    publicPath: 'http://localhost:8080/',
+    hotUpdateChunkFilename: 'hot/hot-update.js',
+    hotUpdateMainFilename: 'hot/hot-update.json'
   },
   module: {
     rules: [
@@ -24,7 +27,12 @@ module.exports = {
       {
         test: /\.(css|sass|scss)$/, // checks for any files ending in .css, .sass, or .scss
         use: ['style-loader', 'css-loader', 'sass-loader'],
-      }
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        include: SRC_DIR,
+        loader: 'url-loader?limit=30000&name=images/[name].[ext]'
+      },
     ]
   },
   devServer: {
