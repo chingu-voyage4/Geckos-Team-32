@@ -11,7 +11,9 @@ module.exports = {
   ],
   output: { //create output path
     filename: 'js/bundle.js',
-    path: PUBLIC_DIR
+    path: PUBLIC_DIR,
+    hotUpdateChunkFilename: 'hot/hot-update.js',
+    hotUpdateMainFilename: 'hot/hot-update.json'
   },
   module: {
     rules: [
