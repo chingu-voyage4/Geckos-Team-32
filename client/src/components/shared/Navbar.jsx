@@ -18,9 +18,14 @@ export default class Navbar extends Component {
               <li><NavLink to="/about">About</NavLink></li>
               <li><NavLink to="/pro">Pro</NavLink></li>
               <li><NavLink to="/help">Help</NavLink></li>
-              <li><NavLink to="/login">Log In</NavLink></li>
-              <li><NavLink to="/signup" className ="btn">Sign up</NavLink></li>
             </ul>
+            {this.props.user.loggedIn ? 
+              <ul className="nav-list"><li><a href="#" onClick={(e) => this.props.handleLogoutUser(e)}>Log out</a></li></ul> : 
+              <ul className="nav-list">
+                <li><NavLink to="/login">Log In</NavLink></li>
+                <li><NavLink to="/signup" className ="btn">Sign up</NavLink></li>
+              </ul>
+            }
           </nav>
         </nav>
 			</div>
