@@ -18,4 +18,9 @@ body {
   padding: 1em;
   outline: none;
   cursor: pointer;
+  transition: 0.3s;
+
+  &:hover {
+    transition: 0.3s;
+  }
 }

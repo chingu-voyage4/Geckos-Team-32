@@ -8,7 +8,7 @@
   padding: 1em;
   font-family: 'Ubuntu', sans-serif;
   min-height: calc(100vh - 100px);
-
+  position: fixed;
   h2 {
     font-size: 1.2em;
   }
@@ -26,6 +26,49 @@
   }
 }
 
+// =======================================
+// ========= USER LOGGED IN ==============
+// =======================================
+.dashboard-user {
+  img {
+    width: 90%;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: left;
+  }
+  li {
+    padding: .5em;
+  }
+}
+
+.dash-theme {
+  padding-top: 1em;
+  h3 {
+    margin: 0;
+  }
+
+  select {
+    width: 100%;
+  }
+}
+
+.dashboard-share {
+  a {
+    padding: 0 .5em;
+    color:$off-black;
+
+    &:hover {
+      color: $accent-red;
+    }
+  }
+}
+
+// =======================================
+// ======== DASHBOARD BOTTOM =============
+// =======================================
 .dashboard-bottom p {
   margin: 0.5em 0;
 }
@@ -63,6 +106,11 @@
 .geckos-credit {
   font-size: 0.75em;
 }
+
+
+// =======================================
+// ========= TABLET/MOBILE ===============
+// =======================================
 
 // not visible in mobile/tablet view
 @media (max-width: 768px) {
