@@ -15,7 +15,7 @@ router.post('/signup', (req, res) => {
     }
     passport.authenticate('local')(req, res, () => {
       console.log('new user created: ', newUser);
-      res.redirect('/');
+      res.redirect('/users/' + newUser._id);
     });
   });
 });
@@ -26,7 +26,19 @@ router.post('/login', passport.authenticate('local', {
   failureRedirect: '/login',
 }), (req, res) => {
   console.log('successfully logged in: ', req.user);
-  res.redirect('/');
+  res.redirect('/users/' + req.user._id);
+});
+
+// GET route to obtain user login information
+router.get('/user/:id', (req, res) => {
+  User.findById(req.params.id).exec((err, foundUser) => {
+    if (err || !foundUser) {
+      console.log('There was a problem: ', err);
+      res.redirect('/');
+    } else {
+      res.send({ users: foundUser });
+    }
+  });
 });
 
 // LOGOUT route
