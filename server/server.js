@@ -12,6 +12,8 @@ const cors = require('cors');
 // Require routes & models
 const router = require('./routes/routes')
 const User = require('./models/user');
+const Playlist = require('./models/playlist');
+const Video = require('./models/video');
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -48,6 +50,13 @@ app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+// MIDDLEWARE
+// Calls on every route (DRY)
+app.use((req,res,next) => {
+  res.locals.currentUser = req.user;
+  next();
+});
 
 app.use('/routes', router);
 
