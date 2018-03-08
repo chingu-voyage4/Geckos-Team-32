@@ -1,4 +1,146 @@
+// Grid Settings //
+
+// Baseline settings //
 .navBar {
+  display: grid;
+  grid-template-columns: 400px auto;
+  grid-template-rows: 100px;
+  grid-template-areas:
+    "logo nav-wrapper";
+  min-width: 100%;
+  position: fixed;
+  font-family: 'ubuntu';
+  background-color: white;
+}
+.navBar a {
+  text-decoration: none;
+  color: black;
+  font-size: 26px;
+  transition: .5s color ease-in;
+  -webkit-transition: .5s color ease-in;
+}
+.navBar a:hover {
+  color: $accent-red;
+  transition: .2s color ease-out;
+  -webkit-transition: .2s color ease-in;
+}
+.navBar ul {
+  list-style-type: none;
+}
+.navBar li {
+  display: inline-block;
+  padding: 2% 5%;
+}
+
+// LOGO AREA //
+.logo {
+  grid-area: logo;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+  "logo brand";
+  justify-items: center;
+  border: 1px solid blue;
+}
+.logo img {
+  display: block;
+  max-height: 100%;
+}
+
+.icon {
+  grid-area: logo;
+}
+.brand {
+  grid-area: brand;
+}
+
+// NAV-WRAPPER AREA //
+.nav-wrapper {
+  grid-area: nav-wrapper;
+  display: inline-grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-areas:
+    "nav . login";
+  border: 1px solid red;
+  align-items: center;
+}
+.nav-list {
+  grid-area: nav;
+  border: 1px solid green;
+}
+.login-list {
+  grid-area: login;
+  border: 1px solid black;
+  align-content: center;
+  margin-right: 5%;
+}
+.login-list li {
+  float: right;
+}
+
+// Hamburger Menu animations //
+.hidden {
+  display: none;
+}
+.show {
+  display: block;
+}
+.hamburger {
+  display: none;
+  align-items: center;
+}
+.hamburger-icon {
+  cursor: pointer;
+}
+.bar1, .bar2, .bar3 {
+    width: 50px;
+    height: 5px;
+    background-color: #333;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+.change .bar1 {
+    -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+    transform: rotate(-45deg) translate(-9px, 6px);
+    background-color: $accent-red;
+}
+
+.change .bar2 {opacity: 0;}
+
+.change .bar3 {
+    -webkit-transform: rotate(45deg) translate(-8px, -8px);
+    transform: rotate(45deg) translate(-8px, -8px);
+    background-color: $accent-red;
+}
+
+// Media Queries //
+
+@media screen and (max-width: 768px) {
+  .navBar {
+  grid-template-areas:
+    "logo hamburger";
+  }
+  .nav-wrapper {
+    display: none;
+  }
+  .hamburger {
+    grid-area: hamburger;
+    display: inline-block;
+    justify-self: end;
+    align-self: center;
+    border: 1px solid red;
+  }
+}
+
+
+
+
+
+
+
+
+
+/*.navBar {
   display: flex;
   position: fixed;
   min-width: 100%;
@@ -22,7 +164,8 @@
   display: flex;
   justify-content: center;
   align-content: center;
-  width: 20vw;
+  width: 20%;
+  border: 1px solid blue;
 }
 .logo a {
   // color: $off-black;
@@ -36,7 +179,8 @@
   // margin: auto 0;
 }
 .logo img {
-  height: 100%;
+  display: flex;
+  max-height: 100%;
 }
 
 .toggle {
@@ -200,4 +344,4 @@
   // .logo a {
   //   justify-self: flex-end;
   // }
-}
+}*/
