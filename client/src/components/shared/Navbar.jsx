@@ -6,10 +6,6 @@ import brand from "../../assets/Gechotext2.png";
 
 export default class Navbar extends Component {
 	
-  constructor(props) {
-    super(props);
-  }
-
   render() {
 		return (
 			<div>
@@ -24,18 +20,28 @@ export default class Navbar extends Component {
             </div>
 
             <div className="hamburger">
-
-            <a ref="btn" href="#" className="btn-menu show-on-small"
-              onClick={this.showNav}><i></i></a>
-            <Sidenav ref="sideNav" />
-              <div className="hamburger-icon">
+              <div className="hamburger-icon" onClick={this.burgerToggle}>
                 <div className="bar1"></div>
                 <div className="bar2"></div>
                 <div className="bar3"></div>
               </div>
+              
+              <div className="burger-links">
+                <NavLink to="/about" onClick={this.burgerToggle}>About</NavLink>
+              {this.props.user.loggedIn ?
+                  <div>
+                  <NavLink to="/pro" onClick={this.burgerToggle}>Profile</NavLink>
+                  <a href="#" onClick={(e) => this.props.handleLogoutUser(e)}>Sign  out</a>
+                  </div> :
+                  <div>
+                  <NavLink to="/signup" onClick={this.burgerToggle}>Sign up</NavLink>
+                  <NavLink to="/login" onClick={this.burgerToggle}>Log In</NavLink>
+                  </div>
+                }
+              </div>
             </div>
 
-            
+
             <div className="nav-wrapper">
               <ul className="nav-list">
                 <li><NavLink to="/about">About</NavLink></li>
@@ -53,9 +59,17 @@ export default class Navbar extends Component {
             </div>
         </nav>
 			</div>
-		);
+    );
+    
   }
-  showNav() {
-    this.refs.sideNav.show();
+  
+  burgerToggle = function () {
+    let linksEl = document.querySelector('.burger-links');
+    if (linksEl.style.display === 'block') {
+      linksEl.style.display = 'none';
+    } else {
+      linksEl.style.display = 'block';
+    }
+    
   }
 }

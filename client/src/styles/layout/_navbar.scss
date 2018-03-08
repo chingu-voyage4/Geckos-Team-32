@@ -40,7 +40,6 @@
   grid-template-areas:
   "logo brand";
   justify-items: center;
-  border: 1px solid blue;
 }
 .logo img {
   display: block;
@@ -61,16 +60,13 @@
   grid-template-columns: 1fr auto 1fr;
   grid-template-areas:
     "nav . login";
-  border: 1px solid red;
   align-items: center;
 }
 .nav-list {
   grid-area: nav;
-  border: 1px solid green;
 }
 .login-list {
   grid-area: login;
-  border: 1px solid black;
   align-content: center;
   margin-right: 5%;
 }
@@ -78,18 +74,31 @@
   float: right;
 }
 
-// Hamburger Menu animations //
-.hidden {
-  display: none;
-}
-.show {
-  display: block;
-}
+// Hamburger Menu //
+
 .hamburger {
   display: none;
-  align-items: center;
+}
+.burger-links {
+  display: none;
+  z-index: 5;
+  position: absolute;
+  margin-top: calc(100px + 3%);
+  width: 100%;
+  background-color: darken($bg-grey, 75%);
+}
+.burger-links a {
+  display: block;
+  text-align: center;
+  clear: right;
+  color: white;
+  padding: 1%;
+}
+.burger-links a:hover {
+  color: $accent-red;
 }
 .hamburger-icon {
+  margin-right: 5%;
   cursor: pointer;
 }
 .bar1, .bar2, .bar3 {
@@ -99,6 +108,10 @@
     margin: 6px 0;
     transition: 0.4s;
 }
+
+////////////////////////////////////
+// This animation doesn't work yet(add class="change" to <div className="hamburger-icon" to see it //
+////////////////////////////////////
 .change .bar1 {
     -webkit-transform: rotate(-45deg) translate(-9px, 6px);
     transform: rotate(-45deg) translate(-9px, 6px);
@@ -125,10 +138,20 @@
   }
   .hamburger {
     grid-area: hamburger;
-    display: inline-block;
-    justify-self: end;
-    align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
     border: 1px solid red;
+  }
+
+}
+
+@media screen and (max-width: 500px) {
+  .navBar {
+    grid-template-columns: 200px auto;
+  }
+  .brand {
+    display: none;
   }
 }
 
