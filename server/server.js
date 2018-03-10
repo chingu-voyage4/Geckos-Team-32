@@ -47,10 +47,6 @@ app.use(require('express-session')({
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
-
-
 //OAuth Google Config
 passport.use(
   new GoogleStrategy(
@@ -69,9 +65,13 @@ passport.use(
   )
 );
 
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 
 app.use('/routes', router);
 
+//router(app);
 // handle all routes on index.html
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/public/index.html'))

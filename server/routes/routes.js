@@ -35,19 +35,13 @@ router.get('/logout', (req, res) => {
   res.redirect('/');
 });
 
-router.post('/auth/google', passport.authenticate('google', {
-  // successRedirect: '/',
-  scope: ['profile', 'email'],
-  failureRedirect: '/login'
-}), (req, res) => {
-  console.log('successfully logged in: ', req.user);
-  res.redirect('/');
-});
 
+router.get('/auth/google', passport.authenticate('google', {
+  scope: ['profile', 'email'] //communicates with Google server what access we want to have
+  })
+);
 
-router.post('/auth/google/callback', passport.authenticate('google'));
-
-
+router.get('/auth/google/callback', passport.authenticate('google'));
 
 
 module.exports = router;
