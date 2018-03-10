@@ -2,21 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 class Signup extends React.Component {
-  // constructor() {
-  //   super();
-  // }
-
-  // componentWillMount() {
-  //   console.log('componentWillMount hit!');
-  // }
-
-  // componentDidMount() {
-  //   console.log('componentDidMount hit!');
-  // }
-
-  // sendForm() {
-  //   axios.post()
-  // }
+  
 
   render() {
     return (
@@ -29,7 +15,7 @@ class Signup extends React.Component {
           <button className="button">Sign up</button>
         </form>
 
-        <form className="signup-form" action="/auth/google" method="post">
+        <form className="signup-form" action="routes/auth/google" method="get">
         <button className="button">Sign up with google</button>
         </form>
 
