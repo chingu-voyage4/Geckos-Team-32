@@ -20,8 +20,8 @@ class AppRoutes extends React.Component {
   }
   
   handleSearchInput = (term) => {
-    const API_KEY = "AIzaSyDmsudbl8aw7pQHpMe6vFWXYcFAyqX1N2Y";
-
+    const API_KEY = "AIzaSyAMW6z9bwdn8uqyfUotBevqWr9PbhyfWZA";
+    
     axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&key=${API_KEY}&q=${term}&maxResults=9&topicId=/m/04rlf`)
       .then((results) => {
         // console.log('this is the data: ', results.data.items);
@@ -32,6 +32,7 @@ class AppRoutes extends React.Component {
       })
       .catch(err => {
         console.log(err);
+        console.log(req);
       });
   }
 

@@ -5,15 +5,21 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 
+const keys = require('./config/keys');
+
+
+const app = express();
 
 // Require routes & models
+//require('./routes/authroutes')(app); //calls the function we are importing
 const router = require('./routes/routes')
 const User = require('./models/user');
 
-const app = express();
+
 const PORT = process.env.PORT || 8000;
 
 app.use(bodyParser.urlencoded({extended: true})); // returns middleware that only parses urlencoded bodies; extended allows for the qs library
@@ -22,20 +28,15 @@ app.use(bodyParser.json()); // looks for JSON data
 app.use(cookieParser());
 app.use(cors());
 
-// const options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } },
-//   replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } } };
 
 // Locally use mongoDB or use mLab setup from geckos-32
 // const url = process.env.MONGODB_URI || "mongodb://localhost:27017/geckos32"
-const url = "mongodb://localhost:27017/geckos32"
+const url = keys.DB;
 mongoose.connect(url);
-// const conn = mongoose.connection;
 
-// conn.on('error', console.error.bind(console, 'connection error:'));
 
-// conn.once('open', function() {
-//   // Wait for the database connection to establish, then start the app.
-// });
+
+
 
 // Passport Config
 app.use(require('express-session')({
@@ -48,6 +49,26 @@ app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+
+//OAuth Google Config
+passport.use(
+  new GoogleStrategy(
+      {
+          clientID: keys.googleClientID,
+          clientSecret: keys.googleClientSecret,
+          callbackURL:'auth/google/callback', //route the user is going to be send to after he/she authenticate
+      }, 
+      
+      (accessToken, refreshToken, profile, done) => {
+          console.log('access token:', accessToken);
+          console.log('refresh token:', refreshToken);
+          console.log('profile:', profile);
+          
+      }
+  )
+);
+
 
 app.use('/routes', router);
 

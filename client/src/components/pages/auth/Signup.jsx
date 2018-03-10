@@ -28,6 +28,11 @@ class Signup extends React.Component {
           <input className="signup-form__input" type="password" name="password" placeholder="password"/>
           <button className="button">Sign up</button>
         </form>
+
+        <form className="signup-form" action="/auth/google" method="post">
+        <button className="button">Sign up with google</button>
+        </form>
+
       </div>
     );
   }

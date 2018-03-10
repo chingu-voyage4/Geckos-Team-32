@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/server.js",
     "build": "webpack -w",
-    "dev": "webpack-dev-server"
+    "dev": "webpack-dev-server",
+    "watch": "nodemon server/server.js"
   },
   "proxy": "http://localhost:8000/",
   "repository": {
@@ -42,6 +43,7 @@
     "nodemon": "^1.17.1",
     "npm": "^5.7.1",
     "passport": "^0.4.0",
+    "passport-google-oauth20": "^1.0.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^5.0.0",
     "path": "^0.12.7",
