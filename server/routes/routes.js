@@ -5,7 +5,7 @@ const path = require('path');
 
 const User = require('../models/user');
 
-// POST route to create a new user
+// POST route to create a new user 
 router.post('/signup', passport.authenticate('local-signup', {
   successRedirect : '/', 
   failureRedirect : '/signup'
@@ -25,13 +25,35 @@ router.get('/logout', (req, res) => {
   res.redirect('/');
 });
 
-
+//Google OAuth routes
 router.get('/auth/google', passport.authenticate('google', {
-  scope: ['profile', 'email'] //communicates with Google server what access we want to have
+  scope: ['profile', 'email']
   })
 );
 
 router.get('/auth/google/callback', passport.authenticate('google'));
+
+//Facebook OAuth routes
+router.get('/auth/facebook', passport.authenticate('facebook', { 
+  scope : ['public_profile', 'email']
+}));
+
+router.get('/auth/facebook/callback', passport.authenticate('facebook', {
+            successRedirect : '/',
+            failureRedirect : '/signup'
+        }));
+
+//Function to check authentication
+function isLoggedIn(req, res, next) {
+
+  if (req.isAuthenticated())
+      return next();
+
+  res.redirect('/');
+}
+
+
+
 
 //For testing purposes:
 

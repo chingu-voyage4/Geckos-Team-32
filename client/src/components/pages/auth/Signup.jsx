@@ -19,6 +19,10 @@ class Signup extends React.Component {
         <button className="button">Sign up with google</button>
         </form>
 
+        <form className="signup-form" action="routes/auth/facebook" method="get">
+        <button className="button">Sign up with facebook</button>
+        </form>
+
       </div>
     );
   }

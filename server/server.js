@@ -7,6 +7,7 @@ const passport = require('passport');
 var morgan = require('morgan');
 const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 
@@ -128,6 +129,50 @@ passport.use(
       }
   )
 );
+
+//Facebook Config
+
+passport.use(new FacebookStrategy({
+
+  // pull in our app id and secret from our auth.js file
+  clientID        : keys.facebookClientID,
+  clientSecret    : keys.facebookClientSecret,
+  callbackURL     : '/routes/auth/facebook/callback'
+
+},
+
+function(token, refreshToken, profile, done) {
+
+  process.nextTick(function() {
+
+      User.findOne({ 'facebook.id' : profile.id }, function(err, user) {
+
+          if (err)
+              return done(err);
+
+          if (user) {
+              return done(null, user); 
+          } else {
+             
+              var newUser = new User();
+
+              // set all of the facebook information in our user model
+              newUser.facebookID = profile.id;                  
+              newUser.facebookToken = token;                  
+              newUser.displayName = profile.name.givenName + ' ' + profile.name.familyName; 
+
+              // save our user 
+              newUser.save(function(err) {
+                  if (err)
+                      throw err;
+                  return done(null, newUser);
+              });
+          }
+
+      });
+  });
+
+}));
 
 
 passport.serializeUser ( (user, done) => { 

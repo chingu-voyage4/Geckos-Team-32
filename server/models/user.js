@@ -7,6 +7,10 @@ const User = new Schema({
   username: String,
   password: String,
   googleID: String,
+  facebookID:String,
+  facebookToken:String,
+  displayName:String,
+  email: String
 });
 
 
