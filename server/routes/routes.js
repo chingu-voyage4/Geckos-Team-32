@@ -84,23 +84,50 @@ router.delete('/user/:id', middleware.isLoggedIn, (req,res) => {
   });
 });
 
-// LOGOUT route
+/*
+ * GET ROUTE
+ * READ -- Logout user
+ */
 router.get('/logout', (req, res) => {
   console.log('successfully logged out: ', req.user.username);
   req.logout();
   res.redirect('/');
 });
 
-
+/*
+ * GET ROUTE
+ * READ -- Login user via Google authentication
+ */
 router.get('/auth/google', passport.authenticate('google', {
-  scope: ['profile', 'email'] //communicates with Google server what access we want to have
+  scope: ['profile', 'email']
   })
 );
 
+/*
+ * GET ROUTE
+ * READ -- Callback Google authentication
+ */
 router.get('/auth/google/callback', passport.authenticate('google'));
 
-//For testing purposes:
+/*
+ * GET ROUTE
+ * READ -- Login user via Facebook authentication
+ */
+router.get('/auth/facebook', passport.authenticate('facebook', { 
+  scope : ['public_profile', 'email']
+}));
 
+/*
+ * GET ROUTE
+ * READ -- Callback for Facebook authentication
+ */
+router.get('/auth/facebook/callback', passport.authenticate('facebook', {
+  successRedirect : '/',
+  failureRedirect : '/signup'
+}));
+
+
+//For testing purposes:
 router.get('/api/current_user', (req, res)=> {
   res.send(req.user); //passport attach functions to the request
 });

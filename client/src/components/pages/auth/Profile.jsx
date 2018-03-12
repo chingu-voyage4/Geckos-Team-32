@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import { withRouter } from 'react-router-dom';
 
 
 class Profile extends React.Component {
@@ -19,10 +18,10 @@ class Profile extends React.Component {
   render() {
     return (
       <div className="page-wrapper">
-				<h1>Re-reouting to homepage...</h1>
+				<h1>This is the profile page!</h1>
       </div>
     );
   }
 }
 
-export default withRouter(Profile);
+export default Profile;
