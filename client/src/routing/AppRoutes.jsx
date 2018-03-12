@@ -9,14 +9,54 @@ import Landing from '../components/pages/landing/Landing.jsx';
 import PostLanding from '../components/pages/landing/PostLanding.jsx'
 import Signup from '../components/pages/auth/Signup.jsx';
 import Login from '../components/pages/auth/Login.jsx';
+import Profile from '../components/pages/auth/Profile.jsx';
 import NotFound from './NotFound.jsx';
 
+// Used for client side testing
+// Uncomment top 'state' below and comment out bottom 'state' before pushing!
+const dummyData = {
+  loggedIn: true,
+  creds: {
+    _id: 'f93jafb1fvn39dba1e5a1c2d83',
+    __v: 0,
+    username: 'KentuckyKid309'
+  }
+}
 
 class AppRoutes extends React.Component {
 	state = {
+    user: {
+      loggedIn: false,
+      creds: {}
+    },
     search: '',
     videos: [],
-    selectedVideo:null
+  }
+
+	// state = {
+  //   user: dummyData,
+  //   search: '',
+  //   videos: [],
+  //   selectedVideo:null
+  // }
+
+  handleUpdateUser = (user) => {
+    this.setState({
+      user: {
+        loggedIn: true,
+        creds: user
+      }
+    });
+  }
+
+  handleLogoutUser = () => {
+    console.log('user logging out');
+    this.setState({
+      user: {
+        loggedIn: false,
+        creds: {}
+      }
+    });
   }
   
   handleSearchInput = (term) => {
@@ -40,9 +80,12 @@ class AppRoutes extends React.Component {
     return (
       <BrowserRouter>
         <div>
-          <Navbar />
+          <Navbar 
+            user={this.state.user} 
+            handleLogoutUser={this.handleLogoutUser}
+            />
           <div className="main-page">
-            <Dashboard />
+            <Dashboard user={this.state.user} />
             <Switch>
               <Route 
                 exact path="/" 
@@ -50,6 +93,13 @@ class AppRoutes extends React.Component {
                   search={this.state.search}
                   handleSearchInput={this.handleSearchInput}
                 />)} 
+              />
+              <Route
+                path="/users/:id"
+                render={(props) => (<Profile
+                  userId={props}
+                  handleUpdateUser={this.handleUpdateUser}
+                />)}
               />
               <Route 
                 path="/postlanding" 

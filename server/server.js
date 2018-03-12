@@ -19,6 +19,8 @@ const app = express();
 //require('./routes/authroutes')(app); //calls the function we are importing
 const router = require('./routes/routes')
 const User = require('./models/user');
+const Playlist = require('./models/playlist');
+const Video = require('./models/video');
 
 
 const PORT = process.env.PORT || 8000;
@@ -44,90 +46,69 @@ app.use(require('express-session')({
 app.use(passport.initialize());
 app.use(passport.session());
 
-//Local Config
-
+// Local Signup Config
 passport.use('local-signup', new LocalStrategy({
   usernameField : 'username',
   passwordField : 'password',
   passReqToCallback : true 
-},
-function(req, username, password, done) {
-
-  process.nextTick(function() {
-  User.findOne({'username':username}, function(err, user) {
+}, (req, username, password, done) => {
+  process.nextTick(() => {
+    User.findOne({ 'username': username }, (err, user) => {
       if (err)
-          return done(err);
-
+        return done(err);
       if (user) {
-          return done(null, false);
-      } 
-      
-      else {
-          var newUser = new User();
-
-          newUser.username = username;
-          newUser.password = newUser.generateHash(password);
-
-          newUser.save(function(err) {
-              if (err)
-                  throw err;
-              return done(null, newUser);
-          });
-          console.log('new user created: ', newUser);
+        return done(null, false);
+      } else {
+        let newUser = new User();
+        newUser.username = username;
+        newUser.password = newUser.generateHash(password);
+        newUser.save(function(err) {
+          if (err)
+              throw err;
+          return done(null, newUser);
+        });
+        console.log('new user created: ', newUser);
       }
-  });    
+    });    
   });
 }));
 
+// Local Login Config
 passport.use('local-login', new LocalStrategy({
   usernameField : 'username',
   passwordField : 'password',
   passReqToCallback : true 
-},
-function(req, username, password, done) { 
-
-  User.findOne({ 'username': username}, function(err, user) {
-      if (err)
-          return done(err);
-
-      if (!user)
-          return done(null, false); 
-
-
-      if (!user.validPassword(password))
-          return done(null, false);
-      
-      console.log(user);
-      return done(null, user);
+}, (req, username, password, done) => { 
+  User.findOne({ 'username': username}, (err, user) => {
+    if (err)
+      return done(err);
+    if (!user)
+      return done(null, false); 
+    if (!user.validPassword(password))
+      return done(null, false);
+    console.log(user);
+    return done(null, user);
   });
-
 }));
 
-//OAuth Google Config
-passport.use(
-  new GoogleStrategy(
-      {
-          clientID: keys.googleClientID,
-          clientSecret: keys.googleClientSecret,
-          callbackURL:'/routes/auth/google/callback', //route the user is going to be send to after he/she authenticate
-      }, 
-      
-      (accessToken, refreshToken, profile, done) => {
-          //console.log('profile:', profile);
-          User.findOne({googleID:profile.id}) 
-          .then( (existingUser)=> {                   
-              if(existingUser) {
-                  done(null, existingUser);                
-              } 
-              
-              else {
-                  new User ( {googleID: profile.id}).save() 
-                  .then(user => done (null, user));
-              }
-          })   
-      }
-  )
-);
+// OAuth Google Config
+passport.use(new GoogleStrategy({
+  clientID: keys.googleClientID,
+  clientSecret: keys.googleClientSecret,
+  callbackURL:'/routes/auth/google/callback', //route the user is going to be send to after he/she authenticate
+}, (accessToken, refreshToken, profile, done) => {
+  //console.log('profile:', profile);
+  User.findOne({ googleID: profile.id }) 
+  .then( (existingUser)=> {                   
+    if(existingUser) {
+      done(null, existingUser);                
+    } 
+    else {
+      new User ( {googleID: profile.id}).save() 
+      .then(user => done (null, user));
+    }
+  })   
+}));
 
 
 passport.serializeUser ( (user, done) => { 
@@ -138,6 +119,13 @@ passport.deserializeUser((id, done) => {
   User.findById(id, (err, user) => {
     done(null, user);
   });
+});
+
+// MIDDLEWARE
+// Calls on every route (DRY)
+app.use((req,res,next) => {
+  res.locals.currentUser = req.user;
+  next();
 });
 
 app.use('/routes', router);

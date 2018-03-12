@@ -56,3 +56,6 @@ ehthumbs.db
 Thumbs.db
 
 .env
+
+# HMR Chunks
+client/public/hot
