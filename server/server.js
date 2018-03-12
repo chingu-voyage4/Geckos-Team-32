@@ -10,6 +10,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const { google } = require('googleapis');
 
 const keys = require('./config/keys');
 
@@ -38,6 +39,34 @@ app.use(cors());
 // const url = keys.DB;
 const url = "mongodb://localhost:27017/geckos32";
 mongoose.connect(url);
+
+// ==================================
+// Youtube config
+// ==================================
+// app.get ('../client/src/routing/AppRoutes.jsx', AppRoutes.handleSearchInput)
+
+const API_KEY = keys.youtubeApiKey;
+console.log(API_KEY);
+const term = 'top';
+
+app.get('/searchthis', (req, res) => {
+  google.youtube({
+    version: 'v3',
+    auth: API_KEY
+  }).search.list({
+    part: 'snippet',
+    q: term,
+    maxResults: 9,
+    topicId: '/m/04rlf'
+  }, (err, data, response) => {
+    if (err) {
+      console.error('Error: ' + err);
+    }
+    if (data) {
+      console.log('This is the data: ', data.data)
+    }
+  });
+});
 
 // Passport Config
 app.use(require('express-session')({
