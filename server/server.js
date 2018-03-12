@@ -46,7 +46,7 @@ mongoose.connect(url);
 // app.get ('../client/src/routing/AppRoutes.jsx', AppRoutes.handleSearchInput)
 
 const API_KEY = keys.youtubeApiKey;
-console.log(API_KEY);
+// console.log(API_KEY);
 const term = 'top';
 
 app.get('/searchthis', (req, res) => {
