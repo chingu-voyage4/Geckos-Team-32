@@ -14,12 +14,12 @@ const { google } = require('googleapis');
 
 const keys = require('./config/keys');
 
-
 const app = express();
 
 // Require routes & models
 //require('./routes/authroutes')(app); //calls the function we are importing
-const router = require('./routes/routes')
+const router = require('./routes/routes');
+const youtubeRoutes = require('./routes/youtubeRoute');
 const User = require('./models/user');
 const Playlist = require('./models/playlist');
 const Video = require('./models/video');
@@ -39,34 +39,6 @@ app.use(cors());
 // const url = keys.DB;
 const url = "mongodb://localhost:27017/geckos32";
 mongoose.connect(url);
-
-// ==================================
-// Youtube config
-// ==================================
-// app.get ('../client/src/routing/AppRoutes.jsx', AppRoutes.handleSearchInput)
-
-const API_KEY = keys.youtubeApiKey;
-// console.log(API_KEY);
-const term = 'top';
-
-app.get('/searchthis', (req, res) => {
-  google.youtube({
-    version: 'v3',
-    auth: API_KEY
-  }).search.list({
-    part: 'snippet',
-    q: term,
-    maxResults: 9,
-    topicId: '/m/04rlf'
-  }, (err, data, response) => {
-    if (err) {
-      console.error('Error: ' + err);
-    }
-    if (data) {
-      console.log('This is the data: ', data.data)
-    }
-  });
-});
 
 // Passport Config
 app.use(require('express-session')({
@@ -164,7 +136,6 @@ function(token, refreshToken, profile, done) {
           if (user) {
               return done(null, user); 
           } else {
-             
               var newUser = new User();
 
               // set all of the facebook information in our user model
@@ -203,7 +174,9 @@ app.use((req,res,next) => {
   next();
 });
 
+// ROUTING PATHS
 app.use('/routes', router);
+app.use('/routes', youtubeRoutes);
 
 //router(app);
 // handle all routes on index.html
