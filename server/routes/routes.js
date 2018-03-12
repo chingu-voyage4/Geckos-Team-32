@@ -13,13 +13,10 @@ router.post('/signup', passport.authenticate('local-signup', {
 
 
 // POST route to login user
-router.post('/login', passport.authenticate('local', {
-  // successRedirect: '/',
-  failureRedirect: '/login',
-}), (req, res) => {
-  console.log('successfully logged in: ', req.user);
-  res.redirect('/');
-});
+router.post('/login', passport.authenticate('local-login', {
+  successRedirect : '/', 
+  failureRedirect : '/login', 
+}));
 
 // LOGOUT route
 router.get('/logout', (req, res) => {
