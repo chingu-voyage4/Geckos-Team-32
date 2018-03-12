@@ -4,6 +4,7 @@ const path = require('path'); //joins path segments and normalizes resulting pat
 require('dotenv').config();
 const mongoose = require('mongoose');
 const passport = require('passport');
+var morgan = require('morgan');
 const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const cookieParser = require('cookie-parser');
@@ -34,10 +35,6 @@ app.use(cors());
 const url = keys.DB;
 mongoose.connect(url);
 
-
-
-
-
 // Passport Config
 app.use(require('express-session')({
   secret: 'geckos32 made this',
@@ -46,7 +43,44 @@ app.use(require('express-session')({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new LocalStrategy(User.authenticate()));
+
+//Local Config
+
+passport.use('local-signup', new LocalStrategy({
+  usernameField : 'username',
+  passwordField : 'password',
+  passReqToCallback : true 
+},
+function(req, username, password, done) {
+
+  process.nextTick(function() {
+  User.findOne({ 'username' :  username}, function(err, user) {
+      if (err)
+          return done(err);
+
+      if (user) {
+          return done(null, false);
+      } 
+      
+      else {
+          var newUser = new User();
+
+          newUser.username = username;
+          newUser.password = newUser.generateHash(password);
+
+          newUser.save(function(err) {
+              if (err)
+                  throw err;
+              return done(null, newUser);
+          });
+          console.log('new user created: ', newUser);
+      }
+  });    
+  });
+}));
+
+
+
 //OAuth Google Config
 passport.use(
   new GoogleStrategy(
@@ -57,17 +91,33 @@ passport.use(
       }, 
       
       (accessToken, refreshToken, profile, done) => {
-          console.log('access token:', accessToken);
-          console.log('refresh token:', refreshToken);
-          console.log('profile:', profile);
-          
+          //console.log('profile:', profile);
+          User.findOne({googleID:profile.id}) 
+          .then( (existingUser)=> {                   
+              if(existingUser) {
+                  done(null, existingUser);                
+              } 
+              
+              else {
+                  new User ( {googleID: profile.id}).save() 
+                  .then(user => done (null, user));
+              }
+          })   
       }
   )
 );
 
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
 
+passport.serializeUser ( (user, done) => { 
+  done(null, user.id); 
+});
+
+passport.deserializeUser ((id, done) => {
+  User.findById(id)
+      .then(user => {
+          done(null, user);
+      });
+});
 
 app.use('/routes', router);
 

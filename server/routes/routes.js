@@ -6,18 +6,11 @@ const path = require('path');
 const User = require('../models/user');
 
 // POST route to create a new user
-router.post('/signup', (req, res) => {
-  User.register(new User({ username : req.body.username }), req.body.password, (err, newUser) => {
-    if (err) {
-      console.log(err);
-      res.send('AN ERROR OCURRED', err);
-    }
-    passport.authenticate('local')(req, res, () => {
-      console.log('new user created: ', newUser);
-      res.redirect('/');
-    });
-  });
-});
+router.post('/signup', passport.authenticate('local-signup', {
+  successRedirect : '/', 
+  failureRedirect : '/signup'
+}));
+
 
 // POST route to login user
 router.post('/login', passport.authenticate('local', {
@@ -42,6 +35,12 @@ router.get('/auth/google', passport.authenticate('google', {
 );
 
 router.get('/auth/google/callback', passport.authenticate('google'));
+
+//For testing purposes:
+
+router.get('/api/current_user', (req, res)=> {
+  res.send(req.user); //passport attach functions to the request
+});
 
 
 module.exports = router;
