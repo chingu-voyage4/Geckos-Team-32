@@ -4,38 +4,30 @@ const path = require('path'); //joins path segments and normalizes resulting pat
 require('dotenv').config();
 const mongoose = require('mongoose');
 const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
+const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-
-
-// Require routes & models
-const router = require('./routes/routes')
-const User = require('./models/user');
-
+const keys = require('./config/keys');
 const app = express();
 const PORT = process.env.PORT || 8000;
+
+// Require routes & models
+const router = require('./routes/routes');
+const authRouter = require('./routes/authRoutes');
+const youtubeRouter = require('./routes/youtubeRoutes');
 
 app.use(bodyParser.urlencoded({extended: true})); // returns middleware that only parses urlencoded bodies; extended allows for the qs library
 app.use(express.static(path.join(__dirname, '../client/public'))); // joins current path with client path
 app.use(bodyParser.json()); // looks for JSON data
-app.use(cookieParser());
-app.use(cors());
-
-// const options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } },
-//   replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } } };
+app.use(morgan('dev')); // log every request to the console
+app.use(cookieParser()); // read cookies (needed for auth)
+app.use(cors()); // cors middleware for auth
 
 // Locally use mongoDB or use mLab setup from geckos-32
-// const url = process.env.MONGODB_URI || "mongodb://localhost:27017/geckos32"
-const url = "mongodb://localhost:27017/geckos32"
+// Comment/Uncomment accordingly
+const url = "mongodb://localhost:27017/geckos32";
+// const url = keys.DB;
 mongoose.connect(url);
-// const conn = mongoose.connection;
-
-// conn.on('error', console.error.bind(console, 'connection error:'));
-
-// conn.once('open', function() {
-//   // Wait for the database connection to establish, then start the app.
-// });
 
 // Passport Config
 app.use(require('express-session')({
@@ -45,11 +37,12 @@ app.use(require('express-session')({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+require('./passport/passport')(passport);
 
+// ROUTING PATHS
 app.use('/routes', router);
+app.use('/routes/auth', authRouter);
+app.use('/routes', youtubeRouter);
 
 // handle all routes on index.html
 app.get('*', (req, res) => {
@@ -62,7 +55,6 @@ app.use((req, res, next) => {
   err.status = 404;
   next(err);
 });
-
 
 // start app on specified port
 app.listen(PORT, (err) => {
