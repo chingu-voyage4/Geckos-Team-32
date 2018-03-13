@@ -19,7 +19,7 @@ class Landing extends Component {
 				<div className="searchbar-wrapper">
 					<h2>Get Started with your favorite song/artist!</h2>
 					<form className="landing-searchbar" onSubmit={this.handleSearchInput.bind(this)}>
-						<button type="submit" className="landing-search-icon button"><i className="fas fa-search"></i></button>
+						<button type="submit" className="landing-search-icon"><i className="fas fa-search"></i></button>
 						<input className="landing-search" name="search"/>
 					</form>
 				</div>

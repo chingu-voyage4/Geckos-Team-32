@@ -24,9 +24,9 @@ app.use(cookieParser()); // read cookies (needed for auth)
 app.use(cors()); // cors middleware for auth
 
 // Locally use mongoDB or use mLab setup from geckos-32
-// const url = process.env.MONGODB_URI || "mongodb://localhost:27017/geckos32"
-// const url = keys.DB;
+// Comment/Uncomment accordingly
 const url = "mongodb://localhost:27017/geckos32";
+// const url = keys.DB;
 mongoose.connect(url);
 
 // Passport Config

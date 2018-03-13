@@ -95,6 +95,7 @@ class AppRoutes extends React.Component {
                 path="/users/:id"
                 render={(props) => (<Profile
                   userId={props}
+                  user={this.state.user}
                   handleUpdateUser={this.handleUpdateUser}
                 />)}
               />
