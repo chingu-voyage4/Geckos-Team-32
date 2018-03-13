@@ -4,7 +4,6 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 const passport = require('passport');
 const mongoose = require('mongoose');
 const keys = require('../config/keys');
-
 const User = require('../models/user');
 
 module.exports = (passport) => {
@@ -35,7 +34,7 @@ module.exports = (passport) => {
           let newUser = new User();
           newUser.username = username;
           newUser.password = newUser.generateHash(password);
-          newUser.save(function(err) {
+          newUser.save((err) => {
             if (err)
                 throw err;
             return done(null, newUser);
@@ -73,7 +72,7 @@ module.exports = (passport) => {
     //console.log('profile:', profile);
     User.findOne({ googleID: profile.id }) 
     .then( (existingUser)=> {                   
-      if(existingUser) {
+      if (existingUser) {
         done(null, existingUser);                
       } 
       else {
@@ -83,29 +82,27 @@ module.exports = (passport) => {
     })   
   }));
 
-  //Facebook Config
-
+  // Facebook Config
   passport.use(new FacebookStrategy({
     // pull in our app id and secret from our auth.js file
-    clientID        : keys.facebookClientID,
-    clientSecret    : keys.facebookClientSecret,
-    callbackURL     : '/routes/auth/facebook/callback'
-  },
-  function(token, refreshToken, profile, done) {
-    process.nextTick(function() {
-      User.findOne({ 'facebook.id' : profile.id }, function(err, user) {
+    clientID: keys.facebookClientID,
+    clientSecret: keys.facebookClientSecret,
+    callbackURL: '/routes/auth/facebook/callback'
+  }, (token, refreshToken, profile, done) => {
+    process.nextTick(() => {
+      User.findOne({ 'facebook.id': profile.id }, (err, user) => {
         if (err)
           return done(err);
         if (user) {
           return done(null, user); 
         } else {
-          var newUser = new User();
+          let newUser = new User();
           // set all of the facebook information in our user model
           newUser.facebookID = profile.id;                  
           newUser.facebookToken = token;                  
           newUser.displayName = profile.name.givenName + ' ' + profile.name.familyName; 
           // save our user 
-          newUser.save(function(err) {
+          newUser.save((err) => {
             if (err)
               throw err;
             return done(null, newUser);

@@ -51,6 +51,7 @@ class AppRoutes extends React.Component {
 
   handleLogoutUser = () => {
     console.log('user logging out');
+    axios.get('routes/logout');
     this.setState({
       user: {
         loggedIn: false,
