@@ -3,19 +3,19 @@ import ReactDOM from 'react-dom';
 import VideoDetails from './VideoDetails.jsx';
 
 export default class PostLandingPage extends Component {
- 
+
   constructor (props) {
-   super(props);
-   this.state = {selectedVideo:null};
- }
- 
+    super(props);
+    this.state = {selectedVideo:null};
+  }
+
   handleSearchInput(e) {
 		e.preventDefault();
 		const search = e.target.elements.search.value;
     this.props.handleSearchInput(search);
   }
   
- 
+
   render() {
     // console.log('from postlanding: ', this.props.stateData);
     

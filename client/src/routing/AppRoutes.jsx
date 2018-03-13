@@ -60,10 +60,13 @@ class AppRoutes extends React.Component {
     });
   }
   
-  handleSearchInput = () => {
-    axios.get('routes/searchthis')
+  handleSearchInput = (query) => {
+    console.log('this is the search: ', query);
+    axios.get(`routes/search/${query}`)
       .then((results) => {
-        console.log(results)
+        // console.log(results.data.data.items);
+        let videos = results.data.data.items;
+        this.setState({ search: query, videos: videos });
       })
       .catch((err) => {
         console.log(err);

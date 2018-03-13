@@ -7,8 +7,10 @@ class Profile extends React.Component {
     let id = this.props.userId.match.params.id;
 		axios.get(`/routes/user/${id}`)
 			.then((results) => {
-				this.props.handleUpdateUser(results.data.users)
-				// this.props.history.push('/');
+				let creds = {
+					username: results.data.users.username
+				}
+				this.props.handleUpdateUser(creds);
 			})
 			.catch((err) => {
 				console.log('There was an error: ', err);

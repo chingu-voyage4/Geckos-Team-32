@@ -71,7 +71,7 @@ module.exports = (passport) => {
   }, (accessToken, refreshToken, profile, done) => {
     //console.log('profile:', profile);
     User.findOne({ googleID: profile.id }) 
-    .then( (existingUser)=> {                   
+    .then((existingUser) => {                   
       if (existingUser) {
         done(null, existingUser);                
       } 
