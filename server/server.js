@@ -39,13 +39,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 require('./passport/passport')(passport);
 
-// MIDDLEWARE
-// Calls on every route (DRY)
-app.use((req,res,next) => {
-  res.locals.currentUser = req.user;
-  next();
-});
-
 // ROUTING PATHS
 app.use('/routes', router);
 app.use('/routes/auth', authRouter);

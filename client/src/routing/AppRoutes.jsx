@@ -12,17 +12,6 @@ import Login from '../components/pages/auth/Login.jsx';
 import Profile from '../components/pages/auth/Profile.jsx';
 import NotFound from './NotFound.jsx';
 
-// Used for client side testing
-// Uncomment top 'state' below and comment out bottom 'state' before pushing!
-const dummyData = {
-  loggedIn: true,
-  creds: {
-    _id: 'f93jafb1fvn39dba1e5a1c2d83',
-    __v: 0,
-    username: 'KentuckyKid309'
-  }
-}
-
 class AppRoutes extends React.Component {
 	state = {
     user: {
@@ -32,13 +21,6 @@ class AppRoutes extends React.Component {
     search: '',
     videos: [],
   }
-
-	// state = {
-  //   user: dummyData,
-  //   search: '',
-  //   videos: [],
-  //   selectedVideo:null
-  // }
 
   handleUpdateUser = (user) => {
     this.setState({
@@ -50,7 +32,7 @@ class AppRoutes extends React.Component {
   }
 
   handleLogoutUser = () => {
-    console.log('user logging out');
+    // console.log('user logging out');
     axios.get('routes/logout');
     this.setState({
       user: {
@@ -61,7 +43,7 @@ class AppRoutes extends React.Component {
   }
   
   handleSearchInput = (query) => {
-    console.log('this is the search: ', query);
+    // console.log('this is the search: ', query);
     axios.get(`routes/search/${query}`)
       .then((results) => {
         // console.log(results.data.data.items);

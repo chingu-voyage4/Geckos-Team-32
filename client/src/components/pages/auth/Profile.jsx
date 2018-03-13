@@ -19,7 +19,7 @@ class Profile extends React.Component {
 	}
   
   render() {
-		console.log('this is from profile: ', this.props);
+		// console.log('this is from profile: ', this.props);
     return (
 			<div className="page-wrapper">
 				{this.props.user.loggedIn ? <h1>{this.props.user.creds.username}</h1> : null}
