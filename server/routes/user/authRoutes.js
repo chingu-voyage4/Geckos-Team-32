@@ -1,10 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
-const path = require('path');
-
-const middleware = require('../middleware')
-const User = require('../models/user');
 
 /*
  * GET ROUTE

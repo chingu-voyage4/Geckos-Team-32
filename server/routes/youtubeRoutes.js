@@ -1,13 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const middleware = require('../middleware')
 const { google } = require('googleapis');
 const keys = require('../config/keys');
 
 
-// ==================================
-// Youtube config
-// ==================================
+/*
+ * YouTube Routes
+ * GET ROUTE -- Get search query from frontend search input
+ * READ -- Return top 9 results related to search query
+ */
 
 const API_KEY = keys.youtubeApiKey;
 // console.log(API_KEY);
