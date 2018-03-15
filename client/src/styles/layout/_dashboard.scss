@@ -1,4 +1,136 @@
 .dashboard {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-areas:
+    "dashtop"
+    "dashbottom";
+  align-content: space-between;
+  width: 20vw;
+  min-height: calc(100vh - 100px);
+  position: fixed;
+  background-color: darken($bg-grey, 15%);
+  padding: 1em;
+  
+}
+
+///////////////////
+// Dashboard Top //
+.dashboard-top {
+  grid-area: dashtop;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-areas:
+    "exp"
+    "sign"
+    "list";
+}
+.dash-header {
+  grid-area: exp;
+  text-align: center;
+}
+.sign-up {
+  grid-area: sign;
+}
+.benefits-list {
+  grid-area: list;
+  list-style-type: none;
+  padding-left: 5%;
+  font-style: italic;
+}
+.dashboard__link {
+  font-weight: bold;
+  color: $accent-red;
+  text-decoration: none;
+  transition: color .5s ease-out;
+  -webkit-transition: color .5s ease-out;
+}
+.dashboard__link:hover {
+  color: darken($accent-red, 20%);
+  transition: color .5s ease-out;
+  -webkit-transition: color .5s ease-out;
+}
+
+/////////////////
+// Dash Bottom //
+.dashboard-bottom {
+  grid-area: dashbottom;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-areas:
+    "social"
+    "footer";
+}
+
+// Social Media //
+.dashboard-social-media {
+  grid-area: social;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  list-style-type: none;
+  justify-items: center;
+}
+.social-media {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 50px;
+  font-size: 24px;
+  background-color: darken($off-white, 5%);
+  border: 3px solid $off-black;
+  border-radius: 15%;
+  color: $off-black;
+  transition: all .25s ease-out;
+  -webkit-transition: all .25s ease-out;
+}
+.social-media:hover {
+  color: $accent-red;
+  background-color: $off-white;
+  border-color: $accent-red;
+  border-radius: 50%;
+  position: relative;
+  transition: all .25s ease-out;
+  -webkit-transition: all .25s ease-out;
+  animation: bounce 2s infinite;
+  -webkit-animation: bounce 2s infinite;
+}
+@keyframes bounce {
+  0% {bottom: 0px;}
+  25% {bottom: 0px;  box-shadow: 0px 0px;}
+  50% {bottom: 10px; box-shadow: 0px 8px grey;}
+  65% {bottom: 0px; box-shadow: 0px 0px;}
+  80% {bottom: 3px; box-shadow: 0px 3px grey;}
+  100% {bottom: 0px;}
+}
+// Footer //
+.dashboard-footer {
+  grid-area: footer;
+  display: block;
+  text-align: center;
+}
+
+
+// =======================================
+// ========= TABLET/MOBILE ===============
+// =======================================
+
+// Social media buttons become 2 rows //
+@media (max-width: 1300px) {
+  .dashboard-social-media {
+    grid-template-columns: 1fr 1fr;
+  }
+  .social-media {
+    margin-bottom: 10px;
+  }
+}
+// not visible in mobile/tablet view
+@media (max-width: 768px) {
+  .dashboard {
+    display: none
+  }
+}
+
+/*.dashboard {
   background: darken($bg-grey, 10%);
   display: flex;
   flex-direction: column;
@@ -25,7 +157,9 @@
     font-weight: bold;
   }
 }
-
+.namered {
+  color: $accent-red;
+}
 // =======================================
 // ========= USER LOGGED IN ==============
 // =======================================
@@ -110,13 +244,4 @@
 }
 
 
-// =======================================
-// ========= TABLET/MOBILE ===============
-// =======================================
-
-// not visible in mobile/tablet view
-@media (max-width: 768px) {
-  .dashboard {
-    display: none
-  }
-}
+ */

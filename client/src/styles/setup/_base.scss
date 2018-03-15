@@ -24,3 +24,13 @@ body {
     transition: 0.3s;
   }
 }
+
+/////////////////////
+// Generic Classes //
+.namered {
+  color: $accent-red;
+}
+.bold {
+  font-style: normal;
+  font-weight: bold;
+}
