@@ -18,7 +18,6 @@ const url = "mongodb://localhost:27017/geckos32"; // local mongoDB
 
 const app = express();
 
-
 app.use(bodyParser.urlencoded({extended: true})); // returns middleware that only parses urlencoded bodies; extended allows for the qs library
 app.use(express.static(path.join(__dirname, '../client/public'))); // joins current path with client path
 app.use(bodyParser.json()); // looks for JSON data

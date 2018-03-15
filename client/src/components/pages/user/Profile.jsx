@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 
-
 class Profile extends React.Component {
 	componentDidMount() {
     let id = this.props.userId.match.params.id;
