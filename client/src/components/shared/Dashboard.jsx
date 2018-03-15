@@ -8,7 +8,7 @@ import DashBottom from './DashboardComponents/DashBottom.jsx';
 export default class Dashboard extends Component {
 
   render() {
-		console.log(this.props);
+		// console.log('from dashboard: ', this.props);
 		return (
 			<div className="dashboard">
 				{this.props.user.loggedIn ? <DashTopUser user={this.props}/> : <DashTop />}

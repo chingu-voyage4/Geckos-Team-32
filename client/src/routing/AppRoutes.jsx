@@ -12,29 +12,12 @@ import Login from '../components/pages/auth/Login.jsx';
 import Profile from '../components/pages/auth/Profile.jsx';
 import NotFound from './NotFound.jsx';
 
-// Used for client side testing
-// Uncomment top 'state' below and comment out bottom 'state' before pushing!
-const dummyData = {
-  loggedIn: true,
-  creds: {
-    _id: 'f93jafb1fvn39dba1e5a1c2d83',
-    __v: 0,
-    username: 'KentuckyKid309'
-  }
-}
-
 class AppRoutes extends React.Component {
-	// state = {
-  //   user: {
-  //     loggedIn: false,
-  //     creds: {}
-  //   },
-  //   search: '',
-  //   videos: [],
-  // }
-
 	state = {
-    user: dummyData,
+    user: {
+      loggedIn: false,
+      creds: {}
+    },
     search: '',
     videos: [],
   }
@@ -49,7 +32,8 @@ class AppRoutes extends React.Component {
   }
 
   handleLogoutUser = () => {
-    console.log('user logging out');
+    // console.log('user logging out');
+    axios.get('routes/logout');
     this.setState({
       user: {
         loggedIn: false,
@@ -58,18 +42,15 @@ class AppRoutes extends React.Component {
     });
   }
   
-  handleSearchInput = (term) => {
-    const API_KEY = 'AIzaSyCqCZFFCtUYNsXmm-ew0nFZcArMP1ygpCI';
-
-    axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&key=${API_KEY}&q=${term}&maxResults=9&topicId=/m/04rlf`)
+  handleSearchInput = (query) => {
+    // console.log('this is the search: ', query);
+    axios.get(`routes/search/${query}`)
       .then((results) => {
-        // console.log('this is the data: ', results.data.items);
-        this.setState({
-          search: term,
-          videos: results.data.items,
-        });
+        // console.log(results.data.data.items);
+        let videos = results.data.data.items;
+        this.setState({ search: query, videos: videos });
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   }
@@ -96,6 +77,7 @@ class AppRoutes extends React.Component {
                 path="/users/:id"
                 render={(props) => (<Profile
                   userId={props}
+                  user={this.state.user}
                   handleUpdateUser={this.handleUpdateUser}
                 />)}
               />

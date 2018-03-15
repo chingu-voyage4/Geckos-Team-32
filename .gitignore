@@ -39,10 +39,13 @@ coverage
 # Commenting this out is preferred by some people, see
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git-
 node_modules
+**/server/config
 
 # Users Environment Variables
 .lock-wscript
 
+#config folder
+**/server/config
 
 # OS generated files #
 ######################

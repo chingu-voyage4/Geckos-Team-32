@@ -1,9 +1,173 @@
+// Grid Settings //
+
+// Baseline settings //
 .navBar {
+  display: grid;
+  grid-template-columns: 400px auto;
+  grid-template-rows: 100px;
+  grid-template-areas:
+    "logo nav-wrapper";
+  min-width: 100%;
+  position: fixed;
+  font-family: 'ubuntu';
+  background-color: white;
+}
+.navBar a {
+  text-decoration: none;
+  color: black;
+  font-size: 26px;
+  transition: .5s color ease-in;
+  -webkit-transition: .5s color ease-in;
+}
+.navBar a:hover {
+  color: $accent-red;
+  transition: .2s color ease-out;
+  -webkit-transition: .2s color ease-in;
+}
+.navBar ul {
+  list-style-type: none;
+}
+.navBar li {
+  display: inline-block;
+  padding: 2% 5%;
+}
+
+// LOGO AREA //
+.logo {
+  grid-area: logo;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+  "logo brand";
+  justify-items: center;
+}
+.logo img {
+  display: block;
+  max-height: 100%;
+}
+
+.icon {
+  grid-area: logo;
+}
+.brand {
+  grid-area: brand;
+}
+
+// NAV-WRAPPER AREA //
+.nav-wrapper {
+  grid-area: nav-wrapper;
+  display: inline-grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-areas:
+    "nav . login";
+  align-items: center;
+}
+.nav-list {
+  grid-area: nav;
+}
+.login-list {
+  grid-area: login;
+  align-content: center;
+  margin-right: 5%;
+}
+.login-list li {
+  float: right;
+}
+
+// Hamburger Menu //
+
+.hamburger {
+  display: none;
+}
+.burger-links {
+  display: none;
+  z-index: 5;
+  position: absolute;
+  margin-top: calc(100px + 3%);
+  width: 100%;
+  background-color: darken($bg-grey, 75%);
+}
+.burger-links a {
+  display: block;
+  text-align: center;
+  clear: right;
+  color: white;
+  padding: 1%;
+}
+.burger-links a:hover {
+  color: $accent-red;
+}
+.hamburger-icon {
+  margin-right: 5%;
+  cursor: pointer;
+}
+.bar1, .bar2, .bar3 {
+    width: 50px;
+    height: 5px;
+    background-color: #333;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+
+////////////////////////////////////
+// This animation doesn't work yet(add class="change" to <div className="hamburger-icon" to see it) //
+////////////////////////////////////
+.change .bar1 {
+    -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+    transform: rotate(-45deg) translate(-9px, 6px);
+    background-color: $accent-red;
+}
+
+.change .bar2 {opacity: 0;}
+
+.change .bar3 {
+    -webkit-transform: rotate(45deg) translate(-8px, -8px);
+    transform: rotate(45deg) translate(-8px, -8px);
+    background-color: $accent-red;
+}
+
+// Media Queries //
+
+@media screen and (max-width: 768px) {
+  .navBar {
+  grid-template-areas:
+    "logo hamburger";
+  }
+  .nav-wrapper {
+    display: none;
+  }
+  .hamburger {
+    grid-area: hamburger;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+}
+
+@media screen and (max-width: 500px) {
+  .navBar {
+    grid-template-columns: 200px auto;
+  }
+  .brand {
+    display: none;
+  }
+}
+
+
+
+
+
+
+
+
+
+/*.navBar {
   display: flex;
   position: fixed;
   min-width: 100%;
+  height: 100px;
   background-color: white;
-  justify-content: space-between;
   z-index: 3;
 }
 
@@ -11,30 +175,34 @@
   display: flex;
   align-items: center;
   align-content: center;
-  // justify-content: space-around;
   margin: 0 auto;
-  padding: 0 10%;
-  // background-color: white;
-  max-width: 1440px;
+  padding: 0 5%;
+  width: 80vw;
   height: 100px;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .logo {
-  padding: 0;
-  margin: 0;
-  // width: 50%
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 20%;
+  border: 1px solid blue;
 }
 .logo a {
-  color: $off-black;
+  // color: $off-black;
   text-decoration: none;
-  opacity: .9;
+  // opacity: .9;
   font-family: 'Ubuntu', sans-serif;
   font-size: 40px;
   font-weight: 725;
-  letter-spacing:2px;
+  letter-spacing: 2px;
   justify-self: flex-start;
   // margin: auto 0;
+}
+.logo img {
+  display: flex;
+  max-height: 100%;
 }
 
 .toggle {
@@ -46,24 +214,24 @@
   display: flex;
   list-style-type: none;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin: 0;
   padding: 0 auto;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 24px;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 22px;
   font-weight: 500;
+  height: 100%;
+  width: 50%;
   
   li {
     display: flex;
-    justify-items: center;
     min-width: 90px;
-    width:20%;
+    width: 20%;
   }
   
   a {
     display: flex;
     white-space: nowrap;
-    margin: 10px;
     min-width: 100%;;
     color: $off-black;
     text-decoration: none;
@@ -80,9 +248,27 @@
   width: 110px;
 }
 
-.nav-list a:not(.logo):hover {
+.nav-wrapper a:not(.logo):hover {
   opacity: .8;
   color: #E6484B;
+}
+.login-list {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 40%;
+  height: 100%;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+  list-style-type: none;
+}
+.login-list a {
+  padding: 1em;
+  text-decoration: none;
+  color: $off-black;
+  transition: all .5s ease;
+  white-space: nowrap;
 }
 
 #menu-toggle {
@@ -96,26 +282,56 @@
 .dropdown-toggle {
   display: none;
 }
-
-@media (max-width: 768px) {
-  #menu-toggle:checked ~ ul {
-    opacity: 1;
-    min-height: 100vh;
-    visibility: visible;
+@media screen and (max-width: 949px) {
+  .logo {
+    width: 200px;
   }
-
-  #menu-toggle:checked ~ a.btn {
-    display:none
+}
+@media screen and (max-width: 768px) {
+  .navBar {
+    justify-content: space-between;
   }
-
+  .logo {
+    width: 200px;
+  }
+  .logo img {
+    width: 100%;
+    height: 100%;
+  }
+  .nav-wrapper {
+    display: none;
+  }
+  .login-list {
+    width: 50%;
+  }
+  .nav-wrapper {
+    justify-content: flex-end;
+  }
+  .hamburger {
+    display: flex;
+    padding: 0 5% 0 0;
+    justify-content: flex-end;
+    width: 25%;
+    height: 100px;
+  }
   .dropdown-toggle {
     background: linear-gradient(to bottom, #a9a9a9 0%, #a9a9a9 20%, transparent 20%, transparent 40%, #a9a9a9 40%, #a9a9a9 60%, transparent 60%, transparent 80%, #a9a9a9 80%, #a9a9a9 100%);
     cursor: pointer;
     display: flex;
-    float: right;
     height: 35px;
     align-self: center;
     min-width: 35px;
+  }
+}
+@media (max-width: 768px) {
+  #menu-toggle:checked ~ ul {
+  opacity: 1;
+  min-height: 100vh;
+  visibility: visible;
+  }
+
+  #menu-toggle:checked ~ a.btn {
+    display:none
   }
 
   .nav-list {
@@ -144,10 +360,10 @@
 }
 
 @media screen and (max-width:425px) {
-  .nav-wrapper {
-    justify-content: center;
-  }
+  //.nav-wrapper {
+  //  justify-content: center;
+  //}
   // .logo a {
   //   justify-self: flex-end;
   // }
-}
+}*/

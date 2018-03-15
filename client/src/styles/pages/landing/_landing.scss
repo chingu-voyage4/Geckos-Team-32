@@ -30,9 +30,13 @@
   padding-left: .5em;
   border: none;
   background: transparent;
+  outline: none;
+  cursor: pointer;
+  transition: 0.3s;
 
   &:hover {
     color: $accent-red;
+    transition: 0.3s;
   }
 }
 

@@ -24,6 +24,11 @@
   display: flex;
   flex-direction: column;
   width: 30%;
+  cursor:pointer;
+
+.individual-video-space:hover {
+  background-color:rgba(0,0,0,0.2);
+}
 
   h3 {
     margin: .5em 0 0 0;
@@ -60,6 +65,7 @@
   }
   .post-landing-searchbar-wrapper {
     width: 100%;
+    margin-top: 100px;
   }
 }
 @media screen and (max-width: 481px) {

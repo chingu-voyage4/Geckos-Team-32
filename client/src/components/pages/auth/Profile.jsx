@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import { withRouter } from 'react-router-dom';
 
 
 class Profile extends React.Component {
@@ -8,8 +7,11 @@ class Profile extends React.Component {
     let id = this.props.userId.match.params.id;
 		axios.get(`/routes/user/${id}`)
 			.then((results) => {
-				this.props.handleUpdateUser(results.data.users)
-				this.props.history.push('/');
+				let creds = {
+					// add more data here later
+					username: results.data.users.username
+				}
+				this.props.handleUpdateUser(creds);
 			})
 			.catch((err) => {
 				console.log('There was an error: ', err);
@@ -17,12 +19,13 @@ class Profile extends React.Component {
 	}
   
   render() {
+		// console.log('this is from profile: ', this.props);
     return (
-      <div className="page-wrapper">
-				<h1>Re-reouting to homepage...</h1>
+			<div className="page-wrapper">
+				{this.props.user.loggedIn ? <h1>{this.props.user.creds.username}</h1> : null}
       </div>
     );
   }
 }
 
-export default withRouter(Profile);
+export default Profile;
