@@ -21,6 +21,7 @@ class AppRoutes extends React.Component {
     },
     search: '',
     videos: [],
+    selectedVideo: null
   }
 
   handleUpdateUser = (user) => {
@@ -59,6 +60,10 @@ class AppRoutes extends React.Component {
       });
   }
 
+  handleSelectedVideo = (selectedVideo) => {
+    this.setState({ selectedVideo: selectedVideo });
+  }
+
   render() {
     return (
       <BrowserRouter>
@@ -82,6 +87,7 @@ class AppRoutes extends React.Component {
                 component={() => (<PostLanding
                   stateData={this.state}
                   handleSearchInput={this.handleSearchInput}
+                  handleSelectedVideo={this.handleSelectedVideo}
                 />)} 
               />
               <Route

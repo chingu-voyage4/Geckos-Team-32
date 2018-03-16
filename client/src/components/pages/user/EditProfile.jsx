@@ -23,6 +23,7 @@ class EditProfile extends React.Component {
           <input className="login-form__input" type="text" name="username" placeholder={username} required/>
           <button className="button">Submit</button>
         </form>
+        <button className="button">Delete Account</button>
       </div>
     );
   }
