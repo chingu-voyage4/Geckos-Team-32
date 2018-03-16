@@ -3,13 +3,8 @@ import axios from 'axios';
 import EditProfile from './EditProfile.jsx';
 
 class Profile extends React.Component {
-	state = {
-		edit: false,
-		button: 'Edit'
-	}
-
 	componentDidMount() {
-    this.props.user.loggedIn ? null : this.handleUserData();
+    this.props.state.user.loggedIn ? null : this.handleUserData();
 	}
 
 	// Only call if user is not already logged in
@@ -24,20 +19,17 @@ class Profile extends React.Component {
 				console.log('There was an error: ', err);
 			});
 	}
-
-	handleEditProfile = (req) => {
-		!this.state.edit ? this.setState({ edit: true, button: 'Cancel' }) : this.setState({ edit: false, button: 'Edit' });
-		this.props.handleUpdateUser(req);
-	}
   
   render() {
 		// console.log('this is from profile: ', this.props);
+		const { loggedIn, creds } = this.props.state.user;
+		const { edit, editButton } = this.props.state.editUser;
 
     return (
 			<div className="page-wrapper">
-				{this.props.user.loggedIn ? <h1>{this.props.user.creds.username}</h1> : null}
-				<button className="button" onClick={this.handleEditProfile}>{this.state.button}</button>
-				{this.state.edit ? <EditProfile props={this.props} handleEditProfile={this.handleEditProfile.bind(this)}/> : null}
+				{loggedIn ? <h1>{creds.username}</h1> : null}
+				<button className="button" onClick={this.props.handleEditProfile}>{editButton}</button>
+				{edit ? <EditProfile props={creds} id={this.props.userId.match.params.id} handleEditProfile={this.props.handleEditProfile.bind(this)}/> : null}
       </div>
     );
   }

@@ -9,13 +9,13 @@ class EditProfile extends React.Component {
     let req = {
       username: e.target.elements.username.value
     };
-    axios.post(`/routes/user/${this.props.props.userId.match.params.id}/edit`, req);
+    axios.post(`/routes/user/${this.props.id}/edit`, req);
     this.props.handleEditProfile(req);
   }
 
   render() {
     // console.log('this is from edit profile: ', this.props);
-    const { username } = this.props.props.user.creds;
+    const { username } = this.props.props;
 
     return (
       <div>

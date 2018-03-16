@@ -19,6 +19,10 @@ class AppRoutes extends React.Component {
       loggedIn: false,
       creds: {}
     },
+    editUser: {
+      edit: false,
+      editButton: 'Edit',
+    },
     search: '',
     videos: [],
     selectedVideo: null
@@ -53,15 +57,11 @@ class AppRoutes extends React.Component {
       .then((results) => {
         // console.log(results.data);
         let videos = results.data.data.items;
-        this.setState({ search: query, videos: videos });
+        this.setState({ search: query, videos: videos, selectedVideo: null });
       })
       .catch((err) => {
         console.log(err);
       });
-  }
-
-  handleSelectedVideo = (selectedVideo) => {
-    this.setState({ selectedVideo: selectedVideo });
   }
 
   render() {
@@ -87,15 +87,21 @@ class AppRoutes extends React.Component {
                 component={() => (<PostLanding
                   stateData={this.state}
                   handleSearchInput={this.handleSearchInput}
-                  handleSelectedVideo={this.handleSelectedVideo}
+                  handleSelectedVideo={selectedVideo => this.setState({selectedVideo})}
                 />)} 
               />
               <Route
                 path="/user/:id"
                 render={(props) => (<Profile
                   userId={props}
-                  user={this.state.user}
+                  state={this.state}
                   handleUpdateUser={this.handleUpdateUser}
+                  handleEditProfile={req => {
+                    !this.state.editUser.edit ? 
+                    this.setState({ editUser: { edit: true, editButton: 'Cancel' }}) : 
+                    this.setState({ editUser: { edit: false, editButton: 'Edit' }});
+		                this.handleUpdateUser(req);
+                  }}
                 />)}
               />
               <Route path="/about" component={About} />
