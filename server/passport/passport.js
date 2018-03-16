@@ -51,6 +51,7 @@ module.exports = (passport) => {
     passwordField : 'password',
     passReqToCallback : true 
   }, (req, username, password, done) => { 
+    console.log('LOGIN REQ INFO: ', username, password);
     User.findOne({ 'username': username}, (err, user) => {
       if (err)
         return done(err);

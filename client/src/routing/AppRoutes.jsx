@@ -82,7 +82,7 @@ class AppRoutes extends React.Component {
                 />)} 
               />
               <Route
-                path="/users/:id"
+                path="routes/user/:id"
                 render={(props) => (<Profile
                   userId={props}
                   user={this.state.user}
@@ -90,8 +90,8 @@ class AppRoutes extends React.Component {
                 />)}
               />
               <Route path="/about" component={About} />
-              <Route path="/signup" component={Signup} />
-              <Route path="/login" component={Login} />
+              <Route path="/routes/signup" component={Signup} />
+              <Route path="/routes/login" component={Login} />
               <Route component={NotFound} />
             </Switch>
           </div>

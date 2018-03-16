@@ -10,9 +10,9 @@ const User = require('../../models/user');
  * CREATE -- Make new user
  */
 router.post('/signup', passport.authenticate('local-signup', {
-  failureRedirect : '/login', 
+  failureRedirect : '/routes/login', 
 }), (req, res) => {
-  res.redirect('/users/' + req.user._id);
+  res.redirect('/routes/user/' + req.user._id);
 });
 
 /*
@@ -21,10 +21,10 @@ router.post('/signup', passport.authenticate('local-signup', {
  */
 router.post('/login', passport.authenticate('local-login', {
   // successRedirect : '/', 
-  failureRedirect : '/login', 
+  failureRedirect : '/routes/login', 
 }), (req, res) => {
   console.log('successfully logged in: ', req.user);
-  res.redirect('/users/' + req.user._id);
+  res.redirect('/routes/user/' + req.user._id);
 });
 
 /*
@@ -37,7 +37,8 @@ router.get('/user/:id', (req, res) => {
       console.log('There was a problem: ', err);
       res.redirect('/');
     } else {
-      res.send({ users: foundUser });
+      // res.send({ users: foundUser });
+      res.send({});
     }
   });
 });
@@ -58,12 +59,13 @@ router.get('/user/:id/edit', middleware.isLoggedIn, (req,res) => {
  */
 router.put('/user/:id', middleware.isLoggedIn, (req,res) => {
   // Input fields need to be wrapped, ex: name="user[username]"
-  User.findByIdAndUpdate(req.params.id, req.body.user, (err, updatedUser) => {
+  console.log('THIS IS THE REQ: ', req.body);
+  User.findByIdAndUpdate(req.params.id, req.body, (err, updatedUser) => {
     if (err) {
       res.redirect('/');
     } else {
       console.log('Successfully updated user: ', updatedUser);
-      res.redirect('/users/' + req.params.id);
+      res.redirect('/routes/user/' + req.params.id);
     }
   });
 });

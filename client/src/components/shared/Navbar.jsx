@@ -30,12 +30,12 @@ export default class Navbar extends Component {
               <NavLink to="/about" onClick={this.burgerToggle}>About</NavLink>
               {this.props.user.loggedIn ?
                 <div>
-                  <NavLink to="/profile" onClick={this.burgerToggle}>Profile</NavLink>
+                  <NavLink to="/user/profile" onClick={this.burgerToggle}>Profile</NavLink>
                   <a href="#" onClick={(e) => this.props.handleLogoutUser(e)}>Sign  out</a>
                 </div> :
                 <div>
-                  <NavLink to="/signup" onClick={this.burgerToggle}>Sign up</NavLink>
-                  <NavLink to="/login" onClick={this.burgerToggle}>Log In</NavLink>
+                  <NavLink to="/routes/signup" onClick={this.burgerToggle}>Sign up</NavLink>
+                  <NavLink to="/routes/login" onClick={this.burgerToggle}>Log In</NavLink>
                 </div>
               }
             </div>
@@ -48,11 +48,11 @@ export default class Navbar extends Component {
             {this.props.user.loggedIn ? 
               <ul className="login-list">
                 <li><a href="#" onClick={(e) => this.props.handleLogoutUser(e)}>Sign  out</a></li>
-                <li><NavLink to="/profile">Profile</NavLink></li>
+                <li><NavLink to="routes/user/profile">Profile</NavLink></li>
               </ul> : 
               <ul className="login-list">
-                <li><NavLink to="/signup" className ="btn">Sign up</NavLink></li>
-                <li><NavLink to="/login">Log In</NavLink></li>
+                <li><NavLink to="/routes/signup" className ="btn">Sign up</NavLink></li>
+                <li><NavLink to="/routes/login">Log In</NavLink></li>
               </ul>
             }
           </div>
