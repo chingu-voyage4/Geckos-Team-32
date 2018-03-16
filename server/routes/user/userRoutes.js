@@ -31,64 +31,59 @@ router.post('/login', passport.authenticate('local-login', {
  * GET ROUTE
  * READ -- Get login user information
  */
-router.get('/user/:id', (req, res) => {
-  User.findById(req.params.id).exec((err, foundUser) => {
-    if (err || !foundUser) {
-      console.log('There was a problem: ', err);
+router.get('/user/:id', async (req, res, next) => {
+  try {
+    let user = await User.findById(req.params.id);
+    if (!user) {
       res.redirect('/');
-    } else {
-      res.send({ users: foundUser });
     }
-  });
+    res.send({ users: user });
+  } catch (err) {
+    next(err);
+  }
 });
 
 /*
  * GET ROUTE
  * READ -- Get user credentials for updating
  */
-router.get('/user/:id/edit', middleware.isLoggedIn, (req,res) => {
-  User.findById(req.params.id, (err, foundUser) => {
-    res.send({ users: foundUser });
-  });
+router.get('/user/:id/edit', middleware.isLoggedIn, async (req, res, next) => {
+  try {
+    let user = await User.findById(req.params.id);
+    res.send({ users: user });
+  } catch (err) {
+    next(err);
+  }
 });
 
 /*
  * POST ROUTE
  * UPDATE -- Edit user credentials
  */
-router.post('/user/:id/edit', middleware.isLoggedIn, (req,res) => {
-  // Input fields need to be wrapped, ex: name="user[username]"
-  console.log('THIS IS THE REQ: ', req.body);
-  User.findById(req.params.id, (err, user) => {
-    if (err) {
-      res.redirect('/');
-    } else {
-      user.username = req.body.username;
-      user.save((err) => {
-        if (err) {
-          res.redirect('/');
-        }
-        console.log('Successfully updated user: ', user);
-        res.redirect('/user/' + req.params.id);
-      });
-    }
-  });
+router.post('/user/:id/edit', middleware.isLoggedIn, async (req, res, next) => {
+  try {
+    let user = await User.findById(req.params.id);
+    user.username = req.body.username;
+    user = await user.save();
+    res.redirect(`/user/${req.params.id}`);
+  } catch (err) {
+    next(err);
+  }
 });
 
 /*
  * DELETE ROUTE
  * DESTROY -- Delete user and associated credentials
  */
-router.delete('/user/:id', middleware.isLoggedIn, (req,res) => {
-  User.findByIdAndRemove(req.params.id, (err) => {
-    if (err) {
-      console.log('There was an error: ', err);
-      res.redirect('/');
-    } else {
-      console.log('Successfully deleted user account');
-      res.redirect('/');
-    }
-  });
+router.delete('/user/:id', middleware.isLoggedIn, async (req, res, next) => {
+  try {
+    let user = await User.findByIdAndRemove(req.params.id);
+    console.log('SUCCESSFULLY DELETED USER DOEEEE');
+    res.redirect('/');
+  } catch (err) {
+    console.log("NO LUCK BUDDY");
+    next(err);
+  }
 });
 
 /*

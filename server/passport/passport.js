@@ -23,26 +23,22 @@ module.exports = (passport) => {
     usernameField : 'username',
     passwordField : 'password',
     passReqToCallback : true 
-  }, (req, username, password, done) => {
-    process.nextTick(() => {
-      User.findOne({ 'username': username }, (err, user) => {
-        if (err)
-          return done(err);
-        if (user) {
-          return done(null, false);
+  }, async (req, username, password, done) => {
+    try {
+      let user = await User.findOne({ username: username });
+        if (user) { 
+          return done(null, false); // Username already taken
         } else {
           let newUser = new User();
           newUser.username = username;
           newUser.password = newUser.generateHash(password);
-          newUser.save((err) => {
-            if (err)
-                throw err;
-            return done(null, newUser);
-          });
-          console.log('new user created: ', newUser);
+          newUser = await newUser.save();
+          console.log('new user created: ', newUser);  
+          return done(null, newUser);  
         }
-      });    
-    });
+    } catch (err) {
+      return done(err);
+    }
   }));
 
   // Local Login Config
@@ -50,18 +46,18 @@ module.exports = (passport) => {
     usernameField : 'username',
     passwordField : 'password',
     passReqToCallback : true 
-  }, (req, username, password, done) => { 
-    console.log('LOGIN REQ INFO: ', username, password);
-    User.findOne({ 'username': username}, (err, user) => {
-      if (err)
-        return done(err);
-      if (!user)
-        return done(null, false); 
-      if (!user.validPassword(password))
+  }, async (req, username, password, done) => { 
+    try {
+      let user = await User.findOne({ username: username });
+      if (!user || !user.validPassword(password)) {
         return done(null, false);
-      console.log(user);
-      return done(null, user);
-    });
+      } else {
+        console.log('LOGGED IN USER: ', user);
+        return done(null, user);
+      }
+    } catch (err) {
+      done(err);
+    }
   }));
 
   // OAuth Google Config
@@ -69,18 +65,24 @@ module.exports = (passport) => {
     clientID: keys.googleClientID,
     clientSecret: keys.googleClientSecret,
     callbackURL:'/routes/auth/google/callback', //route the user is going to be send to after he/she authenticate
-  }, (accessToken, refreshToken, profile, done) => {
-    //console.log('profile:', profile);
-    User.findOne({ googleID: profile.id }) 
-    .then((existingUser) => {                   
-      if (existingUser) {
-        done(null, existingUser);                
-      } 
-      else {
-        new User ( {googleID: profile.id}).save() 
-        .then(user => done (null, user));
+  }, async (accessToken, refreshToken, profile, done) => {
+    try {
+      let user = await User.findOne({ googleID: profile.id });
+      if (!user) {
+        let newUser = new User();
+        newUser.googleID = profile.id;
+        newUser.username = profile.displayName;
+        newUser.email = profile.emails[0].value;
+        newUser = await newUser.save();
+        console.log('new google user created: ', newUser);  
+        return done(null, newUser);  
+      } else {
+        console.log('LOGGED IN GOOGLE ACCOUNT: ', user);
+        return done(null, user);
       }
-    })   
+    } catch (e) {
+      return done(e, null);
+    }
   }));
 
   // Facebook Config
