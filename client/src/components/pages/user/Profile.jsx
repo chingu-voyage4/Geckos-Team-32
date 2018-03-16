@@ -4,7 +4,8 @@ import EditProfile from './EditProfile.jsx';
 
 class Profile extends React.Component {
 	state = {
-		edit: false
+		edit: false,
+		button: 'Edit'
 	}
 
 	componentDidMount() {
@@ -24,17 +25,19 @@ class Profile extends React.Component {
 			});
 	}
 
-	handleEditProfile = () => {
-		!this.state.edit ? this.setState({ edit: true }) : this.setState({ edit: false });
+	handleEditProfile = (req) => {
+		!this.state.edit ? this.setState({ edit: true, button: 'Cancel' }) : this.setState({ edit: false, button: 'Edit' });
+		this.props.handleUpdateUser(req);
 	}
   
   render() {
-		console.log('this is from profile: ', this.props);
+		// console.log('this is from profile: ', this.props);
+
     return (
 			<div className="page-wrapper">
 				{this.props.user.loggedIn ? <h1>{this.props.user.creds.username}</h1> : null}
-				<button className="button" onClick={this.handleEditProfile}>Edit</button>
-				{this.state.edit ? <EditProfile props={this.props}/> : null}
+				<button className="button" onClick={this.handleEditProfile}>{this.state.button}</button>
+				{this.state.edit ? <EditProfile props={this.props} handleEditProfile={this.handleEditProfile.bind(this)}/> : null}
       </div>
     );
   }

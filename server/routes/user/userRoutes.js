@@ -10,9 +10,9 @@ const User = require('../../models/user');
  * CREATE -- Make new user
  */
 router.post('/signup', passport.authenticate('local-signup', {
-  failureRedirect : '/routes/login', 
+  failureRedirect : '/signup', 
 }), (req, res) => {
-  res.redirect('/routes/user/' + req.user._id);
+  res.redirect('/user/' + req.user._id);
 });
 
 /*
@@ -21,10 +21,10 @@ router.post('/signup', passport.authenticate('local-signup', {
  */
 router.post('/login', passport.authenticate('local-login', {
   // successRedirect : '/', 
-  failureRedirect : '/routes/login', 
+  failureRedirect : '/login', 
 }), (req, res) => {
   console.log('successfully logged in: ', req.user);
-  res.redirect('/routes/user/' + req.user._id);
+  res.redirect('/user/' + req.user._id);
 });
 
 /*
@@ -37,8 +37,7 @@ router.get('/user/:id', (req, res) => {
       console.log('There was a problem: ', err);
       res.redirect('/');
     } else {
-      // res.send({ users: foundUser });
-      res.send({});
+      res.send({ users: foundUser });
     }
   });
 });
@@ -54,18 +53,24 @@ router.get('/user/:id/edit', middleware.isLoggedIn, (req,res) => {
 });
 
 /*
- * PUT ROUTE
+ * POST ROUTE
  * UPDATE -- Edit user credentials
  */
-router.put('/user/:id', middleware.isLoggedIn, (req,res) => {
+router.post('/user/:id/edit', middleware.isLoggedIn, (req,res) => {
   // Input fields need to be wrapped, ex: name="user[username]"
   console.log('THIS IS THE REQ: ', req.body);
-  User.findByIdAndUpdate(req.params.id, req.body, (err, updatedUser) => {
+  User.findById(req.params.id, (err, user) => {
     if (err) {
       res.redirect('/');
     } else {
-      console.log('Successfully updated user: ', updatedUser);
-      res.redirect('/routes/user/' + req.params.id);
+      user.username = req.body.username;
+      user.save((err) => {
+        if (err) {
+          res.redirect('/');
+        }
+        console.log('Successfully updated user: ', user);
+        res.redirect('/user/' + req.params.id);
+      });
     }
   });
 });

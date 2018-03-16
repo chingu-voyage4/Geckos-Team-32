@@ -17,7 +17,7 @@ router.get('/google', passport.authenticate('google', {
  */
 router.get('/google/callback', passport.authenticate('google', {
   successRedirect : '/',
-  failureRedirect : '/routes/signup'
+  failureRedirect : '/signup'
 }));
 
 /*
@@ -34,7 +34,7 @@ router.get('/facebook', passport.authenticate('facebook', {
  */
 router.get('/facebook/callback', passport.authenticate('facebook', {
   successRedirect : '/',
-  failureRedirect : '/routes/signup'
+  failureRedirect : '/signup'
 }));
 
 module.exports = router;

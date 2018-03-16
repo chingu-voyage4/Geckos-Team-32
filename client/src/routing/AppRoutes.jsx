@@ -24,12 +24,15 @@ class AppRoutes extends React.Component {
   }
 
   handleUpdateUser = (user) => {
-    this.setState({
-      user: {
-        loggedIn: true,
-        creds: user
-      }
-    });
+    // Only change is user object contains a username
+    if (user.username) {
+      this.setState({
+        user: {
+          loggedIn: true,
+          creds: user
+        }
+      });
+    }
   }
 
   handleLogoutUser = () => {
@@ -45,9 +48,9 @@ class AppRoutes extends React.Component {
   
   handleSearchInput = (query) => {
     // console.log('this is the search: ', query);
-    axios.get(`routes/search/${query}`)
+    axios.get(`routes/yt/search/${query}`)
       .then((results) => {
-        // console.log(results.data.data.items);
+        // console.log(results.data);
         let videos = results.data.data.items;
         this.setState({ search: query, videos: videos });
       })
@@ -82,7 +85,7 @@ class AppRoutes extends React.Component {
                 />)} 
               />
               <Route
-                path="routes/user/:id"
+                path="/user/:id"
                 render={(props) => (<Profile
                   userId={props}
                   user={this.state.user}
@@ -90,8 +93,8 @@ class AppRoutes extends React.Component {
                 />)}
               />
               <Route path="/about" component={About} />
-              <Route path="/routes/signup" component={Signup} />
-              <Route path="/routes/login" component={Login} />
+              <Route path="/signup" component={Signup} />
+              <Route path="/login" component={Login} />
               <Route component={NotFound} />
             </Switch>
           </div>
