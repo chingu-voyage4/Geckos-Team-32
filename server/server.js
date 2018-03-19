@@ -1,70 +1,64 @@
+require('dotenv').config();
+
 const express = require('express'); // use express methods
 const bodyParser = require('body-parser'); // allows form data to be available in req.body
 const path = require('path'); //joins path segments and normalizes resulting path
-require('dotenv').config();
 const mongoose = require('mongoose');
 const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
+const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
+const cookieSession = require('cookie-session');
 const cors = require('cors');
 
-
-// Require routes & models
-const router = require('./routes/routes')
-const User = require('./models/user');
+const keys = require('./config/keys'); // access config keys/sensitive info
+const PORT = process.env.PORT || 8000; // set PORT number
+const router = require('./routes'); // connect all routing
+const url = "mongodb://localhost:27017/geckos32"; // local mongoDB
+// const url = keys.DB; // mLabs mongoDB
 
 const app = express();
-const PORT = process.env.PORT || 8000;
+
 
 app.use(bodyParser.urlencoded({extended: true})); // returns middleware that only parses urlencoded bodies; extended allows for the qs library
 app.use(express.static(path.join(__dirname, '../client/public'))); // joins current path with client path
 app.use(bodyParser.json()); // looks for JSON data
-app.use(cookieParser());
-app.use(cors());
+app.use(morgan('dev')); // log every request to the console
+app.use(cookieParser()); // read cookies (needed for auth)
+app.use(cors()); // cors middleware for auth
 
-// const options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } },
-//   replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } } };
-
-// Locally use mongoDB or use mLab setup from geckos-32
-// const url = process.env.MONGODB_URI || "mongodb://localhost:27017/geckos32"
-const url = "mongodb://localhost:27017/geckos32"
+/*
+ * MONGO DB SETUP
+ * Test locally using 'mongodb://localhost:27017/geckos32'
+ * Setup mLabs using keys.DB
+ * Comment/Uncomment accordingly
+ */
 mongoose.connect(url);
-// const conn = mongoose.connection;
-
-// conn.on('error', console.error.bind(console, 'connection error:'));
-
-// conn.once('open', function() {
-//   // Wait for the database connection to establish, then start the app.
-// });
 
 // Passport Config
-app.use(require('express-session')({
-  secret: 'geckos32 made this',
-  resave: false,
-  saveUninitialized: false,
+app.use(cookieSession({
+  maxAge: 24 * 60 * 60 * 1000,
+  keys: [keys.cookieKey]
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+require('./passport/passport')(passport);
 
+// Require routes
 app.use('/routes', router);
 
-// handle all routes on index.html
+// Handle all routes on index.html
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/public/index.html'))
 });
 
-// catch 404 and forward to error handler
+// Catch 404 and forward to error handler
 app.use((req, res, next) => {
   const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
-
-// start app on specified port
+// Start app on specified port
 app.listen(PORT, (err) => {
   if (err) {
     console.log('There was an error connecting to the server', err);
