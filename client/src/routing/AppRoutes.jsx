@@ -12,8 +12,18 @@ import Login from '../components/pages/auth/Login.jsx';
 import Profile from '../components/pages/auth/Profile.jsx';
 import NotFound from './NotFound.jsx';
 
+// Used for client side testing
+// Uncomment top 'state' below and comment out bottom 'state' before pushing!
+const dummyData = {
+  loggedIn: true,
+  creds: {
+    _id: 'f93jafb1fvn39dba1e5a1c2d83',
+    __v: 0,
+    username: 'KentuckyKid309'
+  }
+}
 class AppRoutes extends React.Component {
-	state = {
+  state = {
     user: {
       loggedIn: false,
       creds: {}
@@ -22,6 +32,15 @@ class AppRoutes extends React.Component {
     videos: [],
   }
 
+  // state = {
+  //   user: {
+  //     loggedIn: false,
+  //     creds: {}
+  //   },
+  //   user: dummyData,
+  //   search: '',
+  //   videos: [],
+  // } 
   handleUpdateUser = (user) => {
     this.setState({
       user: {
@@ -41,7 +60,7 @@ class AppRoutes extends React.Component {
       }
     });
   }
-  
+
   handleSearchInput = (query) => {
     // console.log('this is the search: ', query);
     axios.get(`routes/search/${query}`)
@@ -59,19 +78,19 @@ class AppRoutes extends React.Component {
     return (
       <BrowserRouter>
         <div>
-          <Navbar 
-            user={this.state.user} 
+          <Navbar
+            user={this.state.user}
             handleLogoutUser={this.handleLogoutUser}
-            />
+          />
           <div className="main-page">
             <Dashboard user={this.state.user} />
             <Switch>
-              <Route 
-                exact path="/" 
-                component={() => (<Landing 
+              <Route
+                exact path="/"
+                component={() => (<Landing
                   search={this.state.search}
                   handleSearchInput={this.handleSearchInput}
-                />)} 
+                />)}
               />
               <Route
                 path="/users/:id"
@@ -81,12 +100,12 @@ class AppRoutes extends React.Component {
                   handleUpdateUser={this.handleUpdateUser}
                 />)}
               />
-              <Route 
-                path="/postlanding" 
+              <Route
+                path="/postlanding"
                 component={() => (<PostLanding
                   stateData={this.state}
                   handleSearchInput={this.handleSearchInput}
-                />)} 
+                />)}
               />
               <Route path="/signup" component={Signup} />
               <Route path="/login" component={Login} />
