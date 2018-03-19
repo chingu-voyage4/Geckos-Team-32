@@ -23,24 +23,24 @@ const dummyData = {
   }
 }
 class AppRoutes extends React.Component {
-  state = {
-    user: {
-      loggedIn: false,
-      creds: {}
-    },
-    search: '',
-    videos: [],
-  }
-
   // state = {
   //   user: {
   //     loggedIn: false,
   //     creds: {}
   //   },
-  //   user: dummyData,
   //   search: '',
   //   videos: [],
-  // } 
+  // }
+
+  state = {
+    user: {
+      loggedIn: false,
+      creds: {}
+    },
+    user: dummyData,
+    search: '',
+    videos: [],
+  } 
   handleUpdateUser = (user) => {
     this.setState({
       user: {
