@@ -16,7 +16,7 @@ export default class Footer extends Component {
             </div>
             <div className="footer-credits">
               <p className="yt-credit">API provided by: <a className="dashboard__link" href="https://developers.google.com/youtube/">YouTube <i className="fab fa-youtube"></i></a></p>
-              <p className="geckos-credit">Copyright &copy; 2018 <a className="dashboard__link" href="https://github.com/chingu-voyage4/Geckos-Team-32"> Geckos-32</a></p>
+              <p className="geckos-credit">Copyright &copy; 2018<a className="dashboard__link" href="https://github.com/chingu-voyage4/Geckos-Team-32"> Geckos-32</a></p>
             </div>
           </div>
         </footer>

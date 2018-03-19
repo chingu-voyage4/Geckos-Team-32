@@ -10,7 +10,10 @@
 // #1CA7CE
 
 footer {
-  height: 100px;
+  position: absolute;
+  bottom: 0%;
+  height: 110px;
+  width: 100%;
   background-color: $off-white;
 }
 .footer-bottom {
@@ -56,7 +59,17 @@ align-items: center;
   -webkit-transition: all .25s ease-out;
   margin: 10px;
 }
-
+.social-media-footer:hover {
+  color: $accent-red;
+  background-color: $off-white;
+  border-color: $accent-red;
+  border-radius: 50%;
+  position: relative;
+  transition: all .25s ease-out;
+  -webkit-transition: all .25s ease-out;
+  transform: translateY(-2px);
+  -webkit-transform: translateY(-2px);
+}
 .footer-credits {
   grid-area: credits;
   display: grid;
@@ -75,16 +88,11 @@ align-items: center;
     display: none;
   }
 
-///////////cant hear you, noooooooooooooooooooooooooo
-
   footer-credits {
     padding: 0;
   } 
 }
 @media screen and (max-width: 500px) {
-  footer {
-    height: 110px;
-  }
   .footer-credits {
     grid-template-columns: 100%;
     grid-template-areas:
