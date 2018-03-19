@@ -57,6 +57,18 @@ align-items: center;
   margin: 10px;
 }
 
+.social-media-footer:hover {
+  color: $accent-red;
+  background-color: $off-white;
+  border-color: $accent-red;
+  border-radius: 50%;
+  position: relative;
+  transition: all .25s ease-out;
+  -webkit-transition: all .25s ease-out;
+  transform: translateY(-2px);
+  -webkit-transform: translateY(-2px);
+}
+
 .footer-credits {
   grid-area: credits;
   display: grid;
@@ -74,8 +86,6 @@ align-items: center;
   footer {
     display: none;
   }
-
-///////////cant hear you, noooooooooooooooooooooooooo
 
   footer-credits {
     padding: 0;
