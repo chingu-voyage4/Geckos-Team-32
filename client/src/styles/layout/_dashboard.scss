@@ -183,14 +183,14 @@
   animation: bounce 2s infinite;
   -webkit-animation: bounce 2s infinite;
 }
-@keyframes bounce {
-  0% {bottom: 0px;}
-  25% {bottom: 0px;  box-shadow: 0px 0px;}
-  50% {bottom: 10px; box-shadow: 0px 8px grey;}
-  65% {bottom: 0px; box-shadow: 0px 0px;}
-  80% {bottom: 3px; box-shadow: 0px 3px grey;}
-  100% {bottom: 0px;}
-}
+// @keyframes bounce {
+//   0% {bottom: 0px;}
+//   25% {bottom: 0px;  box-shadow: 0px 0px;}
+//   50% {bottom: 10px; box-shadow: 0px 8px grey;}
+//   65% {bottom: 0px; box-shadow: 0px 0px;}
+//   80% {bottom: 3px; box-shadow: 0px 3px grey;}
+//   100% {bottom: 0px;}
+// }
 
 ////////////////////
 // Footer Credits //
@@ -205,16 +205,8 @@
 // ========= TABLET/MOBILE ===============
 // =======================================
 
-// Social media buttons become 2 rows //
-@media screen and (max-width: 1300px) {
-  .dashboard-social-media {
-    grid-template-columns: 1fr 1fr;
-  }
-  .social-media {
-    margin-bottom: 10px;
-  }
-}
-// 
+///////////////////////////////////
+// Share and Theme become 2 rows //
 @media screen and (max-width: 1100px) {
 .dashboard-share {
   grid-template-rows: 35px auto;
@@ -232,11 +224,27 @@
   height: 30px;
 }
 }
+////////////////////////////////////////
+// Social media buttons become 2 rows //
+@media screen and (max-width: 950px) {
+  .dashboard-social-media {
+    grid-template-columns: 1fr 1fr;
+  }
+  .social-media {
+    margin-bottom: 10px;
+    height: 40px;
+    width: 40px;
+  }
+}
+
 ///////////////////////////////////////
 // not visible in mobile/tablet view //
 @media screen and (max-width: 768px) {
   .dashboard {
     display: none
+  }
+  .dashboard-bottom {
+    display: flex;
   }
 }
 
