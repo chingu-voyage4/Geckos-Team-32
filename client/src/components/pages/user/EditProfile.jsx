@@ -9,8 +9,12 @@ class EditProfile extends React.Component {
     let req = {
       username: e.target.elements.username.value
     };
-    axios.post(`/routes/user/${this.props.id}/edit`, req);
-    this.props.handleEditProfile(req);
+    axios.post(`/routes/user/${this.props.id}/edit`, req)
+      .then((results) => {
+        results.data.response === 'taken' ?
+        alert('Sorry, that username is already taken.') :
+        this.props.handleEditProfile(req);
+      });
   }
 
   render() {

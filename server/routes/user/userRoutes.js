@@ -63,9 +63,16 @@ router.get('/user/:id/edit', middleware.isLoggedIn, async (req, res, next) => {
 router.post('/user/:id/edit', middleware.isLoggedIn, async (req, res, next) => {
   try {
     let user = await User.findById(req.params.id);
-    user.username = req.body.username;
-    user = await user.save();
-    res.redirect(`/user/${req.params.id}`);
+    let verify = await User.findOne({ username: req.body.username });
+
+    // Check if DB already has that username (and is not the same user)
+    if (verify && user.username !== verify.username) {
+      res.send({ response: 'taken' });
+    } else {
+      user.username = req.body.username;
+      user = await user.save();
+      res.send({ response: req.body.username });
+    }
   } catch (err) {
     next(err);
   }
