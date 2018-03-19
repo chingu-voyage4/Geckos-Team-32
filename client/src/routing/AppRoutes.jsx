@@ -7,6 +7,7 @@ import Footer from '../components/shared/Footer.jsx';
 import Dashboard from '../components/shared/Dashboard.jsx';
 import Landing from '../components/pages/landing/Landing.jsx';
 import PostLanding from '../components/pages/landing/PostLanding.jsx'
+import About from '../components/pages/moreinfo/About.jsx'
 import Signup from '../components/pages/auth/Signup.jsx';
 import Login from '../components/pages/auth/Login.jsx';
 import Profile from '../components/pages/auth/Profile.jsx';
@@ -107,6 +108,7 @@ class AppRoutes extends React.Component {
                   handleSearchInput={this.handleSearchInput}
                 />)}
               />
+              <Route path="/about" component={About} />
               <Route path="/signup" component={Signup} />
               <Route path="/login" component={Login} />
               <Route component={NotFound} />
