@@ -10,142 +10,104 @@
 // #1CA7CE
 
 footer {
-  display: none;
-  justify-content: space-evenly;
-  background-color: $accent-red;
+  height: 100px;
+  background-color: $off-white;
+}
+.footer-bottom {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-areas:
+   "soc"
+   "credits";
+  height: 100%;
+}
+
+.footer-social-media {
+grid-area: soc;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.yt-credit {
+  grid-area: yt;
+  display: flex;
+  justify-self: start;
+  padding-left: 10%;
+}
+.geckos-credit {
+  grid-area: cpywrite;
+  display: flex;
+  justify-self: end;
+  padding-right: 10%;
+}
+
+.social-media-footer {
+  display: flex;
+  justify-content: center;
   align-items: center;
-  color: #fff;
-  padding: 30px 0;
-  font-family: "Open Sans", sans-serif;
-  font-weight: 525;
-  font-size: 16px;
-  text-transform: uppercase;
+  height: 35px;
+  width: 35px;
+  font-size: 20px;
+  background-color: darken($off-white, 10%);
+  border: 3px solid lighten($off-black, 10%);
+  border-radius: 15%;
+  color: $off-black;
+  transition: all .25s ease-out;
+  -webkit-transition: all .25s ease-out;
+  margin: 10px;
 }
 
-footer div a {
-  color: #fff;
-  text-decoration: none;
+.footer-credits {
+  grid-area: credits;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "yt cpywrite";
+  align-content: center;
+  justify-content: space-around;
+  padding: 0;
+}
 
-  &:hover {
-    text-decoration: underline;
+///////////////////
+// Media Queries //
+@media screen and (min-width: 769px) {
+  footer {
+    display: none;
   }
-}
 
-footer div span {
-  margin: 25px;
-  display:inline-flex;
-  justify-content: space-between;
-}
+///////////cant hear you, noooooooooooooooooooooooooo
 
-div span.fa-layers {
-	margin: 15px;
-	display:inline-flex;
-	background-color: transparent;
-	width:64px;
-	height: 64px;
+  footer-credits {
+    padding: 0;
+  } 
+}
+@media screen and (max-width: 500px) {
+  footer {
+    height: 110px;
+  }
+  .footer-credits {
+    grid-template-columns: 100%;
+    grid-template-areas:
+    "yt"
+    "cpywrite";
+    justify-self: center;
+    margin: 10px auto;
   }
 
-span.span {
-  margin: 0;
-  color: #F7C331;
-  opacity: .75;
-}
-
-.fa-layers {
-  display:flex-row;
-}
-
-span#circle1:hover svg {
-  color: #4567AD;
-  opacity: 0.8;
-}
-
-span#circle2:hover svg{
-  color: #1276B0;
-  opacity: 0.8;
-}
-
-span#circle3:hover svg{
-  color: #562D78;
-  opacity: 0.8;
-}
-
-span#circle4:hover svg{
-  color: #fccc63;
-  opacity: 0.8;
-}
-
-@media (max-width: 1100px) {
-	footer {
-		flex-direction: column;
-		// margin-bottom:20px;
-	}
-
-	footer div.one {
-		order: 1 !important;
-		margin:0 0 20px 0;
-		text-align: center;
-		min-width: 320px;
-	}
-	footer div.two {
-		order: 3 !important;
-		text-align: center;
-		min-width: 405px;
-	}
-	footer div.three {
-		order: 2 !important;
-		text-align: center;
-		min-width: 405px;
-	}
-}
-
-@media (max-width: 475px) {
-	footer {
-		flex-direction: column;
-		// margin-bottom:20px;
+  .footer-social-media {
+    margin-top: 10px;
   }
-  div span.fa-layers {
-    margin: 3px;
+
+  .social-media-footer {
+    margin: 0px 10px 0px 10px ;
   }
-	footer div.one {
-		order: 1 !important;
-		margin:0 0 20px 0;
-		text-align: center;
-		min-width: 320px;
-	}
-	footer div.two {
-		order: 3 !important;
-		text-align: center;
-		min-width: 320px;
-	}
-	footer div.three {
-		order: 2 !important;
-		text-align: center;
-		min-width: 320px;
-	}
-}
 
-@media (max-width: 768px) {
-  footer { display: flex; }
-}
-
-@media (max-width: 375px) {
-  .wrapper {
-    padding: 0 5%;
-    flex-basis:100vw;
+  .geckos-credit {
+    margin: 2px;
+    padding-right: 0;
   }
-}
-
-.fab {
-  padding: 10px;
-  font-size: 30px;
-  width: 50px; /*should be 30px for circle but for some reason doesnt work, so made 58*/
-  text-align: center;
-  text-decoration: none;
-  margin: 5px 2px !important;
-  border-radius: 50%;
-
-  .fab:hover {
-    opacity: 0.7;
+  .yt-credit {
+    margin: 2px;
+    padding-left: 0;
   }
 }

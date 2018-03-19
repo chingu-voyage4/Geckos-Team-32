@@ -162,11 +162,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50px;
-  width: 50px;
-  font-size: 24px;
-  background-color: darken($off-white, 5%);
-  border: 3px solid $off-black;
+  height: 35px;
+  width: 35px;
+  font-size: 20px;
+  background-color: darken($off-white, 10%);
+  border: 3px solid lighten($off-black, 10%);
   border-radius: 15%;
   color: $off-black;
   transition: all .25s ease-out;
@@ -180,9 +180,10 @@
   position: relative;
   transition: all .25s ease-out;
   -webkit-transition: all .25s ease-out;
-  animation: bounce 2s infinite;
-  -webkit-animation: bounce 2s infinite;
+  transform: translateY(-2px);
+  -webkit-transform: translateY(-2px);
 }
+
 // @keyframes bounce {
 //   0% {bottom: 0px;}
 //   25% {bottom: 0px;  box-shadow: 0px 0px;}
@@ -226,7 +227,9 @@
 }
 ////////////////////////////////////////
 // Social media buttons become 2 rows //
+
 @media screen and (max-width: 950px) {
+
   .dashboard-social-media {
     grid-template-columns: 1fr 1fr;
   }
@@ -235,11 +238,13 @@
     height: 40px;
     width: 40px;
   }
+
 }
 
 ///////////////////////////////////////
 // not visible in mobile/tablet view //
 @media screen and (max-width: 768px) {
+
   .dashboard {
     display: none
   }
