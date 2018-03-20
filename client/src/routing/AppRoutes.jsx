@@ -7,14 +7,33 @@ import Footer from '../components/shared/Footer.jsx';
 import Dashboard from '../components/shared/Dashboard.jsx';
 import Landing from '../components/pages/landing/Landing.jsx';
 import PostLanding from '../components/pages/landing/PostLanding.jsx'
-import About from '../components/pages/About.jsx'
+import About from '../components/pages/moreinfo/About.jsx'
 import Signup from '../components/pages/auth/Signup.jsx';
 import Login from '../components/pages/auth/Login.jsx';
 import Profile from '../components/pages/user/Profile.jsx';
 import NotFound from './NotFound.jsx';
 
+// Used for client side testing
+// Uncomment top 'state' below and comment out bottom 'state' before pushing!
+const dummyData = {
+  loggedIn: true,
+  creds: {
+    _id: 'f93jafb1fvn39dba1e5a1c2d83',
+    __v: 0,
+    username: 'KentuckyKid309'
+  }
+}
 class AppRoutes extends React.Component {
-	state = {
+  // state = {
+  //   user: {
+  //     loggedIn: false,
+  //     creds: {}
+  //   },
+  //   search: '',
+  //   videos: [],
+  // }
+
+  state = {
     user: {
       loggedIn: false,
       creds: {}
@@ -50,7 +69,7 @@ class AppRoutes extends React.Component {
       }
     });
   }
-  
+
   handleSearchInput = (query) => {
     // console.log('this is the search: ', query);
     axios.get(`routes/yt/search/${query}`)
@@ -68,19 +87,19 @@ class AppRoutes extends React.Component {
     return (
       <BrowserRouter>
         <div>
-          <Navbar 
-            user={this.state.user} 
+          <Navbar
+            user={this.state.user}
             handleLogoutUser={this.handleLogoutUser}
-            />
+          />
           <div className="main-page">
             <Dashboard user={this.state.user} />
             <Switch>
-              <Route 
-                exact path="/" 
-                component={() => (<Landing 
+              <Route
+                exact path="/"
+                component={() => (<Landing
                   search={this.state.search}
                   handleSearchInput={this.handleSearchInput}
-                />)} 
+                />)}
               />
               <Route 
                 path="/postlanding" 

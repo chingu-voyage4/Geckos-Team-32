@@ -13,8 +13,8 @@
   
 }
 
-///////////////////
-// Dashboard Top //
+///////////////////////
+// Dashboard No User //
 .dashboard-top {
   grid-area: dashtop;
   display: grid;
@@ -50,8 +50,96 @@
   -webkit-transition: color .5s ease-out;
 }
 
-/////////////////
-// Dash Bottom //
+////////////////////////////
+// Dash w/ user logged in //
+////////////////////////////
+.dashboard-user {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-areas:
+    "avatar"
+    "username"
+    "links"
+    "share"
+    "theme";
+}
+/////////////////////////
+// Avatar and Username //
+.avatar {
+  grid-area: avatar;
+  width: 100%;
+}
+.user-name {
+  grid-area: username;
+  word-wrap: break-word;
+  text-align: center;
+}
+
+////////////////////////////////
+// Playlists and Liked Videos //
+.user-links {
+  grid-area: links;
+  display: flex;
+}
+.user-links ul {
+  list-style-type: none;
+  padding: 0;
+}
+.user-links li {
+  padding-top: 10px;
+}
+
+//////////////////////////
+// Social Media Sharing //
+.dashboard-share {
+  grid-area: share;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas:
+  "sharetitle sharelinks sharelinks";
+  align-items: center;
+}
+.share-title {
+  grid-area: sharetitle;
+}
+.soc-share {
+  grid-area: sharelinks;
+  display: flex;
+  justify-content: space-around;
+}
+.soc-share a {
+  color: $accent-red;
+  font-size: 22px;
+  transition: color .5s ease-out;
+  -webkit-transition: color .5s ease-out;
+}
+.soc-share a:hover {
+  color: darken($accent-red, 20%);
+  transition: color .5s ease-out;
+  -webkit-transition: color .5s ease-out;
+}
+
+///////////////////
+// Theme Chooser //
+.dash-theme {
+  grid-area: theme;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas:
+  "themetitle choice choice";
+  align-items: center;
+}
+.theme-title {
+  grid-area: themetitle;
+}
+.theme-changer {
+  grid-area: choice;
+  display: flex;
+  height: 50%;
+}
+
+////////////////////////////
+// Dash Bottom aka Footer //
 .dashboard-bottom {
   grid-area: dashbottom;
   display: grid;
@@ -61,6 +149,7 @@
     "footer";
 }
 
+//////////////////
 // Social Media //
 .dashboard-social-media {
   grid-area: social;
@@ -73,11 +162,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50px;
-  width: 50px;
-  font-size: 24px;
-  background-color: darken($off-white, 5%);
-  border: 3px solid $off-black;
+  height: 35px;
+  width: 35px;
+  font-size: 20px;
+  background-color: darken($off-white, 10%);
+  border: 3px solid lighten($off-black, 10%);
   border-radius: 15%;
   color: $off-black;
   transition: all .25s ease-out;
@@ -91,18 +180,21 @@
   position: relative;
   transition: all .25s ease-out;
   -webkit-transition: all .25s ease-out;
-  animation: bounce 2s infinite;
-  -webkit-animation: bounce 2s infinite;
+  transform: translateY(-2px);
+  -webkit-transform: translateY(-2px);
 }
-@keyframes bounce {
-  0% {bottom: 0px;}
-  25% {bottom: 0px;  box-shadow: 0px 0px;}
-  50% {bottom: 10px; box-shadow: 0px 8px grey;}
-  65% {bottom: 0px; box-shadow: 0px 0px;}
-  80% {bottom: 3px; box-shadow: 0px 3px grey;}
-  100% {bottom: 0px;}
-}
-// Footer //
+
+// @keyframes bounce {
+//   0% {bottom: 0px;}
+//   25% {bottom: 0px;  box-shadow: 0px 0px;}
+//   50% {bottom: 10px; box-shadow: 0px 8px grey;}
+//   65% {bottom: 0px; box-shadow: 0px 0px;}
+//   80% {bottom: 3px; box-shadow: 0px 3px grey;}
+//   100% {bottom: 0px;}
+// }
+
+////////////////////
+// Footer Credits //
 .dashboard-footer {
   grid-area: footer;
   display: block;
@@ -114,19 +206,50 @@
 // ========= TABLET/MOBILE ===============
 // =======================================
 
+///////////////////////////////////
+// Share and Theme become 2 rows //
+@media screen and (max-width: 1100px) {
+.dashboard-share {
+  grid-template-rows: 35px auto;
+  grid-template-areas:
+  "sharetitle . ."
+  "sharelinks sharelinks sharelinks";
+}
+  .dash-theme {
+  grid-template-rows: 35px auto;
+  grid-template-areas:
+  "themetitle . ."
+  "choice choice choice";
+  }
+  .theme-changer {
+  height: 30px;
+}
+}
+////////////////////////////////////////
 // Social media buttons become 2 rows //
-@media (max-width: 1300px) {
+
+@media screen and (max-width: 950px) {
+
   .dashboard-social-media {
     grid-template-columns: 1fr 1fr;
   }
   .social-media {
     margin-bottom: 10px;
+    height: 40px;
+    width: 40px;
   }
+
 }
-// not visible in mobile/tablet view
-@media (max-width: 768px) {
+
+///////////////////////////////////////
+// not visible in mobile/tablet view //
+@media screen and (max-width: 768px) {
+
   .dashboard {
     display: none
+  }
+  .dashboard-bottom {
+    display: flex;
   }
 }
 
