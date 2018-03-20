@@ -48,7 +48,7 @@ class AppRoutes extends React.Component {
   }
 
   handleUpdateUser = (user) => {
-    // Only change is user object contains a username
+    // Only change if user object contains a username
     if (user.username) {
       this.setState({
         user: {
@@ -60,7 +60,7 @@ class AppRoutes extends React.Component {
   }
 
   handleLogoutUser = () => {
-    // console.log('user logging out');
+    console.log('user logging out');
     axios.get('routes/logout');
     this.setState({
       user: {

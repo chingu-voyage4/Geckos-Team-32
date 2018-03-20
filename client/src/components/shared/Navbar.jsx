@@ -5,8 +5,11 @@ import logo from "../../assets/dantv5.png";
 import brand from "../../assets/Gechotext2.png";
 
 export default class Navbar extends Component {
-	
+  
   render() {
+    // console.log('FROM NAVBAR PROPS: ', this.props);
+    const id = this.props.user.creds._id ? this.props.user.creds._id : "profile";
+
 		return (
 			<div>
 				<nav className="navBar">
@@ -30,7 +33,7 @@ export default class Navbar extends Component {
               <NavLink to="/about" onClick={this.burgerToggle}>About</NavLink>
               {this.props.user.loggedIn ?
                 <div>
-                  <NavLink to="/user/profile" onClick={this.burgerToggle}>Profile</NavLink>
+                  <NavLink to={`/user/${id}`} onClick={this.burgerToggle}>Profile</NavLink>
                   <a href="#" onClick={(e) => this.props.handleLogoutUser(e)}>Sign  out</a>
                 </div> :
                 <div>
@@ -48,7 +51,7 @@ export default class Navbar extends Component {
             {this.props.user.loggedIn ? 
               <ul className="login-list">
                 <li><a href="#" onClick={(e) => this.props.handleLogoutUser(e)}>Sign  out</a></li>
-                <li><NavLink to="/user/profile">Profile</NavLink></li>
+                <li><NavLink to={`/user/${id}`}>Profile</NavLink></li>
               </ul> : 
               <ul className="login-list">
                 <li><NavLink to="/signup" className ="btn">Sign up</NavLink></li>

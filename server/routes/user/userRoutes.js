@@ -71,7 +71,7 @@ router.post('/user/:id/edit', middleware.isLoggedIn, async (req, res, next) => {
     } else {
       user.username = req.body.username;
       user = await user.save();
-      res.send({ response: req.body.username });
+      res.send({ response: user });
     }
   } catch (err) {
     next(err);
@@ -84,7 +84,7 @@ router.post('/user/:id/edit', middleware.isLoggedIn, async (req, res, next) => {
  */
 router.get('/user/:id/delete', middleware.isLoggedIn, async (req, res, next) => {
   try {
-    console.log('PARAMS DOE: ', req.params);
+    console.log('DELETE ROUTE PARAMS: ', req.params);
     let user = await User.findByIdAndRemove(req.params.id);
     console.log('SUCCESSFULLY DELETED USER');
     res.send({ response: 'deleted' });

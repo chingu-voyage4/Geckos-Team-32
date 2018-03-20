@@ -15,18 +15,22 @@ class EditProfile extends React.Component {
       .then((results) => {
         results.data.response === 'taken' ?
         alert('Sorry, that username is already taken.') :
-        this.props.handleEditProfile(req);
+        this.props.handleEditProfile(results.data.response);
       });
   }
 
   handleDeleteUser() {
-    axios.get(`/routes/user/${this.props.id}/delete`)
+    // Temporarily warning for handling DELETE route
+    const warning = confirm('Are you sure?');
+    if (warning) {
+      axios.get(`/routes/user/${this.props.id}/delete`)
       .then((results) => {
         if (results.data.response === 'deleted') {
           this.props.props.handleUpdateAfterDelete();
           this.props.history.push('/');
         }
       });
+    }
   }
 
   render() {
