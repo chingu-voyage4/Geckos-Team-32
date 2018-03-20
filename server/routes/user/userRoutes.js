@@ -82,13 +82,15 @@ router.post('/user/:id/edit', middleware.isLoggedIn, async (req, res, next) => {
  * DELETE ROUTE
  * DESTROY -- Delete user and associated credentials
  */
-router.delete('/user/:id', middleware.isLoggedIn, async (req, res, next) => {
+router.get('/user/:id/delete', middleware.isLoggedIn, async (req, res, next) => {
   try {
+    console.log('PARAMS DOE: ', req.params);
     let user = await User.findByIdAndRemove(req.params.id);
-    console.log('SUCCESSFULLY DELETED USER DOEEEE');
-    res.redirect('/');
+    console.log('SUCCESSFULLY DELETED USER');
+    res.send({ response: 'deleted' });
   } catch (err) {
-    console.log("NO LUCK BUDDY");
+    console.log('Error trying to delete');
+    res.send({ response: 'error' });
     next(err);
   }
 });

@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import { withRouter } from 'react-router-dom';
+
 
 class EditProfile extends React.Component {
   handleEditData(e) {
@@ -17,20 +19,30 @@ class EditProfile extends React.Component {
       });
   }
 
+  handleDeleteUser() {
+    axios.get(`/routes/user/${this.props.id}/delete`)
+      .then((results) => {
+        if (results.data.response === 'deleted') {
+          this.props.props.handleUpdateAfterDelete();
+          this.props.history.push('/');
+        }
+      });
+  }
+
   render() {
     // console.log('this is from edit profile: ', this.props);
-    const { username } = this.props.props;
+    const { username } = this.props.creds;
 
     return (
       <div>
-        <form className="login-form" onSubmit={this.handleEditData.bind(this)}>
-          <input className="login-form__input" type="text" name="username" placeholder={username} required/>
+        <form className="form" onSubmit={this.handleEditData.bind(this)}>
+          <input className="form__input" type="text" name="username" placeholder={username} required/>
           <button className="button">Submit</button>
         </form>
-        <button className="button">Delete Account</button>
+        <button className="button" onClick={this.handleDeleteUser.bind(this)}>Delete Account</button>
       </div>
     );
   }
 }
 
-export default EditProfile;
+export default withRouter(EditProfile);

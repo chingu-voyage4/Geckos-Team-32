@@ -29,7 +29,14 @@ class Profile extends React.Component {
 			<div className="page-wrapper">
 				{loggedIn ? <h1>{creds.username}</h1> : null}
 				<button className="button" onClick={this.props.handleEditProfile}>{editButton}</button>
-				{edit ? <EditProfile props={creds} id={this.props.userId.match.params.id} handleEditProfile={this.props.handleEditProfile.bind(this)}/> : null}
+				{edit ? 
+				<EditProfile 
+					props={this.props} 
+					creds={creds} 
+					id={this.props.userId.match.params.id} 
+					handleEditProfile={this.props.handleEditProfile.bind(this)}
+				/> : 
+				null}
       </div>
     );
   }

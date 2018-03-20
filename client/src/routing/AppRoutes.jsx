@@ -70,6 +70,15 @@ class AppRoutes extends React.Component {
     });
   }
 
+  handleUpdateAfterDelete = () => {
+    this.setState({
+      user: {
+        loggedIn: false,
+        creds: {}
+      }
+    });
+  }
+
   handleSearchInput = (query) => {
     // console.log('this is the search: ', query);
     axios.get(`routes/yt/search/${query}`)
@@ -114,6 +123,7 @@ class AppRoutes extends React.Component {
                 render={(props) => (<Profile
                   userId={props}
                   state={this.state}
+                  handleUpdateAfterDelete={this.handleUpdateAfterDelete}
                   handleUpdateUser={this.handleUpdateUser}
                   handleEditProfile={req => {
                     !this.state.editUser.edit ? 
