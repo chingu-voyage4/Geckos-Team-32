@@ -10,7 +10,7 @@ import PostLanding from '../components/pages/landing/PostLanding.jsx'
 import About from '../components/pages/moreinfo/About.jsx'
 import Signup from '../components/pages/auth/Signup.jsx';
 import Login from '../components/pages/auth/Login.jsx';
-import Profile from '../components/pages/auth/Profile.jsx';
+import Profile from '../components/pages/user/Profile.jsx';
 import NotFound from './NotFound.jsx';
 
 // Used for client side testing
@@ -38,22 +38,39 @@ class AppRoutes extends React.Component {
       loggedIn: false,
       creds: {}
     },
-    user: dummyData,
+    editUser: {
+      edit: false,
+      editButton: 'Edit',
+    },
     search: '',
     videos: [],
-  } 
+    selectedVideo: null
+  }
+
   handleUpdateUser = (user) => {
+    // Only change if user object contains a username
+    if (user.username) {
+      this.setState({
+        user: {
+          loggedIn: true,
+          creds: user
+        }
+      });
+    }
+  }
+
+  handleLogoutUser = () => {
+    console.log('user logging out');
+    axios.get('routes/logout');
     this.setState({
       user: {
-        loggedIn: true,
-        creds: user
+        loggedIn: false,
+        creds: {}
       }
     });
   }
 
-  handleLogoutUser = () => {
-    // console.log('user logging out');
-    axios.get('routes/logout');
+  handleUpdateAfterDelete = () => {
     this.setState({
       user: {
         loggedIn: false,
@@ -64,11 +81,11 @@ class AppRoutes extends React.Component {
 
   handleSearchInput = (query) => {
     // console.log('this is the search: ', query);
-    axios.get(`routes/search/${query}`)
+    axios.get(`routes/yt/search/${query}`)
       .then((results) => {
-        // console.log(results.data.data.items);
+        // console.log(results.data);
         let videos = results.data.data.items;
-        this.setState({ search: query, videos: videos });
+        this.setState({ search: query, videos: videos, selectedVideo: null });
       })
       .catch((err) => {
         console.log(err);
@@ -93,19 +110,27 @@ class AppRoutes extends React.Component {
                   handleSearchInput={this.handleSearchInput}
                 />)}
               />
-              <Route
-                path="/users/:id"
-                render={(props) => (<Profile
-                  userId={props}
-                  user={this.state.user}
-                  handleUpdateUser={this.handleUpdateUser}
-                />)}
-              />
-              <Route
-                path="/postlanding"
+              <Route 
+                path="/postlanding" 
                 component={() => (<PostLanding
                   stateData={this.state}
                   handleSearchInput={this.handleSearchInput}
+                  handleSelectedVideo={selectedVideo => this.setState({selectedVideo})}
+                />)} 
+              />
+              <Route
+                path="/user/:id"
+                render={(props) => (<Profile
+                  userId={props}
+                  state={this.state}
+                  handleUpdateAfterDelete={this.handleUpdateAfterDelete}
+                  handleUpdateUser={this.handleUpdateUser}
+                  handleEditProfile={req => {
+                    !this.state.editUser.edit ? 
+                    this.setState({ editUser: { edit: true, editButton: 'Cancel' }}) : 
+                    this.setState({ editUser: { edit: false, editButton: 'Edit' }});
+		                this.handleUpdateUser(req);
+                  }}
                 />)}
               />
               <Route path="/about" component={About} />

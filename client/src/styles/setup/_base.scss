@@ -34,3 +34,15 @@ body {
   font-style: normal;
   font-weight: bold;
 }
+
+.form {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.form__input {
+  padding: 1em;
+  margin: 0.5em;
+  outline: none;
+}
