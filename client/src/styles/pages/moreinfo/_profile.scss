@@ -1,3 +1,10 @@
+.profile-page-wrapper {
+  display: grids;
+  grid-template-columns: 20vw 1fr 1fr 1fr 1fr;
+  grid-template-areas:
+  ". "
+}
+
 .profile-username-edit {
-  color: blue;
+  font-size: 50px;
 }

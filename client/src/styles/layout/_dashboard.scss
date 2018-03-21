@@ -108,13 +108,13 @@
   justify-content: space-around;
 }
 .soc-share a {
-  color: $accent-red;
+  color: $off-black;
   font-size: 22px;
   transition: color .5s ease-out;
   -webkit-transition: color .5s ease-out;
 }
 .soc-share a:hover {
-  color: darken($accent-red, 20%);
+  color: $accent-red;
   transition: color .5s ease-out;
   -webkit-transition: color .5s ease-out;
 }
