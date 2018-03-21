@@ -8,17 +8,18 @@ const passport = require('passport');
  */
 router.get('/google', passport.authenticate('google', {
   scope: ['profile', 'email']
-  })
-);
+}));
 
 /*
  * GET ROUTE
  * READ -- Callback Google authentication
  */
 router.get('/google/callback', passport.authenticate('google', {
-  successRedirect : '/',
   failureRedirect : '/signup'
-}));
+}), (req, res) => {
+  console.log('successfully logged in through google: ', req.user);
+  res.redirect('/user/' + req.user._id);
+});
 
 /*
  * GET ROUTE
@@ -33,8 +34,10 @@ router.get('/facebook', passport.authenticate('facebook', {
  * READ -- Callback for Facebook authentication
  */
 router.get('/facebook/callback', passport.authenticate('facebook', {
-  successRedirect : '/',
   failureRedirect : '/signup'
-}));
+}), (req, res) => {
+  console.log('successfully logged in through facebook: ', req.user);
+  res.redirect('/user/' + req.user._id);
+});
 
 module.exports = router;

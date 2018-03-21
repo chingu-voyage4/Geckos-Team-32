@@ -18,7 +18,6 @@ const url = "mongodb://localhost:27017/geckos32"; // local mongoDB
 
 const app = express();
 
-
 app.use(bodyParser.urlencoded({extended: true})); // returns middleware that only parses urlencoded bodies; extended allows for the qs library
 app.use(express.static(path.join(__dirname, '../client/public'))); // joins current path with client path
 app.use(bodyParser.json()); // looks for JSON data
@@ -53,6 +52,10 @@ app.get('*', (req, res) => {
 
 // Catch 404 and forward to error handler
 app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Credentials", true);
+  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   const err = new Error('Not Found');
   err.status = 404;
   next(err);

@@ -48,3 +48,9 @@
   padding: 0 1.5em;
   text-transform: uppercase;
 }
+
+@media (max-width: 768px) {
+  .auth-buttons-wrapper {
+    flex-direction: column;
+  }
+}
