@@ -27,6 +27,9 @@ class Profile extends React.Component {
 
     return (
 			<div className="page-wrapper">
+				
+				<div className="profile-username-edit">
+				<h1> HI </h1>
 				{loggedIn ? <h1>{creds.username}</h1> : null}
 				<button className="button" onClick={this.props.handleEditProfile}>{editButton}</button>
 				{edit ? 
@@ -37,6 +40,10 @@ class Profile extends React.Component {
 					handleEditProfile={this.props.handleEditProfile.bind(this)}
 				/> : 
 				null}
+				</div>
+				<div>
+					<h1> hi</h1>
+				</div>
       </div>
     );
   }
