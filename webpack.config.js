@@ -12,7 +12,6 @@ module.exports = {
   output: { //create output path
     filename: 'js/bundle.js',
     path: PUBLIC_DIR,
-    publicPath: 'http://localhost:8080/',
     hotUpdateChunkFilename: 'hot/hot-update.js',
     hotUpdateMainFilename: 'hot/hot-update.json'
   },
