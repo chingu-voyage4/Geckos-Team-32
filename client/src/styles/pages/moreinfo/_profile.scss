@@ -101,6 +101,10 @@
   grid-area: avatar;
   display: flex;
 }
+.avatar-library {
+  border: 1px solid $off-black;
+  background: linear-gradient(darken($off-white, 5%), $off-black);
+}
 .avatar-library img {
   height: 150px;
   width: 150px;
