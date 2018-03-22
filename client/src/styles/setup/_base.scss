@@ -39,6 +39,8 @@ body {
   display: flex;
   flex-direction: column;
   text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 
 .form__input {
@@ -46,3 +48,12 @@ body {
   margin: 0.5em;
   outline: none;
 }
+
+.link {
+  color: $accent-red;
+
+  &:hover {
+    color: darken($accent-red, 20%);
+  }
+}
+
