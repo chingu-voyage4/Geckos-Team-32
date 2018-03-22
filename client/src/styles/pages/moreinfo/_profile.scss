@@ -1,10 +1,95 @@
 .profile-page-wrapper {
-  display: grids;
+  display: grid;
   grid-template-columns: 20vw 1fr 1fr 1fr 1fr;
+  grid-template-rows: 65px 50px 50px 50px;
   grid-template-areas:
-  ". "
+  ". banner banner banner banner"
+  ". welcome welcome modal ."
+  ". usernameedit usernameedit . .";
+
+}
+// This class is called on to get all content 2vw from left edge of screen, the reason    is because we needed the border bottom in .profile-banner to span the entire length.
+.twopercent-spacing {
+  margin-left: 2vw;
+}
+.profile-banner {
+  grid-area: banner;
+  display: flex;
+  width: 80vw; // 78vw is because 20vw dashboard, and 2% margin-left. This makes the                   underline cross the entire page
+  background: linear-gradient(-90deg, $off-black, darken($off-white, 5%));
+  border-bottom: 2px solid $off-black;
+  
+}
+.profile-username-edit {
+  grid-area: usernameedit;
+  display: block;
+}
+.welcome {
+  grid-area: welcome;
+}
+////////////////////////
+// Username Edit Form //
+.button {
+  width: 180px;
+  background-color: darken($off-white, 15%);
+  font-size: 14px;
+  font-weight: bold;
+  border: 1px solid $off-black;
+  border-radius: 5px;
+}
+.delete {
+  background-color: $accent-red;
+}
+.form {
+  display: inline;
+}
+.form__input {
+  width: 350px;
+  margin-left: 0;
+  border: 1px solid #DDDDDD;
+  transition: all 0.30s ease-in-out;
+  -webkit-transition: all 0.30s ease-in-out;
+}
+.form__input:focus {
+  border: 1px solid rgba(81, 203, 238, 1);
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
 }
 
-.profile-username-edit {
-  font-size: 50px;
+///////////////////////////////////////
+// Delete Account Confirmation Modal //
+.modalbut {
+  grid-area: modal;
 }
+.warning-window {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+.close-modal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close-modal:hover,
+.close-modal:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+// {this.handleDeleteUser.bind(this)} onClick function for delete button

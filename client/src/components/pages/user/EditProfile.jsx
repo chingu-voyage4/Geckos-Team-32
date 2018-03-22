@@ -43,10 +43,12 @@ class EditProfile extends React.Component {
           <input className="form__input" type="text" name="username" placeholder={username} required/>
           <button className="button">Submit</button>
         </form>
-        <button className="button" onClick={this.handleDeleteUser.bind(this)}>Delete Account</button>
+        <br />
+        <button className="button delete" onClick={this.handleDeleteUser.bind(this)}>Delete Account</button>
       </div>
     );
   }
+
 }
 
 export default withRouter(EditProfile);
