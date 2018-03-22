@@ -1,0 +1,17 @@
+@import './setup/variables';
+@import './setup/base';
+
+@import './layout/navbar';
+@import './layout/footer';
+@import './layout/dashboard';
+@import './pages/mainpage';
+
+@import './pages/landing/landing';
+@import './pages/landing/postlanding';
+@import './pages/landing/videodetails';
+
+@import './pages/auth/login';
+@import './pages/auth/signup';
+@import './pages/auth/auth';
+
+@import './pages/moreinfo/profile';

@@ -1,0 +1,50 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  padding: 0;
+  margin: 0;
+  background: $bg-grey;
+  min-width: 320px;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+.button {
+  border-radius: 3px;
+  padding: 1em;
+  outline: none;
+  cursor: pointer;
+  transition: 0.3s;
+
+  &:hover {
+    transition: 0.3s;
+  }
+}
+
+/////////////////////
+// Generic Classes //
+.namered {
+  color: $accent-red;
+}
+.bold {
+  font-style: normal;
+  font-weight: bold;
+}
+.underline {
+  text-decoration: underline;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.form__input {
+  padding: 1em;
+  margin: 0.5em;
+  outline: none;
+}

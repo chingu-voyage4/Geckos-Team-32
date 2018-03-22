@@ -1,0 +1,13 @@
+.signup-wrapper {
+  justify-content: center;
+
+  h1 {
+    margin: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .signup-wrapper {
+    min-height: calc(100vh - 100px);
+  }
+}

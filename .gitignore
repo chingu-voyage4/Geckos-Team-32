@@ -40,9 +40,14 @@ coverage
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git-
 node_modules
 
+#config folder
+**/server/config
+
 # Users Environment Variables
 .lock-wscript
 
+#config folder
+**/server/config
 
 # OS generated files #
 ######################
@@ -54,13 +59,7 @@ node_modules
 ehthumbs.db
 Thumbs.db
 
-package.json
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
+.env
 
-package.json
+# HMR Chunks
+client/public/hot
