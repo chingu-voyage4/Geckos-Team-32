@@ -26,10 +26,10 @@ class AvatarSelection extends React.Component {
       </div>
     );
   }
-  selectAvatar = function () {
-    let images = document.getElementsByClassName("avatars");
-    for (i = 0; i < )
-  }
+  // selectAvatar = function () {
+  //   let images = document.getElementsByClassName("avatars");
+  //   for (i = 0; i < )
+  // }
 }
 
 export default withRouter(AvatarSelection);
