@@ -45,6 +45,12 @@
   }
 }
 
+@media (max-width: 768px) and (orientation: landscape){
+  .page-wrapper {
+    margin-left: 0 !important;
+  }
+}
+
 @media (max-width: 320px) {
   .page-wrapper {
     width: 100vw;
