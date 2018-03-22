@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import EditProfile from './EditProfile.jsx';
+import AvatarSelection from './AvatarSelection.jsx';
 
 class Profile extends React.Component {
 	componentDidMount() {
@@ -49,7 +50,9 @@ class Profile extends React.Component {
 					/> : 
 					null}
 				</div>
-
+				<div className="avatar-selection twopercent-spacing underline">
+						<AvatarSelection />
+				</div>
       </div>
     );
 	}

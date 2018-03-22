@@ -1,11 +1,12 @@
 .profile-page-wrapper {
   display: grid;
   grid-template-columns: 20vw 1fr 1fr 1fr 1fr;
-  grid-template-rows: 65px 50px 50px 50px;
+  grid-template-rows: 65px 50px 225px 100px;
   grid-template-areas:
   ". banner banner banner banner"
-  ". welcome welcome modal ."
-  ". usernameedit usernameedit . .";
+  ". welcome welcome . ."
+  ". usernameedit usernameedit . ."
+  ". avatar avatar avatar .";
 
 }
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -21,13 +22,14 @@
   border-bottom: 2px solid $off-black;
   
 }
+.welcome {
+  grid-area: welcome;
+}
 .profile-username-edit {
   grid-area: usernameedit;
   display: block;
 }
-.welcome {
-  grid-area: welcome;
-}
+
 ////////////////////////
 // Username Edit Form //
 .button {
@@ -93,3 +95,14 @@
     cursor: pointer;
 }
 
+//////////////////////
+// Avatar Selection //
+.avatar-selection {
+  grid-area: avatar;
+  display: flex;
+}
+.avatar-library img {
+  height: 150px;
+  width: 150px;
+  margin: 10px;
+}
