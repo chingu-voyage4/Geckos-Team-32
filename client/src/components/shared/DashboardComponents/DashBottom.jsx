@@ -12,7 +12,6 @@ export default class DashBottom extends Component {
           <a className="social-media" href="#"><i className="fab fa-github"></i></a>
         </div>
         <div className="dashboard-footer">
-          <p>API provided by: <a className="dashboard__link" href="https://developers.google.com/youtube/">YouTube <i className="fab fa-youtube"></i></a></p>
           <p>Copyright &copy; 2018<span> </span><a className="dashboard__link" href="https://github.com/chingu-voyage4/Geckos-Team-32">Geckos-32</a></p>
         </div>
       </div>
@@ -20,3 +19,4 @@ export default class DashBottom extends Component {
   }
 }
 
+// <p>API provided by: <a className="dashboard__link" href="https://developers.google.com/youtube/">YouTube <i className="fab fa-youtube"></i></a></p>

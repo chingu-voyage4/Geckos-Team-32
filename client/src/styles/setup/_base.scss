@@ -46,3 +46,12 @@ body {
   margin: 0.5em;
   outline: none;
 }
+
+.link {
+  color: $accent-red;
+
+  &:hover {
+    color: darken($accent-red, 20%);
+  }
+}
+

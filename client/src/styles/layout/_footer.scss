@@ -10,7 +10,7 @@
 // #1CA7CE
 
 footer {
-  position: absolute;
+  // position: absolute;
   bottom: 0%;
   height: 110px;
   width: 100%;
@@ -20,8 +20,8 @@ footer {
   display: grid;
   grid-template-columns: 100%;
   grid-template-areas:
-   "soc"
-   "credits";
+    "soc"
+    "credits";
   height: 100%;
 }
 
@@ -119,3 +119,13 @@ align-items: center;
     padding-left: 0;
   }
 }
+
+// @media screen and (max-height: 850px) {
+//   footer {
+//     display: none;
+//   }
+
+//   footer-credits {
+//     padding: 0;
+//   } 
+// }
