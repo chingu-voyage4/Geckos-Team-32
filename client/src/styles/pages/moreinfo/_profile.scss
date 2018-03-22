@@ -8,6 +8,7 @@
   ". usernameedit usernameedit . .";
 
 }
+///////////////////////////////////////////////////////////////////////////////////////
 // This class is called on to get all content 2vw from left edge of screen, the reason    is because we needed the border bottom in .profile-banner to span the entire length.
 .twopercent-spacing {
   margin-left: 2vw;
@@ -15,7 +16,7 @@
 .profile-banner {
   grid-area: banner;
   display: flex;
-  width: 80vw; // 78vw is because 20vw dashboard, and 2% margin-left. This makes the                   underline cross the entire page
+  width: 80vw; // 80vw is because 20vw dashboard, This makes the                                       underline cross the entire page
   background: linear-gradient(-90deg, $off-black, darken($off-white, 5%));
   border-bottom: 2px solid $off-black;
   
@@ -61,23 +62,23 @@
   grid-area: modal;
 }
 .warning-window {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); // Fallback color 
+    background-color: rgba(0,0,0,0.4); // Black w/ opacity 
 }
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
+    margin: 15% auto; // 15% from the top and centered
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    width: 50%; 
 }
 .close-modal {
     color: #aaa;
@@ -92,4 +93,3 @@
     cursor: pointer;
 }
 
-// {this.handleDeleteUser.bind(this)} onClick function for delete button

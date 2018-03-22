@@ -49,43 +49,9 @@ class Profile extends React.Component {
 					/> : 
 					null}
 				</div>
-				<button className="modalbut" id="modalButton" onClick={this.deleteModal}>Open Modal</button>
-				<div>
-					
-					<div className="warning-window" id="modal">
-						<div className="modal-content">
-							<span className="close-modal">&times;</span>
-							<h3>testing</h3>
-							<p>testing testing</p>
-						</div>
-					</div>
-				</div>
 
       </div>
     );
-	}
-	
-	deleteModal = function () {
-		let modal = document.getElementById('modal');
-		let btn = document.getElementById("modalButton");
-		let span = document.getElementsByClassName("close-modal");
-
-		// When the user clicks on the button, open the modal 
-		btn.onclick = function () {
-			modal.style.display = "block";
-		}
-
-		// When the user clicks on <span> (x), close the modal
-		span.onclick = function () {
-			modal.style.display = "none";
-		}
-
-		// When the user clicks anywhere outside of the modal, close it
-		window.onclick = function (event) {
-			if (event.target == modal) {
-				modal.style.display = "none";
-			}
-		}
 	}
 }
 
