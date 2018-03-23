@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 
@@ -31,6 +32,11 @@ class AppRoutes extends React.Component {
   //   },
   //   search: '',
   //   videos: [],
+  // }
+
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {};
   // }
 
   state = {
@@ -146,4 +152,10 @@ class AppRoutes extends React.Component {
   }
 }
 
-export default AppRoutes;
+const mapStateToProps = (state) => {
+  return { 
+    auth: state.user
+  };
+};
+
+export default (connect(mapStateToProps)(AppRoutes));

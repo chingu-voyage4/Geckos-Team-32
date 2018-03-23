@@ -1,7 +1,18 @@
 import React from 'react';
 import axios from 'axios';
+import { signupUser } from "../../../actions/authenticate";
 
 class Signup extends React.Component {
+  handleSubmit(e) {
+    e.preventDefault();
+    const creds = {
+      username: e.target.username.value,
+      password: e.target.password.value
+    }
+    console.log(creds);
+    signupUser(creds);
+  }
+
   render() {
     return (
       <div className="page-wrapper signup-wrapper">
@@ -21,7 +32,7 @@ class Signup extends React.Component {
           </div>
         </div>
 
-        <form className="form" action="/routes/signup" method="post">
+        <form className="form" onSubmit={(e) => this.handleSubmit(e)}>
           <input className="form__input" type="text" name="username" placeholder="username"/>
           <input className="form__input" type="password" name="password" placeholder="password"/>
           <button className="button">Sign up</button>
