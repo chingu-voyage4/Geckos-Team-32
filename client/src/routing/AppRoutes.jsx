@@ -12,6 +12,8 @@ import Signup from '../components/pages/auth/Signup.jsx';
 import Login from '../components/pages/auth/Login.jsx';
 import Profile from '../components/pages/user/Profile.jsx';
 import NotFound from './NotFound.jsx';
+import AvatarSelection from '../components/pages/user/AvatarSelection.jsx'
+import AvatarIcon from '../components/pages/user/AvatarIcon.jsx'
 
 // Used for client side testing
 // Uncomment top 'state' below and comment out bottom 'state' before pushing!

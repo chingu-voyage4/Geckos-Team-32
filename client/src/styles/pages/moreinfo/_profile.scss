@@ -102,11 +102,18 @@
   display: flex;
 }
 .avatar-library {
-  border: 1px solid $off-black;
-  background: linear-gradient(darken($off-white, 5%), $off-black);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border: 1px solid black;
 }
 .avatar-library img {
   height: 150px;
   width: 150px;
   margin: 10px;
+}
+.activeavatar {
+  border: 3px solid $off-black;
+  box-shadow: 0 0 5px $off-black;
+  border-radius: 50%;
+  transform: scale(1.05);
 }
