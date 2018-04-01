@@ -15,7 +15,7 @@ router.get('/', middleware.isLoggedIn, async (req, res) => {
     if (!user) {
       res.redirect('/');
     } else {
-      console.log('sending video data: ', user.videos);
+      // console.log('sending video data: ', user.videos);
       res.send({ videos: user.videos });
     }
   } catch (err) {

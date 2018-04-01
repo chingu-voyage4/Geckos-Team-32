@@ -67,7 +67,7 @@ class Profile extends React.Component {
 					handleEditProfile={this.props.handleEditProfile.bind(this)}
 				/> : 
 				null}
-				<button onClick={() => this.retrieveSavedVideos()}>Liked/Saved Videos</button>
+				<button className="button" onClick={() => this.retrieveSavedVideos()}>Liked/Saved Videos</button>
 				{this.state.saved && <SavedVideos videos={this.state.savedVideos}/>}
       </div>
     );
