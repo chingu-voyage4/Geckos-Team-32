@@ -9,7 +9,13 @@ const User = new Schema({
   facebookID: String,
   facebookToken: String,
   displayName: String,
-  email: String
+  email: String,
+  videos: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Video"
+    }
+  ]
 });
 
 // methods ======================

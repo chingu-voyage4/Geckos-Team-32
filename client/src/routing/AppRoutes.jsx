@@ -92,6 +92,24 @@ class AppRoutes extends React.Component {
       });
   }
 
+  handleLikedVideo = (e, video) => {
+    console.log('liked video: ', video);
+    if (this.state.user.loggedIn) {
+      console.log('Logged in, proceed...', this.state.user.creds);
+      let id = this.state.user.creds._id;
+      axios.post(`/routes/user/${id}/videos`, video)
+      	.then((results) => {
+      		let videos = results.data.videos;
+      		console.log('new video data: ', videos);
+      	})
+      	.catch((err) => {
+      		console.log('There was an error: ', err);
+      	});
+    } else {
+      console.log('Not logged in');
+    }
+  }
+
   render() {
     return (
       <BrowserRouter>
@@ -116,6 +134,7 @@ class AppRoutes extends React.Component {
                   stateData={this.state}
                   handleSearchInput={this.handleSearchInput}
                   handleSelectedVideo={selectedVideo => this.setState({selectedVideo})}
+                  handleLikedVideo={this.handleLikedVideo}
                 />)} 
               />
               <Route

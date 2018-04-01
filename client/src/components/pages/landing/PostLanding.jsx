@@ -23,7 +23,10 @@ export default class PostLandingPage extends Component {
           </form>
         </div>
 
-        <VideoDetails selectedVideo={selectedVideo}/>
+        <VideoDetails 
+          selectedVideo={selectedVideo}
+          handleLikedVideo={this.props.handleLikedVideo}
+        />
 
         <div className="post-landing-video-pull">
           {videos.map((video, index) => (

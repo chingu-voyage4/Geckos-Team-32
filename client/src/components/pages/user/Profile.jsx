@@ -1,8 +1,18 @@
 import React from 'react';
 import axios from 'axios';
 import EditProfile from './EditProfile.jsx';
+import SavedVideos from './SavedVideos.jsx';
 
 class Profile extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			saved: false,
+			savedVideos: null
+		}
+	}
+
 	componentDidMount() {
     this.props.state.user.loggedIn ? null : this.handleUserData();
 	}
@@ -19,11 +29,31 @@ class Profile extends React.Component {
 				console.log('There was an error: ', err);
 			});
 	}
+
+	retrieveSavedVideos() {
+		console.log('retrieve button clicked');
+		let id = this.props.userId.match.params.id;
+		let videos = {};
+		if (!this.state.saved) {
+			axios.get(`/routes/user/${id}/videos`)
+				.then((results) => {
+					videos = results.data.videos;
+					console.log('new video data: ', videos);
+					this.setState({ saved: true, savedVideos: videos });
+				})
+				.catch((err) => {
+					console.log('There was an error: ', err);
+				});
+		} else {
+			this.setState({ saved: false });
+		}
+	}
   
   render() {
 		// console.log('this is from profile: ', this.props);
 		const { loggedIn, creds } = this.props.state.user;
 		const { edit, editButton } = this.props.state.editUser;
+		console.log('newest state: ', this.state);
 
     return (
 			<div className="page-wrapper">
@@ -37,6 +67,8 @@ class Profile extends React.Component {
 					handleEditProfile={this.props.handleEditProfile.bind(this)}
 				/> : 
 				null}
+				<button onClick={() => this.retrieveSavedVideos()}>Liked/Saved Videos</button>
+				{this.state.saved && <SavedVideos videos={this.state.savedVideos}/>}
       </div>
     );
   }
