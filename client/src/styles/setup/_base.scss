@@ -34,7 +34,9 @@ body {
   font-style: normal;
   font-weight: bold;
 }
-
+.underline {
+  text-decoration: underline;
+}
 .form {
   display: flex;
   flex-direction: column;

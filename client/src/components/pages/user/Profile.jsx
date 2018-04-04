@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import EditProfile from './EditProfile.jsx';
 import SavedVideos from './SavedVideos.jsx';
+import AvatarSelection from './AvatarSelection.jsx';
 
 class Profile extends React.Component {
 	constructor(props) {
@@ -56,22 +57,38 @@ class Profile extends React.Component {
 		console.log('newest state: ', this.state);
 
     return (
-			<div className="page-wrapper">
-				{loggedIn ? <h1>{creds.username}</h1> : null}
-				<button className="button" onClick={this.props.handleEditProfile}>{editButton}</button>
-				{edit ? 
-				<EditProfile 
-					props={this.props} 
-					creds={creds} 
-					id={this.props.userId.match.params.id} 
-					handleEditProfile={this.props.handleEditProfile.bind(this)}
-				/> : 
-				null}
-				<button className="button" onClick={() => this.retrieveSavedVideos()}>Liked/Saved Videos</button>
-				{this.state.saved && <SavedVideos videos={this.state.savedVideos}/>}
+			<div className="profile-page-wrapper">
+
+				<div className="profile-banner">
+					<h1 className="twopercent-spacing">Profile</h1> 
+				</div>
+				<hr />
+				<div className="welcome twopercent-spacing">
+					<h2>Welcome back</h2>
+					
+				</div>
+				<div className="profile-username-edit twopercent-spacing">
+					
+					{loggedIn ? <h2>{creds.username}!</h2> : null}
+					<button className="button" onClick={this.props.handleEditProfile}>{editButton}</button>
+					{edit ? 
+					<EditProfile 
+						props={this.props} 
+						creds={creds} 
+						id={this.props.userId.match.params.id} 
+						handleEditProfile={this.props.handleEditProfile.bind(this)}
+					/> : 
+					null}
+					<button className="button" onClick={() => this.retrieveSavedVideos()}>Liked/Saved Videos</button>
+					{this.state.saved && <SavedVideos videos={this.state.savedVideos}/>}
+				</div>
+
+				<div className="avatar-selection twopercent-spacing underline">
+					<AvatarSelection />
+				</div>
       </div>
     );
-  }
+	}
 }
 
 export default Profile;

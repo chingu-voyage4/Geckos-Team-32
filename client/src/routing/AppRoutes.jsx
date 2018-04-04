@@ -21,24 +21,13 @@ const dummyData = {
   creds: {
     _id: 'f93jafb1fvn39dba1e5a1c2d83',
     __v: 0,
-    username: 'KentuckyKid309'
+    username: 'KentuckyKid309',
+    password: '$2a$08$2Lbj5d5rku1LjU7rb/TwtOl0nyNY7YjTwyAl9r2JwEimdXi894Nnq'
   }
 }
 class AppRoutes extends React.Component {
-  // state = {
-  //   user: {
-  //     loggedIn: false,
-  //     creds: {}
-  //   },
-  //   search: '',
-  //   videos: [],
-  // }
-
   state = {
-    user: {
-      loggedIn: false,
-      creds: {}
-    },
+    user: dummyData,
     editUser: {
       edit: false,
       editButton: 'Edit',
@@ -47,6 +36,20 @@ class AppRoutes extends React.Component {
     videos: [],
     selectedVideo: null
   }
+
+  // state = {
+  //   user: {
+  //     loggedIn: false,
+  //     creds: {}
+  //   },
+  //   editUser: {
+  //     edit: false,
+  //     editButton: 'Edit',
+  //   },
+  //   search: '',
+  //   videos: [],
+  //   selectedVideo: null
+  // }
 
   handleUpdateUser = (user) => {
     // Only change if user object contains a username
@@ -148,7 +151,7 @@ class AppRoutes extends React.Component {
                   handleEditProfile={req => {
                     !this.state.editUser.edit ? 
                     this.setState({ editUser: { edit: true, editButton: 'Cancel' }}) : 
-                    this.setState({ editUser: { edit: false, editButton: 'Edit' }});
+                    this.setState({ editUser: { edit: false, editButton: 'Change Username' }});
 		                this.handleUpdateUser(req);
                   }}
                 />)}
