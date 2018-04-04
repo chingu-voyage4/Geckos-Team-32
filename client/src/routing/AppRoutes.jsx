@@ -7,7 +7,7 @@ import Footer from '../components/shared/Footer.jsx';
 import Dashboard from '../components/shared/Dashboard.jsx';
 import Landing from '../components/pages/landing/Landing.jsx';
 import PostLanding from '../components/pages/landing/PostLanding.jsx';
-import SavedVideo from '../components/pages/landing/SavedVideo.jsx';
+import PlayVideo from '../components/pages/landing/PlayVideo.jsx';
 import About from '../components/pages/moreinfo/About.jsx';
 import Signup from '../components/pages/auth/Signup.jsx';
 import Login from '../components/pages/auth/Login.jsx';
@@ -153,7 +153,7 @@ class AppRoutes extends React.Component {
                   }}
                 />)}
               />
-              <Route path="/savedvideo" component={SavedVideo} />
+              <Route path="/playvideo" component={PlayVideo} />
               <Route path="/about" component={About} />
               <Route path="/signup" component={Signup} />
               <Route path="/login" component={Login} />

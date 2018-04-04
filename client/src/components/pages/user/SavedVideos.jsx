@@ -12,7 +12,7 @@ class SavedVideos extends React.Component {
             <div key={index}>
               <Link 
                 to={{
-                  pathname: '/savedvideo',
+                  pathname: '/playvideo',
                   state: { video: video }
                 }}>
                 <img src={video.thumbnail} alt="video thumbnail"/>
