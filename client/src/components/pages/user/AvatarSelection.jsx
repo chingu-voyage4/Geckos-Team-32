@@ -7,8 +7,8 @@ class AvatarSelection extends React.Component {
   render() {
 
     return (
-      <div>
-      <h2>Avatar Selection</h2>
+      <div className="avatar-wrapper">
+        <h2>Avatar Selection</h2>
         <div className="avatar-library">
           <img className="avatars" src="https://s9.postimg.org/6254t3onj/001-boy-1.png" />
           <img className="avatars" src="https://s9.postimg.org/98zocqgtb/002-girl-1.png" />

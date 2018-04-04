@@ -10,11 +10,13 @@ class Profile extends React.Component {
 
 		this.state = {
 			saved: false,
-			savedVideos: null
+			savedVideos: null,
+			avatar: false,
 		}
 	}
 
 	componentDidMount() {
+		this.props.handleShowDash();
     this.props.state.user.loggedIn ? null : this.handleUserData();
 	}
 
@@ -49,6 +51,10 @@ class Profile extends React.Component {
 			this.setState({ saved: false });
 		}
 	}
+
+	showAvatars() {
+		!this.state.avatar ? this.setState({ avatar: true }) : this.setState({ avatar: false });
+	}
   
   render() {
 		// console.log('this is from profile: ', this.props);
@@ -62,13 +68,12 @@ class Profile extends React.Component {
 				<div className="profile-banner">
 					<h1 className="twopercent-spacing">Profile</h1> 
 				</div>
-				<hr />
+
 				<div className="welcome twopercent-spacing">
 					<h2>Welcome back</h2>
-					
 				</div>
+
 				<div className="profile-username-edit twopercent-spacing">
-					
 					{loggedIn ? <h2>{creds.username}!</h2> : null}
 					<button className="button" onClick={this.props.handleEditProfile}>{editButton}</button>
 					{edit ? 
@@ -79,13 +84,18 @@ class Profile extends React.Component {
 						handleEditProfile={this.props.handleEditProfile.bind(this)}
 					/> : 
 					null}
+				</div>
+					
+				<div className="savedvideos twopercent-spacing">
 					<button className="button" onClick={() => this.retrieveSavedVideos()}>Liked/Saved Videos</button>
 					{this.state.saved && <SavedVideos videos={this.state.savedVideos}/>}
 				</div>
 
 				<div className="avatar-selection twopercent-spacing underline">
-					<AvatarSelection />
+					<button className="button" onClick={() => this.showAvatars()}>Change Avatar</button>
+					{this.state.avatar && <AvatarSelection />}
 				</div>
+	
       </div>
     );
 	}

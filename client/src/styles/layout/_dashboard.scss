@@ -1,3 +1,7 @@
+.hide-dash {
+  display: none;
+}
+
 .dashboard {
   display: grid;
   grid-template-columns: 100%;
@@ -6,8 +10,8 @@
     "dashbottom";
   align-content: space-between;
   width: 20vw;
-  min-height: calc(100vh - 100px);
-  position: fixed;
+  // height: calc(100vh - 100px);
+  // position: fixed;
   background-color: darken($bg-grey, 15%);
   padding: 1em;
   
@@ -257,7 +261,7 @@
 // not visible in mobile/tablet view //
 @media screen and (max-height: 850px) {
   .dashboard {
-    position: relative;
+    position: fixed;
   }
   // .benefits-list{
   //   display: none;

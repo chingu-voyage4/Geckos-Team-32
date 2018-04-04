@@ -27,6 +27,7 @@ const dummyData = {
 }
 class AppRoutes extends React.Component {
   state = {
+    launch: true,
     user: dummyData,
     editUser: {
       edit: false,
@@ -50,6 +51,9 @@ class AppRoutes extends React.Component {
   //   videos: [],
   //   selectedVideo: null
   // }
+
+  // Show dashboard after moving form landing page
+  handleShowDash = () => this.setState({ launch: false });
 
   handleUpdateUser = (user) => {
     // Only change if user object contains a username
@@ -123,7 +127,10 @@ class AppRoutes extends React.Component {
             handleLogoutUser={this.handleLogoutUser}
           />
           <div className="main-page">
-            <Dashboard user={this.state.user} />
+            <Dashboard 
+              user={this.state.user}
+              launch={this.state.launch}  
+            />
             <Switch>
               <Route
                 exact path="/"
@@ -139,6 +146,7 @@ class AppRoutes extends React.Component {
                   handleSearchInput={this.handleSearchInput}
                   handleSelectedVideo={selectedVideo => this.setState({selectedVideo})}
                   handleLikedVideo={this.handleLikedVideo}
+                  handleShowDash={this.handleShowDash}
                 />)} 
               />
               <Route
@@ -148,6 +156,7 @@ class AppRoutes extends React.Component {
                   state={this.state}
                   handleUpdateAfterDelete={this.handleUpdateAfterDelete}
                   handleUpdateUser={this.handleUpdateUser}
+                  handleShowDash={this.handleShowDash}
                   handleEditProfile={req => {
                     !this.state.editUser.edit ? 
                     this.setState({ editUser: { edit: true, editButton: 'Cancel' }}) : 

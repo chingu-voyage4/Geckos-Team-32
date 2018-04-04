@@ -21,6 +21,10 @@ export default class PostLandingPage extends Component {
     this.props.handleSelectedVideo(selectedVideo);
   }
 
+  componentDidMount() {
+    this.props.handleShowDash();
+  }
+
   render() {
     console.log('from postlanding: ', this.props);
     const { search, videos, selectedVideo } = this.props.stateData;
