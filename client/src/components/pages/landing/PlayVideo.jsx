@@ -4,16 +4,18 @@ const PlayVideo = (props) => {
   console.log('this is playvideo props: ', props);
 
   if (props.location) {
+    console.log('if hit');
     const { title, description, url } = props.location.state.video;
     
     return (
       <div className="page-wrapper">
-        <iframe src={url} className="main-video"></iframe>
+        <iframe src={`https://www.youtube.com/embed/${url}`} className="main-video"></iframe>
         <h3>{title}</h3>
         <p>{description}</p>
       </div>
     );
   } else if (props.selectedVideo) {
+    console.log('else if hit');
     const { title, description, thumbnail, url } = props.selectedVideo;
     const yturl = `https://www.youtube.com/embed/${url}`;
 
