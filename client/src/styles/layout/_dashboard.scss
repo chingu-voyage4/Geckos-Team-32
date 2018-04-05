@@ -1,3 +1,7 @@
+.hide-dash {
+  display: none;
+}
+
 .dashboard {
   display: grid;
   grid-template-columns: 100%;
@@ -6,7 +10,7 @@
     "dashbottom";
   align-content: space-between;
   width: 20vw;
-  min-height: calc(100vh - 100px);
+  height: calc(100vh - 100px);
   position: fixed;
   background-color: darken($bg-grey, 15%);
   padding: 1em;
@@ -39,10 +43,15 @@
 }
 .dashboard__link {
   font-weight: bold;
+  font-size: 1em;
   color: $accent-red;
   text-decoration: none;
   transition: color .5s ease-out;
   -webkit-transition: color .5s ease-out;
+  border: none;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
 }
 .dashboard__link:hover {
   color: darken($accent-red, 20%);
@@ -108,13 +117,13 @@
   justify-content: space-around;
 }
 .soc-share a {
-  color: $accent-red;
+  color: $off-black;
   font-size: 22px;
   transition: color .5s ease-out;
   -webkit-transition: color .5s ease-out;
 }
 .soc-share a:hover {
-  color: darken($accent-red, 20%);
+  color: $accent-red;
   transition: color .5s ease-out;
   -webkit-transition: color .5s ease-out;
 }
@@ -257,7 +266,7 @@
 // not visible in mobile/tablet view //
 @media screen and (max-height: 850px) {
   .dashboard {
-    position: relative;
+    position: fixed;
   }
   // .benefits-list{
   //   display: none;

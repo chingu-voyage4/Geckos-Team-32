@@ -4,7 +4,7 @@ import axios from 'axios';
 class Signup extends React.Component {
   render() {
     return (
-      <div className="page-wrapper signup-wrapper">
+      <div className={this.props.launch ? "page-wrapper nodash" : "page-wrapper signup-wrapper"}>
         <div>
           <h1>Explore the music you love.</h1>
           <h2>Visualize the experience now!</h2>

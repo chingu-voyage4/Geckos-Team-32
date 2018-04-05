@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import VideoDetails from './VideoDetails.jsx';
+import PlayVideo from './PlayVideo.jsx';
 
 export default class PostLandingPage extends Component {
   handleSearchInput(e) {
@@ -9,7 +9,20 @@ export default class PostLandingPage extends Component {
     this.props.handleSearchInput(search);
   }
 
+  saveSelectedVideo(video) {
+    console.log('this is the youtube video details: ', video);
+    const selectedVideo = {
+      title: video.snippet.title,
+      description: video.snippet.description,
+      url: video.id.videoId,
+      thumbnail: video.snippet.thumbnails.high.url
+    }
+
+    this.props.handleSelectedVideo(selectedVideo);
+  }
+
   render() {
+    this.props.handleShowDash();
     // console.log('from postlanding: ', this.props);
     const { search, videos, selectedVideo } = this.props.stateData;
     
@@ -23,14 +36,14 @@ export default class PostLandingPage extends Component {
           </form>
         </div>
 
-        <VideoDetails 
+        <PlayVideo 
           selectedVideo={selectedVideo}
           handleLikedVideo={this.props.handleLikedVideo}
         />
 
         <div className="post-landing-video-pull">
           {videos.map((video, index) => (
-            <div key={index} className="individual-video-space" onClick={() => this.props.handleSelectedVideo(video)}>
+            <div key={index} className="individual-video-space" onClick={() => this.saveSelectedVideo(video)}>
               <img className="post-search-video" src={video.snippet.thumbnails.high.url}/>
               <h3>{video.snippet.title}</h3>
             </div> 
