@@ -3,15 +3,18 @@ import { NavLink } from 'react-router-dom';
 
 export default class DashTop extends Component {
   render() {
+    // console.log('from user dash: ', this.props);
+    const { username, _id, img } = this.props.state.user.creds;
+
     return (
       <div className="dashboard-user">
-        <img className="avatar" src="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/profile-icon.png"/>
-        <h2 className="user-name">{this.props.user.user.creds.username}</h2>
+        <img className="avatar" src={img}/>
+        <h2 className="user-name">{username}</h2>
         
         <div className="user-links">
           <ul>
-          <li><a className="dashboard__link" href="#">Playlists</a></li>
-          <li><a className="dashboard__link" href="#">Liked Videos</a></li>
+            <li><NavLink className="dashboard__link" to={`/user/${_id}/playlist`}>Playlists</NavLink></li>
+            <li><NavLink className="dashboard__link" to={`/user/${_id}/saved`}>Liked Videos</NavLink></li>
           </ul>
         </div>
 

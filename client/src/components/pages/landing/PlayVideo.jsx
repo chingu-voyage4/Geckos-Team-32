@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 
-const SavedVideo = (props) => {
+const PlayVideo = (props) => {
   console.log('this is playvideo props: ', props);
 
   if (props.location) {
-    const { title, url } = props.location.state.video;
+    const { title, description, url } = props.location.state.video;
     
     return (
       <div className="page-wrapper">
         <iframe src={`https://www.youtube.com/embed/${url}`} className="main-video"></iframe>
         <h3>{title}</h3>
+        <p>{description}</p>
       </div>
     );
   } else if (props.selectedVideo) {
@@ -34,6 +35,6 @@ const SavedVideo = (props) => {
 
 };
 
-export default SavedVideo;
+export default PlayVideo;
 
 

@@ -37,18 +37,18 @@ class EditProfile extends React.Component {
       <div>
         <form className="form" onSubmit={this.handleEditData.bind(this)}>
           <input className="form__input" type="text" name="username" placeholder={username} required/>
-          <button className="button">Submit</button>
+          <button className="button profile-button submit">Submit</button>
         </form>
         <br />
-        <button className="button delete" onClick={this.openModalDelete}>Delete Account</button>
-        <button className="button twopercent-spacing" onClick={this.openModalDuplicate}>Duplicate Username</button>
+        <button className="button profile-button delete" onClick={this.openModalDelete}>Delete Account</button>
+        <button className="button profile-button twopercent-spacing" onClick={this.openModalDuplicate}>Duplicate Username</button>
 
         <div className="warning-window" id="deleteModal">
           <div className="modal-content">
             <span className="close-modal" onClick={this.closeModalDelete}>&times;</span>
             <h3>Are you sure you want to do this? Deleting your account will permanently erase all user data including: saved preferences, videos, and playlists.</h3>
-            <button className="button" onClick={this.closeModalDelete}>NO! Go back.</button>
-            <button className="delete button twopercent-spacing" onClick={this.handleDeleteUser.bind(this)}>Yes, Delete account</button>
+            <button className="button profile-button" onClick={this.closeModalDelete}>NO! Go back.</button>
+            <button className="delete button profile-button twopercent-spacing" onClick={this.handleDeleteUser.bind(this)}>Yes, Delete account</button>
           </div>
         </div>
 
@@ -56,7 +56,7 @@ class EditProfile extends React.Component {
           <div className="modal-content">
             <span className="close-modal" onClick={this.closeModalDuplicate}>&times;</span>
             <h3>The username you have chosen is unavailable. Please try another username.</h3>
-            <button className="button" onClick={this.closeModalDuplicate}>Ok, go back.</button>
+            <button className="button profile-button" onClick={this.closeModalDuplicate}>Ok, go back.</button>
           </div>
         </div>
       </div>

@@ -10,8 +10,8 @@
     "dashbottom";
   align-content: space-between;
   width: 20vw;
-  // height: calc(100vh - 100px);
-  // position: fixed;
+  height: calc(100vh - 100px);
+  position: fixed;
   background-color: darken($bg-grey, 15%);
   padding: 1em;
   
@@ -43,10 +43,15 @@
 }
 .dashboard__link {
   font-weight: bold;
+  font-size: 1em;
   color: $accent-red;
   text-decoration: none;
   transition: color .5s ease-out;
   -webkit-transition: color .5s ease-out;
+  border: none;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
 }
 .dashboard__link:hover {
   color: darken($accent-red, 20%);

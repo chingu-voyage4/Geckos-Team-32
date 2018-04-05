@@ -12,6 +12,7 @@
   font-family: 'ubuntu';
   background-color: white;
   z-index: 5;
+  box-shadow: 0px 1px 10px 0px darken($bg-grey, 10%);
 }
 .navBar a {
   text-decoration: none;
