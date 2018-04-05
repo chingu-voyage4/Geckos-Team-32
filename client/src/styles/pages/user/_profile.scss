@@ -98,7 +98,7 @@
 }
 .form__input {
   width: 350px;
-  margin-left: 0;
+  margin-left: 5px;
   border: 1px solid #DDDDDD;
   transition: all 0.30s ease-in-out;
   -webkit-transition: all 0.30s ease-in-out;
@@ -168,9 +168,7 @@
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  // border: 1px solid $off-black;
   box-shadow: 0px 0px 15px 1px #888888;
-  // background: linear-gradient(darken($off-white, 5%), $off-black);
 }
 .avatar-library img {
   height: 150px;
@@ -190,18 +188,37 @@
 
 @media (max-width: 768px) {
   .profile-page-wrapper {
-    grid-template-columns: 0vw 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-areas:
-    ". banner banner banner banner"
-    ". welcome welcome . ."
-    ". usernameedit usernameedit . ."
-    ". savedvideos savedvideos . ."
-    ". avatar avatar avatar .";
+    "banner banner banner banner"
+    "welcome welcome . ."
+    "usernameedit usernameedit . ."
+    "savedvideos savedvideos . ."
+    "avatar avatar avatar avatar";
   }
 
   .avatar-library img {
     height: 75px;
     width: 75px;
   }
+  .modal-content {
+    margin: 35% auto; // 15% from the top and centered
+    width: 75%; 
 }
-
+}
+@media (max-width: 562px) {
+.modal-content {
+  .profile-button {
+  display: flex;
+  justify-content: center;
+  margin: 10px auto;
+  width: 80%;
+  
+  }
+}
+}
+@media (max-width: 400px) {
+  .form__input {
+  width: 300px;
+}
+}

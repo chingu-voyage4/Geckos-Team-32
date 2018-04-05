@@ -23,6 +23,8 @@ const About = (props) => (
 
     <div className="about-container team-grid">
       <h2 className="section-title">Our Team:</h2>
+      
+
       <a href="https://github.com/marylicious" target="_blank" className="about-teammate">
         <div className="team-member">
           <div className="circle-icon">
@@ -31,6 +33,7 @@ const About = (props) => (
           <p>Mary</p>
         </div>
       </a>
+
       <a href="https://github.com/Raymond-Cox" target="_blank" className="about-teammate">
         <div className="team-member">
           <div className="circle-icon">
@@ -39,6 +42,7 @@ const About = (props) => (
           <p>Raymond</p>
         </div>
       </a>
+
       <a href="https://github.com/odelavia" target="_blank" className="about-teammate">
         <div className="team-member">
           <div className="circle-icon">
