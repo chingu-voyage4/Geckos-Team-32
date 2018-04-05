@@ -1,7 +1,7 @@
 import React from 'react';
 
-const About = () => (
-  <div className="page-wrapper about-wrapper">
+const About = (props) => (
+  <div className={props.launch ? "page-wrapper nodash" : "page-wrapper about-wrapper"}>
     <h1>WELCOME</h1>
     <p>Gecho is a free video browser platform to watch and listen to your favorite music! We worked hard to provide you an immersive experience for your viewing pleasure.</p>
 

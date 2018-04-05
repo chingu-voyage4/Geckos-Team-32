@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Login = () => (
-  <div className="page-wrapper login-wrapper">
+const Login = (props) => (
+  <div className={props.launch ? "page-wrapper nodash" : "page-wrapper login-wrapper"}>
     <div>
       <h1>Welcome back!</h1>
       <div className="auth-buttons-wrapper">

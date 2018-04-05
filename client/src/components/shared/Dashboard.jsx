@@ -4,14 +4,14 @@ import DashTop from './DashboardComponents/DashTop.jsx';
 import DashTopUser from './DashboardComponents/DashTopUser.jsx';
 import DashBottom from './DashboardComponents/DashBottom.jsx';
 
-// Will include conditional rendering to show appropriate content if user if logged in/out
 export default class Dashboard extends Component {
-
   render() {
-		// console.log('from dashboard: ', this.props);
+		console.log('from dashboard: ', this.props);
+		const { loggedIn } = this.props.state.user;
+
 		return (
-			<div className="dashboard">
-				{this.props.user.loggedIn ? <DashTopUser user={this.props}/> : <DashTop />}
+			<div className={this.props.state.launch ? "hide-dash" : "dashboard"}>
+				{loggedIn ? <DashTopUser state={this.props.state}/> : <DashTop />}
 				<DashBottom />
 			</div>
 		);

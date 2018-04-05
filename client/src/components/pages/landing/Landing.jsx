@@ -11,8 +11,9 @@ class Landing extends Component {
 	}
 
   render() {
+		// console.log('from landing', this.props);
 		return (
-			<div className="page-wrapper">
+			<div className={this.props.launch ? "page-wrapper nodash" : "page-wrapper"}>
 				<div className="landing-page-title">
 				<h1>Discover new songs and artists based on your interests!</h1>
 				</div>
