@@ -23,29 +23,9 @@ class AppRoutes extends React.Component {
   //////////////////////////
   /////// SEED DATA ////////
   //////////////////////////
-  state = {
-    launch: true,
-    user: dummyUserData,
-    editUser: {
-      edit: false,
-      editButton: 'Edit',
-    },
-    search: '',
-    videos: [],
-    selectedVideo: null,
-    saved: true,
-    savedVideos: dummySavedVideosData
-  }
-
-  //////////////////////////
-  ///// ACTUAL STATE ///////
-  //////////////////////////
   // state = {
   //   launch: true,
-  //   user: {
-  //     loggedIn: false,
-  //     creds: {}
-  //   },
+  //   user: dummyUserData,
   //   editUser: {
   //     edit: false,
   //     editButton: 'Edit',
@@ -53,9 +33,29 @@ class AppRoutes extends React.Component {
   //   search: '',
   //   videos: [],
   //   selectedVideo: null,
-  //   saved: false,
-  //   savedVideos: null
+  //   saved: true,
+  //   savedVideos: dummySavedVideosData
   // }
+
+  //////////////////////////
+  ///// ACTUAL STATE ///////
+  //////////////////////////
+  state = {
+    launch: true,
+    user: {
+      loggedIn: false,
+      creds: {}
+    },
+    editUser: {
+      edit: false,
+      editButton: 'Edit',
+    },
+    search: '',
+    videos: [],
+    selectedVideo: null,
+    saved: false,
+    savedVideos: null
+  }
 
   // Show dashboard after moving form landing page
   handleShowDash = () => this.state.launch ? this.setState({ launch: false }) : null;
@@ -216,8 +216,14 @@ class AppRoutes extends React.Component {
                 component={(props) => <About launch={this.state.launch}/>}
               />
               <Route path="/playvideo" component={PlayVideo} />
-              <Route path="/signup" component={Signup} />
-              <Route path="/login" component={Login} />
+              <Route 
+                path="/signup" 
+                component={(props) => <Signup launch={this.state.launch}/>} 
+              />
+              <Route 
+                path="/login" 
+                component={(props) => <Login launch={this.state.launch}/>} 
+              />
               <Route component={NotFound} />
             </Switch>
           </div>

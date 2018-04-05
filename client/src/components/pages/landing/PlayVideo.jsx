@@ -8,7 +8,7 @@ const PlayVideo = (props) => {
     
     return (
       <div className="page-wrapper">
-        <iframe src={`https://www.youtube.com/embed/${url}`} className="main-video"></iframe>
+        <iframe src={url} className="main-video"></iframe>
         <h3>{title}</h3>
         <p>{description}</p>
       </div>
