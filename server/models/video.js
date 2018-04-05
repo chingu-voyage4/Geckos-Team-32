@@ -2,12 +2,8 @@ const mongoose = require('mongoose');
 
 const videoSchema = mongoose.Schema({
   title: String,
-  playlist: {
-    id: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Playlist'
-    }
-  }
+  thumbnail: String,
+  url: String,
 });
 
 module.exports = mongoose.model('Video', videoSchema);
