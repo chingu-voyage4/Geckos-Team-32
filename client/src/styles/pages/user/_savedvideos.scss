@@ -73,3 +73,9 @@
     transition:0.3s;
   }
 }
+
+@media (max-width: 768px) {
+  .video-delete {
+    opacity: 1 !important;
+  }
+}

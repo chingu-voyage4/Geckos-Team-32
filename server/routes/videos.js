@@ -53,12 +53,14 @@ router.post('/', async (req, res, next) => {
  * DESTROY -- Delete video from user's saved/liked videos list
  */
 router.delete('/delete/:video_id', middleware.isLoggedIn, async (req, res, next) => {
-  let video_id = req.params.video_id;
+  let video_id = req.params.video_id; // get specific video id
   try {
     let video = await Video.findByIdAndRemove(req.params.video_id);
-    video = await video.save();
-    let user = await User.findById(req.params.id).populate('videos');
-    res.send({ videos: user.videos });  
+    let userArr = await User.findById(req.params.id); // get array of saved videos
+    userArr.videos.pull(video_id); // remove video object from user video array
+    userArr = await userArr.save();
+    let user = await User.findById(req.params.id).populate('videos'); // get updated list of saved videos
+    res.send({ videos: user.videos }); // send list of saved videos
   } catch (err) {
     console.log('Error trying to delete');
     next(err);
