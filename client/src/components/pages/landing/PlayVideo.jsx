@@ -26,7 +26,12 @@ const PlayVideo = (props) => {
         <div>
           <div>{title}</div>
           <div>{description}</div>
-          <button onClick={(e) => props.handleLikedVideo(e, props.selectedVideo)}><i className="fas fa-heart"></i></button>
+          {props.user.loggedIn && 
+            <div>
+              <button className="save-video-button" onClick={(e) => props.handleLikedVideo(e, props.selectedVideo)}><i className="fas fa-heart"></i></button>
+              <button className="save-video-button"><i className="fas fa-list"></i> <i className="fas fa-plus"></i></button>
+            </div>
+          }
         </div>
       </div>
     );

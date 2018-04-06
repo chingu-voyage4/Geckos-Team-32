@@ -8,7 +8,7 @@ class SavedVideos extends React.Component {
   }
 
   render() {
-    console.log('from savedvideos.jsx:', this.props.videos);
+    // console.log('from savedvideos.jsx:', this.props.videos);
 
     if (this.props.videos) {
       return (
