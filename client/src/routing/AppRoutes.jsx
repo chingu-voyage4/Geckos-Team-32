@@ -15,6 +15,8 @@ import Profile from '../components/pages/user/Profile.jsx';
 import SavedVideos from '../components/pages/user/SavedVideos.jsx';
 import Playlist from '../components/pages/user/Playlist.jsx';
 import NotFound from './NotFound.jsx';
+import ScrollToTop from './ScrollToTop.jsx';
+
 
 // Seed Data
 import { dummyUserData, dummySavedVideosData } from '../seedData/seedData';
@@ -154,7 +156,7 @@ class AppRoutes extends React.Component {
   render() {
     return (
       <BrowserRouter>
-        <div>
+        <ScrollToTop>
           <Navbar
             user={this.state.user}
             handleLogoutUser={this.handleLogoutUser}
@@ -228,7 +230,7 @@ class AppRoutes extends React.Component {
             </Switch>
           </div>
           <Footer />
-        </div>
+        </ScrollToTop>
       </BrowserRouter>
     )
   }

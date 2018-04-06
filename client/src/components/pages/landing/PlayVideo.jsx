@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 
 const PlayVideo = (props) => {
   console.log('this is playvideo props: ', props);
+  window.scrollTo(0, 0)
 
   if (props.location) {
-    console.log('if hit');
     const { title, description, url } = props.location.state.video;
     
     return (
@@ -15,7 +15,6 @@ const PlayVideo = (props) => {
       </div>
     );
   } else if (props.selectedVideo) {
-    console.log('else if hit');
     const { title, description, thumbnail, url } = props.selectedVideo;
     const yturl = `https://www.youtube.com/embed/${url}`;
 
