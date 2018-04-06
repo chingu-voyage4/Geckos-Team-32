@@ -21,8 +21,12 @@ const About = () => (
 
     <div className="divider"></div>
 
-    <div className="about-container team-grid">
+    <div className="about-container">
+    
+      <div className="team-grid">
       <h2 className="section-title">Our Team:</h2>
+      
+
       <a href="https://github.com/marylicious" target="_blank" className="about-teammate">
         <div className="team-member">
           <div className="circle-icon">
@@ -31,6 +35,7 @@ const About = () => (
           <p>Mary</p>
         </div>
       </a>
+
       <a href="https://github.com/Raymond-Cox" target="_blank" className="about-teammate">
         <div className="team-member">
           <div className="circle-icon">
@@ -39,6 +44,7 @@ const About = () => (
           <p>Raymond</p>
         </div>
       </a>
+
       <a href="https://github.com/odelavia" target="_blank" className="about-teammate">
         <div className="team-member">
           <div className="circle-icon">
@@ -47,6 +53,7 @@ const About = () => (
           <p>Oliver</p>
         </div>
       </a>
+
       <a href="https://github.com/ziggysauce" target="_blank" className="about-teammate">
         <div className="team-member">
           <div className="circle-icon">
@@ -55,8 +62,10 @@ const About = () => (
           <p>Dan</p>
         </div>
       </a>
+
     </div>
   </div>
+</div>
 );
 
 export default About;
