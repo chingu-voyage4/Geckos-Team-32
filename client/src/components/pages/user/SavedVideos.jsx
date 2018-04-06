@@ -9,8 +9,9 @@ class SavedVideos extends React.Component {
   }
 
   handleRemoveVideo(video) {
+    console.log('got clicked');
 		let id = this.props.userId.match.params.id;
-    axios.get(`routes/user/${id}/videos/delete/${video}`)
+    axios.delete(`routes/user/${id}/videos/delete/${video}`)
       .then((results) => {
         let newVideos = results.data.videos;
         this.props.handleUpdateSavedVideos(newVideos);
@@ -18,6 +19,14 @@ class SavedVideos extends React.Component {
       .catch((err) => {
         console.log(err);
       });
+  }
+
+  componentWillReceiveProps() {
+    console.log('receiving new props', this.props);
+  }
+
+  componentDidUpdate() {
+    console.log('updated component', this.props);
   }
 
   render() {
@@ -31,6 +40,7 @@ class SavedVideos extends React.Component {
             {this.props.videos.map((video, index) => {
               return (
                 <div key={index} className="saved-video-list-items">
+                  <button className="button video-delete" onClick={() => this.handleRemoveVideo(video._id)}><i className="fas fa-times"></i></button>
                   <Link 
                     to={{
                       pathname: '/playvideo',
@@ -38,10 +48,7 @@ class SavedVideos extends React.Component {
                     }}>
                     <img src={video.thumbnail} alt="video thumbnail"/>
                     <h4>{video.title}</h4>
-                    </Link>
-                    <div>
-                      <button className="button video-delete" onClick={() => this.handleRemoveVideo(video._id)}>Remove</button>
-                    </div>
+                  </Link>
                 </div>
               );
             })}

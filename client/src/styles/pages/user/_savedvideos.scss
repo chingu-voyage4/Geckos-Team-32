@@ -6,7 +6,7 @@
 
 .saved-video-list {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   flex-wrap: wrap;
   margin-right: 2vw;
 }
@@ -14,18 +14,27 @@
 .saved-video-list-items {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  margin: 10px 5px;
+  margin: 15px 10px;
   width: 30%;
   min-width: 200px;
   text-align: center;
   box-shadow: 0px 0px 10px 1px #888888;
   transition: 0.3s;
 
+  .video-delete {
+    opacity: 0;
+    transition: 0.3s;
+  }
+
   &:hover {
     box-shadow: 0px 10px 10px 1px #a7a6a6;
     transform: translateY(-10px);
     transition: 0.3s;
+
+    .video-delete {
+      opacity: 1;
+      transition: 0.3s;
+    }
 
     a {
       color: $accent-red;
@@ -45,19 +54,22 @@
 }
 
 .video-delete {
-  font-size: 14px;
-  font-weight: bold;
-  margin-bottom: 10px;
-  padding: 0.5em;
-  outline: none;
-  border-radius: 5px;
-  background-color: $accent-red;
-  border: none;
-  border-bottom: 3px solid darken($accent-red, 15%);
-  transition:0.3s;
+  width: 20px;
+  height: 20px;
+  background-color: $off-black;
+  color: $off-white;
+  border: 2px solid transparent;
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  border-radius: 100%;
+  transform: translate(-10px, -10px);
 
   &:hover {
-    background-color: darken($accent-red, 15%);
+    background-color: $accent-red;
     transition:0.3s;
   }
 }
