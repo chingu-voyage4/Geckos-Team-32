@@ -1,10 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 class SavedVideos extends React.Component {
   componentDidMount() {
     console.log('mounted: ', this.props);
     this.props.retrieveSavedVideos();
+  }
+
+  handleRemoveVideo(video) {
+		let id = this.props.userId.match.params.id;
+    axios.get(`routes/user/${id}/videos/delete/${video}`)
+      .then((results) => {
+        let newVideos = results.data.videos;
+        this.props.handleUpdateSavedVideos(newVideos);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   render() {
@@ -25,7 +38,10 @@ class SavedVideos extends React.Component {
                     }}>
                     <img src={video.thumbnail} alt="video thumbnail"/>
                     <h4>{video.title}</h4>
-                  </Link>
+                    </Link>
+                    <div>
+                      <button className="button video-delete" onClick={() => this.handleRemoveVideo(video._id)}>Remove</button>
+                    </div>
                 </div>
               );
             })}

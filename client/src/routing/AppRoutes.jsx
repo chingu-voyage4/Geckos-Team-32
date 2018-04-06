@@ -151,7 +151,11 @@ class AppRoutes extends React.Component {
 		} else {
 			this.setState({ saved: false });
 		}
-	}
+  }
+  
+  handleUpdateSavedVideos = (videos) => {
+    this.setState({ saved: true, savedVideos: videos });
+  }
 
   render() {
     return (
@@ -206,8 +210,10 @@ class AppRoutes extends React.Component {
               <Route 
                 exact path="/user/:id/saved"
                 render={(props) => (<SavedVideos 
+                  userId={props}
                   videos={this.state.savedVideos}
                   retrieveSavedVideos={this.retrieveSavedVideos}
+                  handleUpdateSavedVideos={this.handleUpdateSavedVideos}
                 />)}
               />
               <Route 
