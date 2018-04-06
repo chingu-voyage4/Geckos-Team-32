@@ -21,7 +21,9 @@ const About = (props) => (
 
     <div className="divider"></div>
 
-    <div className="about-container team-grid">
+    <div className="about-container">
+    
+      <div className="team-grid">
       <h2 className="section-title">Our Team:</h2>
       
 
@@ -51,6 +53,7 @@ const About = (props) => (
           <p>Oliver</p>
         </div>
       </a>
+
       <a href="https://github.com/ziggysauce" target="_blank" className="about-teammate">
         <div className="team-member">
           <div className="circle-icon">
@@ -59,8 +62,10 @@ const About = (props) => (
           <p>Dan</p>
         </div>
       </a>
+
     </div>
   </div>
+</div>
 );
 
 export default About;

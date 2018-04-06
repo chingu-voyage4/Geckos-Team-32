@@ -14,13 +14,7 @@
   min-height: 20vh;
   width: 100%;
   margin: 0;
-  justify-content: center;
-  align-items: center;
   padding: 20px;
-}
-
-.about-container h1 {
-  text-decoration: underline;
 }
 
 .about-container a {
@@ -65,13 +59,21 @@
   transition: 0.3s ease-in-out;
   cursor: pointer;
   text-decoration: none;
+  width: 50%;
+  margin: 0 auto;
 
   &:hover{
     background: lightgreen;
     transition: 0.3s ease-in-out;
     box-shadow: 0px 5px 10px #888888;
-    transform: scale(1.25, 1.25);
+    transform: scale(1.2, 1.2);
   }
+}
+
+@media (max-width: 1100px) {
+  .about-teammate {
+  width: 75%;
+}
 }
 
 @media (max-width: 768px) {
@@ -82,15 +84,13 @@
     "title title"
     "mem1 mem2"
     "mem3 mem4";
-    justify-items: space-evenly;
-    padding: 0 70px;
   }
   .team-member {
-    padding: 40px 0;
+    margin: 10px 0;
   }
 
   .about-teammate:hover {
-    transform: scale(1.1, 1.1);
+    transform: scale(1.05, 1.05);
   }
 }
 
@@ -108,7 +108,7 @@
 
   
   .about-teammate:hover {
-    transform: scale(1.1, 1.1);
+    transform: scale(1.05, 1.05);
   }
 }
 
@@ -130,4 +130,7 @@
     "mem4";
     padding: 0;
   }
+  .about-teammate {
+  width: 100%;
+  } 
 }
