@@ -7,7 +7,11 @@ class Landing extends Component {
 		e.preventDefault();
 		const search = e.target.elements.search.value;
 		this.props.handleSearchInput(search);
-		this.props.history.push('/PostLanding');
+		this.props.history.push('/search');
+	}
+
+	componentWillUnmount() {
+    this.props.handleShowDash();
 	}
 
   render() {

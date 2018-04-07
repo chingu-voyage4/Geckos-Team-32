@@ -22,8 +22,7 @@ export default class PostLandingPage extends Component {
   }
 
   render() {
-    this.props.handleShowDash();
-    // console.log('from postlanding: ', this.props);
+    console.log('from postlanding: ', this.props);
     const { search, videos, selectedVideo } = this.props.stateData;
     
     return (
@@ -39,6 +38,7 @@ export default class PostLandingPage extends Component {
         <PlayVideo 
           selectedVideo={selectedVideo}
           handleLikedVideo={this.props.handleLikedVideo}
+          user={this.props.stateData.user}
         />
 
         <div className="post-landing-video-pull">

@@ -62,12 +62,9 @@ class Profile extends React.Component {
 				</div>
 					
 				<div className="savedvideos twopercent-spacing">
-					<button 
-						className="button profile-button" 
-						onClick={() => this.props.retrieveSavedVideos()}
-					>
-						<Link to={`/user/${creds._id}/saved`}>Liked/Saved Videos</Link>
-					</button>
+					<Link to={`/user/${creds._id}/saved`}>
+						<button className="button profile-button">Liked/Saved Videos</button>
+					</Link>
 				</div>
 
 				<div className="avatar-selection twopercent-spacing underline">

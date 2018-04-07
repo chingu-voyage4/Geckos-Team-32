@@ -5,8 +5,8 @@ import axios from 'axios';
 import Navbar from '../components/shared/Navbar.jsx';
 import Footer from '../components/shared/Footer.jsx';
 import Dashboard from '../components/shared/Dashboard.jsx';
-import Landing from '../components/pages/landing/Landing.jsx';
-import PostLanding from '../components/pages/landing/PostLanding.jsx';
+import Home from '../components/pages/landing/Home.jsx';
+import Search from '../components/pages/landing/Search.jsx';
 import PlayVideo from '../components/pages/landing/PlayVideo.jsx';
 import About from '../components/pages/moreinfo/About.jsx';
 import Signup from '../components/pages/auth/Signup.jsx';
@@ -15,6 +15,8 @@ import Profile from '../components/pages/user/Profile.jsx';
 import SavedVideos from '../components/pages/user/SavedVideos.jsx';
 import Playlist from '../components/pages/user/Playlist.jsx';
 import NotFound from './NotFound.jsx';
+import ScrollToTop from './ScrollToTop.jsx';
+
 
 // Seed Data
 import { dummyUserData, dummySavedVideosData } from '../seedData/seedData';
@@ -23,6 +25,7 @@ class AppRoutes extends React.Component {
   //////////////////////////
   /////// SEED DATA ////////
   //////////////////////////
+
   // state = {
   //   launch: true,
   //   user: dummyUserData,
@@ -40,6 +43,7 @@ class AppRoutes extends React.Component {
   //////////////////////////
   ///// ACTUAL STATE ///////
   //////////////////////////
+  
   state = {
     launch: true,
     user: {
@@ -115,14 +119,14 @@ class AppRoutes extends React.Component {
   }
 
   handleLikedVideo = (e, video) => {
-    console.log('liked video: ', video);
+    // console.log('liked video: ', video);
     if (this.state.user.loggedIn) {
-      console.log('Logged in, proceed...', this.state.user.creds);
+      // console.log('Logged in, proceed...', this.state.user.creds);
       let id = this.state.user.creds._id;
       axios.post(`/routes/user/${id}/videos`, video)
       	.then((results) => {
       		let videos = results.data.videos;
-      		console.log('new video data: ', videos);
+      		// console.log('new video data: ', videos);
       	})
       	.catch((err) => {
       		console.log('There was an error: ', err);
@@ -133,14 +137,14 @@ class AppRoutes extends React.Component {
   }
 
   retrieveSavedVideos = () => {
-		console.log('retrieve button clicked', this.state);
+		// console.log('retrieve button clicked', this.state);
 		let id = this.state.user.creds._id;
 		let videos = {};
 		if (!this.state.saved) {
 			axios.get(`/routes/user/${id}/videos`)
 				.then((results) => {
 					videos = results.data.videos;
-					console.log('new video data: ', videos);
+					// console.log('new video data: ', videos);
 					this.setState({ saved: true, savedVideos: videos });
 				})
 				.catch((err) => {
@@ -149,12 +153,16 @@ class AppRoutes extends React.Component {
 		} else {
 			this.setState({ saved: false });
 		}
-	}
+  }
+  
+  handleUpdateSavedVideos = (videos) => {
+    this.setState({ saved: true, savedVideos: videos });
+  }
 
   render() {
     return (
       <BrowserRouter>
-        <div>
+        <ScrollToTop>
           <Navbar
             user={this.state.user}
             handleLogoutUser={this.handleLogoutUser}
@@ -162,24 +170,25 @@ class AppRoutes extends React.Component {
           <div className="main-page">
             <Dashboard 
               state={this.state}
+              retrieveSavedVideos={this.retrieveSavedVideos}
             />
             <Switch>
               <Route
                 exact path="/"
-                component={() => (<Landing
+                component={() => (<Home
                   launch={this.state.launch}
                   search={this.state.search}
                   handleSearchInput={this.handleSearchInput}
+                  handleShowDash={this.handleShowDash}
                 />)}
               />
               <Route 
-                path="/postlanding" 
-                component={() => (<PostLanding
+                path="/search" 
+                component={() => (<Search
                   stateData={this.state}
                   handleSearchInput={this.handleSearchInput}
                   handleSelectedVideo={selectedVideo => this.setState({selectedVideo})}
                   handleLikedVideo={this.handleLikedVideo}
-                  handleShowDash={this.handleShowDash}
                 />)} 
               />
               <Route
@@ -203,8 +212,10 @@ class AppRoutes extends React.Component {
               <Route 
                 exact path="/user/:id/saved"
                 render={(props) => (<SavedVideos 
+                  userId={props}
                   videos={this.state.savedVideos}
                   retrieveSavedVideos={this.retrieveSavedVideos}
+                  handleUpdateSavedVideos={this.handleUpdateSavedVideos}
                 />)}
               />
               <Route 
@@ -228,7 +239,7 @@ class AppRoutes extends React.Component {
             </Switch>
           </div>
           <Footer />
-        </div>
+        </ScrollToTop>
       </BrowserRouter>
     )
   }
