@@ -145,6 +145,22 @@
     align-items: center;
     justify-content: flex-end;
   }
+  #toggle:focus {
+    & ~ .toggle-container .button-toggle {
+      box-shadow: 0 0 0 8px rgba(0, 0, 0, 0.1), inset 0 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+  }
+  #toggle:checked {
+    .burger-links {
+      // display: none;
+      // z-index: 5;
+      // position: absolute;
+      // margin-top: calc(100px + 3%);
+      // width: 100%;
+      // background-color: darken($bg-grey, 75%);
+      transform: translate(-220px, 150px); //controls where the links show up after clicking x vertically
+    }
+  }
 
 }
 
