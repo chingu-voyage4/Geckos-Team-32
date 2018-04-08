@@ -1,0 +1,131 @@
+// #53384B
+// #E6484B
+// #caebf2
+// #a9a9a9
+// #ff3b3f
+// #efefef
+
+// #A9AAAA
+// #EE4548
+// #1CA7CE
+
+footer {
+  // position: absolute;
+  bottom: 0%;
+  height: 110px;
+  width: 100%;
+  background-color: $off-white;
+}
+.footer-bottom {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-areas:
+    "soc"
+    "credits";
+  height: 100%;
+}
+
+.footer-social-media {
+grid-area: soc;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.yt-credit {
+  grid-area: yt;
+  display: flex;
+  justify-self: start;
+  padding-left: 10%;
+}
+.geckos-credit {
+  grid-area: cpywrite;
+  display: flex;
+  justify-self: end;
+  padding-right: 10%;
+}
+
+.social-media-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 35px;
+  width: 35px;
+  font-size: 20px;
+  background-color: darken($off-white, 10%);
+  border: 3px solid lighten($off-black, 10%);
+  border-radius: 15%;
+  color: $off-black;
+  transition: all .25s ease-out;
+  -webkit-transition: all .25s ease-out;
+  margin: 10px;
+}
+.social-media-footer:hover {
+  color: $accent-red;
+  background-color: $off-white;
+  border-color: $accent-red;
+  border-radius: 50%;
+  position: relative;
+  transition: all .25s ease-out;
+  -webkit-transition: all .25s ease-out;
+  transform: translateY(-2px);
+  -webkit-transform: translateY(-2px);
+}
+.footer-credits {
+  grid-area: credits;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "yt cpywrite";
+  align-content: center;
+  justify-content: space-around;
+  padding: 0;
+}
+
+///////////////////
+// Media Queries //
+@media screen and (min-width: 769px) {
+  footer {
+    display: none;
+  }
+
+  footer-credits {
+    padding: 0;
+  } 
+}
+@media screen and (max-width: 500px) {
+  .footer-credits {
+    grid-template-columns: 100%;
+    grid-template-areas:
+    "yt"
+    "cpywrite";
+    justify-self: center;
+    margin: 10px auto;
+  }
+
+  .footer-social-media {
+    margin-top: 10px;
+  }
+
+  .social-media-footer {
+    margin: 0px 10px 0px 10px ;
+  }
+
+  .geckos-credit {
+    margin: 2px;
+    padding-right: 0;
+  }
+  .yt-credit {
+    margin: 2px;
+    padding-left: 0;
+  }
+}
+
+// @media screen and (max-height: 850px) {
+//   footer {
+//     display: none;
+//   }
+
+//   footer-credits {
+//     padding: 0;
+//   } 
+// }

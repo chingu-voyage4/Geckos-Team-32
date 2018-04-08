@@ -1,0 +1,9 @@
+.login-wrapper {
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .login-wrapper {
+    min-height: calc(100vh - 100px);
+  }
+}

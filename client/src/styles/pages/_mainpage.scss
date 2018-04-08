@@ -1,0 +1,64 @@
+.main-page {
+  display: flex;
+  padding-top: 100px;
+  min-height: 100vh;
+}
+
+.nodash {
+  margin-left: 0 !important;
+  justify-content: center;
+}
+
+.page-wrapper {
+  width: 100%;
+  min-height: calc(80vh - 100px);
+  padding: 2em;
+  margin-left: 20vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-family: 'ubuntu', sans-serif;
+}
+
+.not-found {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+  width: 100%;
+
+  span {
+    color: $accent-red;
+  }
+
+  a {
+    text-decoration: none;
+    color: $off-black;
+
+    &:hover {
+      text-decoration: underline;
+      color: $accent-red;
+    }
+  }  
+}
+
+@media (max-width: 768px) {
+  .page-wrapper {
+    margin: 0;
+    min-height: calc(85vh - 100px);
+  }
+}
+
+@media (max-width: 768px) and (orientation: landscape){
+  .page-wrapper {
+    margin-left: 0 !important;
+  }
+}
+
+@media (max-width: 320px) {
+  .page-wrapper {
+    width: 100vw;
+  }
+}

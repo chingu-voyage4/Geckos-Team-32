@@ -1,0 +1,225 @@
+.profile-page-wrapper {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: 20vw 1fr 1fr 1fr 1fr;
+  // grid-template-rows: 10% 8% 15% 10% 25%;
+  grid-template-areas:
+  ". banner banner banner banner"
+  ". welcome welcome . ."
+  ". usernameedit usernameedit usernameedit ."
+  ". savedvideos savedvideos . ."
+  ". avatar avatar avatar avatar";
+  font-family: "ubuntu", sans-serif;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////
+// This class is called on to get all content 2vw from left edge of screen, the reason    
+// is because we needed the border bottom in .profile-banner to span the entire length.
+.twopercent-spacing {
+  margin-left: 2vw;
+
+  &:last-of-type {
+    margin-bottom: 2vw;
+  }
+}
+.profile-banner {
+  grid-area: banner;
+  display: flex;
+  width: 100%;
+  // background: linear-gradient(-90deg, $off-black, darken($off-white, 5%));
+  border-bottom: 1px solid $off-black;
+  margin-bottom: 2vw;
+}
+.welcome {
+  grid-area: welcome;
+  h2 {
+    font-size: 2.5em;
+    margin: 0;
+  }
+}
+.profile-username-edit {
+  grid-area: usernameedit;
+  display: block;
+
+  h2 {
+    margin: 0 0 2vw 0;
+    font-size: 2em;
+  }
+}
+
+////////////////////////
+// Username Edit Form //
+.profile-button {
+  width: 180px;
+  background-color: darken($off-white, 15%);
+  font-size: 14px;
+  font-weight: bold;
+  outline: none;
+  border: none;
+  border-bottom: 3px solid darken($off-white, 25%);
+  border-radius: 5px;
+  margin: 5px;
+  transition:0.3s;
+  
+  a {
+    text-decoration: none;
+    color: $off-black;
+  }
+
+  &:hover {
+    background-color: darken($off-white, 25%);
+    transition:0.3s;
+  }
+}
+
+.submit {
+  background-color: $accent-green;
+  border-bottom: 3px solid darken($accent-green, 15%);
+  transition:0.3s;
+
+  &:hover {
+    background-color: darken($accent-green, 15%);
+    transition:0.3s;
+  }
+}
+
+.delete {
+  background-color: $accent-red;
+  border-bottom: 3px solid darken($accent-red, 15%);
+  transition:0.3s;
+
+  &:hover {
+    background-color: darken($accent-red, 15%);
+    transition:0.3s;
+  }
+}
+.form {
+  display: inline;
+}
+.form__input {
+  width: 350px;
+  margin-left: 5px;
+  border: 1px solid #DDDDDD;
+  transition: all 0.30s ease-in-out;
+  -webkit-transition: all 0.30s ease-in-out;
+}
+.form__input:focus {
+  border: 1px solid rgba(81, 203, 238, 1);
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+}
+
+///////////////////////////////////////
+// Delete Account Confirmation Modal //
+.modalbut {
+  grid-area: modal;
+}
+.warning-window {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); // Fallback color 
+    background-color: rgba(0,0,0,0.4); // Black w/ opacity 
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; // 15% from the top and centered
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%; 
+}
+.close-modal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close-modal:hover,
+.close-modal:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+//////////////////////////
+// Saved Videos Section //
+.savedvideos {
+  display: flex;
+  flex-direction: column;
+  grid-area: savedvideos;
+  padding: 20px 0;
+}
+
+//////////////////////
+// Avatar Selection //
+.avatar-wrapper{
+  display: flex;
+  flex-direction: column;
+  margin-right: 2vw;
+}
+.avatar-selection {
+  grid-area: avatar;
+}
+.avatar-library {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  box-shadow: 0px 0px 15px 1px #888888;
+}
+.avatar-library img {
+  height: 150px;
+  width: 150px;
+  margin: 10px;
+  cursor: pointer;
+  border-radius: 100%;
+  transition: 0.3s;
+  
+  &:hover {
+    border-radius: 100%;
+    box-shadow: 0px 10px 15px 2px #adadad;
+    transform: translateY(-10px);
+    transition: 0.3s;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-page-wrapper {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+    "banner banner banner banner"
+    "welcome welcome . ."
+    "usernameedit usernameedit . ."
+    "savedvideos savedvideos . ."
+    "avatar avatar avatar avatar";
+  }
+
+  .avatar-library img {
+    height: 75px;
+    width: 75px;
+  }
+  .modal-content {
+    margin: 35% auto; // 15% from the top and centered
+    width: 75%; 
+}
+}
+@media (max-width: 562px) {
+.modal-content {
+  .profile-button {
+  display: flex;
+  justify-content: center;
+  margin: 10px auto;
+  width: 80%;
+  
+  }
+}
+}
+@media (max-width: 400px) {
+  .form__input {
+  width: 300px;
+}
+}

@@ -1,0 +1,57 @@
+.auth-buttons-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.google-button, .facebook-button {
+  color: $off-white;
+  display: flex;
+  align-items: center;
+  margin: 1em;
+  border: none;
+}
+
+.google-button {
+  background: #CD5542;
+
+  &:hover {
+    background: darken(#CD5542, 5%);
+  }
+}
+
+.facebook-button {
+  background: #405993;
+
+  &:hover {
+    background: darken(#405993, 5%);
+  }
+}
+
+.auth-icon {
+  font-size: 2em;
+  padding: 0 0.5em;
+}
+
+.divider {
+  width: 100%;
+  margin: 1em 0;
+  border-top: 1px solid darken($bg-grey, 10%);
+  text-align: center;
+  display: block;
+  line-height: 1px;
+  position: relative;
+}
+
+.divider-title {
+  background: $bg-grey;
+  font-size: 12px;
+  letter-spacing: 1px;
+  padding: 0 1.5em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .auth-buttons-wrapper {
+    flex-direction: column;
+  }
+}
