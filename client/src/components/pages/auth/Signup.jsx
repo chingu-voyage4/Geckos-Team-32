@@ -24,6 +24,8 @@ class Signup extends React.Component {
         <form className="form" action="/routes/signup" method="post">
           <input className="form__input" type="text" name="username" placeholder="username"/>
           <input className="form__input" type="password" name="password" placeholder="password"/>
+          <br />
+          <br />
           <button className="button">Sign up</button>
         </form>
       </div>

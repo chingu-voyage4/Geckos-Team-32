@@ -1,4 +1,5 @@
 // All middleware functions
+const passport = require('passport');
 const Playlist = require('../models/playlist');
 const Video = require('../models/video');
 
@@ -42,8 +43,9 @@ middlewareObj.checkPlaylistOwner = (req,res,next) => {
 middlewareObj.isLoggedIn = (req,res,next) => {
   if (req.isAuthenticated()) {
     return next();
+  } else {
+    res.redirect('/routes/login');
   }
-  res.redirect('/routes/login');
 }
 
 module.exports = middlewareObj;
