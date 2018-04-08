@@ -13,8 +13,8 @@ const cors = require('cors');
 const keys = require('./config/keys'); // access config keys/sensitive info
 const PORT = process.env.PORT || 8000; // set PORT number
 const router = require('./routes'); // connect all routing
-const url = "mongodb://localhost:27017/geckos32"; // local mongoDB
-// const url = keys.DB; // mLabs mongoDB
+// const url = "mongodb://localhost:27017/geckos32"; // local mongoDB
+const url = keys.DB; // mLabs mongoDB
 
 const app = express();
 
