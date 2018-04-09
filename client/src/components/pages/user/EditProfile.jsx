@@ -20,7 +20,7 @@ class EditProfile extends React.Component {
   }
 
   handleDeleteUser() {
-      axios.get(`/routes/user/${this.props.id}/delete`)
+      axios.delete(`/routes/user/${this.props.id}/delete`)
       .then((results) => {
         if (results.data.response === 'deleted') {
           this.props.props.handleUpdateAfterDelete();

@@ -6,6 +6,21 @@
   overflow: hidden;
 }
 
+.save-video-button {
+  border: none;
+  outline:none;
+  background: transparent;
+  margin: .5em;
+  font-size: 2em;
+  transition: 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    color: $accent-red;
+    transition: 0.3s;
+  }
+}
+
 @media (max-width: 768px) {
   .main-video {
     max-height: 450px;
