@@ -10,7 +10,8 @@
     "dev": "webpack-dev-server",
     "watch": "nodemon server/server.js",
     "build:dev": "webpack",
-    "build:prod": "webpack -p --env production"
+    "build:prod": "webpack -p --env production",
+    "heroku-postbuild": "npm run build:prod"
   },
   "proxy": "http://localhost:8000/",
   "repository": {
