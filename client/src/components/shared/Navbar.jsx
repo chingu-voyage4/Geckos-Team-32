@@ -4,14 +4,17 @@ import { NavLink } from 'react-router-dom';
 import logo from "../../assets/dantv5.png";
 import brand from "../../assets/Gechotext2.png";
 
+/*              <img className="test" src={logo} />*/
+/*              <img src={brand} />*/
 export default class Navbar extends Component {
   state = {
     hamburgerToggle: false
   }
 
-  handleOpenNav = () => this.state.hamburgerToggle
-    ? this.setState({ hamburgerToggle: true })
-    : this.setState({ hamburgerToggle: false });
+  handleopennav = () => this.state.hamburgerToggle
+    ? this.setState({ hamburgerToggle: false }, 
+    console.log('this is working'))
+    : this.setState({ hamburgerToggle: true });
   
   render() {
     // console.log('FROM NAVBAR PROPS: ', this.props);
@@ -20,81 +23,51 @@ export default class Navbar extends Component {
 		return (
 			<div>
         <nav className="navBar">
-        
           <div className="logo">
-{/*         <NavLink className="icon" exact to="/">
-              <img src={logo} />
+            <NavLink className="icon" exact to="/">
+              logo
             </NavLink>
             <NavLink className="brand" exact to="/">
-              <img src={brand} />
-            </NavLink>*/}
+              brand
+            </NavLink>
           </div>
-
           <div className="hamburger">
-{/*         <div className="hamburger-icon" onClick={this.burgerToggle}>
-              <div className="bar1"></div>
-              <div className="bar2"></div>
-              <div className="bar3"></div>
-            </div>
-            <div className="burger-links">
-              <NavLink to="/about" onClick={this.burgerToggle}>About</NavLink>
+            <input id="toggle"  type="checkbox" />
+            <label className="toggle-container" htmlFor="toggle">
+                <span className="button button-toggle"></span>
+            </label>
+            <div className={this.state.hamburgerToggle ? "toggle-on burger-links" : "toggle-off burger-links" } handleOpenNav={this.handleopennav}>
+              <NavLink to="/about" className="nav-item two" onClick={this.burgerToggle}>About</NavLink>
               {this.props.user.loggedIn ?
                 <div>
-                  <NavLink to={`/user/${id}`} onClick={this.burgerToggle}>Profile</NavLink>
-                  <a href="#" onClick={(e) => this.props.handleLogoutUser(e)}>Sign out</a>
+                  <NavLink to={`/user/${id}`} href="" className="nav-item two" href="">Profile</NavLink>
+                  <a href="" onClick={(e) => this.props.handleLogoutUser(e)} className="nav-item two" href="">Sign Out</a>
                 </div> :
                 <div>
-                  <NavLink to="/signup" onClick={this.burgerToggle}>Sign up</NavLink>
-                  <NavLink to="/login" onClick={this.burgerToggle}>Log In</NavLink>
+                  <NavLink to="/signup" className="nav-item two" onClick={this.burgerToggle}>Sign up</NavLink>
+                  <NavLink to="/login" className="nav-item two" onClick={this.burgerToggle}>Log In</NavLink>
                 </div>
               }
-            </div>*/}
-            <input id="toggle"  type="checkbox" />
-            <label class="toggle-container " for="toggle">
-                <span class="button button-toggle"></span>
-            </label>
-            <nav class="burger-links" hamburgerToggle={this.state.hamburgerToggle} handleShowNav={this.handleShowNav}>
-              <a href="" class="nav-item two" href="">About</a>
-              <a href="" class="nav-item two" href="">Sign Up</a>
-              <a href="" class="nav-item two" href="">Login In</a>
-            </nav>
+            </div>
           </div>
 
           <div className="nav-wrapper">
-{/*         <ul className="nav-list">
-              <li><NavLink to="/about">About</NavLink></li>
+            <ul className="nav-list">
+              <li><NavLink to="/about" className="nav-item">About</NavLink></li>
             </ul>
             {this.props.user.loggedIn ? 
               <ul className="login-list">
-                <li><a href="#" onClick={(e) => this.props.handleLogoutUser(e)}>Sign out</a></li>
-                <li><NavLink to={`/user/${id}`}>Profile</NavLink></li>
-              </ul> : 
+                <li><a href="#" onClick={(e) => this.props.handleLogoutUser(e)} className="nav-item item-one">Sign Out</a></li>
+                <li><NavLink to={`/user/${id}`} className="nav-item item-two" href="">Profile</NavLink></li>
+              </ul> :
               <ul className="login-list">
-                <li><NavLink to="/signup" className ="btn">Sign up</NavLink></li>
-                <li><NavLink to="/login">Log In</NavLink></li>
+                <li><NavLink to="/signup" className ="nav-item item-one btn">Sign up</NavLink></li>
+                <li><NavLink to="/login" className="nav-item item-two">Log In</NavLink></li>
               </ul>
-            }*/}
-            <span class="nav-list">
-              <a class="nav-item" href="">About</a>
-            </span>
-            <span class="login-list">
-            <a class="nav-item item-one" href="">Sign Up</a>
-            <a class="nav-item item-two" href="">Login In</a>
-            </span>
+            }
           </div>
         </nav>
 			</div>
     );
-    
   }
-  
-  // burgerToggle = function () {
-  //   let linksEl = document.querySelector('.burger-links');
-  //   if (linksEl.style.display === 'block') {
-  //     linksEl.style.display = 'none';
-  //   } else {
-  //     linksEl.style.display = 'block';
-  //   }
-    
-  // }
 }
