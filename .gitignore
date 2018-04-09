@@ -40,6 +40,7 @@ coverage
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git-
 node_modules
 
+server/config/dev.js
 dev.js
 
 # Users Environment Variables
@@ -58,5 +59,6 @@ Thumbs.db
 
 .env
 
-# HMR Chunks
-client/public/hot
+# HMR Chunks inside Dist
+# Dist folder
+/client/public/dist

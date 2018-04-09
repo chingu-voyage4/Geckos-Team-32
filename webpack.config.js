@@ -15,8 +15,8 @@ module.exports = (env) => {
       SRC_DIR + '/index.jsx',
     ],
     output: { //create output path
-      filename: 'js/bundle.js',
-      path: PUBLIC_DIR,
+      filename: 'bundle.js',
+      path: PUBLIC_DIR + '/dist',
       hotUpdateChunkFilename: 'hot/hot-update.js',
       hotUpdateMainFilename: 'hot/hot-update.json'
     },
@@ -45,6 +45,7 @@ module.exports = (env) => {
     },
     devServer: {
       contentBase: './client/public',
+      publicPath: '/dist/',
       historyApiFallback: true,
       hot: true
     },

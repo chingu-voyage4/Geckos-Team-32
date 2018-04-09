@@ -9,7 +9,9 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
 const cors = require('cors');
+const compression = require('compression');
 
+const publicPath = path.join(__dirname, '..', 'client/public');
 const keys = require('./config/keys'); // access config keys/sensitive info
 const PORT = process.env.PORT || 8000; // set PORT number
 const router = require('./routes'); // connect all routing
@@ -19,11 +21,12 @@ const url = keys.DB; // mLabs mongoDB
 const app = express();
 
 app.use(bodyParser.urlencoded({extended: true})); // returns middleware that only parses urlencoded bodies; extended allows for the qs library
-app.use(express.static(path.join(__dirname, '../client/public'))); // joins current path with client path
+app.use(express.static(path.join(publicPath))); // joins current path with client path
 app.use(bodyParser.json()); // looks for JSON data
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(cors()); // cors middleware for auth
+app.use(compression());
 
 /*
  * MONGO DB SETUP
@@ -46,8 +49,8 @@ require('./passport/passport')(passport);
 app.use('/routes', router);
 
 // Handle all routes on index.html
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/public/index.html'))
+app.get('*', (req, res) => {
+  res.sendFile(path.join(publicPath, 'index.html'));
 });
 
 // Catch 404 and forward to error handler
