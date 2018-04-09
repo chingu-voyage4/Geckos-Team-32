@@ -15,6 +15,12 @@ const User = new Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: "Video"
     }
+  ],
+playlists:[
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Video"
+    }
   ]
 });
 
