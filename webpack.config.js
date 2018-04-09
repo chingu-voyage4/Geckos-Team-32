@@ -10,11 +10,11 @@ module.exports = (env) => {
     entry: [
       'babel-polyfill',
       'react-hot-loader/patch',
-      './src/index.js',
+      path.join(__dirname, 'client/index.jsx'),
     ],
     output: { //create output path
       filename: 'bundle.js',
-      path: path.join(__dirname, 'public', 'dist'),
+      path: path.join(__dirname, 'client', 'public', 'dist'),
       hotUpdateChunkFilename: 'hot/hot-update.js',
       hotUpdateMainFilename: 'hot/hot-update.json'
     },
