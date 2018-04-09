@@ -10,7 +10,7 @@ module.exports = (env) => {
     entry: [
       'babel-polyfill',
       'react-hot-loader/patch',
-      'client/index.jsx',
+      './client/index.jsx',
     ],
     output: { //create output path
       filename: 'bundle.js',
