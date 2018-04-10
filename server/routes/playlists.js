@@ -28,7 +28,7 @@ router.get('/', middleware.isLoggedIn, async (req, res) => {
    * POST ROUTE
    * CREATE -- Create a new playlist
    */
-  router.post('/add/:playlistName', async (req, res, next) => {
+  router.post('/new/:playlistName', async (req, res, next) => {
     try {
       let user = await User.findById(req.params.id);
       if (!user) {
@@ -36,8 +36,8 @@ router.get('/', middleware.isLoggedIn, async (req, res) => {
       } else {
         let newPlaylist = new Playlist(); 
         newPlaylist.name = req.params.playlistName; 
-      //  newPlaylist.author.id = user._id;  //check if it works
-       // newPlaylist.author.username = user.username;
+        newPlaylist.author.id = user._id; 
+        newPlaylist.author.username = user.username;
         newPlaylist = await newPlaylist.save();
         console.log(newPlaylist);
         user.playlists.push(newPlaylist._id);
@@ -51,7 +51,31 @@ router.get('/', middleware.isLoggedIn, async (req, res) => {
   });
   /*
    * POST ROUTE
-   * UPDATE -- Update the playlist to add a video
+   * UPDATE/CREATE?? -- Add a video to the playlist
    */
- 
+  router.post('/:playlist_id/add', async (req, res, next) => {
+    try {
+      let user = await User.findById(req.params.id); // is this necessary??? 
+      if (!user) {
+        res.redirect('/');
+      } else {
+        let playlist = await Playlist.findById(req.params.playlist_id);
+        let newVideoInPlaylist = new Video(); 
+       
+        newVideoInPlaylist.title = req.body.title;
+        newVideoInPlaylist.url = req.body.url;
+        newVideoInPlaylist.thumbnail = req.body.thumbnail;
+        newVideoInPlaylist = await newVideoInPlaylist.save();
+
+        playlist.videos.push(newVideoInPlaylist._id);
+        playlist = await playlist.save();
+        
+        console.log(playlist);
+        res.send({ playlist: playlist });
+
+      }
+    } catch (err) {
+      next(err);
+    }
+  });
   module.exports = router;
