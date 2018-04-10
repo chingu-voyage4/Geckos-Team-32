@@ -185,16 +185,16 @@ class AppRoutes extends React.Component {
                     launch={this.state.launch}
                     search={this.state.search}
                     handleSearchInput={this.handleSearchInput}
-                    handleShowDash={this.handleShowDash}
-                  />)}
-                />
-                <Route 
-                  path="/search" 
-                  component={() => (<Search
+                    />)}
+                    />
+                    <Route 
+                    path="/search" 
+                    component={() => (<Search
                     stateData={this.state}
                     handleSearchInput={this.handleSearchInput}
                     handleSelectedVideo={selectedVideo => this.setState({selectedVideo})}
                     handleLikedVideo={this.handleLikedVideo}
+                    handleShowDash={this.handleShowDash}
                   />)} 
                 />
                 <Route
@@ -235,11 +235,17 @@ class AppRoutes extends React.Component {
                 <Route path="/playvideo" component={PlayVideo} />
                 <Route 
                   path="/signup" 
-                  component={(props) => <Signup launch={this.state.launch}/>} 
+                  component={(props) => <Signup 
+                    launch={this.state.launch} 
+                    handleHideDash={this.handleHideDash}
+                  />} 
                 />
                 <Route 
                   path="/login" 
-                  component={(props) => <Login launch={this.state.launch}/>} 
+                  component={(props) => <Login 
+                    launch={this.state.launch} 
+                    handleHideDash={this.handleHideDash}
+                  />} 
                 />
                 <Route component={NotFound} />
               </Switch>

@@ -1,14 +1,24 @@
+.auth-card {
+  padding: 1em;
+  background: white;
+  box-shadow: 0px 0px 10px 1px #cacaca;
+}
+
 .auth-buttons-wrapper {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .google-button, .facebook-button {
-  color: $off-white;
+  color: white;
   display: flex;
   align-items: center;
+  justify-content: center;
   margin: 1em;
+  padding: .5em 1em .5em 0;
   border: none;
+  width: 200px;
 }
 
 .google-button {
@@ -33,9 +43,13 @@
 }
 
 .divider {
+  @include themify($themes) {
+    border-top: 1px solid darken(themed('backgroundColor'), 10%);
+  }
+
   width: 100%;
   margin: 1em 0;
-  border-top: 1px solid darken($bg-grey, 10%);
+  // border-top: 1px solid darken($bg-grey, 10%);
   text-align: center;
   display: block;
   line-height: 1px;
@@ -43,15 +57,63 @@
 }
 
 .divider-title {
-  background: $bg-grey;
+  background: white;
   font-size: 12px;
   letter-spacing: 1px;
   padding: 0 1.5em;
   text-transform: uppercase;
 }
 
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-form__input {
+  @include themify($themes) {
+    color: themed('textColor');
+    border-bottom: 1px solid themed('lightShadow');
+  }
+  
+  background-color: transparent;
+  padding: .5em;
+  margin: 0.5em;
+  width: 400px;
+  outline: none;
+  border: none;
+  font-family: 'ubuntu', sans-serif;
+  font-size: 1.2em;
+
+  &:focus {
+    border-bottom: 1px solid $accent-blue;
+  }
+}
+
+.auth-submit {
+  font-family: 'ubuntu', sans-serif;
+  font-size: 1.5em;
+  padding-bottom: 5px;
+  width: 200px;
+  color: white;
+  background-color: $accent-blue;
+  border: none;
+  transition: 0.3s;
+
+  &:hover {
+    color: white;
+    background-color: darken($accent-blue, 5%);
+    transition: 0.3s;
+  }
+}
+
 @media (max-width: 768px) {
   .auth-buttons-wrapper {
     flex-direction: column;
+  }
+  .auth-form__input {
+    width: 200px;
   }
 }

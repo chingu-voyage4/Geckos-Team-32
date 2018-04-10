@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import EditProfile from './EditProfile.jsx';
 import SavedVideos from './SavedVideos.jsx';
 import AvatarSelection from './AvatarSelection.jsx';
@@ -25,6 +25,7 @@ class Profile extends React.Component {
 			})
 			.catch((err) => {
 				console.log('There was an error: ', err);
+				this.props.history.push('/');
 			});
 	}
 
@@ -77,4 +78,4 @@ class Profile extends React.Component {
 	}
 }
 
-export default Profile;
+export default withRouter(Profile);

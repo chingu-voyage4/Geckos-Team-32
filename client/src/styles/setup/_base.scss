@@ -7,15 +7,11 @@ html, body {
   margin: 0;
   background: $bg-grey;
   min-width: 320px;
-}
-
-body {
-  font-family: sans-serif;
+  font-family: 'ubuntu', sans-serif;
 }
 
 .button {
-  border-radius: 3px;
-  padding: 1em;
+  border-radius: 2px;
   outline: none;
   cursor: pointer;
   transition: 0.3s;
@@ -38,19 +34,6 @@ body {
 }
 .underline {
   text-decoration: underline;
-}
-.form {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-}
-
-.form__input {
-  padding: 1em;
-  margin: 0.5em;
-  outline: none;
 }
 
 .link {

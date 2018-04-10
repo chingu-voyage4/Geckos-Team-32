@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PlayVideo from './PlayVideo.jsx';
 
-export default class PostLandingPage extends Component {
+export default class Search extends Component {
+  componentDidMount() {
+		this.props.handleShowDash();
+  }
+    
   handleSearchInput(e) {
 		e.preventDefault();
 		const search = e.target.elements.search.value;
@@ -22,7 +26,7 @@ export default class PostLandingPage extends Component {
   }
 
   render() {
-    console.log('from postlanding: ', this.props);
+    console.log('from search: ', this.props);
     const { search, videos, selectedVideo } = this.props.stateData;
     
     return (

@@ -6,17 +6,15 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 10vh;
 }
 .landing-searchbar {
   @include themify($themes) {
-    color: themed('textColor');
-    background: themed('inputBackground');
+    border: none;
+    background: themed('backgroundColor');
   }
-
   outline: none;
-  border: none;
   height: 40px;
+  margin-top: 10vh;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -25,24 +23,25 @@
 .landing-search {
   @include themify($themes) {
     color: themed('hoverColor');
-    background: themed('inputBackground');
+    border: none;
+    border-bottom: 1px solid themed('input');
+    background: themed('backgroundColor');
   }
   width: 100%;
   height: 100%;
   font-size: 26px;
   text-indent: 12px;
   outline: none;
-  border: none;
 }
 .landing-search-icon {
   @include themify($themes) {
     color: themed('textColor');
+    background: themed('backgroundColor');
   }
 
   font-size: 1.5em;
   padding-left: .5em;
   border: none;
-  background: transparent;
   outline: none;
   cursor: pointer;
   transition: 0.3s;

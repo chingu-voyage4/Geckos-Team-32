@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Link, withRouter } from 'react-router-dom';
 
-class Landing extends Component {
+class Home extends Component {
 	handleSearchInput(e) {
 		e.preventDefault();
 		const search = e.target.elements.search.value;
@@ -10,12 +10,8 @@ class Landing extends Component {
 		this.props.history.push('/search');
 	}
 
-	componentWillUnmount() {
-    this.props.handleShowDash();
-	}
-
   render() {
-		// console.log('from landing', this.props);
+		// console.log('from home', this.props);
 		return (
 			<div className={this.props.launch ? "page-wrapper nodash" : "page-wrapper"}>
 				<div className="landing-page-title">
@@ -33,4 +29,4 @@ class Landing extends Component {
   }
 }
 
-export default withRouter(Landing);
+export default withRouter(Home);

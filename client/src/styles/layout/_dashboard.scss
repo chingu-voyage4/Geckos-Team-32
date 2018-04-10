@@ -6,6 +6,7 @@
   @include themify($themes) {
     color: themed('textColor');
     background: themed('dashBackground');
+    z-index: 5;
   }
 
   display: grid;
