@@ -46,7 +46,7 @@ class Profile extends React.Component {
 				</div>
 
 				<div className="welcome twopercent-spacing">
-					<h2>Welcome back</h2>
+					<h2>Welcome back,</h2>
 				</div>
 
 				<div className="profile-username-edit twopercent-spacing">
@@ -61,16 +61,16 @@ class Profile extends React.Component {
 					/> : 
 					null}
 				</div>
-					
-				<div className="savedvideos twopercent-spacing">
-					<Link to={`/user/${creds._id}/saved`}>
-						<button className="button profile-button">Liked/Saved Videos</button>
-					</Link>
-				</div>
 
 				<div className="avatar-selection twopercent-spacing underline">
 					<button className="button profile-button" onClick={() => this.showAvatars()}>Change Avatar</button>
 					{this.state.avatar && <AvatarSelection handleUpdateAvatar={this.props.handleUpdateAvatar}/>}
+				</div>
+					
+				<div className="savedvideos twopercent-spacing">
+					<Link to={`/user/${creds._id}/saved`}>
+						<button className="button profile-button">Liked Videos</button>
+					</Link>
 				</div>
 	
       </div>

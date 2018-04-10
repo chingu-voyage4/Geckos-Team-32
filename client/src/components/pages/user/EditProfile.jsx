@@ -67,12 +67,16 @@ class EditProfile extends React.Component {
 
     return (
       <div>
-        <form className="form" onSubmit={this.handleEditData.bind(this)}>
-          <input className="form__input" type="text" name="username" placeholder={username} required/>
-          <button className="button profile-button submit">Submit</button>
-        </form>
+        <div className="edit-form">
+          <form onSubmit={this.handleEditData.bind(this)}>
+            <label htmlFor="username">
+              Username: <input className="form__input" type="text" name="username" defaultValue={username} onChange={(e) =>this.handleEditData.bind(this)} required/>
+            </label>
+            <button className="button profile-button submit">Submit</button>
+          </form>
+          <button className="button profile-button delete" onClick={this.openModalDelete}>Delete Account</button>
+        </div>
         <br />
-        <button className="button profile-button delete" onClick={this.openModalDelete}>Delete Account</button>
 
         <div className="warning-window" id="deleteModal">
           <div className="modal-content">

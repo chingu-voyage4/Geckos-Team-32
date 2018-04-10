@@ -1,6 +1,6 @@
 .main-page {
   display: flex;
-  padding-top: 100px;
+  padding-top: 75px;
   min-height: 100vh;
 
   @include themify($themes) {
@@ -16,7 +16,7 @@
 
 .page-wrapper {
   width: 100%;
-  min-height: calc(80vh - 100px);
+  min-height: calc(80vh - 75px);
   padding: 2em;
   margin-left: 20vw;
   display: flex;

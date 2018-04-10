@@ -4,8 +4,9 @@
 
 .dashboard {
   @include themify($themes) {
-    color: themed('textColor');
+    color: themed('dashText');
     background: themed('dashBackground');
+    box-shadow: 0px 3px 5px 1px themed('shadow');
     z-index: 5;
   }
 
@@ -16,7 +17,7 @@
     "dashbottom";
   align-content: space-between;
   width: 20vw;
-  height: calc(100vh - 100px);
+  height: calc(100vh - 75px);
   position: fixed;
   // background-color: darken($bg-grey, 15%);
   padding: 1em;
@@ -77,13 +78,16 @@
 // Dash w/ user logged in //
 ////////////////////////////
 .dashboard-user {
+  a {
+    text-decoration: none; // points to username link
+  }
+
   display: grid;
   grid-template-columns: 100%;
   grid-template-areas:
     "avatar"
     "username"
     "links"
-    "share"
     "theme";
 }
 /////////////////////////
@@ -93,6 +97,9 @@
   width: 100%;
 }
 .user-name {
+  @include themify($themes) {
+    color: themed('dashText');
+  }
   grid-area: username;
   word-wrap: break-word;
   text-align: center;
@@ -112,42 +119,6 @@
   padding-top: 10px;
 }
 
-//////////////////////////
-// Social Media Sharing //
-.dashboard-share {
-  grid-area: share;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-areas:
-  "sharetitle sharelinks sharelinks";
-  align-items: center;
-}
-.share-title {
-  grid-area: sharetitle;
-}
-.soc-share {
-  grid-area: sharelinks;
-  display: flex;
-  justify-content: space-around;
-}
-.soc-share a {
-  @include themify($themes) {
-    color: themed('textColor');
-  }
-  // color: $off-black;
-  font-size: 22px;
-  transition: color .5s ease-out;
-  -webkit-transition: color .5s ease-out;
-}
-.soc-share a:hover {
-  @include themify($themes) {
-    color: themed('linkHoverColor');
-  }
-  // color: $accent-red;
-  transition: color .5s ease-out;
-  -webkit-transition: color .5s ease-out;
-}
-
 ///////////////////
 // Theme Chooser //
 .dash-theme {
@@ -162,9 +133,17 @@
   grid-area: themetitle;
 }
 .theme-changer {
+  @include themify($themes) {
+    color: themed('hoverColor');
+    border: 1px solid themed('dashText');
+  }
+
   grid-area: choice;
   display: flex;
   height: 50%;
+  font-size: 1em;
+  outline: none;
+  background: inherit;
 }
 
 ////////////////////////////

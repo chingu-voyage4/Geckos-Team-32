@@ -210,7 +210,7 @@ class AppRoutes extends React.Component {
                     handleEditProfile={req => {
                       !this.state.editUser.edit ? 
                       this.setState({ editUser: { edit: true, editButton: 'Cancel' }}) : 
-                      this.setState({ editUser: { edit: false, editButton: 'Change Username' }});
+                      this.setState({ editUser: { edit: false, editButton: 'Edit Profile' }});
                       this.handleUpdateUser(req);
                     }}
                   />)}

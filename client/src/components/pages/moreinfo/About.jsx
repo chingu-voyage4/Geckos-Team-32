@@ -1,8 +1,6 @@
 import React from 'react';
 
-const About = (props) => {
-  console.log('from about: ', props);
-  return (
+const About = (props) => (
   <div className={props.launch ? "page-wrapper nodash" : "page-wrapper"}>
     <div className="about-wrapper">
       <h1>WELCOME</h1>
@@ -12,14 +10,14 @@ const About = (props) => {
 
       <div className="about-container">
         <h2>The App</h2>
-        <p>This app was made with love and care from the <a href="https://github.com/chingu-voyage4/Geckos-Team-32" target="_blank" className="bold link"><strong>Geckos-32</strong></a> team in association with <a className="bold link" href="https://chingu.io/" target="_blank">Chingu Cohorts.</a></p>
+        <p>This app was made with love by the <a href="https://github.com/chingu-voyage4/Geckos-Team-32" target="_blank" className="bold link"><strong>Geckos-32</strong></a> team in association with <a className="bold link" href="https://chingu.io/" target="_blank">Chingu Cohorts.</a></p>
       </div>
 
       <div className="divider"></div>
 
       <div className="about-container">
         <h2>Special Thanks to:</h2>
-        <span>The API provided by: <a className="bold link" href="https://developers.google.com/youtube/" target="_blank">Youtube <i className="fab fa-youtube"></i></a></span>
+        <span>The API provided by <a className="bold link" href="https://developers.google.com/youtube/" target="_blank">Youtube <i className="fab fa-youtube"></i></a></span>
       </div>
 
       <div className="divider"></div>
@@ -68,6 +66,5 @@ const About = (props) => {
     </div>
   </div>
 );
-}
 
 export default About;

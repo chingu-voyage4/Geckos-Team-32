@@ -9,10 +9,10 @@ class Login extends React.Component {
           <div>
             <h1>Welcome back!</h1>
             <div className="auth-buttons-wrapper">
-              <form className="form" action="routes/auth/google" method="get">
+              <form action="routes/auth/google" method="get">
                 <button className="button google-button"><span className="auth-icon"><i className="fab fa-google-plus-g"></i></span> Google</button>
               </form>
-              <form className="form" action="routes/auth/facebook" method="get">
+              <form action="routes/auth/facebook" method="get">
                 <button className="button facebook-button"><span className="auth-icon"><i className="fab fa-facebook"></i></span> Facebook</button>
               </form>
             </div>

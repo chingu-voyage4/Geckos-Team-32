@@ -15,10 +15,10 @@ export default class Navbar extends Component {
 				<nav className="navBar">
           <div className="logo">
             <NavLink className="icon" exact to="/">
-            <img src={logo} />
+              <img src={logo} />
             </NavLink>
             <NavLink className="brand" exact to="/">
-            <img src={brand} />
+              GECHO
             </NavLink>
           </div>
 

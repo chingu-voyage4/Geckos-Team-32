@@ -6,6 +6,10 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  h2 {
+    margin-bottom: 10vh;
+  }
 }
 .landing-searchbar {
   @include themify($themes) {
@@ -14,7 +18,6 @@
   }
   outline: none;
   height: 40px;
-  margin-top: 10vh;
   display: flex;
   flex-direction: row;
   align-items: center;

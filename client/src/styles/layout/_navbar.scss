@@ -7,9 +7,10 @@
     box-shadow: 0px 1px 10px 0px darken(themed('backgroundColor'), 10%);
   }
 
+  text-transform: uppercase;
   display: grid;
-  grid-template-columns: 400px auto;
-  grid-template-rows: 100px;
+  grid-template-columns: .25fr auto;
+  grid-template-rows: 75px;
   grid-template-areas:
     "logo nav-wrapper";
   min-width: 100%;
@@ -37,21 +38,25 @@
 }
 .navBar ul {
   list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 .navBar li {
   display: inline-block;
-  padding: 2% 5%;
+  margin: auto 0;
+  padding: 0 1em;
 }
 
 // LOGO AREA //
 .logo {
   grid-area: logo;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: .5fr 1fr;
   grid-template-areas:
   "logo brand";
   justify-items: center;
-  padding: 16px 0;
+  padding: 1em 0;
+  margin-left: 1em;
 }
 .logo img {
   display: block;
@@ -62,6 +67,8 @@
   grid-area: logo;
 }
 .brand {
+  font-family: 'ubuntu', sans-serif;
+  margin: auto 0;
   grid-area: brand;
 }
 

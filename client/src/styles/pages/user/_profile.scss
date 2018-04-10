@@ -8,8 +8,8 @@
   ". banner banner banner banner"
   ". welcome welcome . ."
   ". usernameedit usernameedit usernameedit ."
-  ". savedvideos savedvideos . ."
-  ". avatar avatar avatar avatar";
+  ". avatar avatar avatar avatar"
+  ". savedvideos . . .";
   font-family: "ubuntu", sans-serif;
 }
 
@@ -55,14 +55,26 @@
 ////////////////////////
 // Username Edit Form //
 .profile-button {
-  width: 180px;
-  background-color: darken($off-white, 15%);
-  font-size: 14px;
-  font-weight: bold;
+  @include themify($themes) {
+    background-color: themed('dashBackground');
+
+    &:hover {
+      background-color: lighten(themed('dashBackground'), 15%);
+      transition:0.3s;
+    }
+  }
+
+  font-family: 'ubuntu', sans-serif;
+  padding: 0.5em 0;
+  width: 150px;
+  // background-color: darken($off-white, 35%);
+  color: white;
+  font-size: 1em;
+  // font-weight: bold;
   outline: none;
   border: none;
-  border-bottom: 3px solid darken($off-white, 25%);
-  border-radius: 5px;
+  // border-bottom: 3px solid darken($off-white, 25%);
+  border-radius: 2px;
   margin: 5px;
   transition:0.3s;
   
@@ -70,47 +82,68 @@
     text-decoration: none;
     color: $off-black;
   }
-
-  &:hover {
-    background-color: darken($off-white, 25%);
-    transition:0.3s;
-  }
 }
 
 .submit {
-  background-color: $accent-green;
-  border-bottom: 3px solid darken($accent-green, 15%);
+  background-color: $accent-green !important;
+  // border-bottom: 3px solid darken($accent-green, 15%);
   transition:0.3s;
 
   &:hover {
-    background-color: darken($accent-green, 15%);
+    background-color: darken($accent-green, 15%) !important;
     transition:0.3s;
   }
 }
 
 .delete {
-  background-color: $accent-red;
-  border-bottom: 3px solid darken($accent-red, 15%);
+  background-color: $accent-red !important;
+  // border-bottom: 3px solid darken($accent-red, 15%);
   transition:0.3s;
 
   &:hover {
-    background-color: darken($accent-red, 15%);
+    background-color: darken($accent-red, 15%) !important;
     transition:0.3s;
   }
 }
-.form {
-  display: inline;
+.edit-form {
+  @include themify($themes) {
+    box-shadow: 0px 0px 10px 1px themed('lightShadow');
+    background: lighten(themed('backgroundColor'), 5%);
+  }
+
+  display: flex;
+  flex-direction: column;
+  margin: 1em 0;
+  padding: 1em;
+
+  label {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+  }
 }
 .form__input {
-  width: 350px;
-  margin-left: 5px;
-  border: 1px solid #DDDDDD;
+  @include themify($themes) {
+    color: themed('textColor');
+
+    &::placeholder {
+      color: darken(themed('textColor'), 10%);
+    }
+  }
+
+  width: 250px;
+  margin: 5px 0;
+  border: none;
+  border-bottom: 1px solid #DDDDDD;
+  outline: none;
+  background: inherit;
+  padding: 1em;
+  font-size: 1em;
   transition: all 0.30s ease-in-out;
   -webkit-transition: all 0.30s ease-in-out;
 }
 .form__input:focus {
-  border: 1px solid rgba(81, 203, 238, 1);
-  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  border-bottom: 1px solid $accent-light-blue;
 }
 
 ///////////////////////////////////////
