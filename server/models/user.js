@@ -15,6 +15,7 @@ const User = new Schema({
   facebookToken: String,
   displayName: String,
   email: String,
+  location: String,
   videos:[{
       type: Schema.Types.ObjectId,
       ref:'Video'
@@ -29,11 +30,11 @@ const User = new Schema({
 
 //for keeping a counter of liked videos and stored playlists
 
-UserSchema.virtual('videosCount').get(function(){ //keep the function, don't refactor to an arrow function here
+User.virtual('videosCount').get(function(){ //keep the function, don't refactor to an arrow function here
     return this.videos.lenght; 
 });
 
-UserSchema.virtual('playlistsCount').get(function(){
+User.virtual('playlistsCount').get(function(){
     return this.playlists.lenght; 
 });
 

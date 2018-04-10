@@ -13,7 +13,8 @@ export default class DashTop extends Component {
         
         <div className="user-links">
           <ul>
-            <li><NavLink className="dashboard__link" to={`/user/${_id}/playlist`}>Playlists</NavLink></li>
+            <li><NavLink className="dashboard__link" to={`/user/${_id}/playlists/add/jhgjhg`}>Playlists</NavLink></li>
+            <li><NavLink className="dashboard__link" to={`/user/${_id}/playlists`}>Playlists</NavLink></li>
             <li><NavLink className="dashboard__link" to={`/user/${_id}/saved`} onClick={this.props.retrieveSavedVideos}>Liked Videos</NavLink></li>
           </ul>
         </div>

@@ -31,7 +31,7 @@ router.post('/', async (req, res, next) => {
   try {
     let user = await User.findById(req.params.id);
     if (!user) {
-      res.redirect('/');
+      res.redirect('/');    
     } else {
       let newVideo = new Video();
       newVideo.title = req.body.title;
