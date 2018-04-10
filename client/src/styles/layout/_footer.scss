@@ -10,11 +10,14 @@
 // #1CA7CE
 
 footer {
-  // position: absolute;
+  @include themify($themes) {
+    color: themed('textColor');
+    background-color: themed('dashBackground');
+  }
   bottom: 0%;
   height: 110px;
   width: 100%;
-  background-color: $off-white;
+  // background-color: $off-white;
 }
 .footer-bottom {
   display: grid;
@@ -45,13 +48,18 @@ align-items: center;
 }
 
 .social-media-footer {
+  @include themify($themes) {
+    color: themed('textColor');
+    background-color: themed('dashBackground');
+  }
+
   display: flex;
   justify-content: center;
   align-items: center;
   height: 35px;
   width: 35px;
   font-size: 20px;
-  background-color: darken($off-white, 10%);
+  // background-color: darken($off-white, 10%);
   border: 3px solid lighten($off-black, 10%);
   border-radius: 15%;
   color: $off-black;
@@ -60,9 +68,14 @@ align-items: center;
   margin: 10px;
 }
 .social-media-footer:hover {
-  color: $accent-red;
+  @include themify($themes) {
+    color: themed('hoverColor');
+    border-color: themed('hoverColor');
+  }
+
+  // color: $accent-red;
   background-color: $off-white;
-  border-color: $accent-red;
+  // border-color: $accent-red;
   border-radius: 50%;
   position: relative;
   transition: all .25s ease-out;

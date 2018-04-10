@@ -1,0 +1,109 @@
+// Themes
+$themes: (
+  gecho: (
+    backgroundColor: $bg-grey,
+    textColor: $off-black,
+    textColorOpposite: $off-white,
+    hoverColor: $accent-red,
+    linkHoverColor: darken($accent-red, 15%),
+    dashBackground: darken($bg-grey, 15%),
+    aboutContainerBackground: white,
+    teamMember: lightgreen,
+    shadow: #888888,
+    lightShadow: #adadad,
+    teamMemberText: $off-black,
+    inputBackground: white,
+    savedVidBackground: $bg-grey,
+    navBarBackground: white,
+    navBarIcon: #333,
+  ),
+  twilight: (
+    backgroundColor: lighten($off-black, 5%),
+    textColor: $dark-text,
+    textColorOpposite: $off-black,
+    hoverColor: $accent-purple,
+    linkHoverColor: darken($accent-purple, 10%),
+    dashBackground: lighten($off-black, 10%),
+    aboutContainerBackground: lighten($off-black, 20%),
+    teamMember: #ffd13b,
+    shadow: #000000,
+    lightShadow: #181818,
+    teamMemberText: $off-black,
+    inputBackground: lighten($off-black, 25%),
+    savedVidBackground: lighten($off-black, 20%),
+    navBarBackground: lighten($off-black, 25%),
+    navBarIcon: $dark-text
+  ),
+  peacock: (
+    backgroundColor: $accent-dark-blue,
+    textColor: lighten($accent-dark-blue, 35%),
+    textColorOpposite: $off-black,
+    hoverColor: $accent-green,
+    linkHoverColor: $accent-purple,
+    dashBackground: darken($accent-dark-blue, 5%),
+    aboutContainerBackground: darken($accent-dark-blue, 5%),
+    teamMember: $accent-green,
+    shadow: darken($accent-dark-blue, 25%),
+    lightShadow: darken($accent-dark-blue, 15%),
+    teamMemberText: $accent-dark-blue,
+    inputBackground: darken($accent-dark-blue, 10%),
+    savedVidBackground: lighten($accent-dark-blue, 10%),
+    navBarBackground: lighten($accent-dark-blue, 25%),
+    navBarIcon: $dark-text
+  ),
+  daylight: (
+    backgroundColor: $accent-yellow,
+    textColor: $accent-dark-blue,
+    textColorOpposite: $off-white,
+    hoverColor: $accent-red,
+    linkHoverColor: $accent-light-blue,
+    dashBackground: darken($accent-yellow, 5%),
+    aboutContainerBackground: lighten($accent-yellow, 10%),
+    teamMember: $accent-light-blue,
+    shadow: darken($accent-yellow, 25%),
+    lightShadow: darken($accent-yellow, 15%),
+    teamMemberText: $accent-dark-blue,
+    inputBackground: darken($accent-yellow, 10%),
+    savedVidBackground: lighten($accent-yellow, 10%),
+    navBarBackground: lighten($accent-yellow, 5%),
+    navBarIcon: $dark-text
+  ),
+  earth: (
+    backgroundColor: $accent-light-green,
+    textColor: $off-black,
+    textColorOpposite: $off-white,
+    hoverColor: $accent-orange,
+    linkHoverColor: darken($accent-orange, 10%),
+    dashBackground: darken($accent-light-green, 10%),
+    aboutContainerBackground: lighten($accent-light-green, 10%),
+    teamMember: lighten($accent-orange, 10%),
+    shadow: darken($accent-light-green, 25%),
+    lightShadow: darken($accent-light-green, 15%),
+    teamMemberText: $off-black,
+    inputBackground: darken($accent-light-green, 10%),
+    savedVidBackground: lighten($accent-light-green, 10%),
+    navBarBackground: lighten($accent-light-green, 5%),
+    navBarIcon: darken($accent-light-green, 20%),
+  )
+);
+
+/*
+ * Implementation of themes
+ */
+ @mixin themify($themes) {
+  @each $theme, $map in $themes {
+    .theme-#{$theme} & {
+      $theme-map: () !global;
+      @each $key, $submap in $map {
+        $value: map-get(map-get($themes, $theme), '#{$key}');
+        $theme-map: map-merge($theme-map, ($key: $value)) !global;
+      }
+      @content;
+      $theme-map: null !global;
+    }
+  }
+}
+
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}

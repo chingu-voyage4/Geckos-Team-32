@@ -9,6 +9,11 @@
   margin-top: 10vh;
 }
 .landing-searchbar {
+  @include themify($themes) {
+    color: themed('textColor');
+    background: themed('inputBackground');
+  }
+
   outline: none;
   border: none;
   height: 40px;
@@ -18,6 +23,10 @@
   background: white;
 }
 .landing-search {
+  @include themify($themes) {
+    color: themed('hoverColor');
+    background: themed('inputBackground');
+  }
   width: 100%;
   height: 100%;
   font-size: 26px;
@@ -26,6 +35,10 @@
   border: none;
 }
 .landing-search-icon {
+  @include themify($themes) {
+    color: themed('textColor');
+  }
+
   font-size: 1.5em;
   padding-left: .5em;
   border: none;
@@ -35,7 +48,10 @@
   transition: 0.3s;
 
   &:hover {
-    color: $accent-red;
+    @include themify($themes) {
+      color: themed('hoverColor');
+    }
+    // color: $accent-red;
     transition: 0.3s;
   }
 }

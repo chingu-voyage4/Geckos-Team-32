@@ -11,7 +11,13 @@ export default class Dashboard extends Component {
 
 		return (
 			<div className={this.props.state.launch ? "hide-dash" : "dashboard"}>
-				{loggedIn ? <DashTopUser state={this.props.state} retrieveSavedVideos={this.props.retrieveSavedVideos}/> : <DashTop />}
+				{loggedIn ? 
+					<DashTopUser 
+						state={this.props.state} 
+						retrieveSavedVideos={this.props.retrieveSavedVideos} 
+						handleUpdateTheme={this.props.handleUpdateTheme}
+					/> : 
+					<DashTop />}
 				<DashBottom />
 			</div>
 		);

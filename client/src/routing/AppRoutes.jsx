@@ -58,7 +58,8 @@ class AppRoutes extends React.Component {
     videos: [],
     selectedVideo: null,
     saved: false,
-    savedVideos: null
+    savedVideos: null,
+    theme: 'theme-gecho'
   }
 
   // Show dashboard after moving form landing page
@@ -159,6 +160,8 @@ class AppRoutes extends React.Component {
     this.setState({ saved: true, savedVideos: videos });
   }
 
+  handleUpdateTheme = (theme) => this.setState({ theme });
+
   render() {
     return (
       <BrowserRouter>
@@ -166,79 +169,83 @@ class AppRoutes extends React.Component {
           <Navbar
             user={this.state.user}
             handleLogoutUser={this.handleLogoutUser}
+            theme={this.state.theme}
           />
-          <div className="main-page">
-            <Dashboard 
-              state={this.state}
-              retrieveSavedVideos={this.retrieveSavedVideos}
-            />
-            <Switch>
-              <Route
-                exact path="/"
-                component={() => (<Home
-                  launch={this.state.launch}
-                  search={this.state.search}
-                  handleSearchInput={this.handleSearchInput}
-                  handleShowDash={this.handleShowDash}
-                />)}
+          <div className={this.state.theme}>
+            <div className="main-page">
+              <Dashboard 
+                state={this.state}
+                retrieveSavedVideos={this.retrieveSavedVideos}
+                handleUpdateTheme={this.handleUpdateTheme}
               />
-              <Route 
-                path="/search" 
-                component={() => (<Search
-                  stateData={this.state}
-                  handleSearchInput={this.handleSearchInput}
-                  handleSelectedVideo={selectedVideo => this.setState({selectedVideo})}
-                  handleLikedVideo={this.handleLikedVideo}
-                />)} 
-              />
-              <Route
-                exact path="/user/:id"
-                render={(props) => (<Profile
-                  userId={props}
-                  state={this.state}
-                  handleUpdateAfterDelete={this.handleUpdateAfterDelete}
-                  handleUpdateUser={this.handleUpdateUser}
-                  handleUpdateAvatar={this.handleUpdateAvatar}
-                  handleShowDash={this.handleShowDash}
-                  retrieveSavedVideos={this.retrieveSavedVideos}
-                  handleEditProfile={req => {
-                    !this.state.editUser.edit ? 
-                    this.setState({ editUser: { edit: true, editButton: 'Cancel' }}) : 
-                    this.setState({ editUser: { edit: false, editButton: 'Change Username' }});
-		                this.handleUpdateUser(req);
-                  }}
-                />)}
-              />
-              <Route 
-                exact path="/user/:id/saved"
-                render={(props) => (<SavedVideos 
-                  userId={props}
-                  videos={this.state.savedVideos}
-                  retrieveSavedVideos={this.retrieveSavedVideos}
-                  handleUpdateSavedVideos={this.handleUpdateSavedVideos}
-                />)}
-              />
-              <Route 
-                exact path="/user/:id/playlist"
-                render={() => <Playlist/>}
-              />
-              <Route 
-                path="/about" 
-                component={(props) => <About launch={this.state.launch}/>}
-              />
-              <Route path="/playvideo" component={PlayVideo} />
-              <Route 
-                path="/signup" 
-                component={(props) => <Signup launch={this.state.launch}/>} 
-              />
-              <Route 
-                path="/login" 
-                component={(props) => <Login launch={this.state.launch}/>} 
-              />
-              <Route component={NotFound} />
-            </Switch>
+              <Switch>
+                <Route
+                  exact path="/"
+                  component={() => (<Home
+                    launch={this.state.launch}
+                    search={this.state.search}
+                    handleSearchInput={this.handleSearchInput}
+                    handleShowDash={this.handleShowDash}
+                  />)}
+                />
+                <Route 
+                  path="/search" 
+                  component={() => (<Search
+                    stateData={this.state}
+                    handleSearchInput={this.handleSearchInput}
+                    handleSelectedVideo={selectedVideo => this.setState({selectedVideo})}
+                    handleLikedVideo={this.handleLikedVideo}
+                  />)} 
+                />
+                <Route
+                  exact path="/user/:id"
+                  render={(props) => (<Profile
+                    userId={props}
+                    state={this.state}
+                    handleUpdateAfterDelete={this.handleUpdateAfterDelete}
+                    handleUpdateUser={this.handleUpdateUser}
+                    handleUpdateAvatar={this.handleUpdateAvatar}
+                    handleShowDash={this.handleShowDash}
+                    retrieveSavedVideos={this.retrieveSavedVideos}
+                    handleEditProfile={req => {
+                      !this.state.editUser.edit ? 
+                      this.setState({ editUser: { edit: true, editButton: 'Cancel' }}) : 
+                      this.setState({ editUser: { edit: false, editButton: 'Change Username' }});
+                      this.handleUpdateUser(req);
+                    }}
+                  />)}
+                />
+                <Route 
+                  exact path="/user/:id/saved"
+                  render={(props) => (<SavedVideos 
+                    userId={props}
+                    videos={this.state.savedVideos}
+                    retrieveSavedVideos={this.retrieveSavedVideos}
+                    handleUpdateSavedVideos={this.handleUpdateSavedVideos}
+                  />)}
+                />
+                <Route 
+                  exact path="/user/:id/playlist"
+                  render={() => <Playlist/>}
+                />
+                <Route 
+                  path="/about" 
+                  component={(props) => <About launch={this.state.launch}/>}
+                />
+                <Route path="/playvideo" component={PlayVideo} />
+                <Route 
+                  path="/signup" 
+                  component={(props) => <Signup launch={this.state.launch}/>} 
+                />
+                <Route 
+                  path="/login" 
+                  component={(props) => <Login launch={this.state.launch}/>} 
+                />
+                <Route component={NotFound} />
+              </Switch>
+            </div>
           </div>
-          <Footer />
+          <Footer theme={this.state.theme}/>
         </ScrollToTop>
       </BrowserRouter>
     )

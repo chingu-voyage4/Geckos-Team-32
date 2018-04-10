@@ -11,7 +11,7 @@ export default class Navbar extends Component {
     const id = this.props.user.creds._id ? this.props.user.creds._id : "profile";
 
 		return (
-			<div>
+			<div className={this.props.theme}>
 				<nav className="navBar">
           <div className="logo">
             <NavLink className="icon" exact to="/">

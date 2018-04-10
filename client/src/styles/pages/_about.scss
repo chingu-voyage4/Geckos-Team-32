@@ -8,9 +8,13 @@
 }
 
 .about-container {
+  @include themify($themes) {
+    background-color: themed('aboutContainerBackground');
+  }
+
   display: flex;
   flex-direction: column;
-  background-color: white;
+  // background-color: white;
   min-height: 20vh;
   width: 100%;
   margin: 0;
@@ -35,10 +39,14 @@
 }
 
 .circle-icon {
+  @include themify($themes) {
+    background-color: themed('teamMember');
+  }
+
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: lightgreen;
+  // background-color: lightgreen;
   border-radius: 100%;
   min-width: 3em;
   min-height: 3em;
@@ -57,6 +65,16 @@
 }
 
 .about-teammate {
+  @include themify($themes) {
+    color: themed('textColor');
+
+    &:hover {
+      background: themed('teamMember');
+      box-shadow: 0px 5px 10px themed('shadow');
+      color: themed('teamMemberText');
+    }
+  }
+
   color: $off-black;
   transition: 0.3s ease-in-out;
   cursor: pointer;
@@ -65,9 +83,9 @@
   margin: 0 10px;
 
   &:hover{
-    background: lightgreen;
+    // background: lightgreen;
+    // box-shadow: 0px 5px 10px #888888;
     transition: 0.3s ease-in-out;
-    box-shadow: 0px 5px 10px #888888;
     transform: scale(1.2, 1.2);
   }
 }

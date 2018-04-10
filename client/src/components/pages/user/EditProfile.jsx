@@ -14,7 +14,7 @@ class EditProfile extends React.Component {
     axios.post(`/routes/user/${this.props.id}/edit`, req)
       .then((results) => {
         results.data.response === 'taken' ?
-        openModalDuplicate() :
+        this.openModalDuplicate() :
         this.props.handleEditProfile(results.data.response);
       });
   }
@@ -29,6 +29,38 @@ class EditProfile extends React.Component {
       });
   }
 
+  openModalDelete() {
+    let modal = document.getElementById('deleteModal');
+    modal.style.display = "block";
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = (event) => {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  }
+  closeModalDelete() {
+    let modal = document.getElementById('deleteModal');
+    modal.style.display = "none";
+  }
+
+  openModalDuplicate() {
+    let modal = document.getElementById('duplicateUserModal');
+    modal.style.display = "block";
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = (event) => {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  }
+  closeModalDuplicate() {
+    let modal = document.getElementById('duplicateUserModal');
+    modal.style.display = "none";
+  }
+
   render() {
     // console.log('this is from edit profile: ', this.props);
     const { username } = this.props.creds;
@@ -41,7 +73,6 @@ class EditProfile extends React.Component {
         </form>
         <br />
         <button className="button profile-button delete" onClick={this.openModalDelete}>Delete Account</button>
-        <button className="button profile-button twopercent-spacing" onClick={this.openModalDuplicate}>Duplicate Username</button>
 
         <div className="warning-window" id="deleteModal">
           <div className="modal-content">
@@ -60,41 +91,7 @@ class EditProfile extends React.Component {
           </div>
         </div>
       </div>
-
     );
-  }
-
-  
-  openModalDelete = function () {
-    let modal = document.getElementById('deleteModal');
-    modal.style.display = "block";
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function (event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    }
-  }
-  closeModalDelete = function () {
-    let modal = document.getElementById('deleteModal');
-    modal.style.display = "none";
-  }
-
-  openModalDuplicate = function () {
-    let modal = document.getElementById('duplicateUserModal');
-    modal.style.display = "block";
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function (event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    }
-  }
-  closeModalDuplicate = function () {
-    let modal = document.getElementById('duplicateUserModal');
-    modal.style.display = "none";
   }
 }
 

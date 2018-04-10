@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 export default class DashTop extends Component {
   render() {
-    // console.log('from user dash: ', this.props);
+    console.log('from user dash: ', this.props);
     const { username, _id, img } = this.props.state.user.creds;
 
     return (
@@ -29,11 +29,12 @@ export default class DashTop extends Component {
         
         <div className="dash-theme">
           <h4 className="theme-title">Theme:</h4>
-          <select className="theme-changer">
-            <option value="Jungle">Jungle</option>
-            <option value="Arctic">Arctic</option>
-            <option value="City">City</option>
-            <option value="Technicolor">Technicolor</option>
+          <select className="theme-changer" onChange={(e) => this.props.handleUpdateTheme(e.target.value)}>
+            <option value="theme-gecho">Gecho</option>
+            <option value="theme-twilight">Twilight</option>
+            <option value="theme-peacock">Peacock</option>
+            <option value="theme-daylight">Daylight</option>
+            <option value="theme-earth">Earth</option>
           </select>
         </div>
       </div>

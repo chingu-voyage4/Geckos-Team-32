@@ -28,7 +28,9 @@ body {
 /////////////////////
 // Generic Classes //
 .namered {
-  color: $accent-red;
+  @include themify($themes) {
+    color: themed('hoverColor');
+  }
 }
 .bold {
   font-style: normal;
@@ -52,14 +54,21 @@ body {
 }
 
 .link {
-  color: $accent-red;
+  @include themify($themes) {
+    color: themed('hoverColor');
+
+    &:hover {
+      color: themed('linkHoverColor');
+    }
+  }
+
+  // color: $accent-red;
   transition: color .5s ease-out;
   -webkit-transition: color .5s ease-out;
 
   &:hover {
-    color: darken($accent-red, 20%);
+    // color: darken($accent-red, 20%);
     transition: color .5s ease-in;
     -webkit-transition: color .5s ease-in;
   }
 }
-

@@ -3,6 +3,11 @@
 }
 
 .dashboard {
+  @include themify($themes) {
+    color: themed('textColor');
+    background: themed('dashBackground');
+  }
+
   display: grid;
   grid-template-columns: 100%;
   grid-template-areas:
@@ -12,7 +17,7 @@
   width: 20vw;
   height: calc(100vh - 100px);
   position: fixed;
-  background-color: darken($bg-grey, 15%);
+  // background-color: darken($bg-grey, 15%);
   padding: 1em;
   
 }
@@ -42,9 +47,13 @@
   font-style: italic;
 }
 .dashboard__link {
+  @include themify($themes) {
+    color: themed('hoverColor');
+  }
+
   font-weight: bold;
   font-size: 1em;
-  color: $accent-red;
+  // color: $accent-red;
   text-decoration: none;
   transition: color .5s ease-out;
   -webkit-transition: color .5s ease-out;
@@ -54,7 +63,11 @@
   cursor: pointer;
 }
 .dashboard__link:hover {
-  color: darken($accent-red, 20%);
+  @include themify($themes) {
+    color: themed('linkHoverColor');
+  }
+
+  // color: darken($accent-red, 20%);
   transition: color .5s ease-out;
   -webkit-transition: color .5s ease-out;
 }
@@ -117,13 +130,19 @@
   justify-content: space-around;
 }
 .soc-share a {
-  color: $off-black;
+  @include themify($themes) {
+    color: themed('textColor');
+  }
+  // color: $off-black;
   font-size: 22px;
   transition: color .5s ease-out;
   -webkit-transition: color .5s ease-out;
 }
 .soc-share a:hover {
-  color: $accent-red;
+  @include themify($themes) {
+    color: themed('linkHoverColor');
+  }
+  // color: $accent-red;
   transition: color .5s ease-out;
   -webkit-transition: color .5s ease-out;
 }
@@ -182,9 +201,14 @@
   -webkit-transition: all .25s ease-out;
 }
 .social-media:hover {
-  color: $accent-red;
+  @include themify($themes) {
+    color: themed('linkHoverColor');
+    border-color: themed('linkHoverColor');
+  }
+
+  // color: $accent-red;
   background-color: $off-white;
-  border-color: $accent-red;
+  // border-color: $accent-red;
   border-radius: 50%;
   position: relative;
   transition: all .25s ease-out;

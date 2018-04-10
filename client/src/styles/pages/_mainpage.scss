@@ -2,6 +2,11 @@
   display: flex;
   padding-top: 100px;
   min-height: 100vh;
+
+  @include themify($themes) {
+    color: themed('textColor');
+    background-color: themed('backgroundColor');
+  }
 }
 
 .nodash {

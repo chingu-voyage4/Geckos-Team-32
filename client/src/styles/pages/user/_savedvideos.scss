@@ -11,13 +11,18 @@
 }
 
 .saved-video-list-items {
+  @include themify($themes) {
+    box-shadow: 0px 0px 10px 1px themed('lightShadow');
+    background-color: themed('savedVidBackground');
+  }
+
   display: flex;
   flex-direction: column;
   margin: 15px 10px;
   width: 30%;
   min-width: 200px;
   text-align: center;
-  box-shadow: 0px 0px 10px 1px #888888;
+  // box-shadow: 0px 0px 10px 1px #888888;
   transition: 0.3s;
 
   .video-delete {
@@ -26,7 +31,11 @@
   }
 
   &:hover {
-    box-shadow: 0px 10px 10px 1px #a7a6a6;
+    @include themify($themes) {
+      box-shadow: 0px 10px 10px 1px themed('lightShadow');
+    }
+    
+    // box-shadow: 0px 10px 10px 1px #a7a6a6;
     transform: translateY(-10px);
     transition: 0.3s;
 
@@ -36,13 +45,20 @@
     }
 
     a {
-      color: $accent-red;
+      @include themify($themes) {
+        color: themed('hoverColor');
+      }
+      // color: $accent-red;
       transition: 0.3s;
     }
   }
 
   a {
-    color: $off-black;
+    @include themify($themes) {
+      color: themed('textColor');
+    }
+
+    // color: $off-black;
     text-decoration: none;
     transition: 0.3s;
   }
@@ -53,10 +69,15 @@
 }
 
 .video-delete {
+  @include themify($themes) {
+    background-color: themed('textColor');
+    color: themed('textColorOpposite');
+  }
+
   width: 20px;
   height: 20px;
-  background-color: $off-black;
-  color: $off-white;
+  // background-color: $off-black;
+  // color: $off-white;
   border: 2px solid transparent;
   transition: 0.3s;
   display: flex;
