@@ -42,7 +42,10 @@ class Profile extends React.Component {
 			<div className="profile-page-wrapper">
 
 				<div className="profile-banner">
-					<h1 className="twopercent-spacing">Profile</h1> 
+					<h1 className="twopercent-spacing">
+						{loggedIn ? <img className="profile-avatar-responsive" src={creds.img}/> : null}
+						Profile
+					</h1> 
 				</div>
 
 				<div className="welcome twopercent-spacing">

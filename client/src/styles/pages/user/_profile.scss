@@ -10,6 +10,11 @@
   ". usernameedit usernameedit usernameedit ."
   ". avatar avatar avatar avatar";
   font-family: "ubuntu", sans-serif;
+
+  h1 {
+    display: flex;
+    align-items: center;
+  }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -17,10 +22,6 @@
 // is because we needed the border bottom in .profile-banner to span the entire length.
 .twopercent-spacing {
   margin-left: 2vw;
-
-  &:last-of-type {
-    margin-bottom: 2vw;
-  }
 }
 .profile-banner {
   @include themify($themes) {
@@ -34,6 +35,19 @@
   // border-bottom: 1px solid $off-black;
   margin-bottom: 2vw;
 }
+
+// Profile avatar only shown in tablet/mobile
+// since the dashboard disappears
+.profile-avatar-responsive {
+  display: none;
+
+  @media (max-width: 768px) {
+    display: block;
+    width: 50px;
+    margin-right: .5em;
+  }
+}
+
 .welcome {
   grid-area: welcome;
   h2 {
@@ -125,16 +139,12 @@
 .form__input {
   @include themify($themes) {
     color: themed('textColor');
-
-    &::placeholder {
-      color: darken(themed('textColor'), 10%);
-    }
+    border: none;
+    border-bottom: 1px solid lighten(themed('textColor'), 15%);
   }
 
   max-width: 250px;
   margin: 5px 0;
-  border: none;
-  border-bottom: 1px solid #DDDDDD;
   outline: none;
   background: inherit;
   padding: 1em;
@@ -183,8 +193,8 @@
     cursor: pointer;
 }
 
-/////////////////////////////////////////////////////////////////////
-// Saved Videos, Playlists, Theme Select Section for Tablet/Mobile //
+//////////////////
+// Theme Select //
 .profile-themeselect {
   display: none;
   
@@ -192,6 +202,7 @@
     display: flex;
     flex-direction: column;
     grid-area: themeselect;
+    margin-bottom: 1em;
   }
 }
 
@@ -200,7 +211,7 @@
 .avatar-wrapper{
   display: flex;
   flex-direction: column;
-  margin-right: .5em;
+  margin-right: 2vw;
   margin-bottom: 1em;
 }
 .avatar-selection {
@@ -212,7 +223,7 @@
   }
 
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   flex-wrap: wrap;
   // box-shadow: 0px 0px 15px 1px #888888;
 }

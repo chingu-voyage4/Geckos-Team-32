@@ -18,7 +18,7 @@ const About = (props) => (
       <div className="about-container">
         <h2>Special Thanks to:</h2>
         <span>The API provided by <a className="bold link" href="https://developers.google.com/youtube/" target="_blank">Youtube <i className="fab fa-youtube"></i></a></span>
-        <span>Icons made by <a className="bold link" href="http://www.freepik.com" target="_blank">Freepik</a> and provided by <a className="bold link" href="https://www.flaticon.com/" target="_blank">Flaticon</a> licensed by <a className="bold link" href="http://creativecommons.org/licenses/by/3.0/" target="_blank">CC 3.0 BY</a></span>
+        <span>Icons made by <a className="bold link" href="http://www.freepik.com" target="_blank">Freepik</a> from <a className="bold link" href="https://www.flaticon.com/" target="_blank">Flaticon</a> licensed by <a className="bold link" href="http://creativecommons.org/licenses/by/3.0/" target="_blank">CC 3.0 BY</a></span>
       </div>
 
       <div className="divider"></div>
