@@ -136,6 +136,10 @@
   @include themify($themes) {
     color: themed('hoverColor');
     border: 1px solid themed('dashText');
+
+    @media (max-width: 768px) {
+      border: 1px solid themed('themeSelect');
+    }
   }
 
   grid-area: choice;
@@ -167,16 +171,19 @@
   justify-items: center;
 }
 .social-media {
+  @include themify($themes) {
+    color: themed('dashText');
+    border: 2px solid themed('dashText');
+  }
+
   display: flex;
   justify-content: center;
   align-items: center;
   height: 35px;
   width: 35px;
   font-size: 20px;
-  background-color: darken($off-white, 10%);
-  border: 3px solid lighten($off-black, 10%);
+  background-color: transparent;
   border-radius: 15%;
-  color: $off-black;
   transition: all .25s ease-out;
   -webkit-transition: all .25s ease-out;
 }

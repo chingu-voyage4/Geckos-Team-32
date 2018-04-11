@@ -11,7 +11,6 @@ export default class DashTop extends Component {
           <li>- User avatar</li>
           <li>- Customized themes</li>
           <li>- Save 'liked' videos</li>
-          <li>- See what other users are watching</li>
           <p className="bold">And much more!</p>
         </ul>
         

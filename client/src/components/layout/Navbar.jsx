@@ -34,6 +34,8 @@ export default class Navbar extends Component {
               {this.props.user.loggedIn ?
                 <div>
                   <NavLink to={`/user/${id}`} onClick={this.burgerToggle}>Profile</NavLink>
+                  <NavLink to={`/user/${id}/playlists`} onClick={this.burgerToggle}>Playlists</NavLink>
+                  <NavLink to={`/user/${id}/saved`} onClick={this.burgerToggle}>Liked Videos</NavLink>
                   <a href="#" onClick={(e) => this.props.handleLogoutUser(e)}>Sign Out</a>
                 </div> :
                 <div>

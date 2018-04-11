@@ -205,6 +205,7 @@ class AppRoutes extends React.Component {
                     handleUpdateAfterDelete={this.handleUpdateAfterDelete}
                     handleUpdateUser={this.handleUpdateUser}
                     handleUpdateAvatar={this.handleUpdateAvatar}
+                    handleUpdateTheme={this.handleUpdateTheme}
                     handleShowDash={this.handleShowDash}
                     retrieveSavedVideos={this.retrieveSavedVideos}
                     handleEditProfile={req => {
@@ -225,7 +226,7 @@ class AppRoutes extends React.Component {
                   />)}
                 />
                 <Route 
-                  exact path="/user/:id/playlist"
+                  exact path="/user/:id/playlists"
                   render={() => <Playlist/>}
                 />
                 <Route 

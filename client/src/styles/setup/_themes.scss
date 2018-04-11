@@ -18,6 +18,7 @@ $themes: (
     savedVidBackground: $bg-grey,
     navBarBackground: white,
     navBarIcon: #333,
+    themeSelect: #333,
   ),
   twilight: (
     backgroundColor: lighten($off-black, 5%),
@@ -35,7 +36,8 @@ $themes: (
     input: lighten($off-black, 25%),
     savedVidBackground: lighten($off-black, 20%),
     navBarBackground: lighten($off-black, 25%),
-    navBarIcon: $dark-text,
+    navBarIcon: lighten($off-black, 5%),
+    themeSelect: $dark-text,
   ),
   peacock: (
     backgroundColor: $accent-dark-blue,
@@ -53,7 +55,8 @@ $themes: (
     input: darken($accent-dark-blue, 10%),
     savedVidBackground: lighten($accent-dark-blue, 10%),
     navBarBackground: lighten($accent-dark-blue, 25%),
-    navBarIcon: $dark-text,
+    navBarIcon: $accent-dark-blue,
+    themeSelect: lighten($accent-dark-blue, 35%),
   )
 );
 

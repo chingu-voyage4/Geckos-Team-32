@@ -20,6 +20,10 @@ footer {
   // background-color: $off-white;
 }
 .footer-bottom {
+  @include themify($themes) {
+    color: themed('dashText');
+  }
+
   display: grid;
   grid-template-columns: 100%;
   grid-template-areas:
@@ -46,13 +50,17 @@ align-items: center;
   justify-self: end;
   padding-right: 10%;
 }
+.yt-credit a, .geckos-credit a {
+  padding-left: 0.5em;
+}
 
 .social-media-footer {
   @include themify($themes) {
-    color: themed('textColor');
-    background-color: themed('dashBackground');
+    color: themed('dashText');
+    border: 2px solid themed('dashText');
   }
-
+  
+  background-color: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,7 +68,7 @@ align-items: center;
   width: 35px;
   font-size: 20px;
   // background-color: darken($off-white, 10%);
-  border: 3px solid lighten($off-black, 10%);
+  border: 2px solid lighten($off-black, 10%);
   border-radius: 15%;
   color: $off-black;
   transition: all .25s ease-out;

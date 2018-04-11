@@ -8,8 +8,7 @@
   ". banner banner banner banner"
   ". welcome welcome . ."
   ". usernameedit usernameedit usernameedit ."
-  ". avatar avatar avatar avatar"
-  ". savedvideos . . .";
+  ". avatar avatar avatar avatar";
   font-family: "ubuntu", sans-serif;
 }
 
@@ -113,7 +112,8 @@
 
   display: flex;
   flex-direction: column;
-  margin: 1em 0;
+  margin-top: 1em;
+  margin-right: .5em;
   padding: 1em;
 
   label {
@@ -131,7 +131,7 @@
     }
   }
 
-  width: 250px;
+  max-width: 250px;
   margin: 5px 0;
   border: none;
   border-bottom: 1px solid #DDDDDD;
@@ -183,13 +183,16 @@
     cursor: pointer;
 }
 
-//////////////////////////
-// Saved Videos Section //
-.savedvideos {
-  display: flex;
-  flex-direction: column;
-  grid-area: savedvideos;
-  padding: 20px 0;
+/////////////////////////////////////////////////////////////////////
+// Saved Videos, Playlists, Theme Select Section for Tablet/Mobile //
+.profile-themeselect {
+  display: none;
+  
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    grid-area: themeselect;
+  }
 }
 
 //////////////////////
@@ -197,7 +200,8 @@
 .avatar-wrapper{
   display: flex;
   flex-direction: column;
-  margin-right: 2vw;
+  margin-right: .5em;
+  margin-bottom: 1em;
 }
 .avatar-selection {
   grid-area: avatar;
@@ -234,13 +238,13 @@
 
 @media (max-width: 768px) {
   .profile-page-wrapper {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas:
-    "banner banner banner banner"
-    "welcome welcome . ."
-    "usernameedit usernameedit . ."
-    "savedvideos savedvideos . ."
-    "avatar avatar avatar avatar";
+    "banner banner banner"
+    "welcome welcome welcome"
+    "usernameedit usernameedit usernameedit"
+    "avatar avatar avatar"
+    "themeselect themeselect .";
   }
 
   .avatar-library img {
@@ -253,18 +257,12 @@
 }
 }
 @media (max-width: 562px) {
-.modal-content {
-  .profile-button {
-  display: flex;
-  justify-content: center;
-  margin: 10px auto;
-  width: 80%;
-  
+  .modal-content {
+    .profile-button {
+    display: flex;
+    justify-content: center;
+    margin: 10px auto;
+    width: 80%;
+    }
   }
-}
-}
-@media (max-width: 400px) {
-  .form__input {
-  width: 300px;
-}
 }

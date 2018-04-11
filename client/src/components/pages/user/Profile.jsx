@@ -66,11 +66,14 @@ class Profile extends React.Component {
 					<button className="button profile-button" onClick={() => this.showAvatars()}>Change Avatar</button>
 					{this.state.avatar && <AvatarSelection handleUpdateAvatar={this.props.handleUpdateAvatar}/>}
 				</div>
-					
-				<div className="savedvideos twopercent-spacing">
-					<Link to={`/user/${creds._id}/saved`}>
-						<button className="button profile-button">Liked Videos</button>
-					</Link>
+				
+				<div className="profile-themeselect twopercent-spacing">
+					<h4 className="theme-title">Theme:</h4>
+					<select className="theme-changer" onChange={(e) => this.props.handleUpdateTheme(e.target.value)}>
+						<option value="theme-gecho">Gecho</option>
+						<option value="theme-twilight">Twilight</option>
+						<option value="theme-peacock">Peacock</option>
+					</select>
 				</div>
 	
       </div>
