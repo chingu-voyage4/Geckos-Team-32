@@ -22,9 +22,9 @@ import ScrollToTop from './ScrollToTop.jsx';
 import { dummyUserData, dummySavedVideosData } from '../seedData/seedData';
 
 class AppRoutes extends React.Component {
-  //////////////////////////
-  /////// SEED DATA ////////
-  //////////////////////////
+  ////////////////////////
+  ///// SEED DATA ////////
+  ////////////////////////
 
   // state = {
   //   launch: true,
