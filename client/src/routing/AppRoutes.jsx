@@ -219,7 +219,7 @@ class AppRoutes extends React.Component {
                 />)}
               />
               <Route 
-                exact path="/user/:id/playlist"
+                exact path="/user/:id/playlists"
                 render={() => <Playlist/>}
               />
               <Route 
