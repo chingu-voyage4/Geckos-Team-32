@@ -2,9 +2,9 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 
-import Navbar from '../components/shared/Navbar.jsx';
-import Footer from '../components/shared/Footer.jsx';
-import Dashboard from '../components/shared/Dashboard.jsx';
+import Navbar from '../components/layout/Navbar.jsx';
+import Footer from '../components/layout/Footer.jsx';
+import Dashboard from '../components/layout/Dashboard.jsx';
 import Home from '../components/pages/landing/Home.jsx';
 import Search from '../components/pages/landing/Search.jsx';
 import PlayVideo from '../components/pages/landing/PlayVideo.jsx';
