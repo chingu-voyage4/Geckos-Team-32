@@ -82,7 +82,7 @@ router.post('/user/:id/edit', middleware.isLoggedIn, async (req, res, next) => {
  * DELETE ROUTE
  * DESTROY -- Delete user and associated credentials
  */
-router.get('/user/:id/delete', middleware.isLoggedIn, async (req, res, next) => {
+router.delete('/user/:id/delete', middleware.isLoggedIn, async (req, res, next) => {
   try {
     console.log('DELETE ROUTE PARAMS: ', req.params);
     let user = await User.findByIdAndRemove(req.params.id);

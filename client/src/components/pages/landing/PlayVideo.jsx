@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 
 const PlayVideo = (props) => {
   console.log('this is playvideo props: ', props);
+  window.scrollTo(0, 0)
 
   if (props.location) {
-    console.log('if hit');
     const { title, description, url } = props.location.state.video;
     
     return (
@@ -15,7 +15,6 @@ const PlayVideo = (props) => {
       </div>
     );
   } else if (props.selectedVideo) {
-    console.log('else if hit');
     const { title, description, thumbnail, url } = props.selectedVideo;
     const yturl = `https://www.youtube.com/embed/${url}`;
 
@@ -27,7 +26,12 @@ const PlayVideo = (props) => {
         <div>
           <div>{title}</div>
           <div>{description}</div>
-          <button onClick={(e) => props.handleLikedVideo(e, props.selectedVideo)}><i className="fas fa-heart"></i></button>
+          {props.user.loggedIn && 
+            <div>
+              <button className="save-video-button" onClick={(e) => props.handleLikedVideo(e, props.selectedVideo)}><i className="fas fa-heart"></i></button>
+              <button className="save-video-button"><i className="fas fa-list"></i> <i className="fas fa-plus"></i></button>
+            </div>
+          }
         </div>
       </div>
     );
