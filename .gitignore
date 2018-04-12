@@ -40,12 +40,19 @@ coverage
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git-
 node_modules
 
+<<<<<<< HEAD
 dev.js
+=======
+server/config/dev.js
+>>>>>>> 76642a8d37b7259c1ec0e1df1db75dee10aad16a
 
 # Users Environment Variables
 .lock-wscript
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 76642a8d37b7259c1ec0e1df1db75dee10aad16a
 # OS generated files #
 ######################
 .DS_Store
@@ -58,5 +65,6 @@ Thumbs.db
 
 .env
 
-# HMR Chunks
-client/public/hot
+# HMR Chunks inside Dist
+# Dist folder
+/client/public/dist
