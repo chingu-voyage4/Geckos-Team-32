@@ -73,6 +73,3 @@ router.delete('/delete/:video_id', middleware.isLoggedIn, async (req, res, next)
 });
 
 module.exports = router;
-
-// 
-//5ace1d123c3c2ce62a5393e0
