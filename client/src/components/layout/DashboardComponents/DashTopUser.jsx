@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 export default class DashTop extends Component {
   render() {
-    console.log('from user dash: ', this.props);
+    // console.log('from user dash: ', this.props);
     const { username, _id, img } = this.props.state.user.creds;
 
     return (

@@ -64,6 +64,13 @@ class AppRoutes extends React.Component {
   // Show dashboard after moving form landing page
   handleShowDash = () => this.state.launch ? this.setState({ launch: false }) : null;
 
+  // Check sessionStorage if user is logged in or not
+  handleCheckSession = (session) => {
+    if (session && this.state.user.loggedIn !== session.loggedIn) {
+      this.setState({ user: session, launch: false });
+    }
+  }
+
   handleUpdateUser = (user) => {
     // Only change if user object contains a username
     if (user.username) {
@@ -73,6 +80,7 @@ class AppRoutes extends React.Component {
           creds: user
         }
       });
+      sessionStorage.setItem('session', JSON.stringify(this.state.user)); // set sessionStorage for log in
     }
   }
 
@@ -94,6 +102,7 @@ class AppRoutes extends React.Component {
         creds: {}
       }
     });
+    sessionStorage.removeItem('session'); // set sessionStorage for logout
   }
 
   handleUpdateAfterDelete = () => {
@@ -103,6 +112,7 @@ class AppRoutes extends React.Component {
         creds: {}
       }
     });
+    sessionStorage.removeItem('session');
     window.location.reload(); // reload page to reset state
   }
 
@@ -177,6 +187,7 @@ class AppRoutes extends React.Component {
                 state={this.state}
                 retrieveSavedVideos={this.retrieveSavedVideos}
                 handleUpdateTheme={this.handleUpdateTheme}
+                handleCheckSession={this.handleCheckSession}
               />
               <Switch>
                 <Route
