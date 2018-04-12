@@ -45,8 +45,6 @@ dev.js
 # Users Environment Variables
 .lock-wscript
 
-#config folder
-**/server/config
 
 # OS generated files #
 ######################
