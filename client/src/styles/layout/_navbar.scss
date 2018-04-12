@@ -122,6 +122,12 @@ img.test {
     transition: 0.4s;
 }
 
+#toggle {
+  position: absolute;
+  left: -100%;
+  top: -100%;
+}
+
 ////////////////////////////////////
 // This animation doesn't work yet(add class="change" to <div className="hamburger-icon" to see it) //
 ////////////////////////////////////

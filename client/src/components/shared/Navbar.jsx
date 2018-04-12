@@ -8,14 +8,12 @@ import brand from "../../assets/Gechotext2.png";
 /*              <img src={brand} />*/
 export default class Navbar extends Component {
   state = {
-    hamburgerToggle: false
+    navOpen: false
   }
 
-  handleopennav = () => this.state.hamburgerToggle
-    ? this.setState({ hamburgerToggle: false }, 
-    console.log('this is working'))
-    : this.setState({ hamburgerToggle: true });
-  
+  openNavbar = () => {
+    this.setState({ navOpen: true })
+  };
   render() {
     // console.log('FROM NAVBAR PROPS: ', this.props);
     const id = this.props.user.creds._id ? this.props.user.creds._id : "profile";
@@ -32,11 +30,11 @@ export default class Navbar extends Component {
             </NavLink>
           </div>
           <div className="hamburger">
-            <input id="toggle"  type="checkbox" />
-            <label className="toggle-container" htmlFor="toggle">
+            <input id="toggle" className={this.state.navOpen ? "toggle-off" : "toggle-on" } type="checkbox" />
+            <label className="toggle-container" htmlFor="toggle" onClick={this.openNavbar}>
                 <span className="button button-toggle"></span>
             </label>
-            <div className={this.state.hamburgerToggle ? "toggle-on burger-links" : "toggle-off burger-links" } handleOpenNav={this.handleopennav}>
+            <div className="burger-links" handleOpenNav={this.openNavbar} >
               <NavLink to="/about" className="nav-item two" onClick={this.burgerToggle}>About</NavLink>
               {this.props.user.loggedIn ?
                 <div>
