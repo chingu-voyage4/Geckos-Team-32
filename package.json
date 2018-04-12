@@ -10,7 +10,7 @@
     "dev": "webpack-dev-server",
     "watch": "nodemon server/server.js",
     "build:dev": "webpack",
-    "build:prod": "webpack -p --env production",
+    "build:prod": "NODE_ENV=production webpack -p",
     "heroku-postbuild": "npm run build:prod"
   },
   "proxy": "http://localhost:8000/",
@@ -47,6 +47,7 @@
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.11",
     "googleapis": "^27.0.0",
+    "helmet": "^3.12.0",
     "method-override": "^2.3.10",
     "mongod": "^2.0.0",
     "mongodb": "^3.0.3",

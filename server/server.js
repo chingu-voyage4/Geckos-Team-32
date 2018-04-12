@@ -9,6 +9,7 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
 const cors = require('cors');
+const helmet = require('helmet');
 const compression = require('compression');
 
 const publicPath = path.join(__dirname, '..', 'client/public');
@@ -26,6 +27,7 @@ app.use(bodyParser.json()); // looks for JSON data
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(cors()); // cors middleware for auth
+app.use(helmet()); // header middleware
 app.use(compression());
 
 /*

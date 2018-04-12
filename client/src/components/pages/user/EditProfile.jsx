@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 
 
-class EditProfile extends React.Component {
+class EditProfile extends Component {
   handleEditData(e) {
     e.preventDefault();
 

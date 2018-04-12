@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 
-class AvatarSelection extends React.Component {
+class AvatarSelection extends Component {
   handleAvatarClick(e) {
     e.preventDefault();
     const img = e.target.src;

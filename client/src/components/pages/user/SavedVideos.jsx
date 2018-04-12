@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-class SavedVideos extends React.Component {
+class SavedVideos extends Component {
   componentDidMount() {
     console.log('mounted: ', this.props);
     this.props.retrieveSavedVideos();

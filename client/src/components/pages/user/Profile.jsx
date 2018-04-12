@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 import { Link, withRouter } from 'react-router-dom';
 import EditProfile from './EditProfile.jsx';
 import SavedVideos from './SavedVideos.jsx';
 import AvatarSelection from './AvatarSelection.jsx';
 
-class Profile extends React.Component {
+class Profile extends Component {
 	state = {
 		avatar: false,
 	}
