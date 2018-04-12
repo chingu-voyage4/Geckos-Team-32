@@ -4,7 +4,6 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const cssExtract = new ExtractTextPlugin('styles.css');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-console.log('this is env var: ', process.env.NODE_ENV);
 
 module.exports = {
   entry: {
@@ -61,10 +60,6 @@ module.exports = {
         drop_console: true,
         screw_ie8: true
       },
-      output: {
-        comments: false,
-        screw_ie8: true
-      }
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
