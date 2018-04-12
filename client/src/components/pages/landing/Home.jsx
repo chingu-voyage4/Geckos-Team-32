@@ -6,8 +6,8 @@ class Home extends Component {
 	handleSearchInput(e) {
 		e.preventDefault();
 		const search = e.target.elements.search.value;
-		this.props.handleSearchInput(search);
-		this.props.history.push('/search');
+		// this.props.handleSearchInput(search);
+		this.props.history.push(`/search/${search}`);
 	}
 
   render() {

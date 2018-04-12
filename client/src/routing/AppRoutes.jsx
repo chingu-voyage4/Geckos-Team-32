@@ -54,7 +54,6 @@ class AppRoutes extends React.Component {
       edit: false,
       editButton: 'Edit',
     },
-    search: '',
     videos: [],
     selectedVideo: null,
     saved: false,
@@ -104,6 +103,7 @@ class AppRoutes extends React.Component {
         creds: {}
       }
     });
+    window.location.reload(); // reload page to reset state
   }
 
   handleSearchInput = (query) => {
@@ -112,7 +112,7 @@ class AppRoutes extends React.Component {
       .then((results) => {
         // console.log(results.data);
         let videos = results.data.data.items;
-        this.setState({ search: query, videos: videos, selectedVideo: null });
+        this.setState({ videos: videos, selectedVideo: null });
       })
       .catch((err) => {
         console.log(err);
@@ -188,13 +188,14 @@ class AppRoutes extends React.Component {
                     />)}
                     />
                     <Route 
-                    path="/search" 
-                    component={() => (<Search
-                    stateData={this.state}
-                    handleSearchInput={this.handleSearchInput}
-                    handleSelectedVideo={selectedVideo => this.setState({selectedVideo})}
-                    handleLikedVideo={this.handleLikedVideo}
-                    handleShowDash={this.handleShowDash}
+                    path="/search/:id" 
+                    render={(props) => (<Search
+                      userId={props}
+                      stateData={this.state}
+                      handleSearchInput={this.handleSearchInput}
+                      handleSelectedVideo={selectedVideo => this.setState({selectedVideo})}
+                      handleLikedVideo={this.handleLikedVideo}
+                      handleShowDash={this.handleShowDash}
                   />)} 
                 />
                 <Route
@@ -220,6 +221,7 @@ class AppRoutes extends React.Component {
                   exact path="/user/:id/saved"
                   render={(props) => (<SavedVideos 
                     userId={props}
+                    state={this.state}
                     videos={this.state.savedVideos}
                     retrieveSavedVideos={this.retrieveSavedVideos}
                     handleUpdateSavedVideos={this.handleUpdateSavedVideos}

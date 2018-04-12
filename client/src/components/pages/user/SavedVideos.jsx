@@ -21,16 +21,9 @@ class SavedVideos extends Component {
       });
   }
 
-  componentWillReceiveProps() {
-    console.log('receiving new props', this.props);
-  }
-
-  componentDidUpdate() {
-    console.log('updated component', this.props);
-  }
-
   render() {
-    // console.log('from savedvideos.jsx:', this.props.videos);
+    console.log('from savedvideos.jsx:', this.props);
+    if (!this.props.state.user.loggedIn) { this.props.userId.history.push('/'); } // re-direct to homepage if not logged in
 
     if (this.props.videos) {
       return (
