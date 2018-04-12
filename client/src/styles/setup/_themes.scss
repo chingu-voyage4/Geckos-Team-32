@@ -18,6 +18,7 @@ $themes: (
     navBarBackground: white,
     navBarIcon: #333,
     themeSelect: #333,
+    formLabel: $accent-light-blue,
   ),
   twilight: (
     backgroundColor: lighten($off-black, 5%),
@@ -37,6 +38,7 @@ $themes: (
     navBarBackground: lighten($off-black, 25%),
     navBarIcon: lighten($off-black, 5%),
     themeSelect: $dark-text,
+    formLabel: #ffd13b,
   ),
   peacock: (
     backgroundColor: $accent-dark-blue,
@@ -56,6 +58,7 @@ $themes: (
     navBarBackground: lighten($accent-dark-blue, 25%),
     navBarIcon: $accent-dark-blue,
     themeSelect: lighten($accent-dark-blue, 35%),
+    formLabel: $accent-purple,
   )
 );
 

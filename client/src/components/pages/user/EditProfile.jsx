@@ -9,7 +9,10 @@ class EditProfile extends Component {
 
     // Add more profile details here
     let req = {
-      username: e.target.elements.username.value
+      email: e.target.elements.email.value,
+      displayName: e.target.elements.displayName.value,
+      username: e.target.elements.username.value,
+      location: e.target.elements.location.value,
     };
     axios.post(`/routes/user/${this.props.id}/edit`, req)
       .then((results) => {
@@ -62,15 +65,24 @@ class EditProfile extends Component {
   }
 
   render() {
-    // console.log('this is from edit profile: ', this.props);
-    const { username } = this.props.creds;
+    console.log('this is from edit profile: ', this.props);
+    const { username, email, location, displayName } = this.props.creds;
 
     return (
       <div>
         <div className="edit-form">
           <form onSubmit={this.handleEditData.bind(this)}>
+            <label htmlFor="displayName">
+              Name: <input className="form__input" type="text" name="displayName" defaultValue={displayName || null} onChange={(e) =>this.handleEditData.bind(this)} required/>
+            </label>
+            <label htmlFor="email">
+              Email: <input className="form__input" type="email" name="email" defaultValue={email || null} onChange={(e) =>this.handleEditData.bind(this)} required/>
+            </label>
             <label htmlFor="username">
               Username: <input className="form__input" type="text" name="username" defaultValue={username} onChange={(e) =>this.handleEditData.bind(this)} required/>
+            </label>
+            <label htmlFor="location">
+              Location: <input className="form__input" type="text" name="location" defaultValue={location || null} onChange={(e) =>this.handleEditData.bind(this)} required/>
             </label>
             <button className="button profile-button submit">Submit</button>
           </form>

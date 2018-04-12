@@ -62,7 +62,17 @@
   h2 {
     margin: 0 0 2vw 0;
     font-size: 2em;
+    display: flex;
+    align-items: center;
   }
+}
+
+.profile-location {
+  @include themify($themes) {
+    color: lighten(themed('textColor'), 20%);
+  }
+  font-size: .5em;
+  padding-left: .5em;
 }
 
 ////////////////////////
@@ -131,6 +141,10 @@
   padding: 1em;
 
   label {
+    @include themify($themes) {
+      color: themed('formLabel');
+    }
+
     display: flex;
     flex-direction: column;
     padding: 1em;

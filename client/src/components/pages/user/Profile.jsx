@@ -34,7 +34,7 @@ class Profile extends Component {
 	}
   
   render() {
-		// console.log('this is from profile: ', this.props);
+		console.log('this is from profile: ', this.props);
 		const { loggedIn, creds } = this.props.state.user;
 		const { edit, editButton } = this.props.state.editUser;
 
@@ -53,7 +53,7 @@ class Profile extends Component {
 				</div>
 
 				<div className="profile-username-edit twopercent-spacing">
-					{loggedIn ? <h2>{creds.username}!</h2> : null}
+					{loggedIn ? <h2>{creds.displayName || creds.username}! <span className="profile-location">({creds.location})</span></h2> : null}
 					<button className="button profile-button" onClick={this.props.handleEditProfile}>{editButton}</button>
 					{edit ? 
 					<EditProfile 

@@ -65,7 +65,10 @@ router.post('/user/:id/edit', middleware.isLoggedIn, async (req, res, next) => {
     if (verify && user.username !== verify.username) {
       res.send({ response: 'taken' });
     } else {
+      user.displayName = req.body.displayName;
+      user.email = req.body.email;
       user.username = req.body.username;
+      user.location = req.body.location;
       user = await user.save();
       res.send({ response: user });
     }
