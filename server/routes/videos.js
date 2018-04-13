@@ -29,10 +29,15 @@ router.get('/', middleware.isLoggedIn, async (req, res) => {
  */
 router.post('/', async (req, res, next) => {
   try {
-    let user = await User.findById(req.params.id);
-    if (!user) {
-      res.redirect('/');
+    let user = await User.findById(req.params.id).populate('videos'); // find user in DB
+    let match = await user.videos.find(video => video.url === req.body.url); // search through user's video list
+
+    if (match) {
+      // video already exists, return list
+      console.log('This video already exists in list');
+      res.send({ videos: user.videos });
     } else {
+      // video not in list, add it
       let newVideo = new Video();
       newVideo.title = req.body.title;
       newVideo.url = req.body.url;

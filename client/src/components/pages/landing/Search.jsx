@@ -2,11 +2,22 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PlayVideo from './PlayVideo.jsx';
 
-export default class PostLandingPage extends Component {
+export default class Search extends Component {
+  componentDidMount() {
+    this.props.handleShowDash();
+    this.handleSearchInput();
+  }
+    
   handleSearchInput(e) {
-		e.preventDefault();
-		const search = e.target.elements.search.value;
+    let search = null;
+    if (e) {
+      e.preventDefault();
+      search = e.target.elements.search.value
+    } else {
+      search = this.props.userId.match.params.id;
+    }
     this.props.handleSearchInput(search);
+    this.props.userId.history.push(`/search/${search}`);
   }
 
   saveSelectedVideo(video) {
@@ -22,8 +33,8 @@ export default class PostLandingPage extends Component {
   }
 
   render() {
-    console.log('from postlanding: ', this.props);
-    const { search, videos, selectedVideo } = this.props.stateData;
+    console.log('from search: ', this.props);
+    const { videos, selectedVideo } = this.props.stateData;
     
     return (
       <div className="page-wrapper">
@@ -31,7 +42,7 @@ export default class PostLandingPage extends Component {
         <div className="post-landing-searchbar-wrapper">
           <form className="landing-searchbar" onSubmit={this.handleSearchInput.bind(this)}>
             <button type="submit" className="landing-search-icon button"><i className="fas fa-search"></i></button>
-            <input className="landing-search" name="search" defaultValue={search}/>
+            <input className="landing-search" name="search" defaultValue={this.props.userId.match.params.id}/>
           </form>
         </div>
 

@@ -18,4 +18,11 @@ const playlistSchema = new mongoose.Schema({
   ]
 });
 
+//////// Virtual Types
+
+playlistSchema.virtual('videosCount').get(function(){ //keep the function, don't refactor to an arrow function here
+    return this.videos.lenght; 
+});
+
+
 module.exports = mongoose.model('Playlist', playlistSchema);
