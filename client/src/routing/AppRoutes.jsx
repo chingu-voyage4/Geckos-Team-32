@@ -2,9 +2,9 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 
-import Navbar from '../components/shared/Navbar.jsx';
-import Footer from '../components/shared/Footer.jsx';
-import Dashboard from '../components/shared/Dashboard.jsx';
+import Navbar from '../components/layout/Navbar.jsx';
+import Footer from '../components/layout/Footer.jsx';
+import Dashboard from '../components/layout/Dashboard.jsx';
 import Home from '../components/pages/landing/Home.jsx';
 import Search from '../components/pages/landing/Search.jsx';
 import PlayVideo from '../components/pages/landing/PlayVideo.jsx';
@@ -22,9 +22,9 @@ import ScrollToTop from './ScrollToTop.jsx';
 import { dummyUserData, dummySavedVideosData } from '../seedData/seedData';
 
 class AppRoutes extends React.Component {
-  //////////////////////////
-  /////// SEED DATA ////////
-  //////////////////////////
+  ////////////////////////
+  ///// SEED DATA ////////
+  ////////////////////////
 
   // state = {
   //   launch: true,
@@ -54,15 +54,22 @@ class AppRoutes extends React.Component {
       edit: false,
       editButton: 'Edit',
     },
-    search: '',
     videos: [],
     selectedVideo: null,
     saved: false,
-    savedVideos: null
+    savedVideos: null,
+    theme: 'theme-gecho'
   }
 
   // Show dashboard after moving form landing page
   handleShowDash = () => this.state.launch ? this.setState({ launch: false }) : null;
+
+  // Check sessionStorage if user is logged in or not
+  handleCheckSession = (session) => {
+    if (session && this.state.user.loggedIn !== session.loggedIn) {
+      this.setState({ user: session, launch: false });
+    }
+  }
 
   handleUpdateUser = (user) => {
     // Only change if user object contains a username
@@ -73,6 +80,7 @@ class AppRoutes extends React.Component {
           creds: user
         }
       });
+      sessionStorage.setItem('session', JSON.stringify(this.state.user)); // set sessionStorage for log in
     }
   }
 
@@ -94,6 +102,7 @@ class AppRoutes extends React.Component {
         creds: {}
       }
     });
+    sessionStorage.removeItem('session'); // set sessionStorage for logout
   }
 
   handleUpdateAfterDelete = () => {
@@ -103,6 +112,8 @@ class AppRoutes extends React.Component {
         creds: {}
       }
     });
+    sessionStorage.removeItem('session');
+    window.location.reload(); // reload page to reset state
   }
 
   handleSearchInput = (query) => {
@@ -111,7 +122,7 @@ class AppRoutes extends React.Component {
       .then((results) => {
         // console.log(results.data);
         let videos = results.data.data.items;
-        this.setState({ search: query, videos: videos, selectedVideo: null });
+        this.setState({ videos: videos, selectedVideo: null });
       })
       .catch((err) => {
         console.log(err);
@@ -159,6 +170,8 @@ class AppRoutes extends React.Component {
     this.setState({ saved: true, savedVideos: videos });
   }
 
+  handleUpdateTheme = (theme) => this.setState({ theme });
+
   render() {
     return (
       <BrowserRouter>
@@ -166,79 +179,93 @@ class AppRoutes extends React.Component {
           <Navbar
             user={this.state.user}
             handleLogoutUser={this.handleLogoutUser}
+            theme={this.state.theme}
           />
-          <div className="main-page">
-            <Dashboard 
-              state={this.state}
-              retrieveSavedVideos={this.retrieveSavedVideos}
-            />
-            <Switch>
-              <Route
-                exact path="/"
-                component={() => (<Home
-                  launch={this.state.launch}
-                  search={this.state.search}
-                  handleSearchInput={this.handleSearchInput}
-                  handleShowDash={this.handleShowDash}
-                />)}
+          <div className={this.state.theme}>
+            <div className="main-page">
+              <Dashboard 
+                state={this.state}
+                retrieveSavedVideos={this.retrieveSavedVideos}
+                handleUpdateTheme={this.handleUpdateTheme}
+                handleCheckSession={this.handleCheckSession}
               />
-              <Route 
-                path="/search" 
-                component={() => (<Search
-                  stateData={this.state}
-                  handleSearchInput={this.handleSearchInput}
-                  handleSelectedVideo={selectedVideo => this.setState({selectedVideo})}
-                  handleLikedVideo={this.handleLikedVideo}
-                />)} 
-              />
-              <Route
-                exact path="/user/:id"
-                render={(props) => (<Profile
-                  userId={props}
-                  state={this.state}
-                  handleUpdateAfterDelete={this.handleUpdateAfterDelete}
-                  handleUpdateUser={this.handleUpdateUser}
-                  handleUpdateAvatar={this.handleUpdateAvatar}
-                  handleShowDash={this.handleShowDash}
-                  retrieveSavedVideos={this.retrieveSavedVideos}
-                  handleEditProfile={req => {
-                    !this.state.editUser.edit ? 
-                    this.setState({ editUser: { edit: true, editButton: 'Cancel' }}) : 
-                    this.setState({ editUser: { edit: false, editButton: 'Change Username' }});
-		                this.handleUpdateUser(req);
-                  }}
-                />)}
-              />
-              <Route 
-                exact path="/user/:id/saved"
-                render={(props) => (<SavedVideos 
-                  userId={props}
-                  videos={this.state.savedVideos}
-                  retrieveSavedVideos={this.retrieveSavedVideos}
-                  handleUpdateSavedVideos={this.handleUpdateSavedVideos}
-                />)}
-              />
-              <Route 
-                exact path="/user/:id/playlist"
-                render={() => <Playlist/>}
-              />
-              <Route 
-                path="/about" 
-                component={(props) => <About launch={this.state.launch}/>}
-              />
-              <Route path="/playvideo" component={PlayVideo} />
-              <Route 
-                path="/signup" 
-                component={(props) => <Signup launch={this.state.launch}/>} 
-              />
-              <Route 
-                path="/login" 
-                component={(props) => <Login launch={this.state.launch}/>} 
-              />
-              <Route component={NotFound} />
-            </Switch>
+              <Switch>
+                <Route
+                  exact path="/"
+                  component={() => (<Home
+                    launch={this.state.launch}
+                    search={this.state.search}
+                    handleSearchInput={this.handleSearchInput}
+                    />)}
+                    />
+                    <Route 
+                    path="/search/:id" 
+                    render={(props) => (<Search
+                      userId={props}
+                      stateData={this.state}
+                      handleSearchInput={this.handleSearchInput}
+                      handleSelectedVideo={selectedVideo => this.setState({selectedVideo})}
+                      handleLikedVideo={this.handleLikedVideo}
+                      handleShowDash={this.handleShowDash}
+                  />)} 
+                />
+                <Route
+                  exact path="/user/:id"
+                  render={(props) => (<Profile
+                    userId={props}
+                    state={this.state}
+                    handleUpdateAfterDelete={this.handleUpdateAfterDelete}
+                    handleUpdateUser={this.handleUpdateUser}
+                    handleUpdateAvatar={this.handleUpdateAvatar}
+                    handleUpdateTheme={this.handleUpdateTheme}
+                    handleShowDash={this.handleShowDash}
+                    retrieveSavedVideos={this.retrieveSavedVideos}
+                    handleEditProfile={req => {
+                      !this.state.editUser.edit ? 
+                      this.setState({ editUser: { edit: true, editButton: 'Cancel' }}) : 
+                      this.setState({ editUser: { edit: false, editButton: 'Edit Profile' }});
+                      this.handleUpdateUser(req);
+                    }}
+                  />)}
+                />
+                <Route 
+                  exact path="/user/:id/saved"
+                  render={(props) => (<SavedVideos 
+                    userId={props}
+                    state={this.state}
+                    videos={this.state.savedVideos}
+                    retrieveSavedVideos={this.retrieveSavedVideos}
+                    handleUpdateSavedVideos={this.handleUpdateSavedVideos}
+                  />)}
+                />
+                <Route 
+                  exact path="/user/:id/playlists"
+                  render={() => <Playlist/>}
+                />
+                <Route 
+                  path="/about" 
+                  component={(props) => <About launch={this.state.launch}/>}
+                />
+                <Route path="/playvideo" component={PlayVideo} />
+                <Route 
+                  path="/signup" 
+                  component={(props) => <Signup 
+                    launch={this.state.launch} 
+                    handleHideDash={this.handleHideDash}
+                  />} 
+                />
+                <Route 
+                  path="/login" 
+                  component={(props) => <Login 
+                    launch={this.state.launch} 
+                    handleHideDash={this.handleHideDash}
+                  />} 
+                />
+                <Route component={NotFound} />
+              </Switch>
+            </div>
           </div>
-          <Footer />
+          <Footer theme={this.state.theme}/>
         </ScrollToTop>
       </BrowserRouter>
     )
