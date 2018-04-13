@@ -4,18 +4,14 @@ import { NavLink } from 'react-router-dom';
 import logo from "../../assets/dantv5.png";
 import brand from "../../assets/Gechotext2.png";
 
-/*              <img className="test" src={logo} />*/
-/*              <img src={brand} />*/
 export default class Navbar extends Component {
   state = {
-    hamburgerToggle: false
+    navOpen: false
   }
 
-  handleopennav = () => this.state.hamburgerToggle
-    ? this.setState({ hamburgerToggle: false }, 
-    console.log('this is working'))
-    : this.setState({ hamburgerToggle: true });
-  
+  opennavbar = () => {
+    !this.state.navOpen ? this.setState({navOpen: true}) : this.setState({navOpen: false})
+  };
   render() {
     // console.log('FROM NAVBAR PROPS: ', this.props);
     const id = this.props.user.creds._id ? this.props.user.creds._id : "profile";
@@ -25,27 +21,30 @@ export default class Navbar extends Component {
         <nav className="navBar">
           <div className="logo">
             <NavLink className="icon" exact to="/">
-              logo
+              <img className="test" src={logo} />
             </NavLink>
             <NavLink className="brand" exact to="/">
-              brand
+              <img src={brand} />
             </NavLink>
           </div>
           <div className="hamburger">
-            <input id="toggle"  type="checkbox" />
+            <input id="toggle" 
+            className={this.state.navOpen ? "toggle-on" : "toggle-off" }
+            onClick={this.opennavbar} 
+            type="checkbox" />
             <label className="toggle-container" htmlFor="toggle">
                 <span className="button button-toggle"></span>
             </label>
-            <div className={this.state.hamburgerToggle ? "toggle-on burger-links" : "toggle-off burger-links" } handleOpenNav={this.handleopennav}>
-              <NavLink to="/about" className="nav-item two" onClick={this.burgerToggle}>About</NavLink>
+            <div className="burger-links">
+              <NavLink to="/about" className="nav-item two">About</NavLink>
               {this.props.user.loggedIn ?
                 <div>
                   <NavLink to={`/user/${id}`} href="" className="nav-item two" href="">Profile</NavLink>
-                  <a href="" onClick={(e) => this.props.handleLogoutUser(e)} className="nav-item two" href="">Sign Out</a>
+                  <a href="" onClick={(e) => this.props.handleLogoutUser(e)} className="nav-item two bar-three" href="">Sign Out</a>
                 </div> :
                 <div>
-                  <NavLink to="/signup" className="nav-item two" onClick={this.burgerToggle}>Sign up</NavLink>
-                  <NavLink to="/login" className="nav-item two" onClick={this.burgerToggle}>Log In</NavLink>
+                  <NavLink to="/signup" className="nav-item two">Sign up</NavLink>
+                  <NavLink to="/login" className="nav-item two bar-three">Log In</NavLink>
                 </div>
               }
             </div>

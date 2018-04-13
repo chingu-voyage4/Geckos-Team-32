@@ -18,6 +18,8 @@ const About = () => (
       <div className="about-container">
         <h2>Special Thanks to:</h2>
         <span>The API provided by: <a className="bold link" href="https://developers.google.com/youtube/" target="_blank">Youtube <i className="fab fa-youtube"></i></a></span>
+        <br />
+        <span>Avatar icons made by: Freepik from <a className="bold link" href="https://www.flaticon.com" target="_blank">FlatIcon</a></span>
       </div>
 
       <div className="divider"></div>
