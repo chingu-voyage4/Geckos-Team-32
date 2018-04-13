@@ -35,8 +35,8 @@ const PlayVideo = (props) => {
         </div>
       </div>
     );
-  } else {
-    return <h2>Choose a video to begin!</h2>;
+  } else { 
+    return null;
   }
 
 };
