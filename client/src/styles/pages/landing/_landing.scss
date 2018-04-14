@@ -6,11 +6,17 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 10vh;
+
+  h2 {
+    margin-bottom: 10vh;
+  }
 }
 .landing-searchbar {
+  @include themify($themes) {
+    border: none;
+    background: themed('backgroundColor');
+  }
   outline: none;
-  border: none;
   height: 40px;
   display: flex;
   flex-direction: row;
@@ -18,24 +24,36 @@
   background: white;
 }
 .landing-search {
+  @include themify($themes) {
+    color: themed('hoverColor');
+    border: none;
+    border-bottom: 1px solid themed('input');
+    background: themed('backgroundColor');
+  }
   width: 100%;
   height: 100%;
   font-size: 26px;
   text-indent: 12px;
   outline: none;
-  border: none;
 }
 .landing-search-icon {
+  @include themify($themes) {
+    color: themed('textColor');
+    background: themed('backgroundColor');
+  }
+
   font-size: 1.5em;
   padding-left: .5em;
   border: none;
-  background: transparent;
   outline: none;
   cursor: pointer;
   transition: 0.3s;
 
   &:hover {
-    color: $accent-red;
+    @include themify($themes) {
+      color: themed('hoverColor');
+    }
+    // color: $accent-red;
     transition: 0.3s;
   }
 }

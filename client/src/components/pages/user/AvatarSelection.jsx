@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 
-class AvatarSelection extends React.Component {
+class AvatarSelection extends Component {
   handleAvatarClick(e) {
     e.preventDefault();
     const img = e.target.src;
@@ -39,7 +39,6 @@ class AvatarSelection extends React.Component {
           <img onClick={(e) => this.handleAvatarClick(e)} className="avatars" src="http://webdesignbyraymond.com/gecho/022-woman-2.png" />
           <img onClick={(e) => this.handleAvatarClick(e)} className="avatars" src="http://webdesignbyraymond.com/gecho/023-woman-1.png" />
           <img onClick={(e) => this.handleAvatarClick(e)} className="avatars" src="http://webdesignbyraymond.com/gecho/024-girl.png" />
-          <img onClick={(e) => this.handleAvatarClick(e)} className="avatars" src="http://webdesignbyraymond.com/gecho/025-woman.png" />
         </div>
       </div>
     );

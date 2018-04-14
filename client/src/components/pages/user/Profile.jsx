@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import EditProfile from './EditProfile.jsx';
 import SavedVideos from './SavedVideos.jsx';
 import AvatarSelection from './AvatarSelection.jsx';
 
-class Profile extends React.Component {
+class Profile extends Component {
 	state = {
 		avatar: false,
 	}
@@ -25,6 +25,7 @@ class Profile extends React.Component {
 			})
 			.catch((err) => {
 				console.log('There was an error: ', err);
+				this.props.history.push('/');
 			});
 	}
 
@@ -33,7 +34,7 @@ class Profile extends React.Component {
 	}
   
   render() {
-		// console.log('this is from profile: ', this.props);
+		console.log('this is from profile: ', this.props);
 		const { loggedIn, creds } = this.props.state.user;
 		const { edit, editButton } = this.props.state.editUser;
 
@@ -41,15 +42,18 @@ class Profile extends React.Component {
 			<div className="profile-page-wrapper">
 
 				<div className="profile-banner">
-					<h1 className="twopercent-spacing">Profile</h1> 
+					<h1 className="twopercent-spacing">
+						{loggedIn ? <img className="profile-avatar-responsive" src={creds.img}/> : null}
+						Profile
+					</h1> 
 				</div>
 
 				<div className="welcome twopercent-spacing">
-					<h2>Welcome back</h2>
+					<h2>Welcome back,</h2>
 				</div>
 
 				<div className="profile-username-edit twopercent-spacing">
-					{loggedIn ? <h2>{creds.username}!</h2> : null}
+					{loggedIn ? <h2>{creds.displayName || creds.username}! <span className="profile-location">({creds.location})</span></h2> : null}
 					<button className="button profile-button" onClick={this.props.handleEditProfile}>{editButton}</button>
 					{edit ? 
 					<EditProfile 
@@ -60,16 +64,19 @@ class Profile extends React.Component {
 					/> : 
 					null}
 				</div>
-					
-				<div className="savedvideos twopercent-spacing">
-					<Link to={`/user/${creds._id}/saved`}>
-						<button className="button profile-button">Liked/Saved Videos</button>
-					</Link>
-				</div>
 
 				<div className="avatar-selection twopercent-spacing underline">
 					<button className="button profile-button" onClick={() => this.showAvatars()}>Change Avatar</button>
 					{this.state.avatar && <AvatarSelection handleUpdateAvatar={this.props.handleUpdateAvatar}/>}
+				</div>
+				
+				<div className="profile-themeselect twopercent-spacing">
+					<h4 className="theme-title">Theme:</h4>
+					<select className="theme-changer" onChange={(e) => this.props.handleUpdateTheme(e.target.value)}>
+						<option value="theme-gecho">Gecho</option>
+						<option value="theme-twilight">Twilight</option>
+						<option value="theme-peacock">Peacock</option>
+					</select>
 				</div>
 	
       </div>
@@ -77,4 +84,4 @@ class Profile extends React.Component {
 	}
 }
 
-export default Profile;
+export default withRouter(Profile);

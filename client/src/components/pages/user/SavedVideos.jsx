@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-class SavedVideos extends React.Component {
+export default class SavedVideos extends Component {
   componentDidMount() {
-    console.log('mounted: ', this.props);
     this.props.retrieveSavedVideos();
   }
 
+  componentDidUpdate() {
+    if (!this.props.state.user.loggedIn) { // re-direct to homepage if not logged in
+      this.props.userId.history.push('/'); 
+    } else if (this.props.videos == null) { // re-load props if page is refreshed
+      this.props.retrieveSavedVideos(); 
+    }
+  }
+
   handleRemoveVideo(video) {
-    console.log('got clicked');
 		let id = this.props.userId.match.params.id;
     axios.delete(`routes/user/${id}/videos/delete/${video}`)
       .then((results) => {
@@ -21,16 +27,8 @@ class SavedVideos extends React.Component {
       });
   }
 
-  componentWillReceiveProps() {
-    console.log('receiving new props', this.props);
-  }
-
-  componentDidUpdate() {
-    console.log('updated component', this.props);
-  }
-
   render() {
-    // console.log('from savedvideos.jsx:', this.props.videos);
+    // console.log('from savedvideos.jsx:', this.props);
 
     if (this.props.videos) {
       return (
@@ -64,5 +62,3 @@ class SavedVideos extends React.Component {
     }
   }
 }
-
-export default SavedVideos;
