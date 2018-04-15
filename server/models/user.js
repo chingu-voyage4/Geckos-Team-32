@@ -7,9 +7,9 @@ const User = new Schema({
   username: String,
   password: String,
   profilePic:{
-        type: Schema.Types.ObjectId, 
-        ref: 'ProfilePic'
-        },
+    type: Schema.Types.ObjectId, 
+    ref: 'ProfilePic'
+    },
   googleID: String,
   facebookID: String,
   facebookToken: String,
@@ -17,12 +17,12 @@ const User = new Schema({
   email: String,
   location: String,
   videos:[{
-      type: Schema.Types.ObjectId,
-      ref:'Video'
+    type: Schema.Types.ObjectId,
+    ref:'Video'
   }],
   playlists:[{
-      type: Schema.Types.ObjectId,
-      ref:'Playlist'
+    type: Schema.Types.ObjectId,
+    ref:'Playlist'
   }]
 });
 
