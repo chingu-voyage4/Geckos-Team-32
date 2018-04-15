@@ -16,7 +16,6 @@ router.get('/', middleware.isLoggedIn, async (req, res) => {
       if (!user) {
         res.redirect('/');
       } else {
-        console.log('playlists ', user.playlists);
         res.send({playlists: user.playlists});
       }
     } catch (err) {
@@ -39,10 +38,8 @@ router.get('/', middleware.isLoggedIn, async (req, res) => {
         newPlaylist.author.id = user._id; 
         newPlaylist.author.username = user.username;
         newPlaylist = await newPlaylist.save();
-        console.log(newPlaylist);
         user.playlists.push(newPlaylist._id);
         user = await user.save();
-        console.log(user.playlists);
         res.send({playlists: user.playlists});
       }
     } catch (err) {
@@ -70,7 +67,6 @@ router.get('/', middleware.isLoggedIn, async (req, res) => {
         playlist.videos.push(newVideoInPlaylist._id);
         playlist = await playlist.save();
         
-        console.log(playlist);
         res.send({ playlist: playlist });
 
       }
