@@ -1,7 +1,7 @@
-import { SIGNUP_USER, LOGIN_USER } from '../actions/authenticate';
+import { SIGNUP_USER, LOGIN_USER, LOGOUT_USER } from '../actions/authenticate';
 
 let session = JSON.parse(sessionStorage.getItem('session'));
-const initialState = session ? { user: session } : { user: { loggedIn: false, creds: {} }};
+const initialState = session ? { loggedIn: true, creds: session } : { loggedIn: false, creds: {} };
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -15,6 +15,11 @@ export default (state = initialState, action) => {
         loggedIn: true,
         creds: action.payload,
       }; 
+    case LOGOUT_USER:
+      return {
+        loggedIn: false,
+        creds: {}
+      }
     default:
       return state;
   }

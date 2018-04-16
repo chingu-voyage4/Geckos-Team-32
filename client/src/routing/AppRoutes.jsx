@@ -66,24 +66,24 @@ class AppRoutes extends React.Component {
   handleShowDash = () => this.state.launch ? this.setState({ launch: false }) : null;
 
   // Check sessionStorage if user is logged in or not
-  handleCheckSession = (session) => {
-    if (session && this.state.user.loggedIn !== session.loggedIn) {
-      this.setState({ user: session, launch: false });
-    }
-  }
+  // handleCheckSession = (session) => {
+  //   if (session && this.state.user.loggedIn !== session.loggedIn) {
+  //     this.setState({ user: session, launch: false });
+  //   }
+  // }
 
-  handleUpdateUser = (user) => {
-    // Only change if user object contains a username
-    if (user.username) {
-      this.setState({
-        user: {
-          loggedIn: true,
-          creds: user
-        }
-      });
-      sessionStorage.setItem('session', JSON.stringify(this.state.user)); // set sessionStorage for log in
-    }
-  }
+  // handleUpdateUser = (user) => {
+  //   // Only change if user object contains a username
+  //   if (user.username) {
+  //     this.setState({
+  //       user: {
+  //         loggedIn: true,
+  //         creds: user
+  //       }
+  //     });
+  //     sessionStorage.setItem('session', JSON.stringify(this.state.user)); // set sessionStorage for log in
+  //   }
+  // }
 
   handleUpdateAvatar = (img) => {
     this.setState({
@@ -94,17 +94,17 @@ class AppRoutes extends React.Component {
     });
   }
 
-  handleLogoutUser = () => {
-    console.log('user logging out');
-    axios.get('routes/logout');
-    this.setState({
-      user: {
-        loggedIn: false,
-        creds: {}
-      }
-    });
-    sessionStorage.removeItem('session'); // set sessionStorage for logout
-  }
+  // handleLogoutUser = () => {
+  //   console.log('user logging out');
+  //   axios.get('routes/logout');
+  //   this.setState({
+  //     user: {
+  //       loggedIn: false,
+  //       creds: {}
+  //     }
+  //   });
+  //   sessionStorage.removeItem('session'); // set sessionStorage for logout
+  // }
 
   handleUpdateAfterDelete = () => {
     this.setState({
@@ -178,14 +178,12 @@ class AppRoutes extends React.Component {
       <BrowserRouter>
         <ScrollToTop>
           <Navbar
-            user={this.state.user}
-            handleLogoutUser={this.handleLogoutUser}
             theme={this.state.theme}
           />
           <div className={this.state.theme}>
             <div className="main-page">
               <Dashboard 
-                state={this.state}
+                launch={this.state.launch}
                 retrieveSavedVideos={this.retrieveSavedVideos}
                 handleUpdateTheme={this.handleUpdateTheme}
                 handleCheckSession={this.handleCheckSession}
@@ -213,10 +211,8 @@ class AppRoutes extends React.Component {
                 <Route
                   exact path="/user/:id"
                   render={(props) => (<Profile
-                    userId={props}
-                    state={this.state}
+                    editUser={this.state.editUser}
                     handleUpdateAfterDelete={this.handleUpdateAfterDelete}
-                    handleUpdateUser={this.handleUpdateUser}
                     handleUpdateAvatar={this.handleUpdateAvatar}
                     handleUpdateTheme={this.handleUpdateTheme}
                     handleShowDash={this.handleShowDash}
@@ -225,7 +221,6 @@ class AppRoutes extends React.Component {
                       !this.state.editUser.edit ? 
                       this.setState({ editUser: { edit: true, editButton: 'Cancel' }}) : 
                       this.setState({ editUser: { edit: false, editButton: 'Edit Profile' }});
-                      this.handleUpdateUser(req);
                     }}
                   />)}
                 />
@@ -251,6 +246,7 @@ class AppRoutes extends React.Component {
                 <Route 
                   path="/signup" 
                   component={(props) => <Signup 
+                    userId={props}
                     launch={this.state.launch} 
                     handleHideDash={this.handleHideDash}
                   />} 
@@ -276,7 +272,7 @@ class AppRoutes extends React.Component {
 
 const mapStateToProps = (state) => {
   return { 
-    auth: state.user
+    auth: state.auth
   };
 };
 

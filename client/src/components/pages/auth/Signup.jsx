@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
 import { signupUser } from "../../../actions/authenticate";
 
 class Signup extends Component {
@@ -9,8 +9,8 @@ class Signup extends Component {
       username: e.target.username.value,
       password: e.target.password.value
     }
-    console.log(creds);
-    signupUser(creds);
+    console.log(creds, this.props.userId.history);
+    this.props.dispatch(signupUser(creds, this.props.userId.history));
   }
   
   render() {
@@ -45,4 +45,10 @@ class Signup extends Component {
   }
 }
 
-export default Signup;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth
+  };
+};
+
+export default connect(mapStateToProps)(Signup);

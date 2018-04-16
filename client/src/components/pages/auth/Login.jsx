@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loginUser } from '../../../actions/authenticate';
 
-
 class Login extends Component {
   handleSubmit(e) {
     e.preventDefault();
@@ -48,10 +47,8 @@ class Login extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    auth: state
+    auth: state.auth
   };
 };
 
 export default connect(mapStateToProps)(Login);
-
-// export default Login;
