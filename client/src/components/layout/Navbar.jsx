@@ -36,17 +36,17 @@ export default class Navbar extends Component {
                 <span className="button button-toggle"></span>
             </label>
             <div className="burger-links">
-              <NavLink to="/about" className="nav-item two">About</NavLink>
+              <NavLink to="/about" className="nav-item two bar1">About</NavLink>
               {this.props.user.loggedIn ?
                 <div>
-                  <NavLink to={`/user/${id}`} className="nav-item two">Profile</NavLink>
-                  <NavLink to={`/user/${id}/playlists`} className="nav-item two">Playlists</NavLink>
-                  <NavLink to={`/user/${id}/saved`} className="nav-item two">Liked Videos</NavLink>
-                  <a href="#" className="nav-item two bar-three" onClick={(e) => this.props.handleLogoutUser(e)}>Sign Out</a>
+                  <NavLink to={`/user/${id}`} className="nav-item two bar2" onClick={this.burgerToggle}>Profile</NavLink>
+                  <NavLink to={`/user/${id}/playlists`} className="nav-item two bar3" onClick={this.burgerToggle}>Playlists</NavLink>
+                  <NavLink to={`/user/${id}/saved`} className="nav-item two bar4" onClick={this.burgerToggle}>Liked Videos</NavLink>
+                  <a href="#" className="nav-item two bar5" onClick={(e) => this.props.handleLogoutUser(e)}>Sign Out</a>
                 </div> :
                 <div>
-                  <NavLink to="/signup" className="nav-item two">>Sign Up</NavLink>
-                  <NavLink to="/login" className="nav-item two bar-three">>Log In</NavLink>
+                  <NavLink to="/signup" className="nav-item two bar2" onClick={this.burgerToggle}>Sign Up</NavLink>
+                  <NavLink to="/login" className="nav-item two bar3" onClick={this.burgerToggle}>Log In</NavLink>
                 </div>
               }
             </div>
@@ -58,12 +58,12 @@ export default class Navbar extends Component {
             </ul>
             {this.props.user.loggedIn ? 
               <ul className="login-list">
-                <li><a href="#" className="nav-item item-one" onClick={(e) => this.props.handleLogoutUser(e)}>Sign Out</a></li>
-                <li><NavLink to={`/user/${id}`} className="nav-item item-two">Profile</NavLink></li>
+                <li><a href="#" onClick={(e) => this.props.handleLogoutUser(e)}>Sign Out</a></li>
+                <li><NavLink to={`/user/${id}`}>Profile</NavLink></li>
               </ul> : 
               <ul className="login-list">
-                <li><NavLink to="/signup" className="nav-item item-one btn">Sign Up</NavLink></li>
-                <li><NavLink to="/login" className="nav-item item-two">Log In</NavLink></li>
+                <li><NavLink to="/signup" className ="btn">Sign Up</NavLink></li>
+                <li><NavLink to="/login">Log In</NavLink></li>
               </ul>
             }
           </div>

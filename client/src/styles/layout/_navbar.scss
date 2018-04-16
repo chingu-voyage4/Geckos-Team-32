@@ -71,7 +71,6 @@
 }
 .logo img {
   display: block;
-  // height: 68px;
   max-height: 40px; // set fixed height (issue on other browsers)
   padding-right: .5em;
 }
@@ -127,7 +126,7 @@
   text-align: center;
   clear: right;
   color: white;
-  padding: 1%;
+  padding: 0em;
 }
 
 .burger-links a:hover {
@@ -140,17 +139,17 @@
   margin-right: 5%;
   cursor: pointer;
 }
-// .bar1, .bar2, .bar3 {
-//   @include themify($themes) {
-//     background-color: themed('navBarIcon');
-//   }
+.bar1, .bar2, .bar3, .bar4, .bar5 {
+  @include themify($themes) {
+    background-color: themed('navBarIcon');
+  }
 
-//   width: 50px;
-//   height: 5px;
-//   // background-color: #333;
-//   margin: 6px 0;
-//   transition: 0.4s;
-// }
+  width: 45px;
+  height: 5px;
+  // background-color: #333;
+  margin: 6px 0;
+  transition: 0.4s;
+}
 
 #toggle {
   position: absolute;
@@ -202,7 +201,7 @@
   .burger-links {
     width: 45px;
     height: 45px;
-    right: 4.75%;
+    right: 15px;
     display: inline-block;
     align-self: center;
     // Don't want pointer-events as menu is closed
@@ -211,142 +210,7 @@
     background: none;
   }
 
-  #toggle:focus {
-    & ~ .toggle-container .button-toggle {
-      box-shadow: 0 0 0 8px rgba(0, 0, 0, 0.1), inset 0 0 0 20px rgba(0, 0, 0, 0.1);
-    }
-  }
-
-  .toggle-on {
-    display: block;
-    transform: translate(-220px, 150px); //controls where the links show up after clicking x vertically
-
-        // Making the "X" icon using `:before` and `:after` pseudo-elements
-    & ~ .toggle-container .button-toggle {
-      // box-shadow: 0 0 0 550px rgba(0, 0, 0, 0.1), inset 0 0 0 20px rgba(0, 0, 0, 0.1);
-
-      &:hover {
-        box-shadow: 0 0 0 20px rgba(0, 0, 0, 0.1), inset 0 0 0 20px rgba(0, 0, 0, 0.1), 0 0 0 8px rgba(0, 0, 0, 0.1), inset 0 0 0 20px rgba(0, 0, 0, 0.1);
-      }
-
-      &:before {
-        transform: translateY(50%) rotate(45deg) scale(1);
-      }
-
-      &:after {
-        transform: translateY(50%) rotate(-45deg) scale(1);
-      }
-    }
-
-    &:focus ~ .toggle-container .button-toggle {
-      box-shadow: 0 0 0 550px rgba(0, 0, 0, 0.1), inset 0 0 0 20px rgba(0, 0, 0, 0.1), 0 0 0 8px rgba(0, 0, 0, 0.1), inset 0 0 0 20px rgba(0, 0, 0, 0.1);
-    }
-
-    // menu before clicking on hamburger //
-    & ~ .burger-links {
-      grid-area: navbar;
-      margin-bottom: 100px;
-      pointer-events: auto;
-      width: 100%;
-      right: 3.75%;
-      height: auto;
-      cursor: default;
-      justify-content: center;
-      text-align: center;
-      align-self: auto;
-      transform: translate(30px, 100px); //controls where the links show up after clicking x vertically
-      background-color: darken($bg-grey, 75%);
-
-      // Restoring nav items from "lines" in the menu icon
-      .nav-item.two  {
-        color: #fff;
-        letter-spacing: 0; //open hamburger links width
-        height: 40px; //open hamburger links line height
-        line-height: 15px; //how far down links show up
-        margin: 0;
-        width: 100%;
-        opacity: 1;
-        transform: scaleY(1); //open hamburger font height 
-        transition: $transition-duration, opacity 0.1s;
-  
-        // Setting delays for the nav items in open transition
-        @for $i from 1 through $items {
-          &:nth-child(#{$i}) {
-            $delay: ($items - $i) * $transition-delay;
-            transition-delay: $delay;
-            &:before {
-              transition-delay: $delay;
-            }
-          }
-        }
-  
-        // Hiding the lines
-        &:before {
-          opacity: 0;
-        }
-      }
-
-      .nav-item.two:hover {
-        color: $accent-red;
-      }
-    }
-  }
-
-  // Toggle button //
-  .toggle-container {
-    display: grid; // was auto and grid but don't think it works with this structure
-    align-items: center;
-    // justify-self: flex-end;
-    justify-content: center;  
-  }
-  
-  // 'x' area size
-  span.button {
-    padding: 1.4em;
-  }
-
-  .button-toggle {
-    position: fixed; // was absolute
-    display: inline-block; // was auto and grid but don't think it works with this structure
-    align-items: center;
-    top: 2.25%; //sets x into circle radius toggle-button
-    right: 4.25%;
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-    border-radius: 100%;
-    transition: $transition-duration + 0.1;
-
-    // Shadow on hover
-    &:hover {
-      box-shadow: 0 0 0 8px rgba(0, 0, 0, 0.1), inset 0 0 0 20px rgba(0, 0, 0, 0.1);
-    }
-
-    // Making the "X" icon using `:before` and `:after` pseudo-elements
-    // Initially hidden because `scale(0)` transformation
-
-    &:before, &:after {
-      position: absolute;
-      content: '';
-      top: 45%;
-      left: 0px;
-      width: 100%; //controls how much of the x you see
-      height: 2px;
-      background-color: #2d2d2d;
-      border-radius: 5px;
-      transition: $transition-duration;
-    }
-
-    &:before {
-      transform: translateY(-50%) rotate(45deg) scale(0);
-    }
-
-    &:after {
-      transform: translateY(-50%) rotate(-45deg) scale(0);
-    }
-  }
-
-  // Showing nav items as lines, making up the hamburger menu icon
+  // Showing nav items as lines, making up the hamburger icon
   .nav-item.two  {
     position: relative;
     display: inline-block;
@@ -355,8 +219,8 @@
     clear: both;
     color: transparent;
     // letter-spacing: -6.2px;
-    height: 7px; //space between each hamburger line
-    line-height: 7px;
+    height: 0px; //space between each hamburger line
+    line-height: 0px;
     text-transform: uppercase;
     white-space: nowrap;
     transform: scaleY(0.2); //thickness of hamburger lines
@@ -375,32 +239,199 @@
     }
 
     // Adjusting width for the first line
-    &:nth-child(1) {
-      letter-spacing: -8.5px;
-    }
+    // &:nth-child(1) {
+    //   letter-spacing: -8.5px;
+    // }
 
     // Adjusting width for the second line
-    &:nth-child(2) {
+    // &:nth-child(2) {
+      // letter-spacing: -6.25px;
+
+    &.bar1 {    // this line of code is not working just yet
       letter-spacing: -6.25px;
-
-      &:nth-child(1) {    // this line of code is not working just yet
-        margin: 0 4px; // trying to target the second navlink hamburger line
-      }
+      color: rgba(21, 21, 21, 0)
     }
 
-    &:nth-child(3) {
-      letter-spacing: -5px;
+    &.bar2 {    // this line of code is not working just yet
+      letter-spacing: -6.5px;
+      color: rgba(21, 21, 21, 0)
     }
+
+    &.bar3 {    // this line of code is not working just yet
+      // letter-spacing: -7.75px;
+      color: rgba(21, 21, 21, 0)
+    }
+
+    &.bar4 {    // this line of code is not working just yet
+      letter-spacing: -9.55px;
+      color: rgba(21, 21, 21, 0)
+    }
+
+    &.bar5 {    // this line of code is not working just yet
+      letter-spacing: -8px;
+      color: rgba(21, 21, 21, 0)
+    }
+    // }
+
+    // &:nth-child(3) {
+    //   letter-spacing: -5px;
+    // }
 
     // Getting the lines for the hamburger menu icon
     &:before {
       position: absolute;
       content: '';
-      width: 120%;
-      height: 5px;
+      width: 100%;
+      height: 3px;
       background-color: #2d2d2d;
       transform: translateY(-50%) scaleY(5);
       transition: $transition-duration;
+    }
+  }
+
+  // #toggle:focus {
+  //   & ~ .toggle-container .button-toggle {
+  //     box-shadow: 0 0 0 8px rgba(0, 0, 0, 0.1), inset 0 0 0 20px rgba(0, 0, 0, 0.1);
+  //   }
+  // }
+
+  .toggle-on {
+    display: block;
+    transform: translate(-220px, 150px); //controls where the links show up after clicking x vertically
+
+        // Making the "X" icon using `:before` and `:after` pseudo-elements
+    & ~ .toggle-container .button-toggle {
+      // box-shadow: 0 0 0 550px rgba(0, 0, 0, 0.1), inset 0 0 0 20px rgba(0, 0, 0, 0.1);
+
+      // &:hover {
+      //   box-shadow: 0 0 0 20px rgba(0, 0, 0, 0.1), inset 0 0 0 20px rgba(0, 0, 0, 0.1), 0 0 0 8px rgba(0, 0, 0, 0.1), inset 0 0 0 20px rgba(0, 0, 0, 0.1);
+      // }
+
+      &:before {
+        transform: translateY(50%) rotate(45deg) scale(1);
+      }
+
+      &:after {
+        transform: translateY(50%) rotate(-45deg) scale(1);
+      }
+    }
+
+    // &:focus ~ .toggle-container .button-toggle {
+    //   box-shadow: 0 0 0 550px rgba(0, 0, 0, 0.1), inset 0 0 0 20px rgba(0, 0, 0, 0.1), 0 0 0 8px rgba(0, 0, 0, 0.1), inset 0 0 0 20px rgba(0, 0, 0, 0.1);
+    // }
+
+    // menu after clicking on hamburger //
+    & ~ .burger-links {
+      grid-area: navbar;
+      // margin-bottom: 100px;
+      pointer-events: auto;
+      width: 100%;
+      top: -25px;
+      right: 30px;
+      height: 0px;
+      cursor: default;
+      justify-content: center;
+      text-align: center;
+      align-self: auto;
+      transform: translate(30px, 100px); //controls where the links show up after clicking x vertically
+      background-color: darken($bg-grey, 75%);
+
+      // Restoring nav items from "lines" in the menu icon
+      & .nav-item.two  {
+        color: #fff;
+        letter-spacing: 0; //open hamburger links width
+        height: 40px; //open hamburger links line height
+        line-height: 40px; //how far down links show up
+        margin: 0;
+        width: 100%;
+        opacity: 1;
+        transform: scaleY(1); //open hamburger font height
+        transition: $transition-duration, opacity 0.1s;
+
+        &.bar4,
+        &.bar5 {
+          display: inline-block;
+          &:before {
+            transition-delay: 0.1s;  // sets delay for .05s after first three bars.
+          }
+        }
+
+        // Setting delays for the nav items in open transition
+        @for $i from 1 through $items {
+          &:nth-child(#{$i}) {
+            $delay: ($items - $i) * $transition-delay;
+            transition-delay: $delay;
+            &:before {
+              transition-delay: $delay;
+            }
+          }
+        }
+  
+        // Hiding the lines
+        &:before {
+          opacity: 0;
+          width: 0px;
+          height: 0px;
+        }
+      }
+
+      .nav-item.two:hover {
+        color: $accent-red;
+      }
+    }
+  }
+
+  // Toggle button //
+  .toggle-container {
+    display: grid; // was auto and grid but don't think it works with this structure
+    align-items: center;
+    // justify-self: flex-end;
+    justify-content: center;
+  }
+
+  // 'x' area size
+  span.button {
+    padding: 1em;
+  }
+
+  .button-toggle {
+    position: absolute;
+    display: inline-block; // was auto and grid but don't think it works with this structure
+    align-items: center;
+    top: 21.5px; //sets x into circle radius toggle-button
+    right: 21.5px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    border-radius: 100%;
+    transition: $transition-duration + 0.1;
+
+    // Shadow on hover
+    &:hover {
+      box-shadow: 0 0 0 8px rgba(0, 0, 0, 0.1), inset 0 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    // Making the "X" icon using `:before` and `:after` pseudo-elements
+    // Initially hidden because `scale(0)` transformation
+
+    &:before, &:after {
+      position: absolute;
+      content: '';
+      top: 13.5px;
+      left: 0px;
+      width: 100%; //controls how much of the x you see
+      height: 2.5px;
+      background-color: #2d2d2d;
+      border-radius: 5px;
+      transition: $transition-duration;
+    }
+
+    &:before {
+      transform: translateY(-50%) rotate(45deg) scale(0);
+    }
+
+    &:after {
+      transform: translateY(-50%) rotate(-45deg) scale(0);
     }
   }
 }
