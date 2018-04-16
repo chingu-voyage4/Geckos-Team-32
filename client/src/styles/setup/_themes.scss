@@ -1,0 +1,84 @@
+// Themes
+$themes: (
+  gecho: (
+    backgroundColor: lighten($bg-grey, 5%),
+    textColor: $off-black,
+    dashText: $off-white,
+    textColorOpposite: $off-white,
+    hoverColor: $accent-red,
+    linkHoverColor: darken($accent-red, 20%),
+    dashBackground: lighten($off-black, 10%),
+    aboutContainerBackground: white,
+    teamMember: lightgreen,
+    shadow: #888888,
+    lightShadow: #adadad,
+    teamMemberText: $off-black,
+    input: $off-black,
+    savedVidBackground: $bg-grey,
+    navBarBackground: white,
+    navBarIcon: #333,
+    themeSelect: #333,
+    formLabel: $accent-light-blue,
+  ),
+  twilight: (
+    backgroundColor: lighten($off-black, 5%),
+    textColor: $dark-text,
+    dashText: $dark-text,
+    textColorOpposite: $off-black,
+    hoverColor: $accent-purple,
+    linkHoverColor: darken($accent-purple, 10%),
+    dashBackground: lighten($off-black, 10%),
+    aboutContainerBackground: lighten($off-black, 20%),
+    teamMember: #ffd13b,
+    shadow: #000000,
+    lightShadow: #181818,
+    teamMemberText: $off-black,
+    input: lighten($off-black, 25%),
+    savedVidBackground: lighten($off-black, 20%),
+    navBarBackground: lighten($off-black, 25%),
+    navBarIcon: lighten($off-black, 5%),
+    themeSelect: $dark-text,
+    formLabel: #ffd13b,
+  ),
+  peacock: (
+    backgroundColor: $accent-dark-blue,
+    textColor: lighten($accent-dark-blue, 35%),
+    dashText: lighten($accent-dark-blue, 35%),
+    textColorOpposite: $off-black,
+    hoverColor: $accent-green,
+    linkHoverColor: $accent-purple,
+    dashBackground: darken($accent-dark-blue, 5%),
+    aboutContainerBackground: darken($accent-dark-blue, 5%),
+    teamMember: $accent-green,
+    shadow: darken($accent-dark-blue, 25%),
+    lightShadow: darken($accent-dark-blue, 15%),
+    teamMemberText: $accent-dark-blue,
+    input: lighten($accent-dark-blue, 35%),
+    savedVidBackground: lighten($accent-dark-blue, 10%),
+    navBarBackground: lighten($accent-dark-blue, 25%),
+    navBarIcon: $accent-dark-blue,
+    themeSelect: lighten($accent-dark-blue, 35%),
+    formLabel: $accent-purple,
+  )
+);
+
+/*
+ * Implementation of themes
+ */
+@mixin themify($themes) {
+  @each $theme, $map in $themes {
+    .theme-#{$theme} & {
+      $theme-map: () !global;
+      @each $key, $submap in $map {
+        $value: map-get(map-get($themes, $theme), '#{$key}');
+        $theme-map: map-merge($theme-map, ($key: $value)) !global;
+      }
+      @content;
+      $theme-map: null !global;
+    }
+  }
+}
+
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}

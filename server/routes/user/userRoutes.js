@@ -20,26 +20,23 @@ router.post('/signup', passport.authenticate('local-signup', {
  * READ -- Login user
  */
 router.post('/login', passport.authenticate('local-login', {
-  // successRedirect : '/', 
   failureRedirect : '/login', 
 }), (req, res) => {
   console.log('successfully logged in: ', req.user);
-  res.redirect('/user/' + req.user._id);
+  res.send(req.user);
+  // res.redirect('/user/' + req.user._id);
 });
 
 /*
  * GET ROUTE
  * READ -- Get login user information
  */
-router.get('/user/:id', async (req, res, next) => {
+router.get('/user/:id', async (req, res) => {
   try {
     let user = await User.findById(req.params.id);
-    if (!user) {
-      res.redirect('/');
-    }
     res.send({ users: user });
   } catch (err) {
-    next(err);
+    res.redirect('/');
   }
 });
 
@@ -69,7 +66,10 @@ router.post('/user/:id/edit', middleware.isLoggedIn, async (req, res, next) => {
     if (verify && user.username !== verify.username) {
       res.send({ response: 'taken' });
     } else {
+      user.displayName = req.body.displayName;
+      user.email = req.body.email;
       user.username = req.body.username;
+      user.location = req.body.location;
       user = await user.save();
       res.send({ response: user });
     }
@@ -82,9 +82,9 @@ router.post('/user/:id/edit', middleware.isLoggedIn, async (req, res, next) => {
  * DELETE ROUTE
  * DESTROY -- Delete user and associated credentials
  */
-router.get('/user/:id/delete', middleware.isLoggedIn, async (req, res, next) => {
+router.delete('/user/:id/delete', middleware.isLoggedIn, async (req, res, next) => {
   try {
-    console.log('DELETE ROUTE PARAMS: ', req.params);
+    // console.log('DELETE ROUTE PARAMS: ', req.params);
     let user = await User.findByIdAndRemove(req.params.id);
     console.log('SUCCESSFULLY DELETED USER');
     res.send({ response: 'deleted' });

@@ -1,4 +1,15 @@
+.hide-dash {
+  display: none;
+}
+
 .dashboard {
+  @include themify($themes) {
+    color: themed('dashText');
+    background: themed('dashBackground');
+    box-shadow: 0px 3px 5px 1px themed('lightShadow');
+    z-index: 5;
+  }
+
   display: grid;
   grid-template-columns: 100%;
   grid-template-areas:
@@ -6,9 +17,9 @@
     "dashbottom";
   align-content: space-between;
   width: 20vw;
-  min-height: calc(100vh - 100px);
+  height: calc(100vh - 75px);
   position: fixed;
-  background-color: darken($bg-grey, 15%);
+  // background-color: darken($bg-grey, 15%);
   padding: 1em;
   
 }
@@ -38,14 +49,27 @@
   font-style: italic;
 }
 .dashboard__link {
+  @include themify($themes) {
+    color: themed('hoverColor');
+  }
+
   font-weight: bold;
-  color: $accent-red;
+  font-size: 1em;
+  // color: $accent-red;
   text-decoration: none;
   transition: color .5s ease-out;
   -webkit-transition: color .5s ease-out;
+  border: none;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
 }
 .dashboard__link:hover {
-  color: darken($accent-red, 20%);
+  @include themify($themes) {
+    color: themed('linkHoverColor');
+  }
+
+  // color: darken($accent-red, 20%);
   transition: color .5s ease-out;
   -webkit-transition: color .5s ease-out;
 }
@@ -54,13 +78,16 @@
 // Dash w/ user logged in //
 ////////////////////////////
 .dashboard-user {
+  a {
+    text-decoration: none; // points to username link
+  }
+
   display: grid;
   grid-template-columns: 100%;
   grid-template-areas:
     "avatar"
     "username"
     "links"
-    "share"
     "theme";
 }
 /////////////////////////
@@ -70,6 +97,9 @@
   width: 100%;
 }
 .user-name {
+  @include themify($themes) {
+    color: themed('dashText');
+  }
   grid-area: username;
   word-wrap: break-word;
   text-align: center;
@@ -89,36 +119,6 @@
   padding-top: 10px;
 }
 
-//////////////////////////
-// Social Media Sharing //
-.dashboard-share {
-  grid-area: share;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-areas:
-  "sharetitle sharelinks sharelinks";
-  align-items: center;
-}
-.share-title {
-  grid-area: sharetitle;
-}
-.soc-share {
-  grid-area: sharelinks;
-  display: flex;
-  justify-content: space-around;
-}
-.soc-share a {
-  color: $accent-red;
-  font-size: 22px;
-  transition: color .5s ease-out;
-  -webkit-transition: color .5s ease-out;
-}
-.soc-share a:hover {
-  color: darken($accent-red, 20%);
-  transition: color .5s ease-out;
-  -webkit-transition: color .5s ease-out;
-}
-
 ///////////////////
 // Theme Chooser //
 .dash-theme {
@@ -133,9 +133,21 @@
   grid-area: themetitle;
 }
 .theme-changer {
+  @include themify($themes) {
+    color: themed('hoverColor');
+    border: 1px solid themed('dashText');
+
+    @media (max-width: 768px) {
+      border: 1px solid themed('themeSelect');
+    }
+  }
+
   grid-area: choice;
   display: flex;
   height: 50%;
+  font-size: 1em;
+  outline: none;
+  background: inherit;
 }
 
 ////////////////////////////
@@ -159,23 +171,31 @@
   justify-items: center;
 }
 .social-media {
+  @include themify($themes) {
+    color: themed('dashText');
+    border: 2px solid themed('dashText');
+  }
+
   display: flex;
   justify-content: center;
   align-items: center;
   height: 35px;
   width: 35px;
   font-size: 20px;
-  background-color: darken($off-white, 10%);
-  border: 3px solid lighten($off-black, 10%);
+  background-color: transparent;
   border-radius: 15%;
-  color: $off-black;
   transition: all .25s ease-out;
   -webkit-transition: all .25s ease-out;
 }
 .social-media:hover {
-  color: $accent-red;
+  @include themify($themes) {
+    color: themed('linkHoverColor');
+    border-color: themed('linkHoverColor');
+  }
+
+  // color: $accent-red;
   background-color: $off-white;
-  border-color: $accent-red;
+  // border-color: $accent-red;
   border-radius: 50%;
   position: relative;
   transition: all .25s ease-out;
@@ -257,7 +277,7 @@
 // not visible in mobile/tablet view //
 @media screen and (max-height: 850px) {
   .dashboard {
-    position: relative;
+    position: fixed;
   }
   // .benefits-list{
   //   display: none;

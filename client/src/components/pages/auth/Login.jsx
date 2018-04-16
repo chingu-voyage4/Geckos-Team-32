@@ -1,28 +1,57 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { loginUser } from '../../../actions/authenticate';
 
-const Login = () => (
-  <div className="page-wrapper login-wrapper">
-    <div>
-      <h1>Welcome back!</h1>
-      <div className="auth-buttons-wrapper">
-        <form className="form" action="routes/auth/google" method="get">
-          <button className="button google-button"><span className="auth-icon"><i className="fab fa-google-plus-g"></i></span> Log in with Google</button>
-        </form>
-        <form className="form" action="routes/auth/facebook" method="get">
-          <button className="button facebook-button"><span className="auth-icon"><i className="fab fa-facebook"></i></span> Log in with Facebook</button>
-        </form>
+
+class Login extends Component {
+  handleSubmit(e) {
+    e.preventDefault();
+    const creds = {
+      username: e.target.username.value,
+      password: e.target.password.value
+    }
+    console.log(creds, this.props.userId.history);
+    this.props.dispatch(loginUser(creds, this.props.userId.history));
+  }
+
+  render() {
+    return (
+      <div className={this.props.launch ? "page-wrapper nodash" : "page-wrapper"}>
+        <div className="auth-card">
+          <div>
+            <h1>Welcome back!</h1>
+            <div className="auth-buttons-wrapper">
+              <form action="routes/auth/google" method="get">
+                <button className="button google-button"><span className="auth-icon"><i className="fab fa-google-plus-g"></i></span> Google</button>
+              </form>
+              <form action="routes/auth/facebook" method="get">
+                <button className="button facebook-button"><span className="auth-icon"><i className="fab fa-facebook"></i></span> Facebook</button>
+              </form>
+            </div>
+            <div className="divider">
+              <strong className="divider-title">Or</strong>
+            </div>
+          </div>
+
+          <form className="auth-form" onSubmit={(e) => this.handleSubmit(e)}>
+            <input className="auth-form__input" type="text" name="username" placeholder="username" />
+            <input className="auth-form__input" type="password" name="password" placeholder="password" />
+            <br />
+            <br />
+            <button className="button auth-submit">Log In</button>
+          </form>
+        </div>
       </div>
-      <div className="divider">
-        <strong className="divider-title">Or</strong>
-      </div>
-    </div>
+    );
+  }
+}
 
-    <form className="form" action="/routes/login" method="post">
-      <input className="form__input" type="text" name="username" placeholder="username"/>
-      <input className="form__input" type="password" name="password" placeholder="password"/>
-      <button className="button">Log in</button>
-    </form>
-  </div>
-);
+const mapStateToProps = (state) => {
+  return {
+    auth: state
+  };
+};
 
-export default Login;
+export default connect(mapStateToProps)(Login);
+
+// export default Login;

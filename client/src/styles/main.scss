@@ -1,16 +1,27 @@
 @import './setup/variables';
+@import './setup/themes';
 @import './setup/base';
 
+// Shared components
 @import './layout/navbar';
 @import './layout/footer';
 @import './layout/dashboard';
-@import './pages/mainpage';
 
+// Initial landing/postlanding
 @import './pages/landing/landing';
 @import './pages/landing/postlanding';
-@import './pages/landing/videodetails';
+@import './pages/landing/playvideo';
 
+// Authentication
 @import './pages/auth/login';
 @import './pages/auth/signup';
 @import './pages/auth/auth';
-@import './pages/moreinfo/about';
+
+// Pages
+@import './pages/mainpage';
+@import './pages/about';
+
+// Profile
+@import './pages/user/profile';
+@import './pages/user/playlist';
+@import './pages/user/savedvideos';

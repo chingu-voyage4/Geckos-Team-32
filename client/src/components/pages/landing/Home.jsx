@@ -2,17 +2,18 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Link, withRouter } from 'react-router-dom';
 
-class Landing extends Component {
+class Home extends Component {
 	handleSearchInput(e) {
 		e.preventDefault();
 		const search = e.target.elements.search.value;
-		this.props.handleSearchInput(search);
-		this.props.history.push('/PostLanding');
+		// this.props.handleSearchInput(search);
+		this.props.history.push(`/search/${search}`);
 	}
 
   render() {
+		// console.log('from home', this.props);
 		return (
-			<div className="page-wrapper">
+			<div className={this.props.launch ? "page-wrapper nodash" : "page-wrapper"}>
 				<div className="landing-page-title">
 				<h1>Discover new songs and artists based on your interests!</h1>
 				</div>
@@ -28,4 +29,4 @@ class Landing extends Component {
   }
 }
 
-export default withRouter(Landing);
+export default withRouter(Home);

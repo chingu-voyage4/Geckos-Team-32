@@ -3,43 +3,50 @@ import { connect } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 
-import Navbar from '../components/shared/Navbar.jsx';
-import Footer from '../components/shared/Footer.jsx';
-import Dashboard from '../components/shared/Dashboard.jsx';
-import Landing from '../components/pages/landing/Landing.jsx';
-import PostLanding from '../components/pages/landing/PostLanding.jsx'
-import About from '../components/pages/moreinfo/About.jsx'
+import Navbar from '../components/layout/Navbar.jsx';
+import Footer from '../components/layout/Footer.jsx';
+import Dashboard from '../components/layout/Dashboard.jsx';
+import Home from '../components/pages/landing/Home.jsx';
+import Search from '../components/pages/landing/Search.jsx';
+import PlayVideo from '../components/pages/landing/PlayVideo.jsx';
+import About from '../components/pages/moreinfo/About.jsx';
 import Signup from '../components/pages/auth/Signup.jsx';
 import Login from '../components/pages/auth/Login.jsx';
 import Profile from '../components/pages/user/Profile.jsx';
+import SavedVideos from '../components/pages/user/SavedVideos.jsx';
+import Playlist from '../components/pages/user/Playlist.jsx';
 import NotFound from './NotFound.jsx';
+import ScrollToTop from './ScrollToTop.jsx';
 
-// Used for client side testing
-// Uncomment top 'state' below and comment out bottom 'state' before pushing!
-const dummyData = {
-  loggedIn: true,
-  creds: {
-    _id: 'f93jafb1fvn39dba1e5a1c2d83',
-    __v: 0,
-    username: 'KentuckyKid309'
-  }
-}
+
+// Seed Data
+import { dummyUserData, dummySavedVideosData } from '../seedData/seedData';
+
 class AppRoutes extends React.Component {
+  ////////////////////////
+  ///// SEED DATA ////////
+  ////////////////////////
+
   // state = {
-  //   user: {
-  //     loggedIn: false,
-  //     creds: {}
+  //   launch: true,
+  //   user: dummyUserData,
+  //   editUser: {
+  //     edit: false,
+  //     editButton: 'Edit',
   //   },
   //   search: '',
   //   videos: [],
+  //   selectedVideo: null,
+  //   saved: true,
+  //   savedVideos: dummySavedVideosData
   // }
 
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {};
-  // }
-
+  //////////////////////////
+  ///// ACTUAL STATE ///////
+  //////////////////////////
+  
   state = {
+    launch: true,
     user: {
       loggedIn: false,
       creds: {}
@@ -48,9 +55,21 @@ class AppRoutes extends React.Component {
       edit: false,
       editButton: 'Edit',
     },
-    search: '',
     videos: [],
-    selectedVideo: null
+    selectedVideo: null,
+    saved: false,
+    savedVideos: null,
+    theme: 'theme-gecho'
+  }
+
+  // Show dashboard after moving form landing page
+  handleShowDash = () => this.state.launch ? this.setState({ launch: false }) : null;
+
+  // Check sessionStorage if user is logged in or not
+  handleCheckSession = (session) => {
+    if (session && this.state.user.loggedIn !== session.loggedIn) {
+      this.setState({ user: session, launch: false });
+    }
   }
 
   handleUpdateUser = (user) => {
@@ -62,7 +81,17 @@ class AppRoutes extends React.Component {
           creds: user
         }
       });
+      sessionStorage.setItem('session', JSON.stringify(this.state.user)); // set sessionStorage for log in
     }
+  }
+
+  handleUpdateAvatar = (img) => {
+    this.setState({
+      user: {
+        loggedIn: this.state.user.loggedIn,
+        creds: { ...this.state.user.creds, img: img }
+      }
+    });
   }
 
   handleLogoutUser = () => {
@@ -74,6 +103,7 @@ class AppRoutes extends React.Component {
         creds: {}
       }
     });
+    sessionStorage.removeItem('session'); // set sessionStorage for logout
   }
 
   handleUpdateAfterDelete = () => {
@@ -83,6 +113,8 @@ class AppRoutes extends React.Component {
         creds: {}
       }
     });
+    sessionStorage.removeItem('session');
+    window.location.reload(); // reload page to reset state
   }
 
   handleSearchInput = (query) => {
@@ -91,62 +123,152 @@ class AppRoutes extends React.Component {
       .then((results) => {
         // console.log(results.data);
         let videos = results.data.data.items;
-        this.setState({ search: query, videos: videos, selectedVideo: null });
+        this.setState({ videos: videos, selectedVideo: null });
       })
       .catch((err) => {
         console.log(err);
       });
   }
 
+  handleLikedVideo = (e, video) => {
+    // console.log('liked video: ', video);
+    if (this.state.user.loggedIn) {
+      // console.log('Logged in, proceed...', this.state.user.creds);
+      let id = this.state.user.creds._id;
+      axios.post(`/routes/user/${id}/videos`, video)
+      	.then((results) => {
+      		let videos = results.data.videos;
+      		// console.log('new video data: ', videos);
+      	})
+      	.catch((err) => {
+      		console.log('There was an error: ', err);
+      	});
+    } else {
+      console.log('Not logged in');
+    }
+  }
+
+  retrieveSavedVideos = () => {
+		// console.log('retrieve button clicked', this.state);
+		let id = this.state.user.creds._id;
+		let videos = {};
+		if (!this.state.saved) {
+			axios.get(`/routes/user/${id}/videos`)
+				.then((results) => {
+					videos = results.data.videos;
+					// console.log('new video data: ', videos);
+					this.setState({ saved: true, savedVideos: videos });
+				})
+				.catch((err) => {
+					console.log('There was an error: ', err);
+				});
+		} else {
+			this.setState({ saved: false });
+		}
+  }
+  
+  handleUpdateSavedVideos = (videos) => {
+    this.setState({ saved: true, savedVideos: videos });
+  }
+
+  handleUpdateTheme = (theme) => this.setState({ theme });
+
   render() {
     return (
       <BrowserRouter>
-        <div>
+        <ScrollToTop>
           <Navbar
             user={this.state.user}
             handleLogoutUser={this.handleLogoutUser}
+            theme={this.state.theme}
           />
-          <div className="main-page">
-            <Dashboard user={this.state.user} />
-            <Switch>
-              <Route
-                exact path="/"
-                component={() => (<Landing
-                  search={this.state.search}
-                  handleSearchInput={this.handleSearchInput}
-                />)}
+          <div className={this.state.theme}>
+            <div className="main-page">
+              <Dashboard 
+                state={this.state}
+                retrieveSavedVideos={this.retrieveSavedVideos}
+                handleUpdateTheme={this.handleUpdateTheme}
+                handleCheckSession={this.handleCheckSession}
               />
-              <Route 
-                path="/postlanding" 
-                component={() => (<PostLanding
-                  stateData={this.state}
-                  handleSearchInput={this.handleSearchInput}
-                  handleSelectedVideo={selectedVideo => this.setState({selectedVideo})}
-                />)} 
-              />
-              <Route
-                path="/user/:id"
-                render={(props) => (<Profile
-                  userId={props}
-                  state={this.state}
-                  handleUpdateAfterDelete={this.handleUpdateAfterDelete}
-                  handleUpdateUser={this.handleUpdateUser}
-                  handleEditProfile={req => {
-                    !this.state.editUser.edit ? 
-                    this.setState({ editUser: { edit: true, editButton: 'Cancel' }}) : 
-                    this.setState({ editUser: { edit: false, editButton: 'Edit' }});
-		                this.handleUpdateUser(req);
-                  }}
-                />)}
-              />
-              <Route path="/about" component={About} />
-              <Route path="/signup" component={Signup} />
-              <Route path="/login" component={Login} />
-              <Route component={NotFound} />
-            </Switch>
+              <Switch>
+                <Route
+                  exact path="/"
+                  component={() => (<Home
+                    launch={this.state.launch}
+                    search={this.state.search}
+                    handleSearchInput={this.handleSearchInput}
+                    />)}
+                    />
+                    <Route 
+                    path="/search/:id" 
+                    render={(props) => (<Search
+                      userId={props}
+                      stateData={this.state}
+                      handleSearchInput={this.handleSearchInput}
+                      handleSelectedVideo={selectedVideo => this.setState({selectedVideo})}
+                      handleLikedVideo={this.handleLikedVideo}
+                      handleShowDash={this.handleShowDash}
+                  />)} 
+                />
+                <Route
+                  exact path="/user/:id"
+                  render={(props) => (<Profile
+                    userId={props}
+                    state={this.state}
+                    handleUpdateAfterDelete={this.handleUpdateAfterDelete}
+                    handleUpdateUser={this.handleUpdateUser}
+                    handleUpdateAvatar={this.handleUpdateAvatar}
+                    handleUpdateTheme={this.handleUpdateTheme}
+                    handleShowDash={this.handleShowDash}
+                    retrieveSavedVideos={this.retrieveSavedVideos}
+                    handleEditProfile={req => {
+                      !this.state.editUser.edit ? 
+                      this.setState({ editUser: { edit: true, editButton: 'Cancel' }}) : 
+                      this.setState({ editUser: { edit: false, editButton: 'Edit Profile' }});
+                      this.handleUpdateUser(req);
+                    }}
+                  />)}
+                />
+                <Route 
+                  exact path="/user/:id/saved"
+                  render={(props) => (<SavedVideos 
+                    userId={props}
+                    state={this.state}
+                    videos={this.state.savedVideos}
+                    retrieveSavedVideos={this.retrieveSavedVideos}
+                    handleUpdateSavedVideos={this.handleUpdateSavedVideos}
+                  />)}
+                />
+                <Route 
+                  exact path="/user/:id/playlists"
+                  render={() => <Playlist/>}
+                />
+                <Route 
+                  path="/about" 
+                  component={(props) => <About launch={this.state.launch}/>}
+                />
+                <Route path="/playvideo" component={PlayVideo} />
+                <Route 
+                  path="/signup" 
+                  component={(props) => <Signup 
+                    launch={this.state.launch} 
+                    handleHideDash={this.handleHideDash}
+                  />} 
+                />
+                <Route 
+                  path="/login" 
+                  component={(props) => <Login
+                    userId={props}
+                    launch={this.state.launch} 
+                    handleHideDash={this.handleHideDash}
+                  />} 
+                />
+                <Route component={NotFound} />
+              </Switch>
+            </div>
           </div>
-          <Footer />
-        </div>
+          <Footer theme={this.state.theme}/>
+        </ScrollToTop>
       </BrowserRouter>
     )
   }
