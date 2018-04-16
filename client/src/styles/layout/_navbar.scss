@@ -48,9 +48,12 @@
   -webkit-transition: .2s color ease-in;
 }
 .navBar ul {
+  display: flex;
+  justify-self: flex-end;
   list-style-type: none;
   margin: 0;
-  padding: 0;
+  padding: 16px 0;
+  height: 75px;
 }
 .navBar li {
   display: inline-block;
@@ -135,16 +138,16 @@
   }
   // color: $accent-red;
 }
-.hamburger-icon {
-  margin-right: 5%;
-  cursor: pointer;
-}
+// .hamburger-icon {
+//   margin-right: 5%;
+//   cursor: pointer;
+// }
 .bar1, .bar2, .bar3, .bar4, .bar5 {
   @include themify($themes) {
     background-color: themed('navBarIcon');
   }
 
-  width: 45px;
+  width: 40px;
   height: 5px;
   // background-color: #333;
   margin: 6px 0;
@@ -188,9 +191,9 @@
     justify-self: flex-end;
     align-self: center;
     float: right;
-    height: 45px;
-    width: 45px;
-    margin: 15px 15px;
+    height: 40px;
+    width: 40px;
+    margin: 17px 17px;
     z-index: 5;
   }
   #toggle {
@@ -199,9 +202,10 @@
 
     // unopened hamburger icon //
   .burger-links {
-    width: 45px;
-    height: 45px;
-    right: 15px;
+    width: 40px;
+    height: 0px;
+    top: 14px;
+    right: 16px;
     display: inline-block;
     align-self: center;
     // Don't want pointer-events as menu is closed
@@ -263,13 +267,11 @@
     }
 
     &.bar4 {    // this line of code is not working just yet
-      letter-spacing: -9.55px;
-      color: rgba(21, 21, 21, 0)
+      display: none;
     }
 
     &.bar5 {    // this line of code is not working just yet
-      letter-spacing: -8px;
-      color: rgba(21, 21, 21, 0)
+      display: none;
     }
     // }
 
@@ -323,7 +325,6 @@
     // menu after clicking on hamburger //
     & ~ .burger-links {
       grid-area: navbar;
-      // margin-bottom: 100px;
       pointer-events: auto;
       width: 100%;
       top: -25px;
@@ -377,6 +378,15 @@
 
       .nav-item.two:hover {
         color: $accent-red;
+      }
+    }
+  }
+
+  .toggle-off {
+    .button-toggle {
+      // Shadow on hover
+      &:hover {
+        box-shadow: 0 0 0 8px rgba(0, 0, 0, 0.0), inset 0 0 0 20px rgba(0, 0, 0, 0.0);
       }
     }
   }
