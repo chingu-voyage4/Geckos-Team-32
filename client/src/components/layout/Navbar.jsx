@@ -14,15 +14,17 @@ export default class Navbar extends Component {
     !this.state.navOpen ? this.setState({navOpen: true}) : this.setState({navOpen: false})
   };
 
-  resetMobileNavbar = () => {
-    if (navOpen) {
-      if (!this.state.linkClicked) {
-        this.setState.linkClicked = true;
-      }
-      else {
-        return
-      }
-    }
+  resetMobileNav = () => {
+    // if (navOpen) {
+    //   if (!this.state.linkClicked) {
+    //     this.setState.linkClicked = true;
+    //   }
+    //   else {
+    //     return
+    //   }
+    // }
+    navOpen ? (!this.state.linkClicked ? this.setState({linkClicked: true}) : null) : null
+
     // !this.state.linkClicked ? this.setState({linkClicked: true}) : null
   };
 
