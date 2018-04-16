@@ -26,41 +26,41 @@ class AppRoutes extends React.Component {
   ///// SEED DATA ////////
   ////////////////////////
 
-  state = {
-    launch: true,
-    user: dummyUserData,
-    editUser: {
-      edit: false,
-      editButton: 'Edit',
-    },
-    search: '',
-    videos: [],
-    selectedVideo: null,
-    saved: true,
-    savedVideos: dummySavedVideosData,
-    theme: 'theme-good-vibes'
-  }
+  // state = {
+  //   launch: true,
+  //   user: dummyUserData,
+  //   editUser: {
+  //     edit: false,
+  //     editButton: 'Edit',
+  //   },
+  //   search: '',
+  //   videos: [],
+  //   selectedVideo: null,
+  //   saved: true,
+  //   savedVideos: dummySavedVideosData,
+  //   theme: 'theme-good-vibes'
+  // }
 
   //////////////////////////
   ///// ACTUAL STATE ///////
   //////////////////////////
   
-  // state = {
-  //   launch: true,
-  //   user: {
-  //     loggedIn: false,
-  //     creds: {}
-  //   },
-  //   editUser: {
-  //     edit: false,
-  //     editButton: 'Edit',
-  //   },
-  //   videos: [],
-  //   selectedVideo: null,
-  //   saved: false,
-  //   savedVideos: null,
-  //   theme: 'theme-gecho'
-  // }
+  state = {
+    launch: true,
+    user: {
+      loggedIn: false,
+      creds: {}
+    },
+    editUser: {
+      edit: false,
+      editButton: 'Edit',
+    },
+    videos: [],
+    selectedVideo: null,
+    saved: false,
+    savedVideos: null,
+    theme: 'theme-gecho'
+  }
 
   // Show dashboard after moving form landing page
   handleShowDash = () => this.state.launch ? this.setState({ launch: false }) : null;
