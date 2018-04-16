@@ -67,6 +67,12 @@ class Profile extends React.Component {
 					</Link>
 				</div>
 
+				<div className="playlists twopercent-spacing">
+					<Link to={`/user/${creds._id}/playlists`}>
+						<button className="button profile-button"> Playlists </button>
+					</Link>
+				</div>
+
 				<div className="avatar-selection twopercent-spacing underline">
 					<button className="button profile-button" onClick={() => this.showAvatars()}>Change Avatar</button>
 					{this.state.avatar && <AvatarSelection handleUpdateAvatar={this.props.handleUpdateAvatar}/>}

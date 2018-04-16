@@ -5,6 +5,7 @@ const middleware = require('../middleware')
 const User = require('../models/user');
 const Video = require('../models/video');
 const Playlist = require('../models/playlist');
+const mongoose = require('mongoose');
 
 /*
  * GET ROUTE
@@ -12,7 +13,10 @@ const Playlist = require('../models/playlist');
  */
 router.get('/', middleware.isLoggedIn, async (req, res) => {
     try {
-      let user = await User.findById(req.params.id).populate({path: 'playlists', populate:{path:'videos', model: 'Video'}});
+      let user = await User.findById(req.params.id)
+      .populate({ path: 'playlists',
+        populate: { path: 'videos'}
+      });
       if (!user) {
         res.redirect('/');
       } else {
@@ -48,15 +52,33 @@ router.get('/', middleware.isLoggedIn, async (req, res) => {
   });
   /*
    * POST ROUTE
-   * UPDATE/CREATE?? -- Add a video to the playlist
+   * UPDATE/CREATE -- Add a video to the playlist
    */
   router.post('/:playlist_id/add', async (req, res, next) => {
     try {
-      let user = await User.findById(req.params.id); // is this necessary??? 
+      let user = await User.findById(req.params.id).populate('playlists'); 
+      let match = await user.playlists.find(playlists => playlists._id === req.params.playlist_id);
+
+      if(match) {
+        console.log('this playlists already exists');
+        res.send({playlists: user.playlists});
+      }
+
       if (!user) {
         res.redirect('/');
-      } else {
+      } 
+      
+      else {
         let playlist = await Playlist.findById(req.params.playlist_id);
+        
+        let matchVideo = await playlist.videos.find(video => video.url === req.body.url);
+
+        if (matchVideo) {
+          console.log('this video already exists in this playlist');
+          res.send({playlists: user.playlists});
+        }
+
+        else {
         let newVideoInPlaylist = new Video(); 
        
         newVideoInPlaylist.title = req.body.title;
@@ -68,10 +90,60 @@ router.get('/', middleware.isLoggedIn, async (req, res) => {
         playlist = await playlist.save();
         
         res.send({ playlist: playlist });
-
+        }
       }
     } catch (err) {
       next(err);
     }
   });
+
+  /*
+   * POST ROUTE
+   * UPDATE - DELETE -- Delete a video from the playlist
+   */
+  router.post('/:playlist_id/video/delete', async (req, res, next) => {
+    try {
+      let user = await User.findById(req.params.id); 
+      if (!user) {
+        res.redirect('/');
+      } 
+      
+      else {
+        let playlists_id = req.params.playlist_id;
+        let video_id = req.body.id;
+
+        let video = await Video.findByIdAndRemove(video_id);
+        let playlist = await Playlist.findById(playlist_id);
+        playlist.video.pull(video_id);
+        res.send({playlists: user.playlists});
+      }
+    } catch (err) {
+      next(err);
+    }
+  });
+
+   /*
+   * POST ROUTE
+   * DELETE -- Delete a playlist
+   */
+
+  router.post('/:playlist_id/delete', async (req, res, next) => {
+    try {
+      let user = await User.findById(req.params.id); 
+      if (!user) {
+        res.redirect('/');
+      } 
+      
+      else {
+        let id = req.params.playlist_id;
+        let playlist = await Playlist.findByIdAndRemove(id);
+        user.playlists.pull(id);
+        res.send({playlists: user.playlists});
+      }
+    } catch (err) {
+      next(err);
+    }
+  });
+
+
   module.exports = router;
