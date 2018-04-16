@@ -24,8 +24,6 @@ export default class Navbar extends Component {
     //   }
     // }
     navOpen ? (!this.state.linkClicked ? this.setState({linkClicked: true}) : null) : null
-
-    // !this.state.linkClicked ? this.setState({linkClicked: true}) : null
   };
 
   render() {
@@ -44,15 +42,16 @@ export default class Navbar extends Component {
             </NavLink>
           </div>
           <div className="hamburger">
-            <input id="toggle" 
-            className={this.state.navOpen ? "toggle-on" : (this.state.linkClicked ? "toggle-off" : "toggle-off") }
-            onClick={this.opennavbar} 
-            type="checkbox" />
+            <input id="toggle"
+              className={this.state.navOpen ? "toggle toggle-on" : (this.state.linkClicked ? "toggle toggle-off" : "toggle toggle-off") }
+              onClick={this.opennavbar}
+              type="checkbox"
+            />
             <label className="toggle-container" htmlFor="toggle">
                 <span className="button button-toggle"></span>
             </label>
             <div className="burger-links">
-              <NavLink to="/about" className="nav-item two bar1" linkClicked={this.state.linkClicked} onClick={this.resetMobileNav}>About</NavLink>
+              <NavLink to="/about" className="nav-item two bar1" onClick={this.resetMobileNav}>About</NavLink>
               {this.props.user.loggedIn ?
                 <div>
                   <NavLink to={`/user/${id}`} className="nav-item two bar2" onClick={this.resetMobileNav}>Profile</NavLink>

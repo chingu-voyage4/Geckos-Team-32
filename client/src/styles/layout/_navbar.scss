@@ -7,17 +7,15 @@
     box-shadow: 0px 0px 5px 1px themed('lightShadow');
   }
 
-  text-transform: uppercase;
+  position: fixed;
   display: grid;
   grid-template-columns: .25fr auto;
   grid-template-rows: 75px;
   grid-template-areas:
-    "logo nav-wrapper";
-  min-width: 100%;
-  position: fixed;
+  "logo nav-wrapper";
   font-family: 'ubuntu', sans-serif;
-  // background-color: white;
-  // box-shadow: 0px 1px 10px 0px darken($bg-grey, 10%);
+  text-transform: uppercase;
+  min-width: 100%;
   z-index: 5;
 }
 
@@ -26,16 +24,16 @@
     color: darken(themed('dashBackground'), 10%);
   }
 
-  text-decoration: none;
   font-size: 26px;
+  text-decoration: none;
   transition: .5s color ease-in;
   -webkit-transition: .5s color ease-in;
 }
 
 .nav-item {
+  justify-self: center;
   color: #EC7263;
   letter-spacing: 0;
-  justify-self: center;
 }
 
 .navBar a:hover {
@@ -43,22 +41,21 @@
     color: themed('hoverColor');
   }
 
-  // color: $accent-red;
   transition: .2s color ease-out;
   -webkit-transition: .2s color ease-in;
 }
 .navBar ul {
   display: flex;
   justify-self: flex-end;
-  list-style-type: none;
-  margin: 0;
-  padding: 16px 0;
   height: 75px;
+  padding: 16px 0;
+  margin: 0;
+  list-style-type: none;
 }
 .navBar li {
   display: inline-block;
-  margin: auto 0;
   padding: 0 1em;
+  margin: auto 0;
 }
 
 // LOGO AREA //
@@ -109,7 +106,7 @@
   float: right;
 }
 
-// Hamburger Menu //
+// HAMBURGER AREA //
 .hamburger {
   display: none;
 }
@@ -117,9 +114,6 @@
   display: none;
   z-index: 5;
   position: absolute;
-  // align-self: center;
-  // margin-top: calc(100px + 3%);
-  // width: 80%;
   // margin-top: calc(75px + 10%);
   width: 100%;
   background-color: darken($bg-grey, 75%);
@@ -136,20 +130,18 @@
   @include themify($themes) {
     color: themed('hoverColor');
   }
-  // color: $accent-red;
 }
-// .hamburger-icon {
-//   margin-right: 5%;
-//   cursor: pointer;
-// }
-.bar1, .bar2, .bar3, .bar4, .bar5 {
+
+.bar1,
+.bar2,
+.bar3,
+.bar4,
+.bar5 {
   @include themify($themes) {
     background-color: themed('navBarIcon');
   }
 
   width: 40px;
-  height: 5px;
-  // background-color: #333;
   margin: 6px 0;
   transition: 0.4s;
 }
@@ -179,15 +171,14 @@
   }
 
   .nav-wrapper {
+    display: none;
     height: 0;
     width: 0;
-    display: none;
   }
 
   .hamburger {
     grid-area: hamburger;
     display: grid;
-    // align-items: center;
     justify-self: flex-end;
     align-self: center;
     float: right;
@@ -196,11 +187,17 @@
     margin: 17px 17px;
     z-index: 5;
   }
-  #toggle {
-    background-color: green;
+
+  // UNOPENED MOBILE NAV AREA //
+  .toggle-off {
+    .button-toggle {   // DON'T THINK THIS ACTUALLY WORKS
+      // Shadow on hover
+      &:hover {
+        box-shadow: 0 0 0 8px rgba(0, 0, 0, 0.0), inset 0 0 0 20px rgba(0, 0, 0, 0.0);
+      }
+    }
   }
 
-    // unopened hamburger icon //
   .burger-links {
     width: 40px;
     height: 0px;
@@ -208,28 +205,23 @@
     right: 16px;
     display: inline-block;
     align-self: center;
-    // Don't want pointer-events as menu is closed
     pointer-events: none;
     transition: $transition-duration;
     background: none;
   }
 
-  // Showing nav items as lines, making up the hamburger icon
+  // SHOWING NAV-LINKS AS LINES, MAKING UP MOBILE NAV
   .nav-item.two  {
     position: relative;
     display: inline-block;
-    // float:left;
-    // margin:0 0;
     clear: both;
     color: transparent;
-    // letter-spacing: -6.2px;
     height: 0px; //space between each hamburger line
     line-height: 0px;
     text-transform: uppercase;
     white-space: nowrap;
     transform: scaleY(0.2); //thickness of hamburger lines
     transition: $transition-duration, opacity 1s;
-    // z-index: 100;
 
     // Setting delays for the nav items in close transition
     @for $i from 1 through $items {
@@ -242,44 +234,29 @@
       }
     }
 
-    // Adjusting width for the first line
-    // &:nth-child(1) {
-    //   letter-spacing: -8.5px;
-    // }
-
-    // Adjusting width for the second line
-    // &:nth-child(2) {
+    &.bar1 {
       // letter-spacing: -6.25px;
-
-    &.bar1 {    // this line of code is not working just yet
-      letter-spacing: -6.25px;
       color: rgba(21, 21, 21, 0)
     }
 
-    &.bar2 {    // this line of code is not working just yet
-      letter-spacing: -6.5px;
+    &.bar2 {
+      // letter-spacing: -6.5px;
       color: rgba(21, 21, 21, 0)
     }
 
-    &.bar3 {    // this line of code is not working just yet
+    &.bar3 {
       // letter-spacing: -7.75px;
       color: rgba(21, 21, 21, 0)
     }
 
-    &.bar4 {    // this line of code is not working just yet
+    &.bar4 {
       display: none;
     }
 
-    &.bar5 {    // this line of code is not working just yet
+    &.bar5 {
       display: none;
     }
-    // }
 
-    // &:nth-child(3) {
-    //   letter-spacing: -5px;
-    // }
-
-    // Getting the lines for the hamburger menu icon
     &:before {
       position: absolute;
       content: '';
@@ -291,23 +268,13 @@
     }
   }
 
-  // #toggle:focus {
-  //   & ~ .toggle-container .button-toggle {
-  //     box-shadow: 0 0 0 8px rgba(0, 0, 0, 0.1), inset 0 0 0 20px rgba(0, 0, 0, 0.1);
-  //   }
-  // }
-
+  //  OPENED MOBILE NAV AREA  //
   .toggle-on {
     display: block;
     transform: translate(-220px, 150px); //controls where the links show up after clicking x vertically
 
-        // Making the "X" icon using `:before` and `:after` pseudo-elements
+    // Making the "X" icon using `:before` and `:after` pseudo-elements
     & ~ .toggle-container .button-toggle {
-      // box-shadow: 0 0 0 550px rgba(0, 0, 0, 0.1), inset 0 0 0 20px rgba(0, 0, 0, 0.1);
-
-      // &:hover {
-      //   box-shadow: 0 0 0 20px rgba(0, 0, 0, 0.1), inset 0 0 0 20px rgba(0, 0, 0, 0.1), 0 0 0 8px rgba(0, 0, 0, 0.1), inset 0 0 0 20px rgba(0, 0, 0, 0.1);
-      // }
 
       &:before {
         transform: translateY(50%) rotate(45deg) scale(1);
@@ -318,11 +285,6 @@
       }
     }
 
-    // &:focus ~ .toggle-container .button-toggle {
-    //   box-shadow: 0 0 0 550px rgba(0, 0, 0, 0.1), inset 0 0 0 20px rgba(0, 0, 0, 0.1), 0 0 0 8px rgba(0, 0, 0, 0.1), inset 0 0 0 20px rgba(0, 0, 0, 0.1);
-    // }
-
-    // menu after clicking on hamburger //
     & ~ .burger-links {
       grid-area: navbar;
       pointer-events: auto;
@@ -340,9 +302,9 @@
       // Restoring nav items from "lines" in the menu icon
       & .nav-item.two  {
         color: #fff;
-        letter-spacing: 0; //open hamburger links width
-        height: 40px; //open hamburger links line height
-        line-height: 40px; //how far down links show up
+        letter-spacing: 0;
+        height: 40px;
+        line-height: 40px;
         margin: 0;
         width: 100%;
         opacity: 1;
@@ -353,7 +315,7 @@
         &.bar5 {
           display: inline-block;
           &:before {
-            transition-delay: 0.1s;  // sets delay for .05s after first three bars.
+            transition-delay: .2s;  // sets delay for .05s after first three bars.
           }
         }
 
@@ -367,7 +329,7 @@
             }
           }
         }
-  
+
         // Hiding the lines
         &:before {
           opacity: 0;
@@ -382,33 +344,23 @@
     }
   }
 
-  .toggle-off {
-    .button-toggle {
-      // Shadow on hover
-      &:hover {
-        box-shadow: 0 0 0 8px rgba(0, 0, 0, 0.0), inset 0 0 0 20px rgba(0, 0, 0, 0.0);
-      }
-    }
-  }
-
   // Toggle button //
   .toggle-container {
-    display: grid; // was auto and grid but don't think it works with this structure
+    display: grid;
     align-items: center;
-    // justify-self: flex-end;
     justify-content: center;
   }
 
-  // 'x' area size
+  // SIZE OF 'X'
   span.button {
     padding: 1em;
   }
 
   .button-toggle {
     position: absolute;
-    display: inline-block; // was auto and grid but don't think it works with this structure
+    display: inline-block;
     align-items: center;
-    top: 21.5px; //sets x into circle radius toggle-button
+    top: 21.5px;
     right: 21.5px;
     width: 20px;
     height: 20px;
