@@ -10,7 +10,7 @@ class DashTop extends Component {
     let req = {
       ...this.props.auth.creds,
       theme: theme
-    }
+    };
     axios.post(`/routes/user/${this.props.auth.creds._id}/edit`, req)
     .then((results) => {
       this.props.dispatch(editUser(results.data.response));
@@ -18,7 +18,7 @@ class DashTop extends Component {
   }
   
   render() {
-    const { _id, img, username, } = this.props.auth.creds;
+    const { _id,img, username } = this.props.auth.creds;
 
     return (
       <div className="dashboard-user">

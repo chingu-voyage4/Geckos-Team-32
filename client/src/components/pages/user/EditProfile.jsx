@@ -11,10 +11,11 @@ class EditProfile extends Component {
 
     // Add profile details here
     let req = {
+      ...this.props.auth.creds,
       email: e.target.elements.email.value,
       displayName: e.target.elements.displayName.value,
       username: e.target.elements.username.value,
-      location: e.target.elements.location.value,
+      location: e.target.elements.location.value
     };
     axios.post(`/routes/user/${this.props.auth.creds._id}/edit`, req)
       .then((results) => {

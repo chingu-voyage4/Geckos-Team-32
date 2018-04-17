@@ -1,16 +1,27 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-class AvatarSelection extends Component {
+import { editUser } from '../../../actions/authenticate';
+
+class AvatarSelection extends Component {  
   handleAvatarClick(e) {
     e.preventDefault();
     const img = e.target.src;
-
-    this.props.handleUpdateAvatar(img);
+    let req = {
+      ...this.props.auth.creds,
+      img: img
+    };
+    axios.post(`/routes/user/${this.props.auth.creds._id}/edit`, req)
+      .then((results) => {
+        this.props.dispatch(editUser(results.data.response));
+      });
   }
 
   render() {
+    // console.log('avatar props: ', this.props);
+
     return (
       <div className="avatar-wrapper">
         <h2>Avatar Selection</h2>
@@ -45,4 +56,10 @@ class AvatarSelection extends Component {
   }
 }
 
-export default withRouter(AvatarSelection);
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth
+  };
+};
+
+export default withRouter(connect(mapStateToProps)(AvatarSelection));

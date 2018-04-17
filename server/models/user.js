@@ -17,6 +17,7 @@ const User = new Schema({
   email: String,
   location: String,
   theme: String,
+  img: String,
   videos:[{
     type: Schema.Types.ObjectId,
     ref:'Video'

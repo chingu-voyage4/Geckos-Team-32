@@ -13,6 +13,7 @@ class Profile extends Component {
 	}
 
 	componentDidMount() {
+		this.props.auth.loggedIn ? this.props.handleShowDash() : this.props.history.push('/');
 		this.props.handleShowDash();
 	}
 
