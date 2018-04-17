@@ -30,7 +30,7 @@ const About = (props) => (
           <a href="https://github.com/marylicious" target="_blank" className="about-teammate">
             <div className="team-member">
               <div className="circle-icon">
-                <img className="avatar" src="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/profile-icon.png"/>
+                <img className="avatar" src="http://webdesignbyraymond.com/gecho/unicorn.png"/>
               </div>
               <p>Mary</p>
             </div>
@@ -39,7 +39,7 @@ const About = (props) => (
           <a href="https://github.com/Raymond-Cox" target="_blank" className="about-teammate">
             <div className="team-member">
               <div className="circle-icon">
-                <img className="avatar" src="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/profile-icon.png"/>
+                <img className="avatar" src="http://webdesignbyraymond.com/gecho/wolf.png"/>
               </div>
               <p>Raymond</p>
             </div>
@@ -48,7 +48,7 @@ const About = (props) => (
           <a href="https://github.com/odelavia" target="_blank" className="about-teammate">
             <div className="team-member">
               <div className="circle-icon">
-                <img className="avatar" src="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/profile-icon.png"/>
+                <img className="avatar" src="http://webdesignbyraymond.com/gecho/chameleon.png"/>
               </div>
               <p>Oliver</p>
             </div>
@@ -57,7 +57,7 @@ const About = (props) => (
           <a href="https://github.com/ziggysauce" target="_blank" className="about-teammate">
             <div className="team-member">
               <div className="circle-icon">
-                <img className="avatar" src="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/profile-icon.png"/>
+                <img className="avatar" src="http://webdesignbyraymond.com/gecho/tiger.png"/>
               </div>
               <p>Dan</p>
             </div>
