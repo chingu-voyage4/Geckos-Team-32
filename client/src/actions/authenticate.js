@@ -52,9 +52,16 @@ export const logoutUser = () => {
     axios.get('routes/logout');
     dispatch({ type: 'LOGOUT_USER'});
     sessionStorage.removeItem('session');
+    sessionStorage.removeItem('videos');
+    window.location.reload() // refresh page and handle flash message here
   }
 }
 
+/*
+ * EDIT USER ACTION
+ * Pass in new credentials to backend
+ * Dispatch type and data
+ */
 export const editUser = (newCreds) => {
   return async dispatch => {
     const res = await axios.get(`/routes/user/${newCreds._id}`);
@@ -74,6 +81,7 @@ export const deleteUser = (id, history) => {
     const res = await axios.delete(`/routes/user/${id}/delete`);
     if (res.data.response === 'deleted') {
       sessionStorage.removeItem('session');
+      sessionStorage.removeItem('videos');
       dispatch({ type: 'DELETE_USER'});
       history.push('/');
       // window.location.reload(); // find a way to refresh page

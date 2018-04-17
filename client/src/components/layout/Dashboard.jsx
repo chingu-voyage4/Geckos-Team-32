@@ -9,18 +9,8 @@ import DashBottom from './DashboardComponents/DashBottom.jsx';
 class Dashboard extends Component {
 	handleCheckLogin() {
 		let session = JSON.parse(sessionStorage.getItem('session')); // get JSON session data
-		console.log('the sess: ', session);
-		console.log('the props: ', this.props);
-		// if (this.props.auth.loggedIn !== session.loggedIn) {
-    //   sessionStorage.setItem('session', JSON.stringify(this.state.user)); // set sessionStorage for log in
-		// }
+		this.props.auth.loggedIn ? this.props.handleShowDash() : null;
 	}
-
-	  // handleCheckSession = (session) => {
-  //   if (session && this.state.user.loggedIn !== session.loggedIn) {
-  //     this.setState({ user: session, launch: false });
-  //   }
-  // }
 
   render() {
 		console.log('from dashboard: ', this.props);
@@ -40,7 +30,6 @@ class Dashboard extends Component {
 		);
   }
 }
-
 
 const mapStateToProps = (state) => {
   return {

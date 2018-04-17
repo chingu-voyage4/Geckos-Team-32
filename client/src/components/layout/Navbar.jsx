@@ -22,7 +22,7 @@ class Navbar extends Component {
   };
 
   render() {
-    console.log('FROM NAVBAR PROPS: ', this.props);
+    // console.log('FROM NAVBAR PROPS: ', this.props);
     const id = this.props.auth._id ? this.props.auth._id : "profile";
 
 		return (
@@ -68,8 +68,8 @@ class Navbar extends Component {
             </ul>
             {this.props.auth.loggedIn ? 
               <ul className="login-list">
-                <li><a href="#" className="nav-item item-one" onClick={() => this.props.dispatch(logoutUser())}>Sign Out</a></li>
-                <li><NavLink to={`/user/${id}`} className="nav-item item-two">Profile</NavLink></li>
+              <li><NavLink to={`/user/${id}`} className="nav-item item-two">Profile</NavLink></li>
+              <li><a href="#" className="nav-item item-one" onClick={() => this.props.dispatch(logoutUser())}>Sign Out</a></li>
               </ul> : 
               <ul className="login-list">
                 <li><NavLink to="/signup" className="nav-item item-one btn">Sign Up</NavLink></li>

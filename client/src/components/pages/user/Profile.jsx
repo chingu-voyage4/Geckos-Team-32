@@ -21,7 +21,7 @@ class Profile extends Component {
 	}
   
   render() {
-		console.log('this is from profile: ', this.props);
+		// console.log('this is from profile: ', this.props);
 		const { loggedIn, creds } = this.props.auth;
 		const { edit, editButton } = this.props.editUser;
 

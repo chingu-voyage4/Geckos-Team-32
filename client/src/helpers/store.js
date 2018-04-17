@@ -8,7 +8,7 @@ const loggerMiddleware = createLogger();
 /*
  * Create STORE for redux
  * Apply redux thunk (to return functions instead of actions) 
- * Apply redux logger (to show errors in log)
+ * Apply redux logger (to show changes and errors in log)
  */
 
 export const store = createStore(

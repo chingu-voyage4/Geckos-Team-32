@@ -14,7 +14,6 @@ const DashTop = (props) => {
 
       <div className="user-links">
         <ul>
-          <li><NavLink className="dashboard__link" to={`/user/${_id}/playlists/add/jhgjhg`}>Playlists Test</NavLink></li>
           <li><NavLink className="dashboard__link" to={`/user/${_id}/playlists`}>Playlists</NavLink></li>
           <li><NavLink className="dashboard__link" to={`/user/${_id}/saved`} onClick={props.retrieveSavedVideos}>Liked Videos</NavLink></li>
         </ul>
