@@ -35,7 +35,7 @@ router.post('/login', passport.authenticate('local-login', {
 router.get('/user/:id', async (req, res) => {
   try {
     let user = await User.findById(req.params.id);
-    res.send({ users: user });
+    res.send(user);
   } catch (err) {
     res.redirect('/');
   }

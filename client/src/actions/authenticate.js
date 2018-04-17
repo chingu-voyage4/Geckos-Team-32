@@ -1,9 +1,8 @@
 import axios from 'axios';
-// import { history } from '../helpers/history';
 
 export const LOGIN_USER = 'LOGIN_USER';
 export const SIGNUP_USER = 'SIGNUP_USER';
-// export const UPDATE_USER = 'UPDATE_USER';
+export const UPDATE_USER = 'UPDATE_USER';
 export const DELETE_USER = 'DELETE_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
 
@@ -53,6 +52,14 @@ export const logoutUser = () => {
     axios.get('routes/logout');
     dispatch({ type: 'LOGOUT_USER'});
     sessionStorage.removeItem('session');
+  }
+}
+
+export const editUser = (newCreds) => {
+  return async dispatch => {
+    const res = await axios.get(`/routes/user/${newCreds._id}`);
+    dispatch({ type: 'UPDATE_USER', payload: res.data });
+    sessionStorage.setItem('session', JSON.stringify(res.data));
   }
 }
 

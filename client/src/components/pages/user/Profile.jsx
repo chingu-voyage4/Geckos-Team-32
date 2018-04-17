@@ -14,22 +14,7 @@ class Profile extends Component {
 
 	componentDidMount() {
 		this.props.handleShowDash();
-    // this.props.state.user.loggedIn ? null : this.handleUserData();
 	}
-
-	// Only call if user is not already logged in
-	// handleUserData() {
-	// 	let id = this.props.userId.match.params.id;
-	// 	axios.get(`/routes/user/${id}`)
-	// 		.then((results) => {
-	// 			let creds = results.data.users;
-	// 			this.props.handleUpdateUser(creds);
-	// 		})
-	// 		.catch((err) => {
-	// 			console.log('There was an error: ', err);
-	// 			this.props.history.push('/');
-	// 		});
-	// }
 
 	showAvatars() {
 		!this.state.avatar ? this.setState({ avatar: true }) : this.setState({ avatar: false });
@@ -55,7 +40,7 @@ class Profile extends Component {
 				</div>
 
 				<div className="profile-username-edit twopercent-spacing">
-					{loggedIn ? <h2>{creds.displayName || creds.username}! {creds.location ? <span className="profile-location"></span> : null}</h2> : null}
+					{loggedIn ? <h2>{creds.displayName || creds.username}! {creds.location ? <span className="profile-location">({creds.location})</span> : null}</h2> : null}
 					<button className="button profile-button" onClick={this.props.handleEditProfile}>{editButton}</button>
 					{edit ? 
 					<EditProfile 

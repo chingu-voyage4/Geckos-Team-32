@@ -49,7 +49,6 @@
     "file-loader": "^1.1.11",
     "googleapis": "^27.0.0",
     "helmet": "^3.12.0",
-    "history": "^4.7.2",
     "method-override": "^2.3.10",
     "mongod": "^2.0.0",
     "mongodb": "^3.0.3",

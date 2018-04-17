@@ -3,36 +3,26 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { deleteUser } from '../../../actions/authenticate';
+import { editUser, deleteUser } from '../../../actions/authenticate';
 
 class EditProfile extends Component {
   handleEditData(e) {
     e.preventDefault();
 
-    // Add more profile details here
+    // Add profile details here
     let req = {
       email: e.target.elements.email.value,
       displayName: e.target.elements.displayName.value,
       username: e.target.elements.username.value,
       location: e.target.elements.location.value,
     };
-    axios.post(`/routes/user/${this.props.id}/edit`, req) // handle this on redux
+    axios.post(`/routes/user/${this.props.auth.creds._id}/edit`, req) // handle this on redux
       .then((results) => {
         results.data.response === 'taken' ?
         this.openModalDuplicate() :
-        this.props.handleEditProfile(results.data.response);
+        this.props.dispatch(editUser(results.data.response));
       });
   }
-
-  // handleDeleteUser() {
-  //     axios.delete(`/routes/user/${this.props.auth.creds._id}/delete`)
-  //     .then((results) => {
-  //       if (results.data.response === 'deleted') {
-  //         this.props.props.handleUpdateAfterDelete();
-  //         this.props.history.push('/');
-  //       }
-  //     });
-  // }
 
   openModalDelete() {
     let modal = document.getElementById('deleteModal');
