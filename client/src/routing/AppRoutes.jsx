@@ -81,20 +81,17 @@ class AppRoutes extends React.Component {
       });
   }
 
-  handleUpdateTheme = (theme) => this.setState({ theme });
-
   render() {
     return (
       <BrowserRouter>
         <ScrollToTop>
           <Navbar
-            theme={this.state.theme}
+            theme={this.props.auth.creds.theme || 'theme-gecho'}
           />
-          <div className={this.state.theme}>
+          <div className={this.props.auth.creds.theme || 'theme-gecho'}>
             <div className="main-page">
               <Dashboard 
                 launch={this.state.launch}
-                handleUpdateTheme={this.handleUpdateTheme}
                 handleCheckSession={this.handleCheckSession}
                 handleShowDash={this.handleShowDash}
               />
@@ -122,7 +119,6 @@ class AppRoutes extends React.Component {
                   render={(props) => (<Profile
                     editUser={this.state.editUser}
                     handleUpdateAvatar={this.handleUpdateAvatar}
-                    handleUpdateTheme={this.handleUpdateTheme}
                     handleShowDash={this.handleShowDash}
                     handleEditProfile={req => {
                       !this.state.editUser.edit ? 
@@ -166,7 +162,7 @@ class AppRoutes extends React.Component {
               </Switch>
             </div>
           </div>
-          <Footer theme={this.state.theme}/>
+          <Footer theme={this.props.auth.creds.theme || 'theme-gecho'}/>
         </ScrollToTop>
       </BrowserRouter>
     )

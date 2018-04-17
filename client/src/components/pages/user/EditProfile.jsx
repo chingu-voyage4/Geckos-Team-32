@@ -16,7 +16,7 @@ class EditProfile extends Component {
       username: e.target.elements.username.value,
       location: e.target.elements.location.value,
     };
-    axios.post(`/routes/user/${this.props.auth.creds._id}/edit`, req) // handle this on redux
+    axios.post(`/routes/user/${this.props.auth.creds._id}/edit`, req)
       .then((results) => {
         results.data.response === 'taken' ?
         this.openModalDuplicate() :

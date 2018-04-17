@@ -22,7 +22,6 @@ class Dashboard extends Component {
 				{loggedIn ? 
 					<DashTopUser 
 						retrieveSavedVideos={this.props.retrieveSavedVideos} 
-						handleUpdateTheme={this.props.handleUpdateTheme}
 					/> : 
 					<DashTop />}
 				<DashBottom />
