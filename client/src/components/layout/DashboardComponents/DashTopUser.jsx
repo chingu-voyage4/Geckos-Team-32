@@ -27,6 +27,7 @@ export default class DashTop extends Component {
             <option value="theme-gecho">Gecho</option>
             <option value="theme-twilight">Twilight</option>
             <option value="theme-peacock">Peacock</option>
+            <option value="theme-good-vibes">Good Vibes</option>
           </select>
         </div>
       </div>

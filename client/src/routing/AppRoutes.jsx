@@ -37,7 +37,8 @@ class AppRoutes extends React.Component {
   //   videos: [],
   //   selectedVideo: null,
   //   saved: true,
-  //   savedVideos: dummySavedVideosData
+  //   savedVideos: dummySavedVideosData,
+  //   theme: 'theme-good-vibes'
   // }
 
   //////////////////////////
