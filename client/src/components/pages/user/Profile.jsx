@@ -3,6 +3,8 @@ import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux';
 
+import { fetchUser } from '../../../actions/authenticate';
+
 import EditProfile from './EditProfile.jsx';
 import SavedVideos from './SavedVideos.jsx';
 import AvatarSelection from './AvatarSelection.jsx';
@@ -13,7 +15,11 @@ class Profile extends Component {
 	}
 
 	componentDidMount() {
-		this.props.auth.loggedIn ? this.props.handleShowDash() : this.props.history.push('/');
+		this.props.dispatch(fetchUser(this.props.userId.match.params.id, this.props.history));
+	}
+
+	componentDidUpdate() {
+		// this.props.auth.loggedIn ? this.props.handleShowDash() : this.props.history.push('/');
 		this.props.handleShowDash();
 	}
 

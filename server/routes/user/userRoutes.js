@@ -12,6 +12,7 @@ const User = require('../../models/user');
 router.post('/signup', passport.authenticate('local-signup', {
   failureRedirect : '/signup', 
 }), (req, res) => {
+  console.log('successfully signed up: ', req.user);
   res.send(req.user);
   // res.redirect('/user/' + req.user._id);
 });

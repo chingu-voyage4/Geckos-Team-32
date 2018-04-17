@@ -118,6 +118,7 @@ class AppRoutes extends React.Component {
                 <Route
                   exact path="/user/:id"
                   render={(props) => (<Profile
+                    userId={props}
                     editUser={this.state.editUser}
                     handleUpdateAvatar={this.handleUpdateAvatar}
                     handleShowDash={this.handleShowDash}

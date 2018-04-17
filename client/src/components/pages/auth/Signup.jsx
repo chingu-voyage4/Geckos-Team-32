@@ -9,7 +9,6 @@ class Signup extends Component {
       username: e.target.username.value,
       password: e.target.password.value
     }
-    // console.log(creds, this.props.userId.history);
     this.props.dispatch(signupUser(creds, this.props.userId.history));
   }
   
