@@ -85,7 +85,7 @@ router.post('/user/:id/edit', middleware.isLoggedIn, async (req, res, next) => {
  */
 router.delete('/user/:id/delete', middleware.isLoggedIn, async (req, res, next) => {
   try {
-    // console.log('DELETE ROUTE PARAMS: ', req.params);
+    console.log('DELETE ROUTE PARAMS: ', req.params);
     let user = await User.findByIdAndRemove(req.params.id);
     console.log('SUCCESSFULLY DELETED USER');
     res.send({ response: 'deleted' });
@@ -107,8 +107,8 @@ router.get('/logout', (req, res) => {
 });
 
 //For testing purposes:
-router.get('/api/current_user', (req, res)=> {
-  res.send(req.user); //passport attach functions to the request
-});
+// router.get('/api/current_user', (req, res)=> {
+//   res.send(req.user); //passport attach functions to the request
+// });
 
 module.exports = router;

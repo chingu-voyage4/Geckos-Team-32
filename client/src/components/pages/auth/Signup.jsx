@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { signupUser } from "../../../actions/authenticate";
+import { signupUser } from '../../../actions/authenticate';
 
 class Signup extends Component {
   handleSubmit(e) {

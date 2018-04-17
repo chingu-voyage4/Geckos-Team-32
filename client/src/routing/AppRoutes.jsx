@@ -106,16 +106,16 @@ class AppRoutes extends React.Component {
   //   sessionStorage.removeItem('session'); // set sessionStorage for logout
   // }
 
-  handleUpdateAfterDelete = () => {
-    this.setState({
-      user: {
-        loggedIn: false,
-        creds: {}
-      }
-    });
-    sessionStorage.removeItem('session');
-    window.location.reload(); // reload page to reset state
-  }
+  // handleUpdateAfterDelete = () => {
+  //   this.setState({
+  //     user: {
+  //       loggedIn: false,
+  //       creds: {}
+  //     }
+  //   });
+  //   sessionStorage.removeItem('session');
+  //   window.location.reload(); // reload page to reset state
+  // }
 
   handleSearchInput = (query) => {
     // console.log('this is the search: ', query);
@@ -212,7 +212,6 @@ class AppRoutes extends React.Component {
                   exact path="/user/:id"
                   render={(props) => (<Profile
                     editUser={this.state.editUser}
-                    handleUpdateAfterDelete={this.handleUpdateAfterDelete}
                     handleUpdateAvatar={this.handleUpdateAvatar}
                     handleUpdateTheme={this.handleUpdateTheme}
                     handleShowDash={this.handleShowDash}

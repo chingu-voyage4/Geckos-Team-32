@@ -55,12 +55,10 @@ class Profile extends Component {
 				</div>
 
 				<div className="profile-username-edit twopercent-spacing">
-					{loggedIn ? <h2>{creds.displayName || creds.username}! <span className="profile-location">({creds.location})</span></h2> : null}
+					{loggedIn ? <h2>{creds.displayName || creds.username}! {creds.location ? <span className="profile-location"></span> : null}</h2> : null}
 					<button className="button profile-button" onClick={this.props.handleEditProfile}>{editButton}</button>
 					{edit ? 
 					<EditProfile 
-						creds={creds} 
-						id={this.props.match.params.id} 
 						handleEditProfile={this.props.handleEditProfile.bind(this)}
 					/> : 
 					null}

@@ -4,7 +4,7 @@ import axios from 'axios';
 export const LOGIN_USER = 'LOGIN_USER';
 export const SIGNUP_USER = 'SIGNUP_USER';
 // export const UPDATE_USER = 'UPDATE_USER';
-// export const REMOVE_USER = 'REMOVE_USER';
+export const DELETE_USER = 'DELETE_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
 
 
@@ -16,9 +16,13 @@ export const LOGOUT_USER = 'LOGOUT_USER';
 export const loginUser = (creds, history) => {
   return async dispatch => {
     const res = await axios.post('/routes/login', creds);
-    dispatch({ type: 'LOGIN_USER', payload: res.data });
-    sessionStorage.setItem('session', JSON.stringify(res.data));
-    history.push(`/user/${res.data._id}`);
+    if (typeof res.data === 'object') {
+      dispatch({ type: 'LOGIN_USER', payload: res.data });
+      sessionStorage.setItem('session', JSON.stringify(res.data));
+      history.push(`/user/${res.data._id}`);
+    } else {
+      window.location.reload(); // error logging in, handle flash message here
+    }
   }
 };
 
@@ -30,16 +34,42 @@ export const loginUser = (creds, history) => {
 export const signupUser = (creds, history) => {
   return async dispatch => {
     const res = await axios.post('/routes/signup', creds);
-    dispatch({ type: 'SIGNUP_USER', payload: res.data });
-    sessionStorage.setItem('session', JSON.stringify(res.data));
-    history.push(`/user/${res.data._id}`);
+    if (typeof res.data === 'object') {
+      dispatch({ type: 'SIGNUP_USER', payload: res.data });
+      sessionStorage.setItem('session', JSON.stringify(res.data));
+      history.push(`/user/${res.data._id}`);
+    } else {
+      window.location.reload() // error signing up, handle flash message here
+    }
   }
 };
 
+/*
+ * LOGOUT USER ACTION
+ * Dispatch type
+ */
 export const logoutUser = () => {
   return dispatch => {
     axios.get('routes/logout');
     dispatch({ type: 'LOGOUT_USER'});
     sessionStorage.removeItem('session');
+  }
+}
+
+/*
+ * DELETE USER ACTION
+ * Pass in credentials to delete route on backend
+ * Dispatch type
+ */
+export const deleteUser = (id, history) => {
+  console.log('deleting...: ', id);
+  return async dispatch => {
+    const res = await axios.delete(`/routes/user/${id}/delete`);
+    if (res.data.response === 'deleted') {
+      sessionStorage.removeItem('session');
+      dispatch({ type: 'DELETE_USER'});
+      history.push('/');
+      // window.location.reload(); // find a way to refresh page
+    }
   }
 }
