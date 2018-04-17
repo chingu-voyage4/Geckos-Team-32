@@ -18,34 +18,10 @@ import Playlist from '../components/pages/user/Playlist.jsx';
 import NotFound from './NotFound.jsx';
 import ScrollToTop from './ScrollToTop.jsx';
 
-
 // Seed Data
 import { dummyUserData, dummySavedVideosData } from '../seedData/seedData';
 
 class AppRoutes extends React.Component {
-  ////////////////////////
-  ///// SEED DATA ////////
-  ////////////////////////
-
-  // state = {
-  //   launch: true,
-  //   user: dummyUserData,
-  //   editUser: {
-  //     edit: false,
-  //     editButton: 'Edit',
-  //   },
-  //   search: '',
-  //   videos: [],
-  //   selectedVideo: null,
-  //   saved: true,
-  //   savedVideos: dummySavedVideosData,
-  //   theme: 'theme-good-vibes'
-  // }
-
-  //////////////////////////
-  ///// ACTUAL STATE ///////
-  //////////////////////////
-  
   state = {
     launch: true,
     editUser: {
@@ -54,20 +30,10 @@ class AppRoutes extends React.Component {
     },
     videos: [],
     selectedVideo: null,
-    theme: 'theme-gecho'
   }
 
   // Show dashboard after moving form landing page
   handleShowDash = () => this.state.launch ? this.setState({ launch: false }) : null;
-
-  handleUpdateAvatar = (img) => {
-    this.setState({
-      user: {
-        loggedIn: this.state.user.loggedIn,
-        creds: { ...this.state.user.creds, img: img }
-      }
-    });
-  }
 
   handleSearchInput = (query) => {
     // console.log('this is the search: ', query);
@@ -93,7 +59,6 @@ class AppRoutes extends React.Component {
             <div className="main-page">
               <Dashboard 
                 launch={this.state.launch}
-                handleCheckSession={this.handleCheckSession}
                 handleShowDash={this.handleShowDash}
               />
               <Switch>
@@ -120,7 +85,6 @@ class AppRoutes extends React.Component {
                   render={(props) => (<Profile
                     userId={props}
                     editUser={this.state.editUser}
-                    handleUpdateAvatar={this.handleUpdateAvatar}
                     handleShowDash={this.handleShowDash}
                     handleEditProfile={req => {
                       !this.state.editUser.edit ? 
