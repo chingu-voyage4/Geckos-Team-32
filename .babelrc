@@ -6,6 +6,7 @@
   "plugins": [
     "transform-class-properties",
     "react-hot-loader/babel",
+    "transform-async-to-generator",
     "transform-object-rest-spread"
   ]
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 
@@ -47,43 +48,17 @@ class AppRoutes extends React.Component {
   
   state = {
     launch: true,
-    user: {
-      loggedIn: false,
-      creds: {}
-    },
     editUser: {
       edit: false,
       editButton: 'Edit',
     },
     videos: [],
     selectedVideo: null,
-    saved: false,
-    savedVideos: null,
     theme: 'theme-gecho'
   }
 
   // Show dashboard after moving form landing page
   handleShowDash = () => this.state.launch ? this.setState({ launch: false }) : null;
-
-  // Check sessionStorage if user is logged in or not
-  handleCheckSession = (session) => {
-    if (session && this.state.user.loggedIn !== session.loggedIn) {
-      this.setState({ user: session, launch: false });
-    }
-  }
-
-  handleUpdateUser = (user) => {
-    // Only change if user object contains a username
-    if (user.username) {
-      this.setState({
-        user: {
-          loggedIn: true,
-          creds: user
-        }
-      });
-      sessionStorage.setItem('session', JSON.stringify(this.state.user)); // set sessionStorage for log in
-    }
-  }
 
   handleUpdateAvatar = (img) => {
     this.setState({
@@ -92,29 +67,6 @@ class AppRoutes extends React.Component {
         creds: { ...this.state.user.creds, img: img }
       }
     });
-  }
-
-  handleLogoutUser = () => {
-    console.log('user logging out');
-    axios.get('routes/logout');
-    this.setState({
-      user: {
-        loggedIn: false,
-        creds: {}
-      }
-    });
-    sessionStorage.removeItem('session'); // set sessionStorage for logout
-  }
-
-  handleUpdateAfterDelete = () => {
-    this.setState({
-      user: {
-        loggedIn: false,
-        creds: {}
-      }
-    });
-    sessionStorage.removeItem('session');
-    window.location.reload(); // reload page to reset state
   }
 
   handleSearchInput = (query) => {
@@ -130,65 +82,19 @@ class AppRoutes extends React.Component {
       });
   }
 
-  handleLikedVideo = (e, video) => {
-    // console.log('liked video: ', video);
-    if (this.state.user.loggedIn) {
-      // console.log('Logged in, proceed...', this.state.user.creds);
-      let id = this.state.user.creds._id;
-      axios.post(`/routes/user/${id}/videos`, video)
-      	.then((results) => {
-      		let videos = results.data.videos;
-      		// console.log('new video data: ', videos);
-      	})
-      	.catch((err) => {
-      		console.log('There was an error: ', err);
-      	});
-    } else {
-      console.log('Not logged in');
-    }
-  }
-
-  retrieveSavedVideos = () => {
-		// console.log('retrieve button clicked', this.state);
-		let id = this.state.user.creds._id;
-		let videos = {};
-		if (!this.state.saved) {
-			axios.get(`/routes/user/${id}/videos`)
-				.then((results) => {
-					videos = results.data.videos;
-					// console.log('new video data: ', videos);
-					this.setState({ saved: true, savedVideos: videos });
-				})
-				.catch((err) => {
-					console.log('There was an error: ', err);
-				});
-		} else {
-			this.setState({ saved: false });
-		}
-  }
-  
-  handleUpdateSavedVideos = (videos) => {
-    this.setState({ saved: true, savedVideos: videos });
-  }
-
-  handleUpdateTheme = (theme) => this.setState({ theme });
-
   render() {
     return (
       <BrowserRouter>
         <ScrollToTop>
           <Navbar
-            user={this.state.user}
-            handleLogoutUser={this.handleLogoutUser}
-            theme={this.state.theme}
+            theme={this.props.auth.creds.theme || 'theme-gecho'}
           />
-          <div className={this.state.theme}>
+          <div className={this.props.auth.creds.theme || 'theme-gecho'}>
             <div className="main-page">
               <Dashboard 
-                state={this.state}
-                retrieveSavedVideos={this.retrieveSavedVideos}
-                handleUpdateTheme={this.handleUpdateTheme}
+                launch={this.state.launch}
                 handleCheckSession={this.handleCheckSession}
+                handleShowDash={this.handleShowDash}
               />
               <Switch>
                 <Route
@@ -206,26 +112,19 @@ class AppRoutes extends React.Component {
                       stateData={this.state}
                       handleSearchInput={this.handleSearchInput}
                       handleSelectedVideo={selectedVideo => this.setState({selectedVideo})}
-                      handleLikedVideo={this.handleLikedVideo}
                       handleShowDash={this.handleShowDash}
                   />)} 
                 />
                 <Route
                   exact path="/user/:id"
                   render={(props) => (<Profile
-                    userId={props}
-                    state={this.state}
-                    handleUpdateAfterDelete={this.handleUpdateAfterDelete}
-                    handleUpdateUser={this.handleUpdateUser}
+                    editUser={this.state.editUser}
                     handleUpdateAvatar={this.handleUpdateAvatar}
-                    handleUpdateTheme={this.handleUpdateTheme}
                     handleShowDash={this.handleShowDash}
-                    retrieveSavedVideos={this.retrieveSavedVideos}
                     handleEditProfile={req => {
                       !this.state.editUser.edit ? 
                       this.setState({ editUser: { edit: true, editButton: 'Cancel' }}) : 
                       this.setState({ editUser: { edit: false, editButton: 'Edit Profile' }});
-                      this.handleUpdateUser(req);
                     }}
                   />)}
                 />
@@ -233,10 +132,6 @@ class AppRoutes extends React.Component {
                   exact path="/user/:id/saved"
                   render={(props) => (<SavedVideos 
                     userId={props}
-                    state={this.state}
-                    videos={this.state.savedVideos}
-                    retrieveSavedVideos={this.retrieveSavedVideos}
-                    handleUpdateSavedVideos={this.handleUpdateSavedVideos}
                   />)}
                 />
                 <Route 
@@ -251,13 +146,15 @@ class AppRoutes extends React.Component {
                 <Route 
                   path="/signup" 
                   component={(props) => <Signup 
+                    userId={props}
                     launch={this.state.launch} 
                     handleHideDash={this.handleHideDash}
                   />} 
                 />
                 <Route 
                   path="/login" 
-                  component={(props) => <Login 
+                  component={(props) => <Login
+                    userId={props}
                     launch={this.state.launch} 
                     handleHideDash={this.handleHideDash}
                   />} 
@@ -266,11 +163,17 @@ class AppRoutes extends React.Component {
               </Switch>
             </div>
           </div>
-          <Footer theme={this.state.theme}/>
+          <Footer theme={this.props.auth.creds.theme || 'theme-gecho'}/>
         </ScrollToTop>
       </BrowserRouter>
     )
   }
 }
 
-export default AppRoutes;
+const mapStateToProps = (state) => {
+  return { 
+    auth: state.auth
+  };
+};
+
+export default (connect(mapStateToProps)(AppRoutes));

@@ -24,6 +24,7 @@ module.exports = (passport) => {
     passwordField : 'password',
     passReqToCallback : true 
   }, async (req, username, password, done) => {
+    console.log('passed in req: ', username, password);
     try {
       let user = await User.findOne({ username: username });
         if (user) { 
@@ -47,15 +48,17 @@ module.exports = (passport) => {
     passwordField : 'password',
     passReqToCallback : true 
   }, async (req, username, password, done) => { 
+    console.log('passed in req: ', username, password);
     try {
       let user = await User.findOne({ username: username });
       if (!user || !user.validPassword(password)) {
-        return done(null, false);
+        return done(null, false, { message: 'no user exists, or invalid password' });
       } else {
         console.log('LOGGED IN USER: ', user);
         return done(null, user);
       }
     } catch (err) {
+      console.log('some other error occurred: ', err);
       return done(err);
     }
   }));

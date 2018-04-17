@@ -1,44 +1,33 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import axios from 'axios';
 
-export default class SavedVideos extends Component {
+import { fetchLikedVideo, deleteLikedVideo } from '../../../actions/userVideos';
+
+class SavedVideos extends Component {
   componentDidMount() {
-    this.props.retrieveSavedVideos();
+    this.props.auth.loggedI ? this.props.dispatch(fetchLikedVideo(this.props.auth.creds._id)) : this.props.userId.history.push('/');
   }
 
   componentDidUpdate() {
-    if (!this.props.state.user.loggedIn) { // re-direct to homepage if not logged in
+    if (!this.props.auth.loggedIn) { // re-direct to homepage if not logged in
       this.props.userId.history.push('/'); 
-    } else if (this.props.videos == null) { // re-load props if page is refreshed
-      this.props.retrieveSavedVideos(); 
     }
-  }
-
-  handleRemoveVideo(video) {
-		let id = this.props.userId.match.params.id;
-    axios.delete(`routes/user/${id}/videos/delete/${video}`)
-      .then((results) => {
-        let newVideos = results.data.videos;
-        this.props.handleUpdateSavedVideos(newVideos);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   }
 
   render() {
     // console.log('from savedvideos.jsx:', this.props);
 
-    if (this.props.videos) {
+    if (this.props.likedVideos && this.props.likedVideos.length > 0) {
       return (
         <div className="page-wrapper saved-video-container">
-          <h2>Saved/Liked Videos</h2>
+          <h2>Re-watch your liked videos</h2>
           <div className="saved-video-list">
-            {this.props.videos.map((video, index) => {
+            {this.props.likedVideos.map((video, index) => {
               return (
                 <div key={index} className="saved-video-list-items">
-                  <button className="button video-delete" onClick={() => this.handleRemoveVideo(video._id)}><i className="fas fa-times"></i></button>
+                  <button className="button video-delete" onClick={() => this.props.dispatch(deleteLikedVideo(this.props.auth.creds._id, video._id))}><i className="fas fa-times"></i></button>
                   <Link 
                     to={{
                       pathname: '/playvideo',
@@ -62,3 +51,12 @@ export default class SavedVideos extends Component {
     }
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth,
+    likedVideos: state.likedVideos.likedVideos
+  };
+};
+
+export default connect(mapStateToProps)(SavedVideos);

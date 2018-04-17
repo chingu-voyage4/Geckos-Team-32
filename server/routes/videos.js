@@ -16,7 +16,7 @@ router.get('/', middleware.isLoggedIn, async (req, res) => {
       res.redirect('/');
     } else {
       // console.log('sending video data: ', user.videos);
-      res.send({ videos: user.videos });
+      res.send(user.videos);
     }
   } catch (err) {
     return err;
@@ -46,7 +46,7 @@ router.post('/', async (req, res, next) => {
       user.videos.push(newVideo._id);
       user = await user.save();
       // console.log('udpated user: ', user);
-      res.send({ videos: user.videos });
+      res.send(user.videos);
     }
   } catch (err) {
     next(err);
@@ -65,7 +65,7 @@ router.delete('/delete/:video_id', middleware.isLoggedIn, async (req, res, next)
     userArr.videos.pull(video_id); // remove video object from user video array
     userArr = await userArr.save();
     let user = await User.findById(req.params.id).populate('videos'); // get updated list of saved videos
-    res.send({ videos: user.videos }); // send list of saved videos
+    res.send(user.videos); // send list of saved videos
   } catch (err) {
     console.log('Error trying to delete');
     next(err);

@@ -1,34 +1,27 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
+import { editUser, deleteUser } from '../../../actions/authenticate';
 
 class EditProfile extends Component {
   handleEditData(e) {
     e.preventDefault();
 
-    // Add more profile details here
+    // Add profile details here
     let req = {
+      ...this.props.auth.creds,
       email: e.target.elements.email.value,
       displayName: e.target.elements.displayName.value,
       username: e.target.elements.username.value,
-      location: e.target.elements.location.value,
+      location: e.target.elements.location.value
     };
-    axios.post(`/routes/user/${this.props.id}/edit`, req)
+    axios.post(`/routes/user/${this.props.auth.creds._id}/edit`, req)
       .then((results) => {
         results.data.response === 'taken' ?
         this.openModalDuplicate() :
-        this.props.handleEditProfile(results.data.response);
-      });
-  }
-
-  handleDeleteUser() {
-      axios.delete(`/routes/user/${this.props.id}/delete`)
-      .then((results) => {
-        if (results.data.response === 'deleted') {
-          this.props.props.handleUpdateAfterDelete();
-          this.props.history.push('/');
-        }
+        this.props.dispatch(editUser(results.data.response));
       });
   }
 
@@ -66,23 +59,23 @@ class EditProfile extends Component {
 
   render() {
     console.log('this is from edit profile: ', this.props);
-    const { username, email, location, displayName } = this.props.creds;
+    const { username, email, location, displayName, _id } = this.props.auth.creds;
 
     return (
       <div>
         <div className="edit-form">
           <form onSubmit={this.handleEditData.bind(this)}>
             <label htmlFor="displayName">
-              Name: <input className="form__input" type="text" name="displayName" defaultValue={displayName || null} onChange={(e) =>this.handleEditData.bind(this)} required/>
+              Name: <input className="form__input" type="text" name="displayName" defaultValue={displayName || null} onChange={(e) =>this.handleEditData.bind(this)} />
             </label>
             <label htmlFor="email">
-              Email: <input className="form__input" type="email" name="email" defaultValue={email || null} onChange={(e) =>this.handleEditData.bind(this)} required/>
+              Email: <input className="form__input" type="email" name="email" defaultValue={email || null} onChange={(e) =>this.handleEditData.bind(this)} />
             </label>
             <label htmlFor="username">
               Username: <input className="form__input" type="text" name="username" defaultValue={username} onChange={(e) =>this.handleEditData.bind(this)} required/>
             </label>
             <label htmlFor="location">
-              Location: <input className="form__input" type="text" name="location" defaultValue={location || null} onChange={(e) =>this.handleEditData.bind(this)} required/>
+              Location: <input className="form__input" type="text" name="location" defaultValue={location || null} onChange={(e) =>this.handleEditData.bind(this)} />
             </label>
             <button className="button profile-button submit">Submit</button>
           </form>
@@ -95,7 +88,7 @@ class EditProfile extends Component {
             <span className="close-modal" onClick={this.closeModalDelete}>&times;</span>
             <h3>Are you sure you want to do this? Deleting your account will permanently erase all user data including: saved preferences, videos, and playlists.</h3>
             <button className="button profile-button" onClick={this.closeModalDelete}>NO! Go back.</button>
-            <button className="delete button profile-button twopercent-spacing" onClick={this.handleDeleteUser.bind(this)}>Yes, Delete account</button>
+            <button className="delete button profile-button twopercent-spacing" onClick={() => this.props.dispatch(deleteUser(_id, this.props.history))}>Yes, Delete account</button>
           </div>
         </div>
 
@@ -111,4 +104,10 @@ class EditProfile extends Component {
   }
 }
 
-export default withRouter(EditProfile);
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth
+  };
+};
+
+export default withRouter(connect(mapStateToProps)(EditProfile));

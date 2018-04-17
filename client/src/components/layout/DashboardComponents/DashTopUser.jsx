@@ -1,10 +1,24 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import axios from 'axios';
+import { connect } from 'react-redux';
 
-export default class DashTop extends Component {
+import { editUser } from '../../../actions/authenticate';
+
+class DashTop extends Component {
+  handleUpdateTheme(theme) {
+    let req = {
+      ...this.props.auth.creds,
+      theme: theme
+    };
+    axios.post(`/routes/user/${this.props.auth.creds._id}/edit`, req)
+    .then((results) => {
+      this.props.dispatch(editUser(results.data.response));
+    });
+  }
+  
   render() {
-    // console.log('from user dash: ', this.props);
-    const { username, _id, img } = this.props.state.user.creds;
+    const { _id,img, username } = this.props.auth.creds;
 
     return (
       <div className="dashboard-user">
@@ -15,15 +29,14 @@ export default class DashTop extends Component {
 
         <div className="user-links">
           <ul>
-            <li><NavLink className="dashboard__link" to={`/user/${_id}/playlists/add/jhgjhg`}>Playlists Test</NavLink></li>
             <li><NavLink className="dashboard__link" to={`/user/${_id}/playlists`}>Playlists</NavLink></li>
-            <li><NavLink className="dashboard__link" to={`/user/${_id}/saved`} onClick={this.props.retrieveSavedVideos}>Liked Videos</NavLink></li>
+            <li><NavLink className="dashboard__link" to={`/user/${_id}/saved`}>Liked Videos</NavLink></li>
           </ul>
         </div>
 
         <div className="dash-theme">
           <h4 className="theme-title">Theme:</h4>
-          <select className="theme-changer" onChange={(e) => this.props.handleUpdateTheme(e.target.value)}>
+          <select className="theme-changer" value={this.props.auth.creds.theme || 'theme-gecho'} onChange={(e) => this.handleUpdateTheme(e.target.value)}>
             <option value="theme-gecho">Gecho</option>
             <option value="theme-twilight">Twilight</option>
             <option value="theme-peacock">Peacock</option>
@@ -34,3 +47,11 @@ export default class DashTop extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth
+  };
+};
+
+export default connect(mapStateToProps)(DashTop);

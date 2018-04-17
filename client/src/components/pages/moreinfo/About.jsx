@@ -30,7 +30,7 @@ const About = (props) => (
           <a href="https://github.com/marylicious" target="_blank" className="about-teammate">
             <div className="team-member">
               <div className="circle-icon">
-                <img className="avatar" src="http://webdesignbyraymond.com/gecho/unicorn.png" />
+                <img className="avatar" src="http://webdesignbyraymond.com/gecho/unicorn.png"/>
               </div>
               <p>Mary</p>
             </div>

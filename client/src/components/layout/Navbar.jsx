@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+
+import { logoutUser } from '../../actions/authenticate';
 import logo from "../../assets/dantv5.png";
 import brand from "../../assets/Gechotext2.png";
 
-export default class Navbar extends Component {
+class Navbar extends Component {
   state = {
     navOpen: false,
     linkClicked: false
@@ -15,20 +18,12 @@ export default class Navbar extends Component {
   };
 
   resetMobileNav = () => {
-    // if (navOpen) {
-    //   if (!this.state.linkClicked) {
-    //     this.setState.linkClicked = true;
-    //   }
-    //   else {
-    //     return
-    //   }
-    // }
     navOpen ? (!this.state.linkClicked ? this.setState({linkClicked: true}) : null) : null
   };
 
   render() {
     // console.log('FROM NAVBAR PROPS: ', this.props);
-    const id = this.props.user.creds._id ? this.props.user.creds._id : "profile";
+    const id = this.props.auth._id ? this.props.auth._id : "profile";
 
 		return (
 			<div className={this.props.theme}>
@@ -52,12 +47,12 @@ export default class Navbar extends Component {
             </label>
             <div className="burger-links">
               <NavLink to="/about" className="nav-item two bar1" onClick={this.resetMobileNav}>About</NavLink>
-              {this.props.user.loggedIn ?
+              {this.props.auth.loggedIn ?
                 <div>
                   <NavLink to={`/user/${id}`} className="nav-item two bar2" onClick={this.resetMobileNav}>Profile</NavLink>
                   <NavLink to={`/user/${id}/playlists`} className="nav-item two bar3" onClick={this.resetMobileNav}>Playlists</NavLink>
                   <NavLink to={`/user/${id}/saved`} className="nav-item two bar4" onClick={this.resetMobileNav}>Liked Videos</NavLink>
-                  <a href="#" className="nav-item two bar5" onClick={(e) => this.props.handleLogoutUser(e)}>Sign Out</a>
+                  <a href="#" className="nav-item two bar5" onClick={() => this.props.dispatch(logoutUser())}>Sign Out</a>
                 </div> :
                 <div>
                   <NavLink to="/signup" className="nav-item two bar2" onClick={this.resetMobileNav}>Sign Up</NavLink>
@@ -71,10 +66,10 @@ export default class Navbar extends Component {
             <ul className="nav-list">
               <li><NavLink to="/about" className="nav-item">About</NavLink></li>
             </ul>
-            {this.props.user.loggedIn ? 
+            {this.props.auth.loggedIn ? 
               <ul className="login-list">
-                <li><a href="#" className="nav-item item-one" onClick={(e) => this.props.handleLogoutUser(e)}>Sign Out</a></li>
-                <li><NavLink to={`/user/${id}`} className="nav-item item-two">Profile</NavLink></li>
+              <li><NavLink to={`/user/${id}`} className="nav-item item-two">Profile</NavLink></li>
+              <li><a href="#" className="nav-item item-one" onClick={() => this.props.dispatch(logoutUser())}>Sign Out</a></li>
               </ul> : 
               <ul className="login-list">
                 <li><NavLink to="/signup" className="nav-item item-one btn">Sign Up</NavLink></li>
@@ -87,3 +82,11 @@ export default class Navbar extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth
+  };
+};
+
+export default connect(mapStateToProps)(Navbar);

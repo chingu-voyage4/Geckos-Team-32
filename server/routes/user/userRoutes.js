@@ -12,7 +12,8 @@ const User = require('../../models/user');
 router.post('/signup', passport.authenticate('local-signup', {
   failureRedirect : '/signup', 
 }), (req, res) => {
-  res.redirect('/user/' + req.user._id);
+  res.send(req.user);
+  // res.redirect('/user/' + req.user._id);
 });
 
 /*
@@ -23,7 +24,8 @@ router.post('/login', passport.authenticate('local-login', {
   failureRedirect : '/login', 
 }), (req, res) => {
   console.log('successfully logged in: ', req.user);
-  res.redirect('/user/' + req.user._id);
+  res.send(req.user);
+  // res.redirect('/user/' + req.user._id);
 });
 
 /*
@@ -33,7 +35,7 @@ router.post('/login', passport.authenticate('local-login', {
 router.get('/user/:id', async (req, res) => {
   try {
     let user = await User.findById(req.params.id);
-    res.send({ users: user });
+    res.send(user);
   } catch (err) {
     res.redirect('/');
   }
@@ -69,6 +71,8 @@ router.post('/user/:id/edit', middleware.isLoggedIn, async (req, res, next) => {
       user.email = req.body.email;
       user.username = req.body.username;
       user.location = req.body.location;
+      user.img = req.body.img;
+      user.theme = req.body.theme || 'theme-gecho';
       user = await user.save();
       res.send({ response: user });
     }
@@ -83,7 +87,7 @@ router.post('/user/:id/edit', middleware.isLoggedIn, async (req, res, next) => {
  */
 router.delete('/user/:id/delete', middleware.isLoggedIn, async (req, res, next) => {
   try {
-    // console.log('DELETE ROUTE PARAMS: ', req.params);
+    console.log('DELETE ROUTE PARAMS: ', req.params);
     let user = await User.findByIdAndRemove(req.params.id);
     console.log('SUCCESSFULLY DELETED USER');
     res.send({ response: 'deleted' });
@@ -105,8 +109,8 @@ router.get('/logout', (req, res) => {
 });
 
 //For testing purposes:
-router.get('/api/current_user', (req, res)=> {
-  res.send(req.user); //passport attach functions to the request
-});
+// router.get('/api/current_user', (req, res)=> {
+//   res.send(req.user); //passport attach functions to the request
+// });
 
 module.exports = router;

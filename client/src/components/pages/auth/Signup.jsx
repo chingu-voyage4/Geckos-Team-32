@@ -1,6 +1,17 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { signupUser } from '../../../actions/authenticate';
 
 class Signup extends Component {
+  handleSubmit(e) {
+    e.preventDefault();
+    const creds = {
+      username: e.target.username.value,
+      password: e.target.password.value
+    }
+    // console.log(creds, this.props.userId.history);
+    this.props.dispatch(signupUser(creds, this.props.userId.history));
+  }
   
   render() {
     return (
@@ -21,8 +32,7 @@ class Signup extends Component {
               <strong className="divider-title">Or</strong>
             </div>
           </div>
-
-          <form className="auth-form" action="/routes/signup" method="post">
+          <form className="auth-form" onSubmit={(e) => this.handleSubmit(e)}>
             <input className="auth-form__input" type="text" name="username" placeholder="username"/>
             <input className="auth-form__input" type="password" name="password" placeholder="password"/>
             <br />
@@ -35,4 +45,10 @@ class Signup extends Component {
   }
 }
 
-export default Signup;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth
+  };
+};
+
+export default connect(mapStateToProps)(Signup);

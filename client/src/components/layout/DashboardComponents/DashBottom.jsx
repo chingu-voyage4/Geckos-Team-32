@@ -18,5 +18,3 @@ export default class DashBottom extends Component {
     );
   }
 }
-
-// <p>API provided by: <a className="dashboard__link" href="https://developers.google.com/youtube/">YouTube <i className="fab fa-youtube"></i></a></p>

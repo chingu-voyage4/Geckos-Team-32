@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { Link, withRouter } from 'react-router-dom';
+import axios from 'axios';
+import { connect } from 'react-redux';
+
 import EditProfile from './EditProfile.jsx';
 import SavedVideos from './SavedVideos.jsx';
 import AvatarSelection from './AvatarSelection.jsx';
@@ -11,22 +13,8 @@ class Profile extends Component {
 	}
 
 	componentDidMount() {
+		this.props.auth.loggedIn ? this.props.handleShowDash() : this.props.history.push('/');
 		this.props.handleShowDash();
-    this.props.state.user.loggedIn ? null : this.handleUserData();
-	}
-
-	// Only call if user is not already logged in
-	handleUserData() {
-		let id = this.props.userId.match.params.id;
-		axios.get(`/routes/user/${id}`)
-			.then((results) => {
-				let creds = results.data.users;
-				this.props.handleUpdateUser(creds);
-			})
-			.catch((err) => {
-				console.log('There was an error: ', err);
-				this.props.history.push('/');
-			});
 	}
 
 	showAvatars() {
@@ -34,9 +22,9 @@ class Profile extends Component {
 	}
   
   render() {
-		console.log('this is from profile: ', this.props);
-		const { loggedIn, creds } = this.props.state.user;
-		const { edit, editButton } = this.props.state.editUser;
+		// console.log('this is from profile: ', this.props);
+		const { loggedIn, creds } = this.props.auth;
+		const { edit, editButton } = this.props.editUser;
 
     return (
 			<div className="profile-page-wrapper">
@@ -53,13 +41,10 @@ class Profile extends Component {
 				</div>
 
 				<div className="profile-username-edit twopercent-spacing">
-					{loggedIn ? <h2>{creds.displayName || creds.username}! <span className="profile-location">({creds.location})</span></h2> : null}
+					{loggedIn ? <h2>{creds.displayName || creds.username}! {creds.location ? <span className="profile-location">({creds.location})</span> : null}</h2> : null}
 					<button className="button profile-button" onClick={this.props.handleEditProfile}>{editButton}</button>
 					{edit ? 
 					<EditProfile 
-						props={this.props} 
-						creds={creds} 
-						id={this.props.userId.match.params.id} 
 						handleEditProfile={this.props.handleEditProfile.bind(this)}
 					/> : 
 					null}
@@ -84,4 +69,10 @@ class Profile extends Component {
 	}
 }
 
-export default withRouter(Profile);
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth
+  };
+};
+
+export default withRouter(connect(mapStateToProps)(Profile));

@@ -1,6 +1,17 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { loginUser } from '../../../actions/authenticate';
 
 class Login extends Component {
+  handleSubmit(e) {
+    e.preventDefault();
+    const creds = {
+      username: e.target.username.value,
+      password: e.target.password.value
+    }
+    // console.log(creds, this.props.userId.history);
+    this.props.dispatch(loginUser(creds, this.props.userId.history));
+  }
 
   render() {
     return (
@@ -21,7 +32,7 @@ class Login extends Component {
             </div>
           </div>
 
-          <form className="auth-form" action="/routes/login" method="post">
+          <form className="auth-form" onSubmit={(e) => this.handleSubmit(e)}>
             <input className="auth-form__input" type="text" name="username" placeholder="username" />
             <input className="auth-form__input" type="password" name="password" placeholder="password" />
             <br />
@@ -34,4 +45,10 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth
+  };
+};
+
+export default connect(mapStateToProps)(Login);
