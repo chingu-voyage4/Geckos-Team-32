@@ -40,7 +40,7 @@
 
 .circle-icon {
   @include themify($themes) {
-    background-color: themed('teamMember');
+    background-color: themed('teamMemberCircle');
   }
 
   display: flex;
@@ -48,8 +48,8 @@
   align-items: center;
   // background-color: lightgreen;
   border-radius: 100%;
-  min-width: 3em;
-  min-height: 3em;
+  width: 8em;
+  height: 8em;
   margin-bottom: 10px;
 }
 
@@ -109,7 +109,10 @@
     margin: 10px 0;
     width: 50%;
   }
-
+  .circle-icon {
+    width: 10em;
+    height: 10em;
+  }
   .about-teammate {
     width: 100%;
     display: flex;
