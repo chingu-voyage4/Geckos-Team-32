@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux';
 
-import { fetchUser } from '../../../actions/authenticate';
+import { editUser, fetchUser } from '../../../actions/authenticate';
 
 import EditProfile from './EditProfile.jsx';
 import SavedVideos from './SavedVideos.jsx';
@@ -28,6 +28,17 @@ class Profile extends Component {
 	showAvatars() {
 		!this.state.avatar ? this.setState({ avatar: true }) : this.setState({ avatar: false });
 	}
+
+	handleUpdateTheme(theme) {
+    let req = {
+      ...this.props.auth.creds,
+      theme: theme
+    };
+    axios.post(`/routes/user/${this.props.auth.creds._id}/edit`, req)
+    .then((results) => {
+      this.props.dispatch(editUser(results.data.response));
+    });
+  }
   
   render() {
 		// console.log('this is from profile: ', this.props);
@@ -65,7 +76,7 @@ class Profile extends Component {
 				
 				<div className="profile-themeselect twopercent-spacing">
 					<h4 className="theme-title">Theme:</h4>
-					<select className="theme-changer" onChange={(e) => this.props.handleUpdateTheme(e.target.value)}>
+					<select className="theme-changer" onChange={(e) => this.handleUpdateTheme(e.target.value)}>
 						<option value="theme-gecho">Gecho</option>
 						<option value="theme-twilight">Twilight</option>
 						<option value="theme-peacock">Peacock</option>
