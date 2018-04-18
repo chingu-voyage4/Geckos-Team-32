@@ -7,7 +7,7 @@ import { fetchLikedVideo, deleteLikedVideo } from '../../../actions/userVideos';
 
 class SavedVideos extends Component {
   componentDidMount() {
-    this.props.auth.loggedI ? this.props.dispatch(fetchLikedVideo(this.props.auth.creds._id)) : this.props.userId.history.push('/');
+    this.props.auth.loggedIn ? this.props.dispatch(fetchLikedVideo(this.props.auth.creds._id)) : this.props.userId.history.push('/');
   }
 
   componentDidUpdate() {
