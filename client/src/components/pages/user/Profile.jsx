@@ -15,7 +15,9 @@ class Profile extends Component {
 	}
 
 	componentDidMount() {
-		this.props.dispatch(fetchUser(this.props.userId.match.params.id, this.props.history));
+		if (!this.props.auth.loggedIn) {
+			this.props.dispatch(fetchUser(this.props.userId.match.params.id, this.props.history));
+		}
 	}
 
 	componentDidUpdate() {
