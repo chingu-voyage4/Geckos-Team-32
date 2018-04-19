@@ -1,75 +1,86 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import { editUser, fetchUser } from '../../../actions/authenticate';
+
 import EditProfile from './EditProfile.jsx';
 import SavedVideos from './SavedVideos.jsx';
 import AvatarSelection from './AvatarSelection.jsx';
 
-class Profile extends React.Component {
+class Profile extends Component {
 	state = {
 		avatar: false,
 	}
 
 	componentDidMount() {
-		this.props.handleShowDash();
-    this.props.state.user.loggedIn ? null : this.handleUserData();
+		if (!this.props.auth.loggedIn) {
+			this.props.dispatch(fetchUser(this.props.userId.match.params.id, this.props.history));
+		}
 	}
 
-	// Only call if user is not already logged in
-	handleUserData() {
-		let id = this.props.userId.match.params.id;
-		axios.get(`/routes/user/${id}`)
-			.then((results) => {
-				let creds = results.data.users;
-				this.props.handleUpdateUser(creds);
-			})
-			.catch((err) => {
-				console.log('There was an error: ', err);
-			});
+	componentDidUpdate() {
+		// this.props.auth.loggedIn ? this.props.handleShowDash() : this.props.history.push('/');
+		this.props.handleShowDash();
 	}
 
 	showAvatars() {
 		!this.state.avatar ? this.setState({ avatar: true }) : this.setState({ avatar: false });
 	}
+
+	handleUpdateTheme(theme) {
+    let req = {
+      ...this.props.auth.creds,
+      theme: theme
+    };
+    axios.post(`/routes/user/${this.props.auth.creds._id}/edit`, req)
+    .then((results) => {
+      this.props.dispatch(editUser(results.data.response));
+    });
+  }
   
   render() {
 		// console.log('this is from profile: ', this.props);
-		const { loggedIn, creds } = this.props.state.user;
-		const { edit, editButton } = this.props.state.editUser;
+		const { loggedIn, creds } = this.props.auth;
+		const { edit, editButton } = this.props.editUser;
 
     return (
 			<div className="profile-page-wrapper">
 
 				<div className="profile-banner">
-					<h1 className="twopercent-spacing">Profile</h1> 
+					<h1 className="twopercent-spacing">
+						{loggedIn ? <img className="profile-avatar-responsive" src={creds.img}/> : null}
+						Profile
+					</h1> 
 				</div>
 
 				<div className="welcome twopercent-spacing">
-					<h2>Welcome back</h2>
+					<h2>Welcome back,</h2>
 				</div>
 
 				<div className="profile-username-edit twopercent-spacing">
-					{loggedIn ? <h2>{creds.username}!</h2> : null}
+					{loggedIn ? <h2>{creds.displayName || creds.username}! {creds.location ? <span className="profile-location">({creds.location})</span> : null}</h2> : null}
 					<button className="button profile-button" onClick={this.props.handleEditProfile}>{editButton}</button>
 					{edit ? 
 					<EditProfile 
-						props={this.props} 
-						creds={creds} 
-						id={this.props.userId.match.params.id} 
 						handleEditProfile={this.props.handleEditProfile.bind(this)}
 					/> : 
 					null}
-				</div>
-					
-				<div className="savedvideos twopercent-spacing">
-					<Link to={`/user/${creds._id}/saved`}>
-						<button className="button profile-button">Liked/Saved Videos</button>
-					</Link>
 				</div>
 
 				<div className="avatar-selection twopercent-spacing underline">
 					<button className="button profile-button" onClick={() => this.showAvatars()}>Change Avatar</button>
 					{this.state.avatar && <AvatarSelection handleUpdateAvatar={this.props.handleUpdateAvatar}/>}
+				</div>
+				
+				<div className="profile-themeselect twopercent-spacing">
+					<h4 className="theme-title">Theme:</h4>
+					<select className="theme-changer" onChange={(e) => this.handleUpdateTheme(e.target.value)}>
+						<option value="theme-gecho">Gecho</option>
+						<option value="theme-twilight">Twilight</option>
+						<option value="theme-peacock">Peacock</option>
+					</select>
 				</div>
 	
       </div>
@@ -77,4 +88,10 @@ class Profile extends React.Component {
 	}
 }
 
-export default Profile;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth
+  };
+};
+
+export default withRouter(connect(mapStateToProps)(Profile));

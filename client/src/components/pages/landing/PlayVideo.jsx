@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { addLikedVideo } from '../../../actions/userVideos';
 
 const PlayVideo = (props) => {
-  console.log('this is playvideo props: ', props);
+  // console.log('this is playvideo props: ', props);
   window.scrollTo(0, 0)
 
   if (props.location) {
@@ -26,21 +29,27 @@ const PlayVideo = (props) => {
         <div>
           <div>{title}</div>
           <div>{description}</div>
-          {props.user.loggedIn && 
+          {props.auth.loggedIn && 
             <div>
-              <button className="save-video-button" onClick={(e) => props.handleLikedVideo(e, props.selectedVideo)}><i className="fas fa-heart"></i></button>
+              <button className="save-video-button" onClick={() => props.dispatch(addLikedVideo(props.auth.creds._id, props.selectedVideo))}><i className="fas fa-heart"></i></button>
               <button className="save-video-button"><i className="fas fa-list"></i> <i className="fas fa-plus"></i></button>
             </div>
           }
         </div>
       </div>
     );
-  } else {
-    return <h2>Choose a video to begin!</h2>;
+  } else { 
+    return null;
   }
 
 };
 
-export default PlayVideo;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth
+  };
+};
+
+export default connect(mapStateToProps)(PlayVideo);
 
 

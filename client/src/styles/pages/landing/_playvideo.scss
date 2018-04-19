@@ -7,6 +7,15 @@
 }
 
 .save-video-button {
+  @include themify($themes) {
+    color: themed('textColor');
+
+    &:hover {
+      color: themed('hoverColor');
+      transition: 0.3s;
+    }
+  }
+
   border: none;
   outline:none;
   background: transparent;
@@ -14,11 +23,6 @@
   font-size: 2em;
   transition: 0.3s;
   cursor: pointer;
-
-  &:hover {
-    color: $accent-red;
-    transition: 0.3s;
-  }
 }
 
 @media (max-width: 768px) {

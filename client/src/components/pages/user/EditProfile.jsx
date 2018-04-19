@@ -1,54 +1,94 @@
-import React from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
+import { editUser, deleteUser } from '../../../actions/authenticate';
 
-class EditProfile extends React.Component {
+class EditProfile extends Component {
   handleEditData(e) {
     e.preventDefault();
 
-    // Add more profile details here
+    // Add profile details here
     let req = {
-      username: e.target.elements.username.value
+      ...this.props.auth.creds,
+      email: e.target.elements.email.value,
+      displayName: e.target.elements.displayName.value,
+      username: e.target.elements.username.value,
+      location: e.target.elements.location.value
     };
-    axios.post(`/routes/user/${this.props.id}/edit`, req)
+    axios.post(`/routes/user/${this.props.auth.creds._id}/edit`, req)
       .then((results) => {
         results.data.response === 'taken' ?
-        openModalDuplicate() :
-        this.props.handleEditProfile(results.data.response);
+        this.openModalDuplicate() :
+        this.props.dispatch(editUser(results.data.response));
       });
   }
 
-  handleDeleteUser() {
-      axios.delete(`/routes/user/${this.props.id}/delete`)
-      .then((results) => {
-        if (results.data.response === 'deleted') {
-          this.props.props.handleUpdateAfterDelete();
-          this.props.history.push('/');
-        }
-      });
+  openModalDelete() {
+    let modal = document.getElementById('deleteModal');
+    modal.style.display = "block";
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = (event) => {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  }
+  closeModalDelete() {
+    let modal = document.getElementById('deleteModal');
+    modal.style.display = "none";
+  }
+
+  openModalDuplicate() {
+    let modal = document.getElementById('duplicateUserModal');
+    modal.style.display = "block";
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = (event) => {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  }
+  closeModalDuplicate() {
+    let modal = document.getElementById('duplicateUserModal');
+    modal.style.display = "none";
   }
 
   render() {
-    // console.log('this is from edit profile: ', this.props);
-    const { username } = this.props.creds;
+    console.log('this is from edit profile: ', this.props);
+    const { username, email, location, displayName, _id } = this.props.auth.creds;
 
     return (
       <div>
-        <form className="form" onSubmit={this.handleEditData.bind(this)}>
-          <input className="form__input" type="text" name="username" placeholder={username} required/>
-          <button className="button profile-button submit">Submit</button>
-        </form>
+        <div className="edit-form">
+          <form onSubmit={this.handleEditData.bind(this)}>
+            <label htmlFor="displayName">
+              Name: <input className="form__input" type="text" name="displayName" defaultValue={displayName || null} onChange={(e) =>this.handleEditData.bind(this)} />
+            </label>
+            <label htmlFor="email">
+              Email: <input className="form__input" type="email" name="email" defaultValue={email || null} onChange={(e) =>this.handleEditData.bind(this)} />
+            </label>
+            <label htmlFor="username">
+              Username: <input className="form__input" type="text" name="username" defaultValue={username} onChange={(e) =>this.handleEditData.bind(this)} required/>
+            </label>
+            <label htmlFor="location">
+              Location: <input className="form__input" type="text" name="location" defaultValue={location || null} onChange={(e) =>this.handleEditData.bind(this)} />
+            </label>
+            <button className="button profile-button submit">Submit</button>
+          </form>
+          <button className="button profile-button delete" onClick={this.openModalDelete}>Delete Account</button>
+        </div>
         <br />
-        <button className="button profile-button delete" onClick={this.openModalDelete}>Delete Account</button>
-        <button className="button profile-button twopercent-spacing" onClick={this.openModalDuplicate}>Duplicate Username</button>
 
         <div className="warning-window" id="deleteModal">
           <div className="modal-content">
             <span className="close-modal" onClick={this.closeModalDelete}>&times;</span>
             <h3>Are you sure you want to do this? Deleting your account will permanently erase all user data including: saved preferences, videos, and playlists.</h3>
             <button className="button profile-button" onClick={this.closeModalDelete}>NO! Go back.</button>
-            <button className="delete button profile-button twopercent-spacing" onClick={this.handleDeleteUser.bind(this)}>Yes, Delete account</button>
+            <button className="delete button profile-button twopercent-spacing" onClick={() => this.props.dispatch(deleteUser(_id, this.props.history))}>Yes, Delete account</button>
           </div>
         </div>
 
@@ -60,42 +100,14 @@ class EditProfile extends React.Component {
           </div>
         </div>
       </div>
-
     );
-  }
-
-  
-  openModalDelete = function () {
-    let modal = document.getElementById('deleteModal');
-    modal.style.display = "block";
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function (event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    }
-  }
-  closeModalDelete = function () {
-    let modal = document.getElementById('deleteModal');
-    modal.style.display = "none";
-  }
-
-  openModalDuplicate = function () {
-    let modal = document.getElementById('duplicateUserModal');
-    modal.style.display = "block";
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function (event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    }
-  }
-  closeModalDuplicate = function () {
-    let modal = document.getElementById('duplicateUserModal');
-    modal.style.display = "none";
   }
 }
 
-export default withRouter(EditProfile);
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth
+  };
+};
+
+export default withRouter(connect(mapStateToProps)(EditProfile));

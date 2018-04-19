@@ -1,7 +1,12 @@
 .main-page {
   display: flex;
-  padding-top: 100px;
+  padding-top: 75px;
   min-height: 100vh;
+
+  @include themify($themes) {
+    color: themed('textColor');
+    background-color: themed('backgroundColor');
+  }
 }
 
 .nodash {
@@ -11,11 +16,12 @@
 
 .page-wrapper {
   width: 100%;
-  min-height: calc(80vh - 100px);
+  min-height: calc(80vh - 75px);
   padding: 2em;
   margin-left: 20vw;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   text-align: center;
   font-family: 'ubuntu', sans-serif;
