@@ -14,4 +14,7 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-module.hot.accept();
+// use in development for hot module reloading
+if (process.env.NODE !== 'production') {
+  module.hot.accept();
+}

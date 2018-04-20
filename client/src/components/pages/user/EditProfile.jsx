@@ -58,7 +58,7 @@ class EditProfile extends Component {
   }
 
   render() {
-    console.log('this is from edit profile: ', this.props);
+    // console.log('this is from edit profile: ', this.props);
     const { username, email, location, displayName, _id } = this.props.auth.creds;
 
     return (
