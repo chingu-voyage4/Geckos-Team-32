@@ -15,6 +15,6 @@ ReactDOM.render(
 );
 
 // use in development for hot module reloading
-if (process.env.NODE !== 'production') {
+if (module.hot) {
   module.hot.accept();
 }
