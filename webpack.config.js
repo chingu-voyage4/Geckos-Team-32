@@ -12,7 +12,7 @@ module.exports = {
       'react-hot-loader/patch',
       './client/index.jsx',
     ],
-    vendor: ['react', 'react-dom', 'react-router'],
+    vendor: ['react', 'react-dom', 'react-redux', 'react-router'],
   },
   output: { //create output path
     filename: '[name].bundle.js',
