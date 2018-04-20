@@ -15,22 +15,30 @@ class Login extends Component {
   renderAlert() {
     if (this.props.errorMessage) {
       return (
-        <div class="error-popover">
-          <div class="arrow">
+        <div className="error-popover" id="deleteErrorMessage">
+          <div className="popover-arrow">
           </div>
-          <h3 class="popover-header">
+          <h3 className="popover-header">
             {/* Popover Header */}
-            <a className="close"/>
+            <a className="popover-close" onClick={this.closeErrorMessage}/>
           </h3>
-          <div class="popover-body">
+          <div className="popover-body">
             {this.props.errorMessage}
           </div>
         </div>
       );
     }
-    // if else (<button/>.touched) {
-    //   return;
-    // }
+    window.onclick = (event) => {
+      let flashMessage = document.getElementById('deleteErrorMessage')
+      if (event.target != flashMessage) {
+        flashMessage.style.display = "none";
+      }
+    }
+  }
+
+  closeErrorMessage() {
+    let modal = document.getElementById('deleteErrorMessage');
+    modal.style.display = "none";
   }
 
   render() {
@@ -53,8 +61,8 @@ class Login extends Component {
           </div>
 
           <form className="auth-form" onSubmit={(e) => this.handleSubmit(e)}>
-            <input className="auth-form__input" type="text" name="username" placeholder="username" />
-            <input className="auth-form__input" type="password" name="password" placeholder="password" />
+            <input className="auth-form__input" type="text" name="username" placeholder="username"  required/>
+            <input className="auth-form__input" type="password" name="password" placeholder="password" required/>
             <br />
             <br />
             {this.renderAlert()}

@@ -63,7 +63,7 @@ html, body {
   margin-top: -105px; // change to -105px if you have a header, otherwise -90
   margin-bottom: 20px;
   color: #fff;
-  background-color: #ff323f;
+  background-color: $accent-red;
   opacity: 1; //for viewing purposes only. should also make opacity of rest of page .8 when error shows.
   border: 0;
   border-radius: 5px;
@@ -85,7 +85,7 @@ html, body {
   transition: opacity .15s linear;
 }
 
-.arrow {
+.popover-arrow {
   left: 80px;
   bottom: -98px; // change to -98px if you have a header, otherwise -90px
   border: 0;
@@ -100,7 +100,7 @@ html, body {
     height: 0;
     border-left: 20px solid transparent;
     border-right: 20px solid transparent;
-    border-top: 20px solid #ff323f;
+    border-top: 20px solid $accent-red;
   }
 }
 
@@ -123,7 +123,7 @@ html, body {
   text-align: center;
 }
 
-.close {
+.popover-close {
   position: relative;
   // right: -155px;
   right: -73px;
