@@ -11,15 +11,20 @@ class Signup extends Component {
     }
     this.props.dispatch(signupUser(creds, this.props.userId.history));
   }
-// this.props.addFlashMessage({
-//   type: 'success',
-//   text: 'you signed up successfully, Welcome!'
-// })
+
   renderAlert() {
     if (this.props.errorMessage) {
       return (
-        <div className="error">
-          <strong>OOPS!</strong> {this.props.errorMessage}
+        <div className="error-popover">
+          <div className="arrow">
+          </div>
+          <h3 className="popover-header">
+            {/* Popover Header */}
+            <a className="close"/>
+          </h3>
+          <div className="popover-body">
+            {this.props.errorMessage}
+          </div>
         </div>
       );
     }

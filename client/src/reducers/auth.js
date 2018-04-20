@@ -13,22 +13,28 @@ export default (state = initialState, action) => {
       };
     case LOGOUT_USER:
       return {
+        error: '',
         loggedIn: false,
         creds: {}
       };
     case UPDATE_USER:
       return {
+        error: '',
         loggedIn: true,
         creds: action.payload
       };
     case DELETE_USER:
       return {
+        error: '',
         loggedIn: false,
         creds: {}
       };
     case AUTH_ERROR:
       return {
-        error: action.payload
+        ...state,
+        error: action.payload,
+        loggedIn: false,
+        creds: {}
       };
     default:
       return state;

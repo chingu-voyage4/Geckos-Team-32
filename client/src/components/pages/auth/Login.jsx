@@ -13,23 +13,24 @@ class Login extends Component {
   }
 
   renderAlert() {
-    console.log('not as close, but close!');
     if (this.props.errorMessage) {
-      console.log('so close!');
-      debugger;
       return (
         <div class="error-popover">
           <div class="arrow">
           </div>
           <h3 class="popover-header">
             {/* Popover Header */}
+            <a className="close"/>
           </h3>
           <div class="popover-body">
-            <strong>Oops!</strong> {this.props.errorMessage}
+            {this.props.errorMessage}
           </div>
         </div>
       );
     }
+    // if else (<button/>.touched) {
+    //   return;
+    // }
   }
 
   render() {

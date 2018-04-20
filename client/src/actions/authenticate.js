@@ -5,7 +5,7 @@ import { FETCH_USER, AUTH_ERROR, LOGOUT_USER, UPDATE_USER, DELETE_USER } from '.
 // export const UPDATE_USER = 'UPDATE_USER';
 // export const DELETE_USER = 'DELETE_USER';
 // export const LOGOUT_USER = 'LOGOUT_USER';
-// export const AUTH_ERROR =  'authError';?
+// export const AUTH_ERROR =  'auth-error';
 
 
 /*
@@ -18,10 +18,8 @@ export const loginUser = (creds, history) => {
     if (typeof res.data === 'object') {
       history.push(`/user/${res.data._id}`);
     } else {
-      console.log('attempt failed');
-      window.location.reload();
       // error logging in, handle flash message here
-      dispatch(authError('Bad Login Info'));
+      dispatch(authError('Username and/or password is incorrect'));
     }
   }
 };
@@ -40,7 +38,7 @@ export const fetchUser = (id, history) => {
     } else {
       // history.push('/'); 
       // error validating user, handle flash message here
-      dispatch(authError('Bad Login Info'));
+      dispatch(authError('Bad fetch Info'));
     }
   }
 }
