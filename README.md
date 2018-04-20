@@ -18,7 +18,7 @@ Gecho is a free video browser platform to watch and listen to your favorite musi
 
 
 ## Live Demo
-[Gecho](https://gecho.herokuapp.com/)
+Live Site: [Gecho](https://gecho.herokuapp.com/)  
 If you would like to try out features as a "user" without creating an account, enter the following credentials:  
 username: `chingu`  
 password: `geckos32`  
