@@ -11,7 +11,20 @@ class Signup extends Component {
     }
     this.props.dispatch(signupUser(creds, this.props.userId.history));
   }
-  
+// this.props.addFlashMessage({
+//   type: 'success',
+//   text: 'you signed up successfully, Welcome!'
+// })
+  renderAlert() {
+    if (this.props.errorMessage) {
+      return (
+        <div className="error">
+          <strong>OOPS!</strong> {this.props.errorMessage}
+        </div>
+      );
+    }
+  }
+
   render() {
     return (
       <div className={this.props.launch ? "page-wrapper signup-wrapper nodash" : "page-wrapper signup-wrapper"}>
@@ -36,6 +49,7 @@ class Signup extends Component {
             <input className="auth-form__input" type="password" name="password" placeholder="password"/>
             <br />
             <br />
+            {this.renderAlert()}
             <button className="button auth-submit">Sign Up</button>
           </form>
         </div>
@@ -46,7 +60,8 @@ class Signup extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    auth: state.auth
+    auth: state.auth,
+    errorMessage: state.auth.error
   };
 };
 

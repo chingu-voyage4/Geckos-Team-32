@@ -1,9 +1,11 @@
 import axios from 'axios';
+import { FETCH_USER, AUTH_ERROR, LOGOUT_USER, UPDATE_USER, DELETE_USER } from './types'
 
-export const FETCH_USER = 'FETCH_USER';
-export const UPDATE_USER = 'UPDATE_USER';
-export const DELETE_USER = 'DELETE_USER';
-export const LOGOUT_USER = 'LOGOUT_USER';
+// export const FETCH_USER = 'FETCH_USER'; //change to AUTH_USER for semantic meaning?
+// export const UPDATE_USER = 'UPDATE_USER';
+// export const DELETE_USER = 'DELETE_USER';
+// export const LOGOUT_USER = 'LOGOUT_USER';
+// export const AUTH_ERROR =  'authError';?
 
 
 /*
@@ -16,7 +18,10 @@ export const loginUser = (creds, history) => {
     if (typeof res.data === 'object') {
       history.push(`/user/${res.data._id}`);
     } else {
-      window.location.reload(); // error logging in, handle flash message here
+      console.log('attempt failed');
+      window.location.reload();
+      // error logging in, handle flash message here
+      dispatch(authError('Bad Login Info'));
     }
   }
 };
@@ -33,7 +38,9 @@ export const fetchUser = (id, history) => {
       dispatch({ type: FETCH_USER, payload: res.data });
       sessionStorage.setItem('session', JSON.stringify(res.data));
     } else {
-      history.push('/'); // error validating user, handle flash message here
+      // history.push('/'); 
+      // error validating user, handle flash message here
+      dispatch(authError('Bad Login Info'));
     }
   }
 }
@@ -48,7 +55,9 @@ export const signupUser = (creds, history) => {
     if (typeof res.data === 'object') {
       history.push(`/user/${res.data._id}`);
     } else {
-      window.location.reload() // error signing up, handle flash message here
+      // window.location.reload() S
+      // error signing up, handle flash message here
+      dispatch(authError('That account is already in use'));
     }
   }
 };
@@ -97,4 +106,13 @@ export const deleteUser = (id, history) => {
       // window.location.reload(); // find a way to refresh page
     }
   }
+}
+
+
+
+export function authError(error) {
+  return {
+    type: AUTH_ERROR,
+    payload: error
+  };
 }

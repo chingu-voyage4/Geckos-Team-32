@@ -2,6 +2,77 @@
   justify-content: center;
 }
 
+.error-popover {
+  display: block;
+  margin-bottom: 20px;
+  color: #2c2c2c;
+  background-color: red; //for viewing purposes only. should also make opacity of rest of page .8 when error shows.
+  border: 0;
+  border-radius: 4px;
+  font-weight: 400px;
+  padding: 0;
+  z-index: 1000;
+  box-shadow: none;
+  text-align: center;
+  max-width: 276px;
+  line-height: 1.5;
+  text-decoration: none;
+  text-shadow: none;
+  text-transform: none;
+  letter-spacing: normal;
+  word-break: normal;
+  word-spacing: normal;
+  white-space: normal;
+  line-break: auto;
+  font-size: .875rem;
+  word-wrap: break-word;
+  transition: opacity .15s linear;
+}
+
+.arrow {
+  left: 82px;
+  bottom: 0;
+  border: 0;
+  position: absolute;
+  display: block;
+  width: 10px;
+  height: 5px;
+  
+  &:before,
+  &:after {
+    bottom: -11px;
+    margin-left: -6px;
+    border-top-color: rgba(0,0,0,.25);
+    border-bottom-width: 0;
+    position: absolute;
+    display: block;
+    border-color: transparent;
+    border-style: solid;
+  }
+}
+
+
+.popover-header {
+  background-color: #FFFFFF !important;
+  text-align: center;
+  border-bottom: 0 none;
+  font-size: 15px;
+  font-weight: normal;
+  line-height: 22px;
+  padding: 15px 15px 0px 15px;
+  margin: 0;
+  color: #66615b;
+  border-radius: 4px 4px 0 0;
+  margin-bottom: -10px;
+}
+
+.popover-body {
+  padding: 15px;
+  text-align: center;
+  color: #212529;
+}
+
+
 @media (max-width: 768px) {
   .login-wrapper {
     min-height: calc(100vh - 100px);

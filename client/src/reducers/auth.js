@@ -1,12 +1,13 @@
-import { FETCH_USER, LOGOUT_USER, UPDATE_USER, DELETE_USER } from '../actions/authenticate';
-
+// import { FETCH_USER, LOGOUT_USER, UPDATE_USER, DELETE_USER } from '../actions/authenticate';
+import { LOGIN_USER, FETCH_USER, AUTH_ERROR, LOGOUT_USER, UPDATE_USER, DELETE_USER } from '../actions/types';
 let session = JSON.parse(sessionStorage.getItem('session'));
-const initialState = session ? { loggedIn: true, creds: session } : { loggedIn: false, creds: {} };
+const initialState = session ? { loggedIn: true, creds: session, error: '' } : { loggedIn: false, creds: {}, error: '' };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_USER:
+    case FETCH_USER: //loginuser? authuser?
       return {
+        error: '',
         loggedIn: true,
         creds: action.payload,
       };
@@ -14,17 +15,21 @@ export default (state = initialState, action) => {
       return {
         loggedIn: false,
         creds: {}
-      }
+      };
     case UPDATE_USER:
       return {
         loggedIn: true,
         creds: action.payload
-      }
+      };
     case DELETE_USER:
       return {
         loggedIn: false,
         creds: {}
-      }
+      };
+    case AUTH_ERROR:
+      return {
+        error: action.payload
+      };
     default:
       return state;
   }

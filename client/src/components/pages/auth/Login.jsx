@@ -12,6 +12,26 @@ class Login extends Component {
     this.props.dispatch(loginUser(creds, this.props.userId.history));
   }
 
+  renderAlert() {
+    console.log('not as close, but close!');
+    if (this.props.errorMessage) {
+      console.log('so close!');
+      debugger;
+      return (
+        <div class="error-popover">
+          <div class="arrow">
+          </div>
+          <h3 class="popover-header">
+            {/* Popover Header */}
+          </h3>
+          <div class="popover-body">
+            <strong>Oops!</strong> {this.props.errorMessage}
+          </div>
+        </div>
+      );
+    }
+  }
+
   render() {
     return (
       <div className={this.props.launch ? "page-wrapper nodash" : "page-wrapper"}>
@@ -36,6 +56,7 @@ class Login extends Component {
             <input className="auth-form__input" type="password" name="password" placeholder="password" />
             <br />
             <br />
+            {this.renderAlert()}
             <button className="button auth-submit">Log In</button>
           </form>
         </div>
@@ -46,7 +67,8 @@ class Login extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    auth: state.auth
+    auth: state.auth,
+    errorMessage: state.auth.error
   };
 };
 
