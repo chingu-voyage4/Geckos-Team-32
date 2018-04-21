@@ -14,12 +14,12 @@ class Signup extends Component {
 
   renderAlert() {
     if (this.props.errorMessage) {
-      window.onclick = (event) => {
+      window.addEventListener('click', function (event) {
         let flashMessage = document.getElementById('deleteErrorMessage')
         if (event.target != flashMessage) {
           flashMessage.style.display = "none";
         }
-      }
+      });
       return (
         <div className="error-popover" id="deleteErrorMessage">
           <div className="popover-arrow">
