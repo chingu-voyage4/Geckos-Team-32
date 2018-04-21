@@ -60,11 +60,11 @@ html, body {
 //-----------------  Error Handling popup notification  -----------//
 .error-popover {
   display: block;
-  margin-top: -90px; // change to -105px if you have a header, otherwise -90
+  margin-top: -90px;
   margin-bottom: 20px;
   color: #fff;
   background-color: $accent-red;
-  opacity: 1; //for viewing purposes only. should also make opacity of rest of page .8 when error shows.
+  opacity: 1;
   border: 0;
   border-radius: 5px;
   padding: 0;
@@ -111,8 +111,6 @@ html, body {
   font-size: 15px;
   font-weight: normal;
   line-height: 22px;
-  // padding: 8px 15px 0px 15px; //uncomment if you want to add a header to error message, otherwise comment out
-  margin: 0;
   color: #66615b;
   border-radius: 4px 4px 0 0;
   margin-bottom: -10px;
@@ -122,36 +120,5 @@ html, body {
   padding: 15px;
   text-align: center;
 }
-
-// .popover-close {
-//   position: relative;
-//   // right: -155px;
-//   right: -73px;
-//   top: -9px;
-//   // width: 32px;
-//   // height: 32px;
-//   opacity: 0.8;
-
-//   &:before,
-//   &:after {
-//     position: absolute;
-//     left: 15px;
-//     content: ' ';
-//     height: 15px;
-//     width: 2px;
-//     background-color: #fff;
-//   }
-
-//   &:before {
-//     transform: rotate(45deg);
-//   }
-//   &:after {
-//     transform: rotate(-45deg);
-//   }
-
-//   &:hover {
-//     opacity: 1;
-//   }
-// }
 
 //-----------------  End of Error Handling popup notification  -----------//
