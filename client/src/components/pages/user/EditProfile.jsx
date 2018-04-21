@@ -58,7 +58,7 @@ class EditProfile extends Component {
   }
 
   render() {
-    console.log('this is from edit profile: ', this.props);
+    // console.log('this is from edit profile: ', this.props);
     const { username, email, location, displayName, _id } = this.props.auth.creds;
 
     return (
@@ -71,15 +71,17 @@ class EditProfile extends Component {
             <label htmlFor="email">
               Email: <input className="form__input" type="email" name="email" defaultValue={email || null} onChange={(e) =>this.handleEditData.bind(this)} />
             </label>
+            {this.props.auth.creds.username === 'chingu' ? null : 
             <label htmlFor="username">
               Username: <input className="form__input" type="text" name="username" defaultValue={username} onChange={(e) =>this.handleEditData.bind(this)} required/>
-            </label>
+            </label>}
             <label htmlFor="location">
               Location: <input className="form__input" type="text" name="location" defaultValue={location || null} onChange={(e) =>this.handleEditData.bind(this)} />
             </label>
             <button className="button profile-button submit">Submit</button>
           </form>
-          <button className="button profile-button delete" onClick={this.openModalDelete}>Delete Account</button>
+          {this.props.auth.creds.username === 'chingu' ? null :
+          <button className="button profile-button delete" onClick={this.openModalDelete}>Delete Account</button>}
         </div>
         <br />
 

@@ -21,7 +21,7 @@ export default class Search extends Component {
   }
 
   saveSelectedVideo(video) {
-    console.log('this is the youtube video details: ', video);
+    // console.log('this is the youtube video details: ', video);
     const selectedVideo = {
       title: video.snippet.title,
       description: video.snippet.description,
@@ -33,7 +33,7 @@ export default class Search extends Component {
   }
 
   render() {
-    console.log('from search: ', this.props);
+    // console.log('from search: ', this.props);
     const { videos, selectedVideo } = this.props.stateData;
     
     return (

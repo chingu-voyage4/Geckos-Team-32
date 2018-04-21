@@ -15,6 +15,8 @@ export const store = createStore(
   RootReducer,
   applyMiddleware(
     thunkMiddleware,
-    loggerMiddleware
   )
 );
+
+// loggerMiddleware
+// add redux-loggger last when in development

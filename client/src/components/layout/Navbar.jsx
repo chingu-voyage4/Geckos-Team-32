@@ -5,7 +5,6 @@ import { NavLink } from 'react-router-dom';
 
 import { logoutUser } from '../../actions/authenticate';
 import logo from "../../assets/dantv5.png";
-import brand from "../../assets/Gechotext2.png";
 
 class Navbar extends Component {
   state = {
