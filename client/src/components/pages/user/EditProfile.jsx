@@ -8,9 +8,18 @@ import { editUser, deleteUser } from '../../../actions/authenticate';
 class EditProfile extends Component {
   handleEditData(e) {
     e.preventDefault();
+    let req = null;
 
+    this.props.auth.creds.username === 'chingu' ?
+    req = {
+      ...this.props.auth.creds,
+      email: e.target.elements.email.value,
+      displayName: e.target.elements.displayName.value,
+      username: 'chingu',
+      location: e.target.elements.location.value
+    } :
     // Add profile details here
-    let req = {
+    req = {
       ...this.props.auth.creds,
       email: e.target.elements.email.value,
       displayName: e.target.elements.displayName.value,
