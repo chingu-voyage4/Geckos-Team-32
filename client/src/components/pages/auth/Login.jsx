@@ -13,20 +13,20 @@ class Login extends Component {
   }
 
   renderAlert() {
-    window.onclick = (event) => {
-      let flashMessage = document.getElementById('deleteErrorMessage')
-      if (event.target != flashMessage) {
-        flashMessage.style.display = "none";
-      }
-    }
     if (this.props.errorMessage) {
+      window.onclick = (event) => {
+        let flashMessage = document.getElementById('deleteErrorMessage')
+        if (event.target != flashMessage) {
+          flashMessage.style.display = "none";
+        }
+      }
       return (
         <div className="error-popover" id="deleteErrorMessage">
           <div className="popover-arrow">
           </div>
           <h3 className="popover-header">
             {/* Popover Header */}
-            <a className="popover-close" onClick={this.closeErrorMessage}/>
+            {/* <a className="popover-close" onClick={this.closeErrorMessage}/> */}
           </h3>
           <div className="popover-body">
             {this.props.errorMessage}

@@ -60,7 +60,7 @@ html, body {
 //-----------------  Error Handling popup notification  -----------//
 .error-popover {
   display: block;
-  margin-top: -105px; // change to -105px if you have a header, otherwise -90
+  margin-top: -90px; // change to -105px if you have a header, otherwise -90
   margin-bottom: 20px;
   color: #fff;
   background-color: $accent-red;
@@ -87,7 +87,7 @@ html, body {
 
 .popover-arrow {
   left: 80px;
-  bottom: -98px; // change to -98px if you have a header, otherwise -90px
+  bottom: -90px; // change to -98px if you have a header, otherwise -90px
   border: 0;
   position: relative;
   display: block;
@@ -111,7 +111,7 @@ html, body {
   font-size: 15px;
   font-weight: normal;
   line-height: 22px;
-  padding: 8px 15px 0px 15px; //uncomment if you want to add a header to error message, otherwise comment out
+  // padding: 8px 15px 0px 15px; //uncomment if you want to add a header to error message, otherwise comment out
   margin: 0;
   color: #66615b;
   border-radius: 4px 4px 0 0;
@@ -123,35 +123,35 @@ html, body {
   text-align: center;
 }
 
-.popover-close {
-  position: relative;
-  // right: -155px;
-  right: -73px;
-  top: -9px;
-  // width: 32px;
-  // height: 32px;
-  opacity: 0.8;
+// .popover-close {
+//   position: relative;
+//   // right: -155px;
+//   right: -73px;
+//   top: -9px;
+//   // width: 32px;
+//   // height: 32px;
+//   opacity: 0.8;
 
-  &:before,
-  &:after {
-    position: absolute;
-    left: 15px;
-    content: ' ';
-    height: 15px;
-    width: 2px;
-    background-color: #fff;
-  }
+//   &:before,
+//   &:after {
+//     position: absolute;
+//     left: 15px;
+//     content: ' ';
+//     height: 15px;
+//     width: 2px;
+//     background-color: #fff;
+//   }
 
-  &:before {
-    transform: rotate(45deg);
-  }
-  &:after {
-    transform: rotate(-45deg);
-  }
+//   &:before {
+//     transform: rotate(45deg);
+//   }
+//   &:after {
+//     transform: rotate(-45deg);
+//   }
 
-  &:hover {
-    opacity: 1;
-  }
-}
+//   &:hover {
+//     opacity: 1;
+//   }
+// }
 
 //-----------------  End of Error Handling popup notification  -----------//
