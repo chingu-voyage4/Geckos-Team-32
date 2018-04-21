@@ -104,3 +104,9 @@
     opacity: 1 !important;
   }
 }
+
+@media (max-width: 400px) {
+  .saved-video-list {
+    justify-content: center;
+  }
+}
