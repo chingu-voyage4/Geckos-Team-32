@@ -11,7 +11,36 @@ class Signup extends Component {
     }
     this.props.dispatch(signupUser(creds, this.props.userId.history));
   }
-  
+
+  renderAlert() {
+    if (this.props.errorMessage) {
+      window.onclick = (event) => {
+        let flashMessage = document.getElementById('deleteErrorMessage')
+        if (event.target != flashMessage) {
+          flashMessage.style.display = "none";
+        }
+      }
+      return (
+        <div className="error-popover" id="deleteErrorMessage">
+          <div className="popover-arrow">
+          </div>
+          <h3 className="popover-header">
+            {/* Popover Header */}
+            {/* <a className="popover-close" onClick={this.closeErrorMessage}/> */}
+          </h3>
+          <div className="popover-body">
+            {this.props.errorMessage}
+          </div>
+        </div>
+      );
+    }
+  }
+
+  closeErrorMessage() {
+    let flashMessage = document.getElementById('deleteErrorMessage');
+    flashMessage.style.display = "none";
+  }
+
   render() {
     return (
       <div className={this.props.launch ? "page-wrapper signup-wrapper nodash" : "page-wrapper signup-wrapper"}>
@@ -32,10 +61,11 @@ class Signup extends Component {
             </div>
           </div>
           <form className="auth-form" onSubmit={(e) => this.handleSubmit(e)}>
-            <input className="auth-form__input" type="text" name="username" placeholder="username"/>
-            <input className="auth-form__input" type="password" name="password" placeholder="password"/>
+            <input className="auth-form__input" type="text" name="username" placeholder="username" required/>
+            <input className="auth-form__input" type="password" name="password" placeholder="password" required/>
             <br />
             <br />
+            {this.renderAlert()}
             <button className="button auth-submit">Sign Up</button>
           </form>
         </div>
@@ -46,7 +76,8 @@ class Signup extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    auth: state.auth
+    auth: state.auth,
+    errorMessage: state.auth.error
   };
 };
 
