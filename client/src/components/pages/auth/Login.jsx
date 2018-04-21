@@ -13,6 +13,12 @@ class Login extends Component {
   }
 
   renderAlert() {
+    window.onclick = (event) => {
+      let flashMessage = document.getElementById('deleteErrorMessage')
+      if (event.target != flashMessage) {
+        flashMessage.style.display = "none";
+      }
+    }
     if (this.props.errorMessage) {
       return (
         <div className="error-popover" id="deleteErrorMessage">
@@ -27,12 +33,6 @@ class Login extends Component {
           </div>
         </div>
       );
-    }
-    window.onclick = (event) => {
-      let flashMessage = document.getElementById('deleteErrorMessage')
-      if (event.target != flashMessage) {
-        flashMessage.style.display = "none";
-      }
     }
   }
 
