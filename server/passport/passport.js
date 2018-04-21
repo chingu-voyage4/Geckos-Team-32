@@ -100,7 +100,7 @@ module.exports = (passport) => {
         let newUser = new User();
         newUser.facebookID = profile.id;
         newUser.facebookToken = token;
-        newUser.username = `${profile.name.givenName} ${profile.name.familyName}`;
+        newUser.username = profile.displayName;
         newUser = await newUser.save();
         console.log('new facebook user created: ', newUser);  
         return done(null, newUser); 
