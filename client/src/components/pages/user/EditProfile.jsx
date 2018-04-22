@@ -7,11 +7,16 @@ import { editUser, deleteUser } from '../../../actions/authenticate';
 
 class EditProfile extends Component {
   componentDidMount() {
+    this.handleCloseProfileBox();
+  }
+
+  handleCloseProfileBox() {
     let editBox = document.getElementById('edit-profile-box');
     let editButton = document.getElementById('edit-profile-toggle');
     
     window.onclick = (event) => {
-      if (!editBox.contains(event.target) && event.target !== editButton && this.props.state.editUser.edit) {
+      console.log('clicking');
+      if (!editBox.contains(event.target) && event.target !== editButton) {
         this.props.handleEditProfile();
       }
     }

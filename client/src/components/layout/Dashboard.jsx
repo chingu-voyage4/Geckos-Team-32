@@ -7,14 +7,13 @@ import DashTopUser from './DashboardComponents/DashTopUser.jsx';
 import DashBottom from './DashboardComponents/DashBottom.jsx';
 
 class Dashboard extends Component {
-	handleCheckLogin() {
+	componentDidMount() {
 		let session = JSON.parse(sessionStorage.getItem('session')); // get JSON session data
 		this.props.auth.loggedIn ? this.props.handleShowDash() : null;
 	}
 
   render() {
 		// console.log('from dashboard: ', this.props);
-		this.handleCheckLogin();
 		const { loggedIn, creds } = this.props.auth;
 
 		return (
