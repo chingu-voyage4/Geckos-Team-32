@@ -24,10 +24,6 @@ import { dummyUserData, dummySavedVideosData } from '../seedData/seedData';
 class AppRoutes extends React.Component {
   state = {
     launch: true,
-    editUser: {
-      edit: false,
-      editButton: 'Edit',
-    },
     videos: [],
     selectedVideo: null,
   }
@@ -86,11 +82,6 @@ class AppRoutes extends React.Component {
                     userId={props}
                     editUser={this.state.editUser}
                     handleShowDash={this.handleShowDash}
-                    handleEditProfile={req => {
-                      !this.state.editUser.edit ? 
-                      this.setState({ editUser: { edit: true, editButton: 'Cancel' }}) : 
-                      this.setState({ editUser: { edit: false, editButton: 'Edit Profile' }});
-                    }}
                   />)}
                 />
                 <Route 

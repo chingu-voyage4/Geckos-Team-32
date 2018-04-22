@@ -6,6 +6,21 @@ import { connect } from 'react-redux';
 import { editUser } from '../../../actions/authenticate';
 
 class AvatarSelection extends Component {  
+  componentDidMount() {
+    let editBox = document.getElementById('edit-avatar-box');
+    let editButton = document.getElementById('edit-avatar-toggle');
+    
+    window.onclick = (event) => {
+      if (!editBox.contains(event.target) && event.target !== editButton) {
+        this.props.showAvatars();
+      }
+    }
+  }
+
+  componentWillUnmount() {
+    window.onclick = (event) => { null }
+  }
+
   handleAvatarClick(e) {
     e.preventDefault();
     const img = e.target.src;
@@ -17,13 +32,15 @@ class AvatarSelection extends Component {
       .then((results) => {
         this.props.dispatch(editUser(results.data.response));
       });
+
+    this.props.showAvatars();
   }
 
   render() {
     // console.log('avatar props: ', this.props);
 
     return (
-      <div className="avatar-wrapper">
+      <div className="avatar-wrapper" id="edit-avatar-box">
         <h2>Avatar Selection</h2>
         <div className="avatar-library">
           <img onClick={(e) => this.handleAvatarClick(e)} className="avatars" src="http://webdesignbyraymond.com/gecho/001-boy-1.png" />

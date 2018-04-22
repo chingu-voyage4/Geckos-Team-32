@@ -6,6 +6,21 @@ import { withRouter } from 'react-router-dom';
 import { editUser, deleteUser } from '../../../actions/authenticate';
 
 class EditProfile extends Component {
+  componentDidMount() {
+    let editBox = document.getElementById('edit-profile-box');
+    let editButton = document.getElementById('edit-profile-toggle');
+    
+    window.onclick = (event) => {
+      if (!editBox.contains(event.target) && event.target !== editButton && this.props.state.editUser.edit) {
+        this.props.handleEditProfile();
+      }
+    }
+  }
+
+  componentWillUnmount() {
+    window.onclick = (event) => { null }
+  }
+
   handleEditData(e) {
     e.preventDefault();
     let req = null;
@@ -32,6 +47,8 @@ class EditProfile extends Component {
         this.openModalDuplicate() :
         this.props.dispatch(editUser(results.data.response));
       });
+
+    this.props.handleEditProfile();
   }
 
   openModalDelete() {
@@ -72,7 +89,7 @@ class EditProfile extends Component {
 
     return (
       <div>
-        <div className="edit-form">
+        <div className="edit-form" id="edit-profile-box">
           <form onSubmit={this.handleEditData.bind(this)}>
             <label htmlFor="displayName">
               Name: <input className="form__input" type="text" name="displayName" defaultValue={displayName || null} onChange={(e) =>this.handleEditData.bind(this)} />
