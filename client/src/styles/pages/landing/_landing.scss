@@ -35,6 +35,7 @@
   font-size: 26px;
   text-indent: 12px;
   outline: none;
+  border-radius: 0;
 }
 .landing-search-icon {
   @include themify($themes) {
@@ -53,7 +54,6 @@
     @include themify($themes) {
       color: themed('hoverColor');
     }
-    // color: $accent-red;
     transition: 0.3s;
   }
 }
@@ -73,7 +73,4 @@
   .landing-page {
     margin-left: 0;
   }
-  // .page-wrapper {
-  //   height: 50vh;
-  // }
 }

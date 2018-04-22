@@ -76,10 +76,11 @@ class Profile extends Component {
 				
 				<div className="profile-themeselect twopercent-spacing">
 					<h4 className="theme-title">Theme:</h4>
-					<select className="theme-changer" onChange={(e) => this.handleUpdateTheme(e.target.value)}>
+					<select className="theme-changer" value={this.props.auth.creds.theme || 'theme-gecho'} onChange={(e) => this.handleUpdateTheme(e.target.value)}>
 						<option value="theme-gecho">Gecho</option>
 						<option value="theme-twilight">Twilight</option>
 						<option value="theme-peacock">Peacock</option>
+						<option value="theme-good-vibes">Good Vibes</option>
 					</select>
 				</div>
 	

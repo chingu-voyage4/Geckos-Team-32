@@ -17,7 +17,6 @@ footer {
   bottom: 0%;
   height: 110px;
   width: 100%;
-  // background-color: $off-white;
 }
 .footer-bottom {
   @include themify($themes) {
@@ -67,7 +66,6 @@ align-items: center;
   height: 35px;
   width: 35px;
   font-size: 20px;
-  // background-color: darken($off-white, 10%);
   border: 2px solid lighten($off-black, 10%);
   border-radius: 15%;
   color: $off-black;
@@ -81,9 +79,7 @@ align-items: center;
     border-color: themed('hoverColor');
   }
 
-  // color: $accent-red;
   background-color: $off-white;
-  // border-color: $accent-red;
   border-radius: 50%;
   position: relative;
   transition: all .25s ease-out;
@@ -140,13 +136,3 @@ align-items: center;
     padding-left: 0;
   }
 }
-
-// @media screen and (max-height: 850px) {
-//   footer {
-//     display: none;
-//   }
-
-//   footer-credits {
-//     padding: 0;
-//   } 
-// }
